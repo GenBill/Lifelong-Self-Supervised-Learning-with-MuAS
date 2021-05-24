@@ -1,0 +1,4 @@
+Random Seed: 2077 
+using cuda
+Epoch 0/9 
+----------

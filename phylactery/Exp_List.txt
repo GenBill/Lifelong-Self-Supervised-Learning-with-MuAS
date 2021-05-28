@@ -1,0 +1,29 @@
+实验序列：
+A. 对照组
+    1. pre-train only
+    2. w/o pre-train
+
+B. 实验组 pre-train
+    1. pre-train + lifelong
+    2. pre-train + 1-2-3-self
+    3. pre-train + cycle-self
+    4. pre-train + lifelong + cycle-self
+
+C. 消融组 random initial
+    1. lifelong
+    2. 1-2-3-self
+    3. cycle-self
+    4. lifelong + cycle-self
+
+** lifelong : EWC / FSLL
+
+评估指标：
+D. 标准精度
+    all
+
+E. 鲁棒精度
+    B1 - B3 - B4
+
+F. 遗忘精度
+    B3 - B4 - C3 - C4
+

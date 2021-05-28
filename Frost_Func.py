@@ -88,6 +88,7 @@ optimizer = optim.SGD(
 )
 criterion = nn.MSELoss(reduction='mean')
 
+# Train Step
 old_net = Get_old_net(net)
 shadow_net = Get_shadow_net(net, 2)
 

@@ -35,16 +35,6 @@ def Get_old_net(net):
         params.requires_grad_(False)
     return old_net
 
-'''
-def params_diff(net, old_net):
-    # zero part of _grad
-    params_net = list(net.named_parameters())
-    params_old = list(old_net.named_parameters())
-    loss = 0
-    for i in range(len(params_net)):
-        loss += sum(abs(params_net[i][1].data - params_old[i][1].data))
-    return loss
-'''
 
 def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_lamb=5):
     # 构造参数索引 params_list
@@ -77,7 +67,7 @@ device = torch.device("cpu")
 
 class MyTemplateNet(nn.Module):
     def __init__(self):
-        super(MyTemplateNet, self).__init__() # 第一句话，调用父类的构造函数
+        super(MyTemplateNet, self).__init__()   # 第一句话，调用父类的构造函数
         self.fc1 = nn.Linear(2, 8)
         self.fc2 = nn.Linear(8, 1)
         self.relu = nn.LeakyReLU(0.01)
@@ -89,7 +79,8 @@ class MyTemplateNet(nn.Module):
         x = self.relu(x)
         return x
 
-net = MyTemplateNet().to(device) # 构造模型
+# 构造模型
+net = MyTemplateNet().to(device)
 optimizer = optim.SGD(
     [
         {'params': net.parameters(), 'lr': 0.1, 'momentum': 0.8, 'weight_decay': 0.}

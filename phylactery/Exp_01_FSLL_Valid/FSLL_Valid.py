@@ -5,6 +5,9 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
+from torchvision import datasets, models
+from torch.utils.data import Dataset, DataLoader
+
 # copy from Frost_Func.py
 # Sector Frost_Func
 def print_params(net):
@@ -72,10 +75,27 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 # 载入数据
+class RotationDataset(Dataset):
+
+    def __init__(self, data_root_dir, preTransform=None, postTransform=None):
+        
+        self.data_root_dir = data_root_dir
+        # Output of pretransform should be PIL images
+        self.preTransform = preTransform
+
+        self.postTransform = postTransform
+
+        self.dataset = datasets.ImageFolder(self.data_root_dir, self.preTransform)
+
+    def __len__(self):
+        return len(self.dataset)
+
+
+
 # 就是普通的载入数据
 
 # 载入模型
-net = ResNet18().to(device)
+net = models.resnet50(pretrained=True)
 # 就是普通的载入模型
 optimizer = optim.SGD(
     [

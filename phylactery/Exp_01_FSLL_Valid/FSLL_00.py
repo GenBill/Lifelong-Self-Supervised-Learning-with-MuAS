@@ -33,10 +33,11 @@ def BW_tensor(this_tensor, percent):
     # percent : 将超过min(percent)的数值设置为不更新
     length = this_tensor.numel()
     temp_tensor = torch.abs(this_tensor.view(-1))
-    Kmin_list = torch.topk(temp_tensor, math.floor(length*percent), largest=False, sorted=True)
+    # 000 最新设置 000
+    Kmin_list = torch.topk(temp_tensor, 1, largest=True, sorted=True)
     if len(Kmin_list.values)!=0 :
         threshold = Kmin_list.values[-1]
-        return (torch.abs(this_tensor)<=threshold).float()
+        return (torch.abs(this_tensor)>threshold).float()
     else :
         return torch.zeros(1)    # this_tensor<0 + this_tensor>=0
 

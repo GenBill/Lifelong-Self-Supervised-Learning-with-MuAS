@@ -1,0 +1,21 @@
+Random Seed: 2077 
+Epoch : 1 
+Acc : 0.9232, Loss : 4.7317
+Epoch : 2 
+Acc : 0.9254, Loss : 4.7272
+Epoch : 3 
+Acc : 0.9262, Loss : 4.7265
+Epoch : 4 
+Acc : 0.9264, Loss : 4.7264
+Epoch : 5 
+Acc : 0.9265, Loss : 4.7264
+Epoch : 6 
+Acc : 0.9266, Loss : 4.7265
+Epoch : 7 
+Acc : 0.9267, Loss : 4.7269
+Epoch : 8 
+Acc : 0.9269, Loss : 4.7270
+Epoch : 9 
+Acc : 0.9267, Loss : 4.7276
+Epoch : 10 
+Acc : 0.9267, Loss : 4.7279

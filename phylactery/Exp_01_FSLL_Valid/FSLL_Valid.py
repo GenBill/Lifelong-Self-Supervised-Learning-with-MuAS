@@ -66,11 +66,12 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
     params_shadow = list(shadow_net.named_parameters())
     
     # 计算基本损失
-    pred = net(X)
+    pred = F.softmax(net(X), 1)
     loss = loss_Func(pred, target)
+    # print(pred[0])
 
     # 添加遗忘损失
-    for i in range(len(params_net)):
+    for i in range(len(params_net)-2):
         loss += reg_lamb * torch.sum(torch.abs(params_net[i][1] - params_old[i][1]))
     
     # 计算 grad
@@ -78,13 +79,13 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
     loss.backward()
 
     # 过滤 grad
-    for i in range(len(params_net)):
+    for i in range(len(params_net)-2):
         params_net[i][1].grad = params_net[i][1].grad * params_shadow[i][1].data
     
     # End Sub
     optimizer.step()
     # acc_mat = torch.argmax(pred, 1)==torch.argmax(target, 1)
-    acc_mat = torch.argmax(pred, 0)==torch.argmax(target, 0)
+    acc_mat = torch.argmax(pred, 1)==target
     acc_time = torch.sum(acc_mat)
 
     return loss.item(), acc_time.item()
@@ -103,7 +104,7 @@ Testset_path = '/home/zhangxuanming/Kaggle265/test'
 Validset_path = '/home/zhangxuanming/Kaggle265/valid'
 
 batch_size = 512
-num_epochs = 0#200
+num_epochs = 200
 
 # 载入数据
 
@@ -160,6 +161,10 @@ shadow_net = Unfreeze_net(shadow_net, 'fc')
 '''
 sign_str = 'fc'
 params_shadow = list(shadow_net.named_parameters())
+params_net = list(net.named_parameters())
+print(params_net[-1][1].name)
+print(params_net[-2][1].name)
+
 for i in range(len(params_shadow)):
     this_str = params_shadow[i][0]
     if sign_str in this_str:
@@ -175,7 +180,7 @@ for epoch in range(1,num_epochs+1):
         labels = labels.to(device)
         # targets = F.one_hot(labels,265).float().to(device)
 
-        this_loss, this_acc = Frost_iter(net, shadow_net, old_net, inputs, labels, criterion, optimizer, reg_lamb=1e-2)
+        this_loss, this_acc = Frost_iter(net, shadow_net, old_net, inputs, labels, criterion, optimizer, reg_lamb=0.)
         epoch_loss += this_loss
         epoch_acc += this_acc
     loss_list.append(epoch_loss)

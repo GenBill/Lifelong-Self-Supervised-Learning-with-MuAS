@@ -1,8 +1,11 @@
 from tqdm import tqdm
 import copy
 import numpy as np
+import os
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
+
 import torch.optim as optim
 
 from torchvision import transforms, utils, datasets, models
@@ -69,25 +72,26 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
     
     # End Sub
     optimizer.step()
-    acc_mat = torch.argmax(pred, 1)==torch.argmax(target, 1)
+    # acc_mat = torch.argmax(pred, 1)==torch.argmax(target, 1)
+    acc_mat = torch.argmax(pred, 0)==torch.argmax(target, 0)
     acc_time = torch.sum(acc_mat)
 
     return loss.item(), acc_time.item()
 
-
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+# device = torch.device("cpu")
 
 # 任务：CIFAR10，CUB200（暂定）
 # ResNet-18 装载
 this_Epoch = 0
-checkpoint_path = 'E:/Laplace/Dataset/Kaggle265/models' # './TimHu/models'
+checkpoint_path = '/home/zhangxuanming/eLich/Saved_models'      # 'E:/Laplace/Dataset/Kaggle265/valid'
 
-Trainset_path = 'E:/Laplace/Dataset/Kaggle265/train'    # './Kaggle265/train'
-Testset_path = 'E:/Laplace/Dataset/Kaggle265/test'      # './Kaggle265/test'
-Validset_path = 'E:/Laplace/Dataset/Kaggle265/valid'    # './Kaggle265/valid'
+Trainset_path = '/home/zhangxuanming/Kaggle265/train'
+Testset_path = '/home/zhangxuanming/Kaggle265/test'
+Validset_path = '/home/zhangxuanming/Kaggle265/valid'
 
-batch_size = 64
+batch_size = 512
 num_epochs = 200
 
 # 载入数据
@@ -107,23 +111,32 @@ data_train = datasets.ImageFolder(root = Trainset_path, transform = data_transfo
 
 # 就是普通的载入数据
 data_train = datasets.ImageFolder(root = Trainset_path, transform = data_transform)
-train_loader = torch.utils.data.DataLoader(data_train, batch_size=batch_size, shuffle=True)
-
-
+train_loader = torch.utils.data.DataLoader(data_train, batch_size=batch_size, shuffle=True, num_workers=4)
+data_size = data_train.__len__()
 
 # 载入模型
-net = models.resnet50(pretrained=True)
+net = models.resnet18(pretrained=True)
+num_ftrs = net.fc.in_features
+net.fc = nn.Linear(num_ftrs, 265)
+net = net.to(device)
+
+if torch.cuda.device_count() > 1: 
+    print("Let's use", torch.cuda.device_count(), "GPUs!")
+net = nn.DataParallel(net)
+
 
 if this_Epoch != 0 :
     net.load_state_dict(torch.load('%s/Epoch_%d.pth' % (checkpoint_path, this_Epoch), map_location=device))
 
 # 就是普通的载入模型
-optimizer = optim.SGD(
+optimizer = optim.Adam(
     [
-        {'params': net.parameters(), 'lr': 0.1, 'momentum': 0.8, 'weight_decay': 0.}
-    ]   , lr=1e-1, momentum=0.8, weight_decay=0.0001
+        {'params': (p for name, p in net.named_parameters() if 'weight' in name), 'lr': 1e-3, 'momentum': 0.6, 'weight_decay': 1e-5},
+        {'params': (p for name, p in net.named_parameters() if 'bias' in name), 'lr': 1e-2, 'momentum': 0.9, 'weight_decay': 0.}
+    ]   , lr=1e-3, weight_decay=1e-5
 )
-criterion = nn.MSELoss(reduction='mean')
+
+criterion = nn.CrossEntropyLoss(reduction='mean')   # nn.MSELoss(reduction='mean')
 loss_list = []
 accrate_list = []
 
@@ -133,19 +146,23 @@ old_net = Get_old_net(net)
 shadow_net = Get_shadow_net(net, 2)
 
 # Epoch On !
-for epoch in tqdm(range(1,num_epochs)):
-
-    for batch_num, (inputs, labels) in enumerate(train_loader):
+for epoch in range(1,num_epochs+1):
+    epoch_loss = 0
+    epoch_acc = 0
+    for batch_num, (inputs, labels) in enumerate(tqdm(train_loader)):
         inputs = inputs.to(device)
         labels = labels.to(device)
+        # targets = F.one_hot(labels,265).float().to(device)
 
         this_loss, this_acc = Frost_iter(net, shadow_net, old_net, inputs, labels, criterion, optimizer, reg_lamb=1e-2)
-        loss_list.append(this_loss)
-        accrate_list.append(this_acc/batch_size)
+        epoch_loss += this_loss
+        epoch_acc += this_acc
+    loss_list.append(epoch_loss)
+    accrate_list.append(epoch_acc/data_size)
 
-        if epoch % 10 == 0 :
-            print('Epoch:', epoch, ', acc:', this_acc/batch_size, ', loss:', this_loss)
-        if epoch % 1000 == 0 :
-            torch.save(net.state_dict(), '%s/Epoch_%d.pth' % (checkpoint_path, this_Epoch+epoch))
+    if epoch % 1 == 0 :
+        print('Epoch:', epoch, ', acc:', epoch_acc/data_size, ', loss:', epoch_loss/(data_size//batch_size))
+    if epoch % 10 == 0 :
+        torch.save(net.state_dict(), '%s/Epoch_%d.pth' % (checkpoint_path, this_Epoch+epoch))
 
 

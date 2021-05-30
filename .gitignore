@@ -1,2 +1,3 @@
 StepRot/models/*
 Saved_models/*.pth
+Saved_models/wo_FSLL/*.pth

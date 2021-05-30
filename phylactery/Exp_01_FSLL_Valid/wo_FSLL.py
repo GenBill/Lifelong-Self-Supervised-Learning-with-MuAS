@@ -97,7 +97,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # 任务：CIFAR10，CUB200（暂定）
 # ResNet-18 装载
 this_Epoch = 0
-checkpoint_path = '/home/zhangxuanming/eLich/Saved_models'      # 'E:/Laplace/Dataset/Kaggle265/valid'
+checkpoint_path = '/home/zhangxuanming/eLich/Saved_models/wo_FSLL'      # 'E:/Laplace/Dataset/Kaggle265/valid'
 
 Trainset_path = '/home/zhangxuanming/Kaggle265/train'
 Testset_path = '/home/zhangxuanming/Kaggle265/test'

@@ -1,7 +1,8 @@
 from tqdm import tqdm
-import copy
 import numpy as np
 import os
+import copy
+import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -23,23 +24,33 @@ def print_params(net):
         print(i, params[i][0])      # name
         print(params[i][1].data)    # data
 
-def BW_tensor(this_tensor, divide):
-    # divide : 将超过min(1/div)的数值设置为不更新
+def BW_tensor(this_tensor, percent):
+    # percent : 将超过min(percent)的数值设置为不更新
     length = this_tensor.numel()
     temp_tensor = torch.abs(this_tensor.view(-1))
-    Kmin_list = torch.topk(temp_tensor, length//divide, largest=False, sorted=True)
+    Kmin_list = torch.topk(temp_tensor, math.floor(length*percent), largest=False, sorted=True)
     if len(Kmin_list.values)!=0 :
         threshold = Kmin_list.values[-1]
         return (torch.abs(this_tensor)<=threshold).float()
     else :
         return torch.zeros(1)    # this_tensor<0 + this_tensor>=0
 
-def Get_shadow_net(net, divide=2):
+def Get_shadow_net(net, percent=0.5):
     shadow_net = copy.deepcopy(net)
     for params in shadow_net.parameters():
-        params.data = BW_tensor(params.data, divide)
+        params.data = BW_tensor(params.data, percent)
         params.requires_grad_(False)
     return shadow_net
+
+def Unfreeze_net(shadow_net, sign_str=''):
+    params_shadow = list(shadow_net.named_parameters())
+    for i in range(len(params_shadow)) :
+        this_str = params_shadow[i][0]
+        if sign_str in this_str:
+            params_shadow[i][1].data *= 0.
+            params_shadow[i][1].data += 1.
+    return shadow_net
+
 
 def Get_old_net(net):
     old_net = copy.deepcopy(net)
@@ -92,7 +103,7 @@ Testset_path = '/home/zhangxuanming/Kaggle265/test'
 Validset_path = '/home/zhangxuanming/Kaggle265/valid'
 
 batch_size = 512
-num_epochs = 200
+num_epochs = 0#200
 
 # 载入数据
 
@@ -143,7 +154,17 @@ accrate_list = []
 # Train Step
 # 镜像
 old_net = Get_old_net(net)
-shadow_net = Get_shadow_net(net, 2)
+shadow_net = Get_shadow_net(net, 0.5)
+shadow_net = Unfreeze_net(shadow_net, 'fc')
+
+'''
+sign_str = 'fc'
+params_shadow = list(shadow_net.named_parameters())
+for i in range(len(params_shadow)):
+    this_str = params_shadow[i][0]
+    if sign_str in this_str:
+        print(params_shadow[i][1].data)
+'''
 
 # Epoch On !
 for epoch in range(1,num_epochs+1):

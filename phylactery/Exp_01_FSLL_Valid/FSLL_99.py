@@ -76,8 +76,8 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
     # print(pred[0])
 
     # 添加遗忘损失
-    for i in range(len(params_net)-2):
-        loss += reg_lamb * torch.sum(torch.abs(params_net[i][1] - params_old[i][1]))
+    # for i in range(len(params_net)-2):
+    #     loss += reg_lamb * torch.sum(torch.abs(params_net[i][1] - params_old[i][1]))
     
     # 计算 grad
     optimizer.zero_grad()
@@ -95,14 +95,14 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
 
     return loss.item(), acc_time.item()
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '3'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # device = torch.device("cpu")
 
 # 任务：CIFAR10，CUB200（暂定）
 # ResNet-18 装载
 this_Epoch = 0
-checkpoint_path = '/home/zhangxuanming/eLich/Saved_models/valid_FSLL'      # 'E:/Laplace/Dataset/Kaggle265/valid'
+checkpoint_path = '/home/zhangxuanming/eLich/Saved_models/valid_FSLL_99'      # 'E:/Laplace/Dataset/Kaggle265/valid'
 logs = open(checkpoint_path+'/training_logs.txt', "w+")
 logs.write("Random Seed: {} \n".format(manualSeed))
 logs.write("Loaded Epoch {} and continuing training\n".format(this_Epoch))
@@ -164,7 +164,7 @@ accrate_list = []
 # Train Step
 # 镜像
 old_net = Get_old_net(net)
-shadow_net = Get_shadow_net(net, 0.5)
+shadow_net = Get_shadow_net(net, 1.)
 shadow_net = Unfreeze_net(shadow_net, 'fc')
 
 '''

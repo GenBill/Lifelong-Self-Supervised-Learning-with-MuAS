@@ -95,13 +95,13 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
 
     return loss.item(), acc_time.item()
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3'
+os.environ['CUDA_VISIBLE_DEVICES'] = '2,3'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # device = torch.device("cpu")
 
 # 任务：CIFAR10，CUB200（暂定）
 # ResNet-18 装载
-this_Epoch = 200
+this_Epoch = 0
 checkpoint_path = '/home/zhangxuanming/eLich/Saved_models/wo_FSLL'      # 'E:/Laplace/Dataset/Kaggle265/valid'
 logs = open(checkpoint_path+'/training_logs.txt', "w+")
 logs.write("Random Seed: {} \n".format(manualSeed))
@@ -112,7 +112,7 @@ Testset_path = '/home/zhangxuanming/Kaggle265/test'
 Validset_path = '/home/zhangxuanming/Kaggle265/valid'
 
 batch_size = 512
-num_epochs = 10
+num_epochs = 1000
 
 # 载入数据
 

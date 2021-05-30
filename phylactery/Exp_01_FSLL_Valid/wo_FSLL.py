@@ -3,6 +3,7 @@ import numpy as np
 import os
 import copy
 import math
+import random
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -15,6 +16,10 @@ from torch.utils.data import Dataset, DataLoader
 # 过滤警告信息
 import warnings
 warnings.filterwarnings("ignore")
+
+manualSeed = 2077     # random.randint(1, 10000)
+random.seed(manualSeed)
+torch.manual_seed(manualSeed)
 
 # copy from Frost_Func.py
 # Sector Frost_Func
@@ -96,15 +101,18 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # 任务：CIFAR10，CUB200（暂定）
 # ResNet-18 装载
-this_Epoch = 0
+this_Epoch = 200
 checkpoint_path = '/home/zhangxuanming/eLich/Saved_models/wo_FSLL'      # 'E:/Laplace/Dataset/Kaggle265/valid'
+logs = open(checkpoint_path+'/training_logs.txt', "w+")
+logs.write("Random Seed: {} \n".format(manualSeed))
+logs.write("Loaded Epoch {} and continuing training\n".format(this_Epoch))
 
 Trainset_path = '/home/zhangxuanming/Kaggle265/train'
 Testset_path = '/home/zhangxuanming/Kaggle265/test'
 Validset_path = '/home/zhangxuanming/Kaggle265/valid'
 
 batch_size = 512
-num_epochs = 200
+num_epochs = 10
 
 # 载入数据
 
@@ -134,6 +142,7 @@ net = net.to(device)
 
 if torch.cuda.device_count() > 1: 
     print("Let's use", torch.cuda.device_count(), "GPUs!")
+    logs.write("Now we use {} GPUs!\n\n".format(torch.cuda.device_count()))
 net = nn.DataParallel(net)
 
 
@@ -155,7 +164,7 @@ accrate_list = []
 # Train Step
 # 镜像
 old_net = Get_old_net(net)
-shadow_net = Get_shadow_net(net, 1)
+shadow_net = Get_shadow_net(net, 1.)
 shadow_net = Unfreeze_net(shadow_net, 'fc')
 
 '''
@@ -187,8 +196,11 @@ for epoch in range(1,num_epochs+1):
     accrate_list.append(epoch_acc/data_size)
 
     if epoch % 1 == 0 :
-        print('Epoch:', epoch, ', acc:', epoch_acc/data_size, ', loss:', epoch_loss/(data_size//batch_size))
+        print('Epoch: {} \nAcc: {:.4f}, Loss: {:.4f}'.format(epoch, epoch_acc/data_size, epoch_loss/(data_size//batch_size)))
+        logs.write('\nEpoch: {} \nAcc: {:.4f}, Loss: {:.4f}\n'.format(epoch, epoch_acc/data_size, epoch_loss/(data_size//batch_size)))
+        logs.flush()
+
     if epoch % 10 == 0 :
         torch.save(net.state_dict(), '%s/Epoch_%d.pth' % (checkpoint_path, this_Epoch+epoch))
 
-
+logs.close()

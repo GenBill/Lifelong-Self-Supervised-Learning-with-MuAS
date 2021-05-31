@@ -2717,3 +2717,18 @@ Acc: 0.9995, Loss: 4.6495
 
 Epoch: 905 
 Acc: 0.9995, Loss: 4.6495
+
+Epoch: 906 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 907 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 908 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 909 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 910 
+Acc: 0.9829, Loss: 4.6725

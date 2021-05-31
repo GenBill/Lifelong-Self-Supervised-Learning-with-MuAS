@@ -2675,3 +2675,18 @@ Acc: 0.9993, Loss: 4.6497
 
 Epoch: 891 
 Acc: 0.9993, Loss: 4.6497
+
+Epoch: 892 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 893 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 894 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 895 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 896 
+Acc: 0.9993, Loss: 4.6497

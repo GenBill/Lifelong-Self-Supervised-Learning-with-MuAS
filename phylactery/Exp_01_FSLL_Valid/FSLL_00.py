@@ -85,8 +85,8 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
     loss.backward()
 
     # 过滤 grad
-    for i in range(len(params_net)-2):
-        params_net[i][1].grad = params_net[i][1].grad * params_shadow[i][1].data
+    # for i in range(len(params_net)-2):
+    #     params_net[i][1].grad = params_net[i][1].grad * params_shadow[i][1].data
     
     # End Sub
     optimizer.step()
@@ -151,11 +151,11 @@ if this_Epoch != 0 :
     net.load_state_dict(torch.load('%s/Epoch_%d.pth' % (checkpoint_path, this_Epoch), map_location=device))
 
 # 就是普通的载入模型
+# 000 Quick Frost 000
 optimizer = optim.Adam(
     [
-        {'params': (p for name, p in net.named_parameters() if 'weight' in name), 'lr': 1e-3, 'momentum': 0.6, 'weight_decay': 1e-5},
-        {'params': (p for name, p in net.named_parameters() if 'bias' in name), 'lr': 1e-2, 'momentum': 0.9, 'weight_decay': 0.}
-    ]   , lr=1e-3, weight_decay=1e-5
+        {'params': (p for name, p in net.named_parameters() if 'fc' in name), 'lr': 1e-4, 'momentum': 0.6, 'weight_decay': 1e-8}
+    ]
 )
 
 criterion = nn.CrossEntropyLoss(reduction='mean')   # nn.MSELoss(reduction='mean')
@@ -167,6 +167,12 @@ accrate_list = []
 old_net = Get_old_net(net)
 shadow_net = Get_shadow_net(net, 0.)
 shadow_net = Unfreeze_net(shadow_net, 'fc')
+
+# 000 Quick Frost 000
+params_net = list(net.named_parameters())
+for i, params in enumerate(net.parameters()):
+    if i<len(params_net)-2:
+        params.requires_grad_(False)
 
 '''
 sign_str = 'fc'

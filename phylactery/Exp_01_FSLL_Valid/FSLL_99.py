@@ -84,8 +84,8 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
     loss.backward()
 
     # 过滤 grad
-    for i in range(len(params_net)-2):
-        params_net[i][1].grad = params_net[i][1].grad * params_shadow[i][1].data
+    # for i in range(len(params_net)-2):
+    #     params_net[i][1].grad = params_net[i][1].grad * params_shadow[i][1].data
     
     # End Sub
     optimizer.step()

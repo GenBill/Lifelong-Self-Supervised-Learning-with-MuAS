@@ -1,0 +1,2741 @@
+Random Seed: 2077 
+Loaded Epoch 0 and continuing training
+
+Epoch: 1 
+Acc: 0.1110, Loss: 5.5590
+
+Epoch: 2 
+Acc: 0.1914, Loss: 5.4827
+
+Epoch: 3 
+Acc: 0.2333, Loss: 5.4391
+
+Epoch: 4 
+Acc: 0.2708, Loss: 5.4027
+
+Epoch: 5 
+Acc: 0.2931, Loss: 5.3819
+
+Epoch: 6 
+Acc: 0.3033, Loss: 5.3713
+
+Epoch: 7 
+Acc: 0.3097, Loss: 5.3669
+
+Epoch: 8 
+Acc: 0.3162, Loss: 5.3581
+
+Epoch: 9 
+Acc: 0.3224, Loss: 5.3505
+
+Epoch: 10 
+Acc: 0.3254, Loss: 5.3455
+
+Epoch: 11 
+Acc: 0.3308, Loss: 5.3397
+
+Epoch: 12 
+Acc: 0.3379, Loss: 5.3328
+
+Epoch: 13 
+Acc: 0.3450, Loss: 5.3249
+
+Epoch: 14 
+Acc: 0.3495, Loss: 5.3194
+
+Epoch: 15 
+Acc: 0.3552, Loss: 5.3129
+
+Epoch: 16 
+Acc: 0.3654, Loss: 5.3035
+
+Epoch: 17 
+Acc: 0.3711, Loss: 5.2968
+
+Epoch: 18 
+Acc: 0.3773, Loss: 5.2900
+
+Epoch: 19 
+Acc: 0.3850, Loss: 5.2816
+
+Epoch: 20 
+Acc: 0.3921, Loss: 5.2745
+
+Epoch: 21 
+Acc: 0.4000, Loss: 5.2663
+
+Epoch: 22 
+Acc: 0.4118, Loss: 5.2562
+
+Epoch: 23 
+Acc: 0.4173, Loss: 5.2489
+
+Epoch: 24 
+Acc: 0.4229, Loss: 5.2429
+
+Epoch: 25 
+Acc: 0.4273, Loss: 5.2377
+
+Epoch: 26 
+Acc: 0.4336, Loss: 5.2317
+
+Epoch: 27 
+Acc: 0.4401, Loss: 5.2253
+
+Epoch: 28 
+Acc: 0.4450, Loss: 5.2207
+
+Epoch: 29 
+Acc: 0.4495, Loss: 5.2145
+
+Epoch: 30 
+Acc: 0.4537, Loss: 5.2102
+
+Epoch: 31 
+Acc: 0.4609, Loss: 5.2042
+
+Epoch: 32 
+Acc: 0.4650, Loss: 5.2002
+
+Epoch: 33 
+Acc: 0.4705, Loss: 5.1950
+
+Epoch: 34 
+Acc: 0.4745, Loss: 5.1899
+
+Epoch: 35 
+Acc: 0.4814, Loss: 5.1835
+
+Epoch: 36 
+Acc: 0.4903, Loss: 5.1780
+
+Epoch: 37 
+Acc: 0.4946, Loss: 5.1709
+
+Epoch: 38 
+Acc: 0.4970, Loss: 5.1669
+
+Epoch: 39 
+Acc: 0.5019, Loss: 5.1627
+
+Epoch: 40 
+Acc: 0.5053, Loss: 5.1603
+
+Epoch: 41 
+Acc: 0.5094, Loss: 5.1543
+
+Epoch: 42 
+Acc: 0.5123, Loss: 5.1510
+
+Epoch: 43 
+Acc: 0.5150, Loss: 5.1471
+
+Epoch: 44 
+Acc: 0.5214, Loss: 5.1414
+
+Epoch: 45 
+Acc: 0.5241, Loss: 5.1380
+
+Epoch: 46 
+Acc: 0.5242, Loss: 5.1380
+
+Epoch: 47 
+Acc: 0.5252, Loss: 5.1367
+
+Epoch: 48 
+Acc: 0.5260, Loss: 5.1339
+
+Epoch: 49 
+Acc: 0.5310, Loss: 5.1289
+
+Epoch: 50 
+Acc: 0.5401, Loss: 5.1238
+
+Epoch: 51 
+Acc: 0.5421, Loss: 5.1243
+
+Epoch: 52 
+Acc: 0.5423, Loss: 5.1242
+
+Epoch: 53 
+Acc: 0.5450, Loss: 5.1196
+
+Epoch: 54 
+Acc: 0.5476, Loss: 5.1144
+
+Epoch: 55 
+Acc: 0.5505, Loss: 5.1096
+
+Epoch: 56 
+Acc: 0.5537, Loss: 5.1056
+
+Epoch: 57 
+Acc: 0.5553, Loss: 5.1028
+
+Epoch: 58 
+Acc: 0.5580, Loss: 5.1003
+
+Epoch: 59 
+Acc: 0.5613, Loss: 5.0981
+
+Epoch: 60 
+Acc: 0.5642, Loss: 5.0951
+
+Epoch: 61 
+Acc: 0.5653, Loss: 5.0946
+
+Epoch: 62 
+Acc: 0.5663, Loss: 5.0944
+
+Epoch: 63 
+Acc: 0.5661, Loss: 5.0959
+
+Epoch: 64 
+Acc: 0.5672, Loss: 5.0941
+
+Epoch: 65 
+Acc: 0.5690, Loss: 5.0930
+
+Epoch: 66 
+Acc: 0.5689, Loss: 5.0938
+
+Epoch: 67 
+Acc: 0.5696, Loss: 5.0924
+
+Epoch: 68 
+Acc: 0.5720, Loss: 5.0885
+
+Epoch: 69 
+Acc: 0.5725, Loss: 5.0870
+
+Epoch: 70 
+Acc: 0.5743, Loss: 5.0831
+
+Epoch: 71 
+Acc: 0.5755, Loss: 5.0806
+
+Epoch: 72 
+Acc: 0.5784, Loss: 5.0785
+
+Epoch: 73 
+Acc: 0.5842, Loss: 5.0744
+
+Epoch: 74 
+Acc: 0.5874, Loss: 5.0718
+
+Epoch: 75 
+Acc: 0.5874, Loss: 5.0735
+
+Epoch: 76 
+Acc: 0.5868, Loss: 5.0755
+
+Epoch: 77 
+Acc: 0.5871, Loss: 5.0750
+
+Epoch: 78 
+Acc: 0.5887, Loss: 5.0723
+
+Epoch: 79 
+Acc: 0.5897, Loss: 5.0707
+
+Epoch: 80 
+Acc: 0.5912, Loss: 5.0670
+
+Epoch: 81 
+Acc: 0.5923, Loss: 5.0644
+
+Epoch: 82 
+Acc: 0.5931, Loss: 5.0625
+
+Epoch: 83 
+Acc: 0.5946, Loss: 5.0609
+
+Epoch: 84 
+Acc: 0.5967, Loss: 5.0590
+
+Epoch: 85 
+Acc: 0.5994, Loss: 5.0569
+
+Epoch: 86 
+Acc: 0.6005, Loss: 5.0556
+
+Epoch: 87 
+Acc: 0.6008, Loss: 5.0544
+
+Epoch: 88 
+Acc: 0.6012, Loss: 5.0535
+
+Epoch: 89 
+Acc: 0.6014, Loss: 5.0530
+
+Epoch: 90 
+Acc: 0.6044, Loss: 5.0513
+
+Epoch: 91 
+Acc: 0.6066, Loss: 5.0502
+
+Epoch: 92 
+Acc: 0.6074, Loss: 5.0517
+
+Epoch: 93 
+Acc: 0.5975, Loss: 5.0694
+
+Epoch: 94 
+Acc: 0.5869, Loss: 5.0833
+
+Epoch: 95 
+Acc: 0.5978, Loss: 5.0681
+
+Epoch: 96 
+Acc: 0.6075, Loss: 5.0546
+
+Epoch: 97 
+Acc: 0.6115, Loss: 5.0479
+
+Epoch: 98 
+Acc: 0.6133, Loss: 5.0437
+
+Epoch: 99 
+Acc: 0.6145, Loss: 5.0411
+
+Epoch: 100 
+Acc: 0.6149, Loss: 5.0399
+
+Epoch: 101 
+Acc: 0.6153, Loss: 5.0390
+
+Epoch: 102 
+Acc: 0.6156, Loss: 5.0387
+
+Epoch: 103 
+Acc: 0.6157, Loss: 5.0384
+
+Epoch: 104 
+Acc: 0.6158, Loss: 5.0382
+
+Epoch: 105 
+Acc: 0.6159, Loss: 5.0381
+
+Epoch: 106 
+Acc: 0.6160, Loss: 5.0380
+
+Epoch: 107 
+Acc: 0.6181, Loss: 5.0371
+
+Epoch: 108 
+Acc: 0.6216, Loss: 5.0349
+
+Epoch: 109 
+Acc: 0.6221, Loss: 5.0346
+
+Epoch: 110 
+Acc: 0.6218, Loss: 5.0360
+
+Epoch: 111 
+Acc: 0.6204, Loss: 5.0402
+
+Epoch: 112 
+Acc: 0.6152, Loss: 5.0487
+
+Epoch: 113 
+Acc: 0.6138, Loss: 5.0502
+
+Epoch: 114 
+Acc: 0.6167, Loss: 5.0458
+
+Epoch: 115 
+Acc: 0.6193, Loss: 5.0410
+
+Epoch: 116 
+Acc: 0.6216, Loss: 5.0366
+
+Epoch: 117 
+Acc: 0.6229, Loss: 5.0332
+
+Epoch: 118 
+Acc: 0.6233, Loss: 5.0311
+
+Epoch: 119 
+Acc: 0.6234, Loss: 5.0307
+
+Epoch: 120 
+Acc: 0.6236, Loss: 5.0304
+
+Epoch: 121 
+Acc: 0.6236, Loss: 5.0302
+
+Epoch: 122 
+Acc: 0.6237, Loss: 5.0302
+
+Epoch: 123 
+Acc: 0.6237, Loss: 5.0302
+
+Epoch: 124 
+Acc: 0.6238, Loss: 5.0301
+
+Epoch: 125 
+Acc: 0.6243, Loss: 5.0299
+
+Epoch: 126 
+Acc: 0.6261, Loss: 5.0288
+
+Epoch: 127 
+Acc: 0.6266, Loss: 5.0282
+
+Epoch: 128 
+Acc: 0.6270, Loss: 5.0272
+
+Epoch: 129 
+Acc: 0.6272, Loss: 5.0269
+
+Epoch: 130 
+Acc: 0.6297, Loss: 5.0260
+
+Epoch: 131 
+Acc: 0.6285, Loss: 5.0321
+
+Epoch: 132 
+Acc: 0.6091, Loss: 5.0616
+
+Epoch: 133 
+Acc: 0.6117, Loss: 5.0560
+
+Epoch: 134 
+Acc: 0.6241, Loss: 5.0391
+
+Epoch: 135 
+Acc: 0.6288, Loss: 5.0305
+
+Epoch: 136 
+Acc: 0.6316, Loss: 5.0259
+
+Epoch: 137 
+Acc: 0.6330, Loss: 5.0224
+
+Epoch: 138 
+Acc: 0.6336, Loss: 5.0209
+
+Epoch: 139 
+Acc: 0.6338, Loss: 5.0203
+
+Epoch: 140 
+Acc: 0.6338, Loss: 5.0200
+
+Epoch: 141 
+Acc: 0.6339, Loss: 5.0200
+
+Epoch: 142 
+Acc: 0.6339, Loss: 5.0199
+
+Epoch: 143 
+Acc: 0.6339, Loss: 5.0198
+
+Epoch: 144 
+Acc: 0.6340, Loss: 5.0197
+
+Epoch: 145 
+Acc: 0.6340, Loss: 5.0198
+
+Epoch: 146 
+Acc: 0.6341, Loss: 5.0197
+
+Epoch: 147 
+Acc: 0.6341, Loss: 5.0196
+
+Epoch: 148 
+Acc: 0.6341, Loss: 5.0197
+
+Epoch: 149 
+Acc: 0.6342, Loss: 5.0195
+
+Epoch: 150 
+Acc: 0.6342, Loss: 5.0195
+
+Epoch: 151 
+Acc: 0.6343, Loss: 5.0193
+
+Epoch: 152 
+Acc: 0.6351, Loss: 5.0191
+
+Epoch: 153 
+Acc: 0.6370, Loss: 5.0183
+
+Epoch: 154 
+Acc: 0.6373, Loss: 5.0191
+
+Epoch: 155 
+Acc: 0.6302, Loss: 5.0344
+
+Epoch: 156 
+Acc: 0.6119, Loss: 5.0608
+
+Epoch: 157 
+Acc: 0.6243, Loss: 5.0417
+
+Epoch: 158 
+Acc: 0.6323, Loss: 5.0286
+
+Epoch: 159 
+Acc: 0.6359, Loss: 5.0221
+
+Epoch: 160 
+Acc: 0.6374, Loss: 5.0183
+
+Epoch: 161 
+Acc: 0.6377, Loss: 5.0167
+
+Epoch: 162 
+Acc: 0.6386, Loss: 5.0156
+
+Epoch: 163 
+Acc: 0.6403, Loss: 5.0138
+
+Epoch: 164 
+Acc: 0.6408, Loss: 5.0132
+
+Epoch: 165 
+Acc: 0.6409, Loss: 5.0130
+
+Epoch: 166 
+Acc: 0.6410, Loss: 5.0128
+
+Epoch: 167 
+Acc: 0.6410, Loss: 5.0127
+
+Epoch: 168 
+Acc: 0.6411, Loss: 5.0126
+
+Epoch: 169 
+Acc: 0.6411, Loss: 5.0125
+
+Epoch: 170 
+Acc: 0.6412, Loss: 5.0124
+
+Epoch: 171 
+Acc: 0.6413, Loss: 5.0124
+
+Epoch: 172 
+Acc: 0.6413, Loss: 5.0123
+
+Epoch: 173 
+Acc: 0.6414, Loss: 5.0122
+
+Epoch: 174 
+Acc: 0.6437, Loss: 5.0112
+
+Epoch: 175 
+Acc: 0.6449, Loss: 5.0103
+
+Epoch: 176 
+Acc: 0.6451, Loss: 5.0095
+
+Epoch: 177 
+Acc: 0.6452, Loss: 5.0089
+
+Epoch: 178 
+Acc: 0.6453, Loss: 5.0085
+
+Epoch: 179 
+Acc: 0.6454, Loss: 5.0083
+
+Epoch: 180 
+Acc: 0.6454, Loss: 5.0082
+
+Epoch: 181 
+Acc: 0.6454, Loss: 5.0082
+
+Epoch: 182 
+Acc: 0.6455, Loss: 5.0082
+
+Epoch: 183 
+Acc: 0.6456, Loss: 5.0080
+
+Epoch: 184 
+Acc: 0.6456, Loss: 5.0080
+
+Epoch: 185 
+Acc: 0.6457, Loss: 5.0079
+
+Epoch: 186 
+Acc: 0.6457, Loss: 5.0079
+
+Epoch: 187 
+Acc: 0.6457, Loss: 5.0080
+
+Epoch: 188 
+Acc: 0.6459, Loss: 5.0078
+
+Epoch: 189 
+Acc: 0.6459, Loss: 5.0077
+
+Epoch: 190 
+Acc: 0.6459, Loss: 5.0078
+
+Epoch: 191 
+Acc: 0.6460, Loss: 5.0078
+
+Epoch: 192 
+Acc: 0.6465, Loss: 5.0074
+
+Epoch: 193 
+Acc: 0.6084, Loss: 5.0678
+
+Epoch: 194 
+Acc: 0.5870, Loss: 5.0927
+
+Epoch: 195 
+Acc: 0.6218, Loss: 5.0476
+
+Epoch: 196 
+Acc: 0.6369, Loss: 5.0275
+
+Epoch: 197 
+Acc: 0.6442, Loss: 5.0158
+
+Epoch: 198 
+Acc: 0.6469, Loss: 5.0102
+
+Epoch: 199 
+Acc: 0.6480, Loss: 5.0074
+
+Epoch: 200 
+Acc: 0.6486, Loss: 5.0058
+
+Epoch: 201 
+Acc: 0.6490, Loss: 5.0049
+
+Epoch: 202 
+Acc: 0.6492, Loss: 5.0045
+
+Epoch: 203 
+Acc: 0.6493, Loss: 5.0044
+
+Epoch: 204 
+Acc: 0.6493, Loss: 5.0042
+
+Epoch: 205 
+Acc: 0.6494, Loss: 5.0042
+
+Epoch: 206 
+Acc: 0.6494, Loss: 5.0042
+
+Epoch: 207 
+Acc: 0.6507, Loss: 5.0034
+
+Epoch: 208 
+Acc: 0.6525, Loss: 5.0018
+
+Epoch: 209 
+Acc: 0.6544, Loss: 5.0002
+
+Epoch: 210 
+Acc: 0.6564, Loss: 4.9984
+
+Epoch: 211 
+Acc: 0.6568, Loss: 4.9973
+
+Epoch: 212 
+Acc: 0.6568, Loss: 4.9971
+
+Epoch: 213 
+Acc: 0.6569, Loss: 4.9968
+
+Epoch: 214 
+Acc: 0.6570, Loss: 4.9966
+
+Epoch: 215 
+Acc: 0.6570, Loss: 4.9966
+
+Epoch: 216 
+Acc: 0.6570, Loss: 4.9965
+
+Epoch: 217 
+Acc: 0.6571, Loss: 4.9965
+
+Epoch: 218 
+Acc: 0.6571, Loss: 4.9964
+
+Epoch: 219 
+Acc: 0.6572, Loss: 4.9963
+
+Epoch: 220 
+Acc: 0.6573, Loss: 4.9962
+
+Epoch: 221 
+Acc: 0.6573, Loss: 4.9962
+
+Epoch: 222 
+Acc: 0.6584, Loss: 4.9959
+
+Epoch: 223 
+Acc: 0.6468, Loss: 5.0205
+
+Epoch: 224 
+Acc: 0.6153, Loss: 5.0629
+
+Epoch: 225 
+Acc: 0.6417, Loss: 5.0268
+
+Epoch: 226 
+Acc: 0.6537, Loss: 5.0078
+
+Epoch: 227 
+Acc: 0.6582, Loss: 4.9999
+
+Epoch: 228 
+Acc: 0.6597, Loss: 4.9956
+
+Epoch: 229 
+Acc: 0.6601, Loss: 4.9940
+
+Epoch: 230 
+Acc: 0.6602, Loss: 4.9935
+
+Epoch: 231 
+Acc: 0.6603, Loss: 4.9932
+
+Epoch: 232 
+Acc: 0.6604, Loss: 4.9931
+
+Epoch: 233 
+Acc: 0.6605, Loss: 4.9930
+
+Epoch: 234 
+Acc: 0.6605, Loss: 4.9929
+
+Epoch: 235 
+Acc: 0.6605, Loss: 4.9929
+
+Epoch: 236 
+Acc: 0.6606, Loss: 4.9928
+
+Epoch: 237 
+Acc: 0.6607, Loss: 4.9928
+
+Epoch: 238 
+Acc: 0.6607, Loss: 4.9927
+
+Epoch: 239 
+Acc: 0.6607, Loss: 4.9926
+
+Epoch: 240 
+Acc: 0.6608, Loss: 4.9926
+
+Epoch: 241 
+Acc: 0.6609, Loss: 4.9925
+
+Epoch: 242 
+Acc: 0.6609, Loss: 4.9925
+
+Epoch: 243 
+Acc: 0.6610, Loss: 4.9924
+
+Epoch: 244 
+Acc: 0.6613, Loss: 4.9922
+
+Epoch: 245 
+Acc: 0.6614, Loss: 4.9920
+
+Epoch: 246 
+Acc: 0.6615, Loss: 4.9919
+
+Epoch: 247 
+Acc: 0.6616, Loss: 4.9918
+
+Epoch: 248 
+Acc: 0.6616, Loss: 4.9918
+
+Epoch: 249 
+Acc: 0.6623, Loss: 4.9916
+
+Epoch: 250 
+Acc: 0.6640, Loss: 4.9919
+
+Epoch: 251 
+Acc: 0.6374, Loss: 5.0367
+
+Epoch: 252 
+Acc: 0.6385, Loss: 5.0347
+
+Epoch: 253 
+Acc: 0.6542, Loss: 5.0098
+
+Epoch: 254 
+Acc: 0.6613, Loss: 4.9984
+
+Epoch: 255 
+Acc: 0.6640, Loss: 4.9925
+
+Epoch: 256 
+Acc: 0.6648, Loss: 4.9897
+
+Epoch: 257 
+Acc: 0.6650, Loss: 4.9887
+
+Epoch: 258 
+Acc: 0.6651, Loss: 4.9885
+
+Epoch: 259 
+Acc: 0.6652, Loss: 4.9883
+
+Epoch: 260 
+Acc: 0.6653, Loss: 4.9882
+
+Epoch: 261 
+Acc: 0.6653, Loss: 4.9880
+
+Epoch: 262 
+Acc: 0.6654, Loss: 4.9879
+
+Epoch: 263 
+Acc: 0.6654, Loss: 4.9879
+
+Epoch: 264 
+Acc: 0.6654, Loss: 4.9879
+
+Epoch: 265 
+Acc: 0.6655, Loss: 4.9878
+
+Epoch: 266 
+Acc: 0.6655, Loss: 4.9877
+
+Epoch: 267 
+Acc: 0.6655, Loss: 4.9878
+
+Epoch: 268 
+Acc: 0.6655, Loss: 4.9877
+
+Epoch: 269 
+Acc: 0.6655, Loss: 4.9878
+
+Epoch: 270 
+Acc: 0.6656, Loss: 4.9877
+
+Epoch: 271 
+Acc: 0.6656, Loss: 4.9877
+
+Epoch: 272 
+Acc: 0.6657, Loss: 4.9877
+
+Epoch: 273 
+Acc: 0.6657, Loss: 4.9877
+
+Epoch: 274 
+Acc: 0.6657, Loss: 4.9877
+
+Epoch: 275 
+Acc: 0.6657, Loss: 4.9877
+
+Epoch: 276 
+Acc: 0.6657, Loss: 4.9877
+
+Epoch: 277 
+Acc: 0.6657, Loss: 4.9876
+
+Epoch: 278 
+Acc: 0.6657, Loss: 4.9877
+
+Epoch: 279 
+Acc: 0.6658, Loss: 4.9875
+
+Epoch: 280 
+Acc: 0.6659, Loss: 4.9875
+
+Epoch: 281 
+Acc: 0.6659, Loss: 4.9875
+
+Epoch: 282 
+Acc: 0.6662, Loss: 4.9879
+
+Epoch: 283 
+Acc: 0.6448, Loss: 5.0263
+
+Epoch: 284 
+Acc: 0.6204, Loss: 5.0589
+
+Epoch: 285 
+Acc: 0.6514, Loss: 5.0173
+
+Epoch: 286 
+Acc: 0.6627, Loss: 4.9984
+
+Epoch: 287 
+Acc: 0.6662, Loss: 4.9915
+
+Epoch: 288 
+Acc: 0.6679, Loss: 4.9873
+
+Epoch: 289 
+Acc: 0.6682, Loss: 4.9856
+
+Epoch: 290 
+Acc: 0.6685, Loss: 4.9851
+
+Epoch: 291 
+Acc: 0.6694, Loss: 4.9844
+
+Epoch: 292 
+Acc: 0.6712, Loss: 4.9829
+
+Epoch: 293 
+Acc: 0.6717, Loss: 4.9822
+
+Epoch: 294 
+Acc: 0.6719, Loss: 4.9817
+
+Epoch: 295 
+Acc: 0.6721, Loss: 4.9814
+
+Epoch: 296 
+Acc: 0.6721, Loss: 4.9814
+
+Epoch: 297 
+Acc: 0.6721, Loss: 4.9812
+
+Epoch: 298 
+Acc: 0.6722, Loss: 4.9811
+
+Epoch: 299 
+Acc: 0.6722, Loss: 4.9810
+
+Epoch: 300 
+Acc: 0.6722, Loss: 4.9810
+
+Epoch: 301 
+Acc: 0.6723, Loss: 4.9810
+
+Epoch: 302 
+Acc: 0.6723, Loss: 4.9809
+
+Epoch: 303 
+Acc: 0.6723, Loss: 4.9810
+
+Epoch: 304 
+Acc: 0.6723, Loss: 4.9809
+
+Epoch: 305 
+Acc: 0.6723, Loss: 4.9809
+
+Epoch: 306 
+Acc: 0.6743, Loss: 4.9798
+
+Epoch: 307 
+Acc: 0.6752, Loss: 4.9788
+
+Epoch: 308 
+Acc: 0.6754, Loss: 4.9782
+
+Epoch: 309 
+Acc: 0.6754, Loss: 4.9780
+
+Epoch: 310 
+Acc: 0.6754, Loss: 4.9778
+
+Epoch: 311 
+Acc: 0.6754, Loss: 4.9778
+
+Epoch: 312 
+Acc: 0.6754, Loss: 4.9779
+
+Epoch: 313 
+Acc: 0.6755, Loss: 4.9777
+
+Epoch: 314 
+Acc: 0.6755, Loss: 4.9778
+
+Epoch: 315 
+Acc: 0.6756, Loss: 4.9778
+
+Epoch: 316 
+Acc: 0.6756, Loss: 4.9777
+
+Epoch: 317 
+Acc: 0.6757, Loss: 4.9776
+
+Epoch: 318 
+Acc: 0.6757, Loss: 4.9776
+
+Epoch: 319 
+Acc: 0.6757, Loss: 4.9775
+
+Epoch: 320 
+Acc: 0.6756, Loss: 4.9787
+
+Epoch: 321 
+Acc: 0.6253, Loss: 5.0553
+
+Epoch: 322 
+Acc: 0.6315, Loss: 5.0447
+
+Epoch: 323 
+Acc: 0.6575, Loss: 5.0097
+
+Epoch: 324 
+Acc: 0.6690, Loss: 4.9923
+
+Epoch: 325 
+Acc: 0.6732, Loss: 4.9841
+
+Epoch: 326 
+Acc: 0.6745, Loss: 4.9803
+
+Epoch: 327 
+Acc: 0.6751, Loss: 4.9787
+
+Epoch: 328 
+Acc: 0.6753, Loss: 4.9782
+
+Epoch: 329 
+Acc: 0.6754, Loss: 4.9779
+
+Epoch: 330 
+Acc: 0.6756, Loss: 4.9777
+
+Epoch: 331 
+Acc: 0.6756, Loss: 4.9777
+
+Epoch: 332 
+Acc: 0.6757, Loss: 4.9776
+
+Epoch: 333 
+Acc: 0.6757, Loss: 4.9775
+
+Epoch: 334 
+Acc: 0.6757, Loss: 4.9774
+
+Epoch: 335 
+Acc: 0.6758, Loss: 4.9775
+
+Epoch: 336 
+Acc: 0.6758, Loss: 4.9775
+
+Epoch: 337 
+Acc: 0.6758, Loss: 4.9774
+
+Epoch: 338 
+Acc: 0.6776, Loss: 4.9763
+
+Epoch: 339 
+Acc: 0.6786, Loss: 4.9755
+
+Epoch: 340 
+Acc: 0.6788, Loss: 4.9748
+
+Epoch: 341 
+Acc: 0.6809, Loss: 4.9737
+
+Epoch: 342 
+Acc: 0.6820, Loss: 4.9725
+
+Epoch: 343 
+Acc: 0.6822, Loss: 4.9720
+
+Epoch: 344 
+Acc: 0.6823, Loss: 4.9713
+
+Epoch: 345 
+Acc: 0.6824, Loss: 4.9709
+
+Epoch: 346 
+Acc: 0.6824, Loss: 4.9708
+
+Epoch: 347 
+Acc: 0.6825, Loss: 4.9707
+
+Epoch: 348 
+Acc: 0.6825, Loss: 4.9706
+
+Epoch: 349 
+Acc: 0.6826, Loss: 4.9706
+
+Epoch: 350 
+Acc: 0.6826, Loss: 4.9705
+
+Epoch: 351 
+Acc: 0.6826, Loss: 4.9706
+
+Epoch: 352 
+Acc: 0.6826, Loss: 4.9705
+
+Epoch: 353 
+Acc: 0.6826, Loss: 4.9705
+
+Epoch: 354 
+Acc: 0.6826, Loss: 4.9704
+
+Epoch: 355 
+Acc: 0.6826, Loss: 4.9705
+
+Epoch: 356 
+Acc: 0.6827, Loss: 4.9704
+
+Epoch: 357 
+Acc: 0.6827, Loss: 4.9705
+
+Epoch: 358 
+Acc: 0.6827, Loss: 4.9705
+
+Epoch: 359 
+Acc: 0.6828, Loss: 4.9703
+
+Epoch: 360 
+Acc: 0.6827, Loss: 4.9704
+
+Epoch: 361 
+Acc: 0.6828, Loss: 4.9703
+
+Epoch: 362 
+Acc: 0.6828, Loss: 4.9703
+
+Epoch: 363 
+Acc: 0.6828, Loss: 4.9703
+
+Epoch: 364 
+Acc: 0.6836, Loss: 4.9701
+
+Epoch: 365 
+Acc: 0.6092, Loss: 5.0782
+
+Epoch: 366 
+Acc: 0.6285, Loss: 5.0493
+
+Epoch: 367 
+Acc: 0.6642, Loss: 5.0046
+
+Epoch: 368 
+Acc: 0.6753, Loss: 4.9875
+
+Epoch: 369 
+Acc: 0.6809, Loss: 4.9775
+
+Epoch: 370 
+Acc: 0.6838, Loss: 4.9721
+
+Epoch: 371 
+Acc: 0.6848, Loss: 4.9696
+
+Epoch: 372 
+Acc: 0.6852, Loss: 4.9684
+
+Epoch: 373 
+Acc: 0.6855, Loss: 4.9679
+
+Epoch: 374 
+Acc: 0.6857, Loss: 4.9676
+
+Epoch: 375 
+Acc: 0.6859, Loss: 4.9674
+
+Epoch: 376 
+Acc: 0.6861, Loss: 4.9671
+
+Epoch: 377 
+Acc: 0.6862, Loss: 4.9670
+
+Epoch: 378 
+Acc: 0.6862, Loss: 4.9671
+
+Epoch: 379 
+Acc: 0.6864, Loss: 4.9668
+
+Epoch: 380 
+Acc: 0.6865, Loss: 4.9667
+
+Epoch: 381 
+Acc: 0.6865, Loss: 4.9666
+
+Epoch: 382 
+Acc: 0.6865, Loss: 4.9665
+
+Epoch: 383 
+Acc: 0.6868, Loss: 4.9664
+
+Epoch: 384 
+Acc: 0.6889, Loss: 4.9651
+
+Epoch: 385 
+Acc: 0.6893, Loss: 4.9645
+
+Epoch: 386 
+Acc: 0.6894, Loss: 4.9643
+
+Epoch: 387 
+Acc: 0.6894, Loss: 4.9638
+
+Epoch: 388 
+Acc: 0.6895, Loss: 4.9637
+
+Epoch: 389 
+Acc: 0.6895, Loss: 4.9636
+
+Epoch: 390 
+Acc: 0.6924, Loss: 4.9620
+
+Epoch: 391 
+Acc: 0.6930, Loss: 4.9612
+
+Epoch: 392 
+Acc: 0.6934, Loss: 4.9604
+
+Epoch: 393 
+Acc: 0.6953, Loss: 4.9615
+
+Epoch: 394 
+Acc: 0.6665, Loss: 5.0086
+
+Epoch: 395 
+Acc: 0.6667, Loss: 5.0062
+
+Epoch: 396 
+Acc: 0.6857, Loss: 4.9792
+
+Epoch: 397 
+Acc: 0.6923, Loss: 4.9669
+
+Epoch: 398 
+Acc: 0.6956, Loss: 4.9605
+
+Epoch: 399 
+Acc: 0.6964, Loss: 4.9579
+
+Epoch: 400 
+Acc: 0.6967, Loss: 4.9567
+
+Epoch: 401 
+Acc: 0.6968, Loss: 4.9564
+
+Epoch: 402 
+Acc: 0.6968, Loss: 4.9562
+
+Epoch: 403 
+Acc: 0.6968, Loss: 4.9561
+
+Epoch: 404 
+Acc: 0.6969, Loss: 4.9562
+
+Epoch: 405 
+Acc: 0.6969, Loss: 4.9560
+
+Epoch: 406 
+Acc: 0.6969, Loss: 4.9560
+
+Epoch: 407 
+Acc: 0.6976, Loss: 4.9556
+
+Epoch: 408 
+Acc: 0.6998, Loss: 4.9540
+
+Epoch: 409 
+Acc: 0.7004, Loss: 4.9531
+
+Epoch: 410 
+Acc: 0.7004, Loss: 4.9527
+
+Epoch: 411 
+Acc: 0.7004, Loss: 4.9526
+
+Epoch: 412 
+Acc: 0.7004, Loss: 4.9526
+
+Epoch: 413 
+Acc: 0.7004, Loss: 4.9526
+
+Epoch: 414 
+Acc: 0.7004, Loss: 4.9525
+
+Epoch: 415 
+Acc: 0.7004, Loss: 4.9526
+
+Epoch: 416 
+Acc: 0.7004, Loss: 4.9525
+
+Epoch: 417 
+Acc: 0.7005, Loss: 4.9524
+
+Epoch: 418 
+Acc: 0.7005, Loss: 4.9524
+
+Epoch: 419 
+Acc: 0.7005, Loss: 4.9524
+
+Epoch: 420 
+Acc: 0.7005, Loss: 4.9525
+
+Epoch: 421 
+Acc: 0.7005, Loss: 4.9525
+
+Epoch: 422 
+Acc: 0.7005, Loss: 4.9523
+
+Epoch: 423 
+Acc: 0.7005, Loss: 4.9523
+
+Epoch: 424 
+Acc: 0.7006, Loss: 4.9524
+
+Epoch: 425 
+Acc: 0.7006, Loss: 4.9524
+
+Epoch: 426 
+Acc: 0.7019, Loss: 4.9523
+
+Epoch: 427 
+Acc: 0.6966, Loss: 4.9656
+
+Epoch: 428 
+Acc: 0.6480, Loss: 5.0343
+
+Epoch: 429 
+Acc: 0.6790, Loss: 4.9912
+
+Epoch: 430 
+Acc: 0.6948, Loss: 4.9685
+
+Epoch: 431 
+Acc: 0.7003, Loss: 4.9582
+
+Epoch: 432 
+Acc: 0.7022, Loss: 4.9528
+
+Epoch: 433 
+Acc: 0.7028, Loss: 4.9508
+
+Epoch: 434 
+Acc: 0.7031, Loss: 4.9501
+
+Epoch: 435 
+Acc: 0.7031, Loss: 4.9499
+
+Epoch: 436 
+Acc: 0.7032, Loss: 4.9499
+
+Epoch: 437 
+Acc: 0.7032, Loss: 4.9498
+
+Epoch: 438 
+Acc: 0.7032, Loss: 4.9497
+
+Epoch: 439 
+Acc: 0.7033, Loss: 4.9496
+
+Epoch: 440 
+Acc: 0.7033, Loss: 4.9496
+
+Epoch: 441 
+Acc: 0.7033, Loss: 4.9496
+
+Epoch: 442 
+Acc: 0.7034, Loss: 4.9495
+
+Epoch: 443 
+Acc: 0.7034, Loss: 4.9494
+
+Epoch: 444 
+Acc: 0.7034, Loss: 4.9494
+
+Epoch: 445 
+Acc: 0.7034, Loss: 4.9494
+
+Epoch: 446 
+Acc: 0.7035, Loss: 4.9493
+
+Epoch: 447 
+Acc: 0.7035, Loss: 4.9493
+
+Epoch: 448 
+Acc: 0.7035, Loss: 4.9494
+
+Epoch: 449 
+Acc: 0.7046, Loss: 4.9490
+
+Epoch: 450 
+Acc: 0.7063, Loss: 4.9483
+
+Epoch: 451 
+Acc: 0.7060, Loss: 4.9513
+
+Epoch: 452 
+Acc: 0.6961, Loss: 4.9721
+
+Epoch: 453 
+Acc: 0.6907, Loss: 4.9792
+
+Epoch: 454 
+Acc: 0.6987, Loss: 4.9647
+
+Epoch: 455 
+Acc: 0.7047, Loss: 4.9532
+
+Epoch: 456 
+Acc: 0.7064, Loss: 4.9486
+
+Epoch: 457 
+Acc: 0.7068, Loss: 4.9466
+
+Epoch: 458 
+Acc: 0.7069, Loss: 4.9461
+
+Epoch: 459 
+Acc: 0.7069, Loss: 4.9460
+
+Epoch: 460 
+Acc: 0.7070, Loss: 4.9459
+
+Epoch: 461 
+Acc: 0.7070, Loss: 4.9458
+
+Epoch: 462 
+Acc: 0.7070, Loss: 4.9457
+
+Epoch: 463 
+Acc: 0.7070, Loss: 4.9458
+
+Epoch: 464 
+Acc: 0.7070, Loss: 4.9458
+
+Epoch: 465 
+Acc: 0.7071, Loss: 4.9457
+
+Epoch: 466 
+Acc: 0.7071, Loss: 4.9458
+
+Epoch: 467 
+Acc: 0.7071, Loss: 4.9457
+
+Epoch: 468 
+Acc: 0.7071, Loss: 4.9457
+
+Epoch: 469 
+Acc: 0.7072, Loss: 4.9457
+
+Epoch: 470 
+Acc: 0.7072, Loss: 4.9457
+
+Epoch: 471 
+Acc: 0.7072, Loss: 4.9456
+
+Epoch: 472 
+Acc: 0.7072, Loss: 4.9457
+
+Epoch: 473 
+Acc: 0.7072, Loss: 4.9456
+
+Epoch: 474 
+Acc: 0.7072, Loss: 4.9456
+
+Epoch: 475 
+Acc: 0.7072, Loss: 4.9455
+
+Epoch: 476 
+Acc: 0.7072, Loss: 4.9456
+
+Epoch: 477 
+Acc: 0.7073, Loss: 4.9456
+
+Epoch: 478 
+Acc: 0.7073, Loss: 4.9455
+
+Epoch: 479 
+Acc: 0.7073, Loss: 4.9455
+
+Epoch: 480 
+Acc: 0.7073, Loss: 4.9455
+
+Epoch: 481 
+Acc: 0.7073, Loss: 4.9455
+
+Epoch: 482 
+Acc: 0.7073, Loss: 4.9455
+
+Epoch: 483 
+Acc: 0.7073, Loss: 4.9456
+
+Epoch: 484 
+Acc: 0.7086, Loss: 4.9468
+
+Epoch: 485 
+Acc: 0.6597, Loss: 5.0221
+
+Epoch: 486 
+Acc: 0.6809, Loss: 4.9932
+
+Epoch: 487 
+Acc: 0.7005, Loss: 4.9635
+
+Epoch: 488 
+Acc: 0.7075, Loss: 4.9511
+
+Epoch: 489 
+Acc: 0.7095, Loss: 4.9460
+
+Epoch: 490 
+Acc: 0.7105, Loss: 4.9435
+
+Epoch: 491 
+Acc: 0.7108, Loss: 4.9425
+
+Epoch: 492 
+Acc: 0.7107, Loss: 4.9422
+
+Epoch: 493 
+Acc: 0.7109, Loss: 4.9420
+
+Epoch: 494 
+Acc: 0.7110, Loss: 4.9418
+
+Epoch: 495 
+Acc: 0.7110, Loss: 4.9418
+
+Epoch: 496 
+Acc: 0.7110, Loss: 4.9417
+
+Epoch: 497 
+Acc: 0.7111, Loss: 4.9416
+
+Epoch: 498 
+Acc: 0.7111, Loss: 4.9416
+
+Epoch: 499 
+Acc: 0.7111, Loss: 4.9416
+
+Epoch: 500 
+Acc: 0.7112, Loss: 4.9416
+
+Epoch: 501 
+Acc: 0.7113, Loss: 4.9415
+
+Epoch: 502 
+Acc: 0.7113, Loss: 4.9415
+
+Epoch: 503 
+Acc: 0.7113, Loss: 4.9415
+
+Epoch: 504 
+Acc: 0.7113, Loss: 4.9415
+
+Epoch: 505 
+Acc: 0.7113, Loss: 4.9414
+
+Epoch: 506 
+Acc: 0.7113, Loss: 4.9415
+
+Epoch: 507 
+Acc: 0.7113, Loss: 4.9414
+
+Epoch: 508 
+Acc: 0.7113, Loss: 4.9413
+
+Epoch: 509 
+Acc: 0.7128, Loss: 4.9405
+
+Epoch: 510 
+Acc: 0.7150, Loss: 4.9389
+
+Epoch: 511 
+Acc: 0.7151, Loss: 4.9388
+
+Epoch: 512 
+Acc: 0.7151, Loss: 4.9396
+
+Epoch: 513 
+Acc: 0.7126, Loss: 4.9477
+
+Epoch: 514 
+Acc: 0.6838, Loss: 4.9924
+
+Epoch: 515 
+Acc: 0.6991, Loss: 4.9692
+
+Epoch: 516 
+Acc: 0.7102, Loss: 4.9500
+
+Epoch: 517 
+Acc: 0.7138, Loss: 4.9425
+
+Epoch: 518 
+Acc: 0.7148, Loss: 4.9391
+
+Epoch: 519 
+Acc: 0.7151, Loss: 4.9381
+
+Epoch: 520 
+Acc: 0.7153, Loss: 4.9376
+
+Epoch: 521 
+Acc: 0.7153, Loss: 4.9375
+
+Epoch: 522 
+Acc: 0.7153, Loss: 4.9374
+
+Epoch: 523 
+Acc: 0.7153, Loss: 4.9375
+
+Epoch: 524 
+Acc: 0.7153, Loss: 4.9374
+
+Epoch: 525 
+Acc: 0.7153, Loss: 4.9375
+
+Epoch: 526 
+Acc: 0.7153, Loss: 4.9375
+
+Epoch: 527 
+Acc: 0.7153, Loss: 4.9373
+
+Epoch: 528 
+Acc: 0.7153, Loss: 4.9374
+
+Epoch: 529 
+Acc: 0.7153, Loss: 4.9373
+
+Epoch: 530 
+Acc: 0.7153, Loss: 4.9374
+
+Epoch: 531 
+Acc: 0.7153, Loss: 4.9373
+
+Epoch: 532 
+Acc: 0.7179, Loss: 4.9354
+
+Epoch: 533 
+Acc: 0.7185, Loss: 4.9347
+
+Epoch: 534 
+Acc: 0.7185, Loss: 4.9345
+
+Epoch: 535 
+Acc: 0.7186, Loss: 4.9342
+
+Epoch: 536 
+Acc: 0.7186, Loss: 4.9342
+
+Epoch: 537 
+Acc: 0.7186, Loss: 4.9341
+
+Epoch: 538 
+Acc: 0.7186, Loss: 4.9341
+
+Epoch: 539 
+Acc: 0.7186, Loss: 4.9341
+
+Epoch: 540 
+Acc: 0.7186, Loss: 4.9342
+
+Epoch: 541 
+Acc: 0.7186, Loss: 4.9341
+
+Epoch: 542 
+Acc: 0.7186, Loss: 4.9340
+
+Epoch: 543 
+Acc: 0.7186, Loss: 4.9341
+
+Epoch: 544 
+Acc: 0.7186, Loss: 4.9341
+
+Epoch: 545 
+Acc: 0.7186, Loss: 4.9341
+
+Epoch: 546 
+Acc: 0.7186, Loss: 4.9340
+
+Epoch: 547 
+Acc: 0.7186, Loss: 4.9340
+
+Epoch: 548 
+Acc: 0.7186, Loss: 4.9341
+
+Epoch: 549 
+Acc: 0.7186, Loss: 4.9341
+
+Epoch: 550 
+Acc: 0.7186, Loss: 4.9341
+
+Epoch: 551 
+Acc: 0.7186, Loss: 4.9340
+
+Epoch: 552 
+Acc: 0.7187, Loss: 4.9341
+
+Epoch: 553 
+Acc: 0.6839, Loss: 4.9920
+
+Epoch: 554 
+Acc: 0.6656, Loss: 5.0159
+
+Epoch: 555 
+Acc: 0.7006, Loss: 4.9670
+
+Epoch: 556 
+Acc: 0.7126, Loss: 4.9484
+
+Epoch: 557 
+Acc: 0.7167, Loss: 4.9400
+
+Epoch: 558 
+Acc: 0.7178, Loss: 4.9367
+
+Epoch: 559 
+Acc: 0.7182, Loss: 4.9352
+
+Epoch: 560 
+Acc: 0.7184, Loss: 4.9345
+
+Epoch: 561 
+Acc: 0.7185, Loss: 4.9343
+
+Epoch: 562 
+Acc: 0.7185, Loss: 4.9342
+
+Epoch: 563 
+Acc: 0.7186, Loss: 4.9342
+
+Epoch: 564 
+Acc: 0.7186, Loss: 4.9341
+
+Epoch: 565 
+Acc: 0.7186, Loss: 4.9341
+
+Epoch: 566 
+Acc: 0.7186, Loss: 4.9341
+
+Epoch: 567 
+Acc: 0.7197, Loss: 4.9334
+
+Epoch: 568 
+Acc: 0.7225, Loss: 4.9307
+
+Epoch: 569 
+Acc: 0.7226, Loss: 4.9303
+
+Epoch: 570 
+Acc: 0.7226, Loss: 4.9302
+
+Epoch: 571 
+Acc: 0.7226, Loss: 4.9301
+
+Epoch: 572 
+Acc: 0.7227, Loss: 4.9300
+
+Epoch: 573 
+Acc: 0.7227, Loss: 4.9300
+
+Epoch: 574 
+Acc: 0.7227, Loss: 4.9299
+
+Epoch: 575 
+Acc: 0.7227, Loss: 4.9300
+
+Epoch: 576 
+Acc: 0.7228, Loss: 4.9299
+
+Epoch: 577 
+Acc: 0.7228, Loss: 4.9299
+
+Epoch: 578 
+Acc: 0.7228, Loss: 4.9298
+
+Epoch: 579 
+Acc: 0.7228, Loss: 4.9299
+
+Epoch: 580 
+Acc: 0.7228, Loss: 4.9299
+
+Epoch: 581 
+Acc: 0.7228, Loss: 4.9298
+
+Epoch: 582 
+Acc: 0.7237, Loss: 4.9297
+
+Epoch: 583 
+Acc: 0.7202, Loss: 4.9425
+
+Epoch: 584 
+Acc: 0.6861, Loss: 4.9940
+
+Epoch: 585 
+Acc: 0.7086, Loss: 4.9599
+
+Epoch: 586 
+Acc: 0.7209, Loss: 4.9399
+
+Epoch: 587 
+Acc: 0.7243, Loss: 4.9321
+
+Epoch: 588 
+Acc: 0.7252, Loss: 4.9290
+
+Epoch: 589 
+Acc: 0.7254, Loss: 4.9278
+
+Epoch: 590 
+Acc: 0.7255, Loss: 4.9272
+
+Epoch: 591 
+Acc: 0.7256, Loss: 4.9271
+
+Epoch: 592 
+Acc: 0.7256, Loss: 4.9271
+
+Epoch: 593 
+Acc: 0.7256, Loss: 4.9271
+
+Epoch: 594 
+Acc: 0.7256, Loss: 4.9270
+
+Epoch: 595 
+Acc: 0.7256, Loss: 4.9270
+
+Epoch: 596 
+Acc: 0.7256, Loss: 4.9269
+
+Epoch: 597 
+Acc: 0.7257, Loss: 4.9269
+
+Epoch: 598 
+Acc: 0.7257, Loss: 4.9269
+
+Epoch: 599 
+Acc: 0.7257, Loss: 4.9268
+
+Epoch: 600 
+Acc: 0.7257, Loss: 4.9268
+
+Epoch: 601 
+Acc: 0.7262, Loss: 4.9266
+
+Epoch: 602 
+Acc: 0.7286, Loss: 4.9250
+
+Epoch: 603 
+Acc: 0.7288, Loss: 4.9242
+
+Epoch: 604 
+Acc: 0.7288, Loss: 4.9240
+
+Epoch: 605 
+Acc: 0.7298, Loss: 4.9233
+
+Epoch: 606 
+Acc: 0.7321, Loss: 4.9214
+
+Epoch: 607 
+Acc: 0.7322, Loss: 4.9212
+
+Epoch: 608 
+Acc: 0.7323, Loss: 4.9208
+
+Epoch: 609 
+Acc: 0.7323, Loss: 4.9203
+
+Epoch: 610 
+Acc: 0.7323, Loss: 4.9202
+
+Epoch: 611 
+Acc: 0.7323, Loss: 4.9201
+
+Epoch: 612 
+Acc: 0.7324, Loss: 4.9202
+
+Epoch: 613 
+Acc: 0.7324, Loss: 4.9202
+
+Epoch: 614 
+Acc: 0.7324, Loss: 4.9202
+
+Epoch: 615 
+Acc: 0.7324, Loss: 4.9202
+
+Epoch: 616 
+Acc: 0.7324, Loss: 4.9201
+
+Epoch: 617 
+Acc: 0.7324, Loss: 4.9202
+
+Epoch: 618 
+Acc: 0.7324, Loss: 4.9202
+
+Epoch: 619 
+Acc: 0.7324, Loss: 4.9201
+
+Epoch: 620 
+Acc: 0.7324, Loss: 4.9202
+
+Epoch: 621 
+Acc: 0.7324, Loss: 4.9202
+
+Epoch: 622 
+Acc: 0.7324, Loss: 4.9202
+
+Epoch: 623 
+Acc: 0.7324, Loss: 4.9202
+
+Epoch: 624 
+Acc: 0.7334, Loss: 4.9197
+
+Epoch: 625 
+Acc: 0.6785, Loss: 5.0039
+
+Epoch: 626 
+Acc: 0.6869, Loss: 4.9923
+
+Epoch: 627 
+Acc: 0.7180, Loss: 4.9494
+
+Epoch: 628 
+Acc: 0.7291, Loss: 4.9327
+
+Epoch: 629 
+Acc: 0.7336, Loss: 4.9233
+
+Epoch: 630 
+Acc: 0.7350, Loss: 4.9193
+
+Epoch: 631 
+Acc: 0.7354, Loss: 4.9176
+
+Epoch: 632 
+Acc: 0.7354, Loss: 4.9173
+
+Epoch: 633 
+Acc: 0.7356, Loss: 4.9171
+
+Epoch: 634 
+Acc: 0.7356, Loss: 4.9169
+
+Epoch: 635 
+Acc: 0.7357, Loss: 4.9169
+
+Epoch: 636 
+Acc: 0.7357, Loss: 4.9168
+
+Epoch: 637 
+Acc: 0.7357, Loss: 4.9168
+
+Epoch: 638 
+Acc: 0.7357, Loss: 4.9167
+
+Epoch: 639 
+Acc: 0.7357, Loss: 4.9168
+
+Epoch: 640 
+Acc: 0.7357, Loss: 4.9167
+
+Epoch: 641 
+Acc: 0.7357, Loss: 4.9167
+
+Epoch: 642 
+Acc: 0.7357, Loss: 4.9167
+
+Epoch: 643 
+Acc: 0.7358, Loss: 4.9167
+
+Epoch: 644 
+Acc: 0.7358, Loss: 4.9167
+
+Epoch: 645 
+Acc: 0.7358, Loss: 4.9166
+
+Epoch: 646 
+Acc: 0.7358, Loss: 4.9166
+
+Epoch: 647 
+Acc: 0.7358, Loss: 4.9166
+
+Epoch: 648 
+Acc: 0.7359, Loss: 4.9166
+
+Epoch: 649 
+Acc: 0.7359, Loss: 4.9166
+
+Epoch: 650 
+Acc: 0.7360, Loss: 4.9166
+
+Epoch: 651 
+Acc: 0.7360, Loss: 4.9165
+
+Epoch: 652 
+Acc: 0.7360, Loss: 4.9165
+
+Epoch: 653 
+Acc: 0.7367, Loss: 4.9162
+
+Epoch: 654 
+Acc: 0.7360, Loss: 4.9254
+
+Epoch: 655 
+Acc: 0.7046, Loss: 4.9749
+
+Epoch: 656 
+Acc: 0.7241, Loss: 4.9449
+
+Epoch: 657 
+Acc: 0.7345, Loss: 4.9263
+
+Epoch: 658 
+Acc: 0.7384, Loss: 4.9184
+
+Epoch: 659 
+Acc: 0.7397, Loss: 4.9143
+
+Epoch: 660 
+Acc: 0.7399, Loss: 4.9131
+
+Epoch: 661 
+Acc: 0.7400, Loss: 4.9127
+
+Epoch: 662 
+Acc: 0.7400, Loss: 4.9126
+
+Epoch: 663 
+Acc: 0.7400, Loss: 4.9125
+
+Epoch: 664 
+Acc: 0.7401, Loss: 4.9124
+
+Epoch: 665 
+Acc: 0.7401, Loss: 4.9124
+
+Epoch: 666 
+Acc: 0.7409, Loss: 4.9118
+
+Epoch: 667 
+Acc: 0.7430, Loss: 4.9104
+
+Epoch: 668 
+Acc: 0.7434, Loss: 4.9096
+
+Epoch: 669 
+Acc: 0.7434, Loss: 4.9095
+
+Epoch: 670 
+Acc: 0.7434, Loss: 4.9092
+
+Epoch: 671 
+Acc: 0.7435, Loss: 4.9091
+
+Epoch: 672 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 673 
+Acc: 0.7435, Loss: 4.9090
+
+Epoch: 674 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 675 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 676 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 677 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 678 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 679 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 680 
+Acc: 0.7435, Loss: 4.9090
+
+Epoch: 681 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 682 
+Acc: 0.7435, Loss: 4.9088
+
+Epoch: 683 
+Acc: 0.7435, Loss: 4.9088
+
+Epoch: 684 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 685 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 686 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 687 
+Acc: 0.7436, Loss: 4.9089
+
+Epoch: 688 
+Acc: 0.7436, Loss: 4.9088
+
+Epoch: 689 
+Acc: 0.7429, Loss: 4.9109
+
+Epoch: 690 
+Acc: 0.7008, Loss: 4.9790
+
+Epoch: 691 
+Acc: 0.7048, Loss: 4.9716
+
+Epoch: 692 
+Acc: 0.7317, Loss: 4.9325
+
+Epoch: 693 
+Acc: 0.7394, Loss: 4.9187
+
+Epoch: 694 
+Acc: 0.7422, Loss: 4.9128
+
+Epoch: 695 
+Acc: 0.7431, Loss: 4.9104
+
+Epoch: 696 
+Acc: 0.7433, Loss: 4.9095
+
+Epoch: 697 
+Acc: 0.7433, Loss: 4.9093
+
+Epoch: 698 
+Acc: 0.7434, Loss: 4.9091
+
+Epoch: 699 
+Acc: 0.7434, Loss: 4.9090
+
+Epoch: 700 
+Acc: 0.7435, Loss: 4.9090
+
+Epoch: 701 
+Acc: 0.7434, Loss: 4.9090
+
+Epoch: 702 
+Acc: 0.7434, Loss: 4.9090
+
+Epoch: 703 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 704 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 705 
+Acc: 0.7435, Loss: 4.9088
+
+Epoch: 706 
+Acc: 0.7435, Loss: 4.9088
+
+Epoch: 707 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 708 
+Acc: 0.7435, Loss: 4.9087
+
+Epoch: 709 
+Acc: 0.7435, Loss: 4.9089
+
+Epoch: 710 
+Acc: 0.7435, Loss: 4.9088
+
+Epoch: 711 
+Acc: 0.7436, Loss: 4.9088
+
+Epoch: 712 
+Acc: 0.7436, Loss: 4.9088
+
+Epoch: 713 
+Acc: 0.7436, Loss: 4.9088
+
+Epoch: 714 
+Acc: 0.7436, Loss: 4.9087
+
+Epoch: 715 
+Acc: 0.7436, Loss: 4.9088
+
+Epoch: 716 
+Acc: 0.7436, Loss: 4.9088
+
+Epoch: 717 
+Acc: 0.7436, Loss: 4.9087
+
+Epoch: 718 
+Acc: 0.7436, Loss: 4.9088
+
+Epoch: 719 
+Acc: 0.7436, Loss: 4.9088
+
+Epoch: 720 
+Acc: 0.7436, Loss: 4.9087
+
+Epoch: 721 
+Acc: 0.7448, Loss: 4.9085
+
+Epoch: 722 
+Acc: 0.7234, Loss: 4.9490
+
+Epoch: 723 
+Acc: 0.7076, Loss: 4.9686
+
+Epoch: 724 
+Acc: 0.7330, Loss: 4.9331
+
+Epoch: 725 
+Acc: 0.7417, Loss: 4.9185
+
+Epoch: 726 
+Acc: 0.7458, Loss: 4.9102
+
+Epoch: 727 
+Acc: 0.7468, Loss: 4.9074
+
+Epoch: 728 
+Acc: 0.7473, Loss: 4.9058
+
+Epoch: 729 
+Acc: 0.7473, Loss: 4.9052
+
+Epoch: 730 
+Acc: 0.7475, Loss: 4.9050
+
+Epoch: 731 
+Acc: 0.7476, Loss: 4.9049
+
+Epoch: 732 
+Acc: 0.7476, Loss: 4.9048
+
+Epoch: 733 
+Acc: 0.7476, Loss: 4.9047
+
+Epoch: 734 
+Acc: 0.7476, Loss: 4.9048
+
+Epoch: 735 
+Acc: 0.7476, Loss: 4.9047
+
+Epoch: 736 
+Acc: 0.7476, Loss: 4.9047
+
+Epoch: 737 
+Acc: 0.7476, Loss: 4.9046
+
+Epoch: 738 
+Acc: 0.7477, Loss: 4.9047
+
+Epoch: 739 
+Acc: 0.7477, Loss: 4.9046
+
+Epoch: 740 
+Acc: 0.7477, Loss: 4.9046
+
+Epoch: 741 
+Acc: 0.7477, Loss: 4.9047
+
+Epoch: 742 
+Acc: 0.7477, Loss: 4.9046
+
+Epoch: 743 
+Acc: 0.7477, Loss: 4.9047
+
+Epoch: 744 
+Acc: 0.7477, Loss: 4.9047
+
+Epoch: 745 
+Acc: 0.7477, Loss: 4.9047
+
+Epoch: 746 
+Acc: 0.7477, Loss: 4.9046
+
+Epoch: 747 
+Acc: 0.7477, Loss: 4.9046
+
+Epoch: 748 
+Acc: 0.7477, Loss: 4.9046
+
+Epoch: 749 
+Acc: 0.7477, Loss: 4.9047
+
+Epoch: 750 
+Acc: 0.7477, Loss: 4.9047
+
+Epoch: 751 
+Acc: 0.7475, Loss: 4.9049
+
+Epoch: 752 
+Acc: 0.7475, Loss: 4.9050
+
+Epoch: 753 
+Acc: 0.7476, Loss: 4.9049
+
+Epoch: 754 
+Acc: 0.7474, Loss: 4.9061
+
+Epoch: 755 
+Acc: 0.7253, Loss: 4.9458
+
+Epoch: 756 
+Acc: 0.7074, Loss: 4.9702
+
+Epoch: 757 
+Acc: 0.7345, Loss: 4.9310
+
+Epoch: 758 
+Acc: 0.7440, Loss: 4.9148
+
+Epoch: 759 
+Acc: 0.7464, Loss: 4.9087
+
+Epoch: 760 
+Acc: 0.7473, Loss: 4.9063
+
+Epoch: 761 
+Acc: 0.7475, Loss: 4.9052
+
+Epoch: 762 
+Acc: 0.7476, Loss: 4.9049
+
+Epoch: 763 
+Acc: 0.7476, Loss: 4.9048
+
+Epoch: 764 
+Acc: 0.7476, Loss: 4.9047
+
+Epoch: 765 
+Acc: 0.7476, Loss: 4.9047
+
+Epoch: 766 
+Acc: 0.7476, Loss: 4.9047
+
+Epoch: 767 
+Acc: 0.7476, Loss: 4.9047
+
+Epoch: 768 
+Acc: 0.7476, Loss: 4.9047
+
+Epoch: 769 
+Acc: 0.7476, Loss: 4.9047
+
+Epoch: 770 
+Acc: 0.7476, Loss: 4.9046
+
+Epoch: 771 
+Acc: 0.7476, Loss: 4.9046
+
+Epoch: 772 
+Acc: 0.7476, Loss: 4.9046
+
+Epoch: 773 
+Acc: 0.7476, Loss: 4.9046
+
+Epoch: 774 
+Acc: 0.7476, Loss: 4.9047
+
+Epoch: 775 
+Acc: 0.7476, Loss: 4.9047
+
+Epoch: 776 
+Acc: 0.7476, Loss: 4.9050
+
+Epoch: 777 
+Acc: 0.7476, Loss: 4.9048
+
+Epoch: 778 
+Acc: 0.7476, Loss: 4.9047
+
+Epoch: 779 
+Acc: 0.7477, Loss: 4.9046
+
+Epoch: 780 
+Acc: 0.7477, Loss: 4.9046
+
+Epoch: 781 
+Acc: 0.7477, Loss: 4.9046
+
+Epoch: 782 
+Acc: 0.7477, Loss: 4.9046
+
+Epoch: 783 
+Acc: 0.7501, Loss: 4.9035
+
+Epoch: 784 
+Acc: 0.7513, Loss: 4.9041
+
+Epoch: 785 
+Acc: 0.7221, Loss: 4.9536
+
+Epoch: 786 
+Acc: 0.7245, Loss: 4.9480
+
+Epoch: 787 
+Acc: 0.7441, Loss: 4.9176
+
+Epoch: 788 
+Acc: 0.7496, Loss: 4.9076
+
+Epoch: 789 
+Acc: 0.7512, Loss: 4.9030
+
+Epoch: 790 
+Acc: 0.7517, Loss: 4.9013
+
+Epoch: 791 
+Acc: 0.7517, Loss: 4.9007
+
+Epoch: 792 
+Acc: 0.7517, Loss: 4.9006
+
+Epoch: 793 
+Acc: 0.7517, Loss: 4.9006
+
+Epoch: 794 
+Acc: 0.7517, Loss: 4.9006
+
+Epoch: 795 
+Acc: 0.7517, Loss: 4.9006
+
+Epoch: 796 
+Acc: 0.7517, Loss: 4.9005
+
+Epoch: 797 
+Acc: 0.7517, Loss: 4.9005
+
+Epoch: 798 
+Acc: 0.7517, Loss: 4.9005
+
+Epoch: 799 
+Acc: 0.7517, Loss: 4.9005
+
+Epoch: 800 
+Acc: 0.7517, Loss: 4.9005
+
+Epoch: 801 
+Acc: 0.7517, Loss: 4.9005
+
+Epoch: 802 
+Acc: 0.7517, Loss: 4.9004
+
+Epoch: 803 
+Acc: 0.7517, Loss: 4.9005
+
+Epoch: 804 
+Acc: 0.7517, Loss: 4.9006
+
+Epoch: 805 
+Acc: 0.7517, Loss: 4.9005
+
+Epoch: 806 
+Acc: 0.7517, Loss: 4.9005
+
+Epoch: 807 
+Acc: 0.7517, Loss: 4.9005
+
+Epoch: 808 
+Acc: 0.7517, Loss: 4.9005
+
+Epoch: 809 
+Acc: 0.7517, Loss: 4.9005
+
+Epoch: 810 
+Acc: 0.7528, Loss: 4.9001
+
+Epoch: 811 
+Acc: 0.7521, Loss: 4.9064
+
+Epoch: 812 
+Acc: 0.7308, Loss: 4.9442
+
+Epoch: 813 
+Acc: 0.7411, Loss: 4.9270
+
+Epoch: 814 
+Acc: 0.7513, Loss: 4.9087
+
+Epoch: 815 
+Acc: 0.7540, Loss: 4.9019
+
+Epoch: 816 
+Acc: 0.7550, Loss: 4.8986
+
+Epoch: 817 
+Acc: 0.7553, Loss: 4.8973
+
+Epoch: 818 
+Acc: 0.7553, Loss: 4.8970
+
+Epoch: 819 
+Acc: 0.7553, Loss: 4.8969
+
+Epoch: 820 
+Acc: 0.7553, Loss: 4.8970
+
+Epoch: 821 
+Acc: 0.7553, Loss: 4.8969
+
+Epoch: 822 
+Acc: 0.7553, Loss: 4.8969
+
+Epoch: 823 
+Acc: 0.7569, Loss: 4.8960
+
+Epoch: 824 
+Acc: 0.7581, Loss: 4.8946
+
+Epoch: 825 
+Acc: 0.7583, Loss: 4.8943
+
+Epoch: 826 
+Acc: 0.7583, Loss: 4.8940
+
+Epoch: 827 
+Acc: 0.7584, Loss: 4.8939
+
+Epoch: 828 
+Acc: 0.7584, Loss: 4.8939
+
+Epoch: 829 
+Acc: 0.7583, Loss: 4.8940
+
+Epoch: 830 
+Acc: 0.7583, Loss: 4.8939
+
+Epoch: 831 
+Acc: 0.7584, Loss: 4.8939
+
+Epoch: 832 
+Acc: 0.7584, Loss: 4.8939
+
+Epoch: 833 
+Acc: 0.7584, Loss: 4.8939
+
+Epoch: 834 
+Acc: 0.7584, Loss: 4.8938
+
+Epoch: 835 
+Acc: 0.7584, Loss: 4.8938
+
+Epoch: 836 
+Acc: 0.7584, Loss: 4.8938
+
+Epoch: 837 
+Acc: 0.7584, Loss: 4.8939
+
+Epoch: 838 
+Acc: 0.7583, Loss: 4.8942
+
+Epoch: 839 
+Acc: 0.7584, Loss: 4.8943
+
+Epoch: 840 
+Acc: 0.7584, Loss: 4.8940
+
+Epoch: 841 
+Acc: 0.7584, Loss: 4.8938
+
+Epoch: 842 
+Acc: 0.7584, Loss: 4.8938
+
+Epoch: 843 
+Acc: 0.7584, Loss: 4.8938
+
+Epoch: 844 
+Acc: 0.7584, Loss: 4.8938
+
+Epoch: 845 
+Acc: 0.7584, Loss: 4.8938
+
+Epoch: 846 
+Acc: 0.7584, Loss: 4.8938
+
+Epoch: 847 
+Acc: 0.7584, Loss: 4.8938
+
+Epoch: 848 
+Acc: 0.7601, Loss: 4.8935
+
+Epoch: 849 
+Acc: 0.7063, Loss: 4.9779
+
+Epoch: 850 
+Acc: 0.7250, Loss: 4.9509
+
+Epoch: 851 
+Acc: 0.7510, Loss: 4.9132
+
+Epoch: 852 
+Acc: 0.7587, Loss: 4.8996
+
+Epoch: 853 
+Acc: 0.7610, Loss: 4.8941
+
+Epoch: 854 
+Acc: 0.7621, Loss: 4.8913
+
+Epoch: 855 
+Acc: 0.7624, Loss: 4.8902
+
+Epoch: 856 
+Acc: 0.7625, Loss: 4.8898
+
+Epoch: 857 
+Acc: 0.7626, Loss: 4.8897
+
+Epoch: 858 
+Acc: 0.7626, Loss: 4.8897
+
+Epoch: 859 
+Acc: 0.7626, Loss: 4.8896
+
+Epoch: 860 
+Acc: 0.7627, Loss: 4.8895
+
+Epoch: 861 
+Acc: 0.7627, Loss: 4.8896
+
+Epoch: 862 
+Acc: 0.7627, Loss: 4.8895
+
+Epoch: 863 
+Acc: 0.7627, Loss: 4.8895
+
+Epoch: 864 
+Acc: 0.7627, Loss: 4.8894
+
+Epoch: 865 
+Acc: 0.7627, Loss: 4.8895
+
+Epoch: 866 
+Acc: 0.7627, Loss: 4.8894
+
+Epoch: 867 
+Acc: 0.7627, Loss: 4.8894
+
+Epoch: 868 
+Acc: 0.7627, Loss: 4.8894
+
+Epoch: 869 
+Acc: 0.7627, Loss: 4.8895
+
+Epoch: 870 
+Acc: 0.7627, Loss: 4.8894
+
+Epoch: 871 
+Acc: 0.7627, Loss: 4.8894
+
+Epoch: 872 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 873 
+Acc: 0.7627, Loss: 4.8895
+
+Epoch: 874 
+Acc: 0.7627, Loss: 4.8896
+
+Epoch: 875 
+Acc: 0.7627, Loss: 4.8895
+
+Epoch: 876 
+Acc: 0.7627, Loss: 4.8894
+
+Epoch: 877 
+Acc: 0.7627, Loss: 4.8894
+
+Epoch: 878 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 879 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 880 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 881 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 882 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 883 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 884 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 885 
+Acc: 0.7628, Loss: 4.8895
+
+Epoch: 886 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 887 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 888 
+Acc: 0.7628, Loss: 4.8895
+
+Epoch: 889 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 890 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 891 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 892 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 893 
+Acc: 0.7628, Loss: 4.8894
+
+Epoch: 894 
+Acc: 0.7628, Loss: 4.8895
+
+Epoch: 895 
+Acc: 0.7360, Loss: 4.9343
+
+Epoch: 896 
+Acc: 0.6791, Loss: 5.0089
+
+Epoch: 897 
+Acc: 0.7332, Loss: 4.9376
+
+Epoch: 898 
+Acc: 0.7506, Loss: 4.9126
+
+Epoch: 899 
+Acc: 0.7588, Loss: 4.8990
+
+Epoch: 900 
+Acc: 0.7610, Loss: 4.8937
+
+Epoch: 901 
+Acc: 0.7619, Loss: 4.8916
+
+Epoch: 902 
+Acc: 0.7648, Loss: 4.8889
+
+Epoch: 903 
+Acc: 0.7657, Loss: 4.8874
+
+Epoch: 904 
+Acc: 0.7661, Loss: 4.8867
+
+Epoch: 905 
+Acc: 0.7661, Loss: 4.8863
+
+Epoch: 906 
+Acc: 0.7662, Loss: 4.8861
+
+Epoch: 907 
+Acc: 0.7662, Loss: 4.8859
+
+Epoch: 908 
+Acc: 0.7663, Loss: 4.8859
+
+Epoch: 909 
+Acc: 0.7663, Loss: 4.8859
+
+Epoch: 910 
+Acc: 0.7663, Loss: 4.8859
+
+Epoch: 911 
+Acc: 0.7663, Loss: 4.8859
+
+Epoch: 912 
+Acc: 0.7663, Loss: 4.8859
+
+Epoch: 913 
+Acc: 0.7663, Loss: 4.8858

@@ -165,3 +165,72 @@ Acc: 0.4640, Loss: 5.2217
 
 Epoch: 55 
 Acc: 0.4709, Loss: 5.2167
+
+Epoch: 56 
+Acc: 0.4727, Loss: 5.2137
+
+Epoch: 57 
+Acc: 0.4735, Loss: 5.2117
+
+Epoch: 58 
+Acc: 0.4742, Loss: 5.2099
+
+Epoch: 59 
+Acc: 0.4756, Loss: 5.2080
+
+Epoch: 60 
+Acc: 0.4785, Loss: 5.2051
+
+Epoch: 61 
+Acc: 0.4787, Loss: 5.2035
+
+Epoch: 62 
+Acc: 0.4795, Loss: 5.2022
+
+Epoch: 63 
+Acc: 0.4818, Loss: 5.2000
+
+Epoch: 64 
+Acc: 0.4824, Loss: 5.1984
+
+Epoch: 65 
+Acc: 0.4823, Loss: 5.1975
+
+Epoch: 66 
+Acc: 0.4825, Loss: 5.1965
+
+Epoch: 67 
+Acc: 0.4828, Loss: 5.1956
+
+Epoch: 68 
+Acc: 0.4835, Loss: 5.1947
+
+Epoch: 69 
+Acc: 0.4834, Loss: 5.1940
+
+Epoch: 70 
+Acc: 0.4837, Loss: 5.1931
+
+Epoch: 71 
+Acc: 0.4848, Loss: 5.1919
+
+Epoch: 72 
+Acc: 0.4886, Loss: 5.1896
+
+Epoch: 73 
+Acc: 0.4898, Loss: 5.1881
+
+Epoch: 74 
+Acc: 0.4901, Loss: 5.1871
+
+Epoch: 75 
+Acc: 0.4905, Loss: 5.1861
+
+Epoch: 76 
+Acc: 0.4912, Loss: 5.1853
+
+Epoch: 77 
+Acc: 0.4912, Loss: 5.1846
+
+Epoch: 78 
+Acc: 0.4912, Loss: 5.1836

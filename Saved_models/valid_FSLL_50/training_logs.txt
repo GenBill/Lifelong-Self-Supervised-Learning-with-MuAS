@@ -2666,3 +2666,54 @@ Acc: 0.9995, Loss: 4.6495
 
 Epoch: 888 
 Acc: 0.9995, Loss: 4.6495
+
+Epoch: 889 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 890 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 891 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 892 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 893 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 894 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 895 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 896 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 897 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 898 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 899 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 900 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 901 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 902 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 903 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 904 
+Acc: 0.9995, Loss: 4.6495
+
+Epoch: 905 
+Acc: 0.9995, Loss: 4.6495

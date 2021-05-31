@@ -156,6 +156,7 @@ optimizer = optim.Adam(
         {'params': (p for name, p in net.named_parameters() if 'bias' in name), 'lr': 1e-3, 'momentum': 0.9, 'weight_decay': 0.}
     ]   , lr=1e-4, weight_decay=1e-8
 )
+scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[30, 80], gamma=0.1, last_epoch=-1)
 
 criterion = nn.CrossEntropyLoss(reduction='mean')   # nn.MSELoss(reduction='mean')
 loss_list = []
@@ -194,7 +195,8 @@ for epoch in range(1,num_epochs+1):
         epoch_acc += this_acc
     loss_list.append(epoch_loss)
     accrate_list.append(epoch_acc/data_size)
-
+    scheduler.step()
+    
     if epoch % 1 == 0 :
         print('Epoch: {} \nAcc: {:.4f}, Loss: {:.4f}'.format(epoch, epoch_acc/data_size, epoch_loss/(data_size//batch_size)))
         logs.write('\nEpoch: {} \nAcc: {:.4f}, Loss: {:.4f}\n'.format(epoch, epoch_acc/data_size, epoch_loss/(data_size//batch_size)))

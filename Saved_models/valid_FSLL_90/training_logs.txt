@@ -2624,3 +2624,54 @@ Acc: 0.9993, Loss: 4.6497
 
 Epoch: 874 
 Acc: 0.9993, Loss: 4.6497
+
+Epoch: 875 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 876 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 877 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 878 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 879 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 880 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 881 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 882 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 883 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 884 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 885 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 886 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 887 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 888 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 889 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 890 
+Acc: 0.9993, Loss: 4.6497
+
+Epoch: 891 
+Acc: 0.9993, Loss: 4.6497

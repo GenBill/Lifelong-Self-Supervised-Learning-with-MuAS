@@ -60,3 +60,6 @@ Acc: 0.3739, Loss: 5.3367
 
 Epoch: 20 
 Acc: 0.3768, Loss: 5.3319
+
+Epoch: 21 
+Acc: 0.3811, Loss: 5.3264

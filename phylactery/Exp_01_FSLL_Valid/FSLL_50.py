@@ -95,7 +95,7 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
 
     return loss.item(), acc_time.item()
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '4,5,6,7'
+os.environ['CUDA_VISIBLE_DEVICES'] = '5'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # device = torch.device("cpu")
 

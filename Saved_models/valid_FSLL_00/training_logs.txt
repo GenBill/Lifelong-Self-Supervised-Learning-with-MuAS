@@ -1,0 +1,62 @@
+Random Seed: 2077 
+Loaded Epoch 0 and continuing training
+
+Epoch: 1 
+Acc: 0.0122, Loss: 5.6542
+
+Epoch: 2 
+Acc: 0.0433, Loss: 5.6443
+
+Epoch: 3 
+Acc: 0.1069, Loss: 5.6175
+
+Epoch: 4 
+Acc: 0.1562, Loss: 5.5818
+
+Epoch: 5 
+Acc: 0.2047, Loss: 5.5471
+
+Epoch: 6 
+Acc: 0.2427, Loss: 5.5149
+
+Epoch: 7 
+Acc: 0.2703, Loss: 5.4859
+
+Epoch: 8 
+Acc: 0.2899, Loss: 5.4616
+
+Epoch: 9 
+Acc: 0.3043, Loss: 5.4409
+
+Epoch: 10 
+Acc: 0.3205, Loss: 5.4229
+
+Epoch: 11 
+Acc: 0.3308, Loss: 5.4080
+
+Epoch: 12 
+Acc: 0.3371, Loss: 5.3951
+
+Epoch: 13 
+Acc: 0.3447, Loss: 5.3844
+
+Epoch: 14 
+Acc: 0.3560, Loss: 5.3720
+
+Epoch: 15 
+Acc: 0.3598, Loss: 5.3628
+
+Epoch: 16 
+Acc: 0.3605, Loss: 5.3561
+
+Epoch: 17 
+Acc: 0.3662, Loss: 5.3493
+
+Epoch: 18 
+Acc: 0.3720, Loss: 5.3424
+
+Epoch: 19 
+Acc: 0.3739, Loss: 5.3367
+
+Epoch: 20 
+Acc: 0.3768, Loss: 5.3319

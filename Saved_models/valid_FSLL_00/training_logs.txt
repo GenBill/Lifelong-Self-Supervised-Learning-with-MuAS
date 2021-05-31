@@ -132,3 +132,36 @@ Acc: 0.4309, Loss: 5.2550
 
 Epoch: 44 
 Acc: 0.4347, Loss: 5.2520
+
+Epoch: 45 
+Acc: 0.4391, Loss: 5.2482
+
+Epoch: 46 
+Acc: 0.4399, Loss: 5.2460
+
+Epoch: 47 
+Acc: 0.4400, Loss: 5.2443
+
+Epoch: 48 
+Acc: 0.4453, Loss: 5.2407
+
+Epoch: 49 
+Acc: 0.4488, Loss: 5.2371
+
+Epoch: 50 
+Acc: 0.4520, Loss: 5.2340
+
+Epoch: 51 
+Acc: 0.4539, Loss: 5.2313
+
+Epoch: 52 
+Acc: 0.4556, Loss: 5.2292
+
+Epoch: 53 
+Acc: 0.4593, Loss: 5.2256
+
+Epoch: 54 
+Acc: 0.4640, Loss: 5.2217
+
+Epoch: 55 
+Acc: 0.4709, Loss: 5.2167

@@ -135,3 +135,9 @@ Acc: 0.9624, Loss: 4.6888
 
 Epoch: 45 
 Acc: 0.9673, Loss: 4.6841
+
+Epoch: 46 
+Acc: 0.9691, Loss: 4.6813
+
+Epoch: 47 
+Acc: 0.9700, Loss: 4.6803

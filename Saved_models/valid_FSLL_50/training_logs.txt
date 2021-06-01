@@ -2855,3 +2855,150 @@ Acc: 0.9996, Loss: 4.6495
 
 Epoch: 951 
 Acc: 0.9996, Loss: 4.6495
+
+Epoch: 952 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 953 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 954 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 955 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 956 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 957 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 958 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 959 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 960 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 961 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 962 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 963 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 964 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 965 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 966 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 967 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 968 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 969 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 970 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 971 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 972 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 973 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 974 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 975 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 976 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 977 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 978 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 979 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 980 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 981 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 982 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 983 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 984 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 985 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 986 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 987 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 988 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 989 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 990 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 991 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 992 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 993 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 994 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 995 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 996 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 997 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 998 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 999 
+Acc: 0.9996, Loss: 4.6495
+
+Epoch: 1000 
+Acc: 0.9996, Loss: 4.6495

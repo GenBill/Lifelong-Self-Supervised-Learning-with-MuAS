@@ -76,8 +76,8 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
     # print(pred[0])
 
     # 添加遗忘损失
-    # for i in range(len(params_net)-2):
-    #     loss += reg_lamb * torch.sum(torch.abs(params_net[i][1] - params_old[i][1]))
+    for i in range(len(params_net)-2):
+        loss += reg_lamb * torch.sum(torch.abs(params_net[i][1] - params_old[i][1]))
     
     # 计算 grad
     optimizer.zero_grad()
@@ -95,7 +95,7 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
 
     return loss.item(), acc_time.item()
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '6,7'
+os.environ['CUDA_VISIBLE_DEVICES'] = '3'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # device = torch.device("cpu")
 
@@ -156,6 +156,7 @@ optimizer = optim.Adam(
         {'params': (p for name, p in net.named_parameters() if 'bias' in name), 'lr': 1e-3, 'momentum': 0.9, 'weight_decay': 0.}
     ]   , lr=1e-4, weight_decay=1e-8
 )
+scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[300, 600], gamma=0.2, last_epoch=-1)
 
 criterion = nn.CrossEntropyLoss(reduction='mean')   # nn.MSELoss(reduction='mean')
 loss_list = []
@@ -194,6 +195,7 @@ for epoch in range(1,num_epochs+1):
         epoch_acc += this_acc
     loss_list.append(epoch_loss)
     accrate_list.append(epoch_acc/data_size)
+    scheduler.step()
 
     if epoch % 1 == 0 :
         print('Epoch: {} \nAcc: {:.4f}, Loss: {:.4f}'.format(epoch, epoch_acc/data_size, epoch_loss/(data_size//batch_size)))

@@ -11,3 +11,5 @@ CLR without old dataset !
 
 - [x] LwF: Learning without Forgetting. [[paper](https://arxiv.org/abs/1606.09282)]
 - [x] LwM: Learning without Memorizing. [[paper](https://arxiv.org/abs/1811.08051)]
+
+- [x] Origin: Distilling the Knowledge in a Neural Network. [[paper](https://arxiv.org/abs/1503.02531)]

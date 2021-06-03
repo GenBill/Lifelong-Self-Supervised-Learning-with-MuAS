@@ -9,6 +9,5 @@ CLR without old dataset !
 - [x] EWC: Overcoming catastrophic forgetting in neural networks. [[paper](https://arxiv.org/abs/1612.00796)]
 - [x] PathInt(SI): Continual Learning Through Synaptic Intelligence. [[paper](https://arxiv.org/abs/1703.04200)]
 
-- [x] LwF: ???. [[paper]( ? )]
+- [x] LwF: Learning without Forgetting. [[paper](https://arxiv.org/abs/1606.09282)]
 - [x] LwM: Learning without Memorizing. [[paper](https://arxiv.org/abs/1811.08051)]
-- [x] DMC: ???. [[paper]( ? )]

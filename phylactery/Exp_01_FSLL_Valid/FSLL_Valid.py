@@ -12,14 +12,27 @@ import torch.optim as optim
 
 from torchvision import transforms, utils, datasets, models
 from torch.utils.data import Dataset, DataLoader
+import matplotlib.pyplot as plt
 
 # 过滤警告信息
 import warnings
 warnings.filterwarnings("ignore")
 
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
+
 manualSeed = 2077     # random.randint(1, 10000)
 random.seed(manualSeed)
 torch.manual_seed(manualSeed)
+
+# 将超过 Frost_stone 的参数设置为不更新
+Frost_stone = 0.8
+
+if Frost_stone < 0.10 :
+    Frost_str = '0'+str(int(Frost_stone*10))
+elif Frost_stone > 0.99 :
+    Frost_str = '99'
+else :
+    Frost_str = str(int(Frost_stone*100))
 
 # copy from Frost_Func.py
 # Sector Frost_Func
@@ -95,14 +108,19 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
 
     return loss.item(), acc_time.item()
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # device = torch.device("cpu")
 
 # 任务：CIFAR10，CUB200（暂定）
 # ResNet-18 装载
 this_Epoch = 0
-checkpoint_path = '/home/zhangxuanming/eLich/Saved_models/valid_FSLL'      # 'E:/Laplace/Dataset/Kaggle265/valid'
+checkpoint_path = '/home/zhangxuanming/eLich/Saved_models/valid_FSLL_'+Frost_str      # 'E:/Laplace/Dataset/Kaggle265/valid'
+
+try:
+    os.makedirs(checkpoint_path)
+except OSError:
+    pass
+
 logs = open(checkpoint_path+'/training_logs.txt', "w+")
 logs.write("Random Seed: {} \n".format(manualSeed))
 logs.write("Loaded Epoch {} and continuing training\n".format(this_Epoch))
@@ -126,13 +144,14 @@ data_transform = transforms.Compose([
     )                                   # 标准化至[-1, 1]，规定均值和标准差
 ])
 
-
-data_train = datasets.ImageFolder(root = Trainset_path, transform = data_transform)
-
 # 就是普通的载入数据
 data_train = datasets.ImageFolder(root = Trainset_path, transform = data_transform)
 train_loader = torch.utils.data.DataLoader(data_train, batch_size=batch_size, shuffle=True, num_workers=4)
+data_test = datasets.ImageFolder(root = Testset_path, transform = data_transform)
+test_loader = torch.utils.data.DataLoader(data_test, batch_size=batch_size, shuffle=True, num_workers=4)
+
 data_size = data_train.__len__()
+test_size = data_test.__len__()
 
 # 载入模型
 net = models.resnet18(pretrained=True)
@@ -161,11 +180,13 @@ scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[300, 600], gam
 criterion = nn.CrossEntropyLoss(reduction='mean')   # nn.MSELoss(reduction='mean')
 loss_list = []
 accrate_list = []
+testloss_list = []
+testaccrate_list = []
 
 # Train Step
 # 镜像
 old_net = Get_old_net(net)
-shadow_net = Get_shadow_net(net, 0.5)
+shadow_net = Get_shadow_net(net, Frost_stone)
 shadow_net = Unfreeze_net(shadow_net, 'fc')
 
 '''
@@ -197,12 +218,44 @@ for epoch in range(1,num_epochs+1):
     accrate_list.append(epoch_acc/data_size)
     scheduler.step()
 
+    ## Test
+    with torch.no_grad():
+        test_loss = 0
+        test_acc = 0
+        for batch_num, (inputs, labels) in enumerate(tqdm(test_loader)):
+            inputs = inputs.to(device)
+            labels = labels.to(device)
+            test_pred = net(inputs)
+            this_loss = criterion(F.softmax(test_pred, 1), labels)
+
+            acc_mat = torch.argmax(test_pred, 1)==labels
+            acc_time = torch.sum(acc_mat)
+
+            test_loss += this_loss.item()
+            test_acc += acc_time.item()
+        testloss_list.append(test_loss)
+        testaccrate_list.append(test_acc/test_size)
+
     if epoch % 1 == 0 :
         print('Epoch: {} \nAcc: {:.4f}, Loss: {:.4f}'.format(epoch, epoch_acc/data_size, epoch_loss/(data_size//batch_size)))
+        print('Test Acc: {:.4f}, Test Loss: {:.4f}'.format(test_acc/test_size, test_loss/(test_size//batch_size)))
+        
         logs.write('\nEpoch: {} \nAcc: {:.4f}, Loss: {:.4f}\n'.format(epoch, epoch_acc/data_size, epoch_loss/(data_size//batch_size)))
+        logs.write('\nTest Acc: {:.4f}, Test Loss: {:.4f}'.format(test_acc/test_size, test_loss/(test_size//batch_size)))
+        
         logs.flush()
 
     if epoch % 10 == 0 :
         torch.save(net.state_dict(), '%s/Epoch_%d.pth' % (checkpoint_path, this_Epoch+epoch))
 
 logs.close()
+
+plt.figure()
+plt.plot(loss_list)
+plt.plot(testloss_list)
+
+plt.figure()
+plt.plot(accrate_list)
+plt.plot(testaccrate_list)
+
+plt.show()

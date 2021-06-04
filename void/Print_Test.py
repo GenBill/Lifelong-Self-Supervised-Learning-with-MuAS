@@ -24,3 +24,7 @@ net = models.resnet18(pretrained=True)
 params_net = list(net.named_parameters())
 print(params_net[-1][0])
 print(params_net[-2][0])
+
+
+Frost_Percent = 0.1
+print(str(int(Frost_Percent*100)))

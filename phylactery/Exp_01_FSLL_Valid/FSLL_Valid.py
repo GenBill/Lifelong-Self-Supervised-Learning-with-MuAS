@@ -146,12 +146,13 @@ data_transform = transforms.Compose([
 
 # 就是普通的载入数据
 data_train = datasets.ImageFolder(root = Trainset_path, transform = data_transform)
-train_loader = torch.utils.data.DataLoader(data_train, batch_size=batch_size, shuffle=True, num_workers=4)
-data_test = datasets.ImageFolder(root = Testset_path, transform = data_transform)
-test_loader = torch.utils.data.DataLoader(data_test, batch_size=batch_size, shuffle=True, num_workers=4)
-
 data_size = data_train.__len__()
+train_loader = torch.utils.data.DataLoader(data_train, batch_size=batch_size, shuffle=True, num_workers=4)
+
+data_test = datasets.ImageFolder(root = Testset_path, transform = data_transform)
 test_size = data_test.__len__()
+test_loader = torch.utils.data.DataLoader(data_test, batch_size=test_size, shuffle=False, num_workers=4)
+
 
 # 载入模型
 net = models.resnet18(pretrained=True)
@@ -222,7 +223,7 @@ for epoch in range(1,num_epochs+1):
     with torch.no_grad():
         test_loss = 0
         test_acc = 0
-        for batch_num, (inputs, labels) in enumerate(tqdm(test_loader)):
+        for batch_num, (inputs, labels) in enumerate(test_loader):
             inputs = inputs.to(device)
             labels = labels.to(device)
             test_pred = net(inputs)
@@ -238,10 +239,10 @@ for epoch in range(1,num_epochs+1):
 
     if epoch % 1 == 0 :
         print('Epoch: {} \nAcc: {:.4f}, Loss: {:.4f}'.format(epoch, epoch_acc/data_size, epoch_loss/(data_size//batch_size)))
-        print('Test Acc: {:.4f}, Test Loss: {:.4f}'.format(test_acc/test_size, test_loss/(test_size//batch_size)))
+        print('Test Acc: {:.4f}, Test Loss: {:.4f}'.format(test_acc/test_size, test_loss))
         
         logs.write('\nEpoch: {} \nAcc: {:.4f}, Loss: {:.4f}\n'.format(epoch, epoch_acc/data_size, epoch_loss/(data_size//batch_size)))
-        logs.write('\nTest Acc: {:.4f}, Test Loss: {:.4f}'.format(test_acc/test_size, test_loss/(test_size//batch_size)))
+        logs.write('\nTest Acc: {:.4f}, Test Loss: {:.4f}'.format(test_acc/test_size, test_loss))
         
         logs.flush()
 

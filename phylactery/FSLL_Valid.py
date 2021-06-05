@@ -20,11 +20,10 @@ import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings("ignore")
 
-
 parser = argparse.ArgumentParser(description='FSLL Valid')
 parser.add_argument('--cuda', '-c', help='cuda Num', default='0')
 parser.add_argument('--seed', '-s', help='manual Seed', default=2077)
-parser.add_argument('--frost', '-f', help='Frost Stone', default=0.8)
+parser.add_argument('--frost', '-f', help='Frost Stone', default=0.1)
 args = parser.parse_args()
 
 os.environ['CUDA_VISIBLE_DEVICES'] = args.cuda      # '0'
@@ -35,7 +34,7 @@ random.seed(manualSeed)
 torch.manual_seed(manualSeed)
 
 # 将超过 Frost_stone 的参数设置为不更新
-Frost_stone = args.frost    # 0.8
+Frost_stone = float(args.frost)     # 0.8
 
 if Frost_stone < 0.10 :
     Frost_str = '0'+str(int(Frost_stone*10))
@@ -125,15 +124,17 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # ResNet-18 装载
 this_Epoch = 0
 checkpoint_path = '/home/zhangxuanming/eLich/Saved_models/valid_FSLL_'+Frost_str      # 'E:/Laplace/Dataset/Kaggle265/valid'
-logs_path = '/home/zhangxuanming/eLich/Saved_logs/valid_FSLL_'+Frost_str
+logs_path = '/home/zhangxuanming/eLich/Saved_logs'
+plot_path = '/home/zhangxuanming/eLich/Saved_plot'
 
 try:
     os.makedirs(checkpoint_path)
     os.makedirs(logs_path)
+    os.makedirs(plot_path)
 except OSError:
     pass
 
-logs = open(logs_path+'_logs.txt', "w+")
+logs = open(logs_path+'/logs_'+Frost_str+'.txt', "w+")
 logs.write("Random Seed: {} \n".format(manualSeed))
 logs.write("Loaded Epoch {} and continuing training\n".format(this_Epoch))
 
@@ -263,12 +264,16 @@ for epoch in range(1,num_epochs+1):
 
 logs.close()
 
+
 plt.figure()
 plt.plot(loss_list)
 plt.plot(testloss_list)
+plt.show()
+plt.savefig(plot_path+'/loss_'+Frost_str+'.png')
 
 plt.figure()
 plt.plot(accrate_list)
 plt.plot(testaccrate_list)
 
 plt.show()
+plt.savefig(plot_path+'/acc_'+Frost_str+'.png')

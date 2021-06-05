@@ -4,6 +4,8 @@ import os
 import copy
 import math
 import random
+import argparse
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -12,14 +14,35 @@ import torch.optim as optim
 
 from torchvision import transforms, utils, datasets, models
 from torch.utils.data import Dataset, DataLoader
+import matplotlib.pyplot as plt
 
 # 过滤警告信息
 import warnings
 warnings.filterwarnings("ignore")
 
-manualSeed = 2077     # random.randint(1, 10000)
+
+parser = argparse.ArgumentParser(description='FSLL Valid')
+parser.add_argument('--cuda', '-c', help='cuda Num', default='0')
+parser.add_argument('--seed', '-s', help='manual Seed', default=2077)
+parser.add_argument('--frost', '-f', help='Frost Stone', default=0.8)
+args = parser.parse_args()
+
+os.environ['CUDA_VISIBLE_DEVICES'] = args.cuda      # '0'
+
+# 固定随机种子
+manualSeed = args.seed      # 2077     # random.randint(1, 10000)
 random.seed(manualSeed)
 torch.manual_seed(manualSeed)
+
+# 将超过 Frost_stone 的参数设置为不更新
+Frost_stone = args.frost    # 0.8
+
+if Frost_stone < 0.10 :
+    Frost_str = '0'+str(int(Frost_stone*10))
+elif Frost_stone > 0.99 :
+    Frost_str = '99'
+else :
+    Frost_str = str(int(Frost_stone*100))
 
 # copy from Frost_Func.py
 # Sector Frost_Func
@@ -76,8 +99,8 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
     # print(pred[0])
 
     # 添加遗忘损失
-    # for i in range(len(params_net)-2):
-    #     loss += reg_lamb * torch.sum(torch.abs(params_net[i][1] - params_old[i][1]))
+    for i in range(len(params_net)-2):
+        loss += reg_lamb * torch.sum(torch.abs(params_net[i][1] - params_old[i][1]))
     
     # 计算 grad
     optimizer.zero_grad()
@@ -95,15 +118,22 @@ def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_la
 
     return loss.item(), acc_time.item()
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # device = torch.device("cpu")
 
 # 任务：CIFAR10，CUB200（暂定）
 # ResNet-18 装载
 this_Epoch = 0
-checkpoint_path = '/home/zhangxuanming/eLich/Saved_models/valid_FSLL_75'      # 'E:/Laplace/Dataset/Kaggle265/valid'
-logs = open(checkpoint_path+'/training_logs.txt', "w+")
+checkpoint_path = '/home/zhangxuanming/eLich/Saved_models/valid_FSLL_'+Frost_str      # 'E:/Laplace/Dataset/Kaggle265/valid'
+logs_path = '/home/zhangxuanming/eLich/Saved_logs/valid_FSLL_'+Frost_str
+
+try:
+    os.makedirs(checkpoint_path)
+    os.makedirs(logs_path)
+except OSError:
+    pass
+
+logs = open(logs_path+'_logs.txt', "w+")
 logs.write("Random Seed: {} \n".format(manualSeed))
 logs.write("Loaded Epoch {} and continuing training\n".format(this_Epoch))
 
@@ -126,13 +156,15 @@ data_transform = transforms.Compose([
     )                                   # 标准化至[-1, 1]，规定均值和标准差
 ])
 
-
-data_train = datasets.ImageFolder(root = Trainset_path, transform = data_transform)
-
 # 就是普通的载入数据
 data_train = datasets.ImageFolder(root = Trainset_path, transform = data_transform)
-train_loader = torch.utils.data.DataLoader(data_train, batch_size=batch_size, shuffle=True, num_workers=4)
 data_size = data_train.__len__()
+train_loader = torch.utils.data.DataLoader(data_train, batch_size=batch_size, shuffle=True, num_workers=4)
+
+data_test = datasets.ImageFolder(root = Testset_path, transform = data_transform)
+test_size = data_test.__len__()
+test_loader = torch.utils.data.DataLoader(data_test, batch_size=test_size, shuffle=False, num_workers=4)
+
 
 # 载入模型
 net = models.resnet18(pretrained=True)
@@ -156,15 +188,18 @@ optimizer = optim.Adam(
         {'params': (p for name, p in net.named_parameters() if 'bias' in name), 'lr': 1e-3, 'momentum': 0.9, 'weight_decay': 0.}
     ]   , lr=1e-4, weight_decay=1e-8
 )
+scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[300, 600], gamma=0.1, last_epoch=-1)
 
 criterion = nn.CrossEntropyLoss(reduction='mean')   # nn.MSELoss(reduction='mean')
 loss_list = []
 accrate_list = []
+testloss_list = []
+testaccrate_list = []
 
 # Train Step
 # 镜像
 old_net = Get_old_net(net)
-shadow_net = Get_shadow_net(net, 0.75)
+shadow_net = Get_shadow_net(net, Frost_stone)
 shadow_net = Unfreeze_net(shadow_net, 'fc')
 
 '''
@@ -192,15 +227,48 @@ for epoch in range(1,num_epochs+1):
         this_loss, this_acc = Frost_iter(net, shadow_net, old_net, inputs, labels, criterion, optimizer, reg_lamb=0.)
         epoch_loss += this_loss
         epoch_acc += this_acc
-    loss_list.append(epoch_loss)
+    loss_list.append(epoch_loss/data_size*batch_size)
     accrate_list.append(epoch_acc/data_size)
+    scheduler.step()
+
+    ## Test
+    with torch.no_grad():
+        test_loss = 0
+        test_acc = 0
+        for batch_num, (inputs, labels) in enumerate(test_loader):
+            inputs = inputs.to(device)
+            labels = labels.to(device)
+            test_pred = net(inputs)
+            this_loss = criterion(F.softmax(test_pred, 1), labels)
+
+            acc_mat = torch.argmax(test_pred, 1)==labels
+            acc_time = torch.sum(acc_mat)
+
+            test_loss += this_loss.item()
+            test_acc += acc_time.item()
+        testloss_list.append(test_loss)
+        testaccrate_list.append(test_acc/test_size)
 
     if epoch % 1 == 0 :
-        print('Epoch: {} \nAcc: {:.4f}, Loss: {:.4f}'.format(epoch, epoch_acc/data_size, epoch_loss/(data_size//batch_size)))
-        logs.write('\nEpoch: {} \nAcc: {:.4f}, Loss: {:.4f}\n'.format(epoch, epoch_acc/data_size, epoch_loss/(data_size//batch_size)))
+        print('Epoch: {} \nAcc: {:.4f}, Loss: {:.4f}'.format(epoch, epoch_acc/data_size, epoch_loss/data_size*batch_size))
+        print('Test Acc: {:.4f}, Test Loss: {:.4f}'.format(test_acc/test_size, test_loss))
+        
+        logs.write('\nEpoch: {} \nAcc: {:.4f}, Loss: {:.4f}\n'.format(epoch, epoch_acc/data_size, epoch_loss/data_size*batch_size))
+        logs.write('Test Acc: {:.4f}, Test Loss: {:.4f}\n'.format(test_acc/test_size, test_loss))
+        
         logs.flush()
 
     if epoch % 10 == 0 :
         torch.save(net.state_dict(), '%s/Epoch_%d.pth' % (checkpoint_path, this_Epoch+epoch))
 
 logs.close()
+
+plt.figure()
+plt.plot(loss_list)
+plt.plot(testloss_list)
+
+plt.figure()
+plt.plot(accrate_list)
+plt.plot(testaccrate_list)
+
+plt.show()

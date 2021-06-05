@@ -4,3 +4,31 @@ Loaded Epoch 0 and continuing training
 Epoch: 1 
 Acc: 0.0265, Loss: 5.5765
 Test Acc: 0.0491, Test Loss: 5.5422
+
+Epoch: 2 
+Acc: 0.0994, Loss: 5.5185
+Test Acc: 0.1449, Test Loss: 5.4692
+
+Epoch: 3 
+Acc: 0.1902, Loss: 5.4384
+Test Acc: 0.2075, Test Loss: 5.4023
+
+Epoch: 4 
+Acc: 0.2747, Loss: 5.3611
+Test Acc: 0.2996, Test Loss: 5.3260
+
+Epoch: 5 
+Acc: 0.3593, Loss: 5.2817
+Test Acc: 0.3562, Test Loss: 5.2606
+
+Epoch: 6 
+Acc: 0.4093, Loss: 5.2218
+Test Acc: 0.3917, Test Loss: 5.2178
+
+Epoch: 7 
+Acc: 0.4538, Loss: 5.1765
+Test Acc: 0.4392, Test Loss: 5.1757
+
+Epoch: 8 
+Acc: 0.4868, Loss: 5.1382
+Test Acc: 0.4596, Test Loss: 5.1458

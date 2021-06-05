@@ -175,7 +175,7 @@ net = net.to(device)
 
 if torch.cuda.device_count() > 1: 
     print("Let's use", torch.cuda.device_count(), "GPUs!")
-    logs.write("Now we use {} GPUs!\n\n".format(torch.cuda.device_count()))
+    logs.write("Now we use {} GPUs!\n".format(torch.cuda.device_count()))
 net = nn.DataParallel(net)
 
 

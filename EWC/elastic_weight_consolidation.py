@@ -6,9 +6,7 @@ from torch import autograd
 import numpy as np
 from torch.utils.data import DataLoader
 
-
 class ElasticWeightConsolidation:
-
     def __init__(self, model, crit, lr=0.001, weight=1000000):
         self.model = model
         self.weight = weight

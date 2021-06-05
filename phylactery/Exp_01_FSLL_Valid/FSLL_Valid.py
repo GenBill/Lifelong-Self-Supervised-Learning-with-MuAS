@@ -242,7 +242,7 @@ for epoch in range(1,num_epochs+1):
         print('Test Acc: {:.4f}, Test Loss: {:.4f}'.format(test_acc/test_size, test_loss))
         
         logs.write('\nEpoch: {} \nAcc: {:.4f}, Loss: {:.4f}\n'.format(epoch, epoch_acc/data_size, epoch_loss/(data_size//batch_size)))
-        logs.write('\nTest Acc: {:.4f}, Test Loss: {:.4f}'.format(test_acc/test_size, test_loss))
+        logs.write('Test Acc: {:.4f}, Test Loss: {:.4f}\n'.format(test_acc/test_size, test_loss))
         
         logs.flush()
 

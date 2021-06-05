@@ -86,7 +86,7 @@ def Get_old_net(net):
     return old_net
 
 
-def Frost_iter(net, X, target, loss_Func, optimizer, reg_lamb=5):
+def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_lamb=5):
     # 构造参数索引 params_list
     
     # 计算基本损失

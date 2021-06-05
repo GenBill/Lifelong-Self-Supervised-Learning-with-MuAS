@@ -89,9 +89,6 @@ def Get_old_net(net):
 
 def Frost_iter(net, shadow_net, old_net, X, target, loss_Func, optimizer, reg_lamb=5):
     # 构造参数索引 params_list
-    params_net = list(net.named_parameters())
-    params_old = list(old_net.named_parameters())
-    params_shadow = list(shadow_net.named_parameters())
     
     # 计算基本损失
     pred = F.softmax(net(X), 1)

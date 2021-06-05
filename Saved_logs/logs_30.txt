@@ -1,0 +1,2 @@
+Random Seed: 2077 
+Loaded Epoch 0 and continuing training

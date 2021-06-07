@@ -1,5 +1,6 @@
 {
     "jupyter.jupyterServerType": "remote",
-    "python.pythonPath": "/home/zhangxuanming/anaconda3/bin/python",
+    "python.pythonPath": "C:\\Anaconda3\\python.exe",
+    //"python.pythonPath": "/home/zhangxuanming/anaconda3/bin/python",
     //"python.pythonPath": "/home/genbill/anaconda3/bin/python"
 }

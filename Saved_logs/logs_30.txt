@@ -1,7 +1,10 @@
 Random Seed: 2077 
 Loaded Epoch 0 and continuing training
-Now we use 2 GPUs!
 
 Epoch: 1 
-Acc: 0.2216, Loss: 5.3924
-Test Acc: 0.3381, Test Loss: 5.2548
+Acc: 0.2221, Loss: 5.3918
+Test Acc: 0.3525, Test Loss: 5.2492
+
+Epoch: 2 
+Acc: 0.4298, Loss: 5.1827
+Test Acc: 0.4604, Test Loss: 5.1387

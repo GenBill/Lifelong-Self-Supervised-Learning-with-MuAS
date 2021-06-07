@@ -140,7 +140,7 @@ Testset_path = '/home/zhangxuanming/Kaggle265/test'
 Validset_path = '/home/zhangxuanming/Kaggle265/valid'
 
 batch_size = 256
-num_epochs = 200
+num_epochs = 300
 
 # 载入数据
 
@@ -188,7 +188,7 @@ optimizer = optim.Adam(
         {'params': (p for name, p in net.named_parameters() if 'bias' in name), 'lr': 1e-2, 'momentum': 0.9, 'weight_decay': 0.}
     ]   , lr=1e-3, weight_decay=1e-8
 )
-scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 140], gamma=0.1, last_epoch=-1)
+scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[100, 200], gamma=0.1, last_epoch=-1)
 
 criterion = nn.CrossEntropyLoss(reduction='mean')   # nn.MSELoss(reduction='mean')
 loss_list = []

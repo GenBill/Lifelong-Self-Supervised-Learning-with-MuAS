@@ -2,9 +2,13 @@ Random Seed: 2077
 Loaded Epoch 0 and continuing training
 
 Epoch: 1 
-Acc: 0.2546, Loss: 5.3733
-Test Acc: 0.4226, Test Loss: 5.1826
+Acc: 0.2544, Loss: 5.3734
+Test Acc: 0.4242, Test Loss: 5.1825
 
 Epoch: 2 
-Acc: 0.5094, Loss: 5.1102
-Test Acc: 0.5419, Test Loss: 5.0559
+Acc: 0.5091, Loss: 5.1100
+Test Acc: 0.5457, Test Loss: 5.0555
+
+Epoch: 3 
+Acc: 0.6129, Loss: 5.0002
+Test Acc: 0.6287, Test Loss: 4.9731

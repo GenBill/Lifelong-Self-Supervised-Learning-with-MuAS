@@ -8,3 +8,343 @@ Test Acc: 0.3962, Test Loss: 5.2049
 Epoch: 2 
 Acc: 0.4736, Loss: 5.1395
 Test Acc: 0.5094, Test Loss: 5.0931
+
+Epoch: 3 
+Acc: 0.5779, Loss: 5.0345
+Test Acc: 0.5894, Test Loss: 5.0110
+
+Epoch: 4 
+Acc: 0.6449, Loss: 4.9668
+Test Acc: 0.6430, Test Loss: 4.9573
+
+Epoch: 5 
+Acc: 0.6937, Loss: 4.9203
+Test Acc: 0.6853, Test Loss: 4.9164
+
+Epoch: 6 
+Acc: 0.7145, Loss: 4.8996
+Test Acc: 0.6906, Test Loss: 4.9105
+
+Epoch: 7 
+Acc: 0.7195, Loss: 4.8952
+Test Acc: 0.6913, Test Loss: 4.9104
+
+Epoch: 8 
+Acc: 0.7221, Loss: 4.8948
+Test Acc: 0.6966, Test Loss: 4.9048
+
+Epoch: 9 
+Acc: 0.7221, Loss: 4.8971
+Test Acc: 0.6966, Test Loss: 4.9073
+
+Epoch: 10 
+Acc: 0.7183, Loss: 4.9033
+Test Acc: 0.7042, Test Loss: 4.9079
+
+Epoch: 11 
+Acc: 0.7104, Loss: 4.9132
+Test Acc: 0.6936, Test Loss: 4.9192
+
+Epoch: 12 
+Acc: 0.7038, Loss: 4.9225
+Test Acc: 0.6943, Test Loss: 4.9153
+
+Epoch: 13 
+Acc: 0.6978, Loss: 4.9291
+Test Acc: 0.6974, Test Loss: 4.9189
+
+Epoch: 14 
+Acc: 0.6848, Loss: 4.9436
+Test Acc: 0.6755, Test Loss: 4.9389
+
+Epoch: 15 
+Acc: 0.6736, Loss: 4.9563
+Test Acc: 0.6687, Test Loss: 4.9557
+
+Epoch: 16 
+Acc: 0.6646, Loss: 4.9669
+Test Acc: 0.6657, Test Loss: 4.9552
+
+Epoch: 17 
+Acc: 0.6573, Loss: 4.9739
+Test Acc: 0.6498, Test Loss: 4.9692
+
+Epoch: 18 
+Acc: 0.6485, Loss: 4.9832
+Test Acc: 0.6445, Test Loss: 4.9750
+
+Epoch: 19 
+Acc: 0.6410, Loss: 4.9909
+Test Acc: 0.6445, Test Loss: 4.9772
+
+Epoch: 20 
+Acc: 0.6392, Loss: 4.9935
+Test Acc: 0.6498, Test Loss: 4.9635
+
+Epoch: 21 
+Acc: 0.6365, Loss: 4.9960
+Test Acc: 0.6309, Test Loss: 4.9900
+
+Epoch: 22 
+Acc: 0.6270, Loss: 5.0052
+Test Acc: 0.6521, Test Loss: 4.9681
+
+Epoch: 23 
+Acc: 0.6254, Loss: 5.0077
+Test Acc: 0.6475, Test Loss: 4.9732
+
+Epoch: 24 
+Acc: 0.6287, Loss: 5.0029
+Test Acc: 0.6566, Test Loss: 4.9597
+
+Epoch: 25 
+Acc: 0.6317, Loss: 4.9992
+Test Acc: 0.6468, Test Loss: 4.9643
+
+Epoch: 26 
+Acc: 0.6364, Loss: 4.9933
+Test Acc: 0.6483, Test Loss: 4.9684
+
+Epoch: 27 
+Acc: 0.6310, Loss: 4.9986
+Test Acc: 0.6551, Test Loss: 4.9618
+
+Epoch: 28 
+Acc: 0.6319, Loss: 4.9974
+Test Acc: 0.6581, Test Loss: 4.9633
+
+Epoch: 29 
+Acc: 0.6301, Loss: 4.9974
+Test Acc: 0.6415, Test Loss: 4.9706
+
+Epoch: 30 
+Acc: 0.6291, Loss: 5.0007
+Test Acc: 0.6415, Test Loss: 4.9748
+
+Epoch: 31 
+Acc: 0.6287, Loss: 5.0004
+Test Acc: 0.6377, Test Loss: 4.9677
+
+Epoch: 32 
+Acc: 0.6301, Loss: 4.9975
+Test Acc: 0.6347, Test Loss: 4.9798
+
+Epoch: 33 
+Acc: 0.6323, Loss: 4.9952
+Test Acc: 0.6106, Test Loss: 4.9984
+
+Epoch: 34 
+Acc: 0.6242, Loss: 5.0017
+Test Acc: 0.6445, Test Loss: 4.9644
+
+Epoch: 35 
+Acc: 0.6332, Loss: 4.9920
+Test Acc: 0.6475, Test Loss: 4.9668
+
+Epoch: 36 
+Acc: 0.6301, Loss: 4.9962
+Test Acc: 0.6460, Test Loss: 4.9660
+
+Epoch: 37 
+Acc: 0.6236, Loss: 5.0022
+Test Acc: 0.6528, Test Loss: 4.9627
+
+Epoch: 38 
+Acc: 0.6312, Loss: 4.9940
+Test Acc: 0.6377, Test Loss: 4.9708
+
+Epoch: 39 
+Acc: 0.6345, Loss: 4.9910
+Test Acc: 0.6498, Test Loss: 4.9599
+
+Epoch: 40 
+Acc: 0.6328, Loss: 4.9923
+Test Acc: 0.6340, Test Loss: 4.9805
+
+Epoch: 41 
+Acc: 0.6268, Loss: 4.9970
+Test Acc: 0.6317, Test Loss: 4.9784
+
+Epoch: 42 
+Acc: 0.6283, Loss: 4.9957
+Test Acc: 0.6423, Test Loss: 4.9659
+
+Epoch: 43 
+Acc: 0.6436, Loss: 4.9783
+Test Acc: 0.6287, Test Loss: 4.9788
+
+Epoch: 44 
+Acc: 0.6424, Loss: 4.9801
+Test Acc: 0.6317, Test Loss: 4.9710
+
+Epoch: 45 
+Acc: 0.6464, Loss: 4.9756
+Test Acc: 0.6408, Test Loss: 4.9597
+
+Epoch: 46 
+Acc: 0.6493, Loss: 4.9703
+Test Acc: 0.6506, Test Loss: 4.9575
+
+Epoch: 47 
+Acc: 0.6526, Loss: 4.9676
+Test Acc: 0.6423, Test Loss: 4.9635
+
+Epoch: 48 
+Acc: 0.6523, Loss: 4.9676
+Test Acc: 0.6498, Test Loss: 4.9505
+
+Epoch: 49 
+Acc: 0.6544, Loss: 4.9638
+Test Acc: 0.6453, Test Loss: 4.9547
+
+Epoch: 50 
+Acc: 0.6611, Loss: 4.9574
+Test Acc: 0.6536, Test Loss: 4.9497
+
+Epoch: 51 
+Acc: 0.6651, Loss: 4.9526
+Test Acc: 0.6528, Test Loss: 4.9527
+
+Epoch: 52 
+Acc: 0.6672, Loss: 4.9492
+Test Acc: 0.6574, Test Loss: 4.9453
+
+Epoch: 53 
+Acc: 0.6703, Loss: 4.9457
+Test Acc: 0.6566, Test Loss: 4.9458
+
+Epoch: 54 
+Acc: 0.6723, Loss: 4.9442
+Test Acc: 0.6491, Test Loss: 4.9538
+
+Epoch: 55 
+Acc: 0.6742, Loss: 4.9410
+Test Acc: 0.6513, Test Loss: 4.9464
+
+Epoch: 56 
+Acc: 0.6764, Loss: 4.9397
+Test Acc: 0.6468, Test Loss: 4.9526
+
+Epoch: 57 
+Acc: 0.6779, Loss: 4.9360
+Test Acc: 0.6619, Test Loss: 4.9441
+
+Epoch: 58 
+Acc: 0.6822, Loss: 4.9328
+Test Acc: 0.6521, Test Loss: 4.9476
+
+Epoch: 59 
+Acc: 0.6805, Loss: 4.9335
+Test Acc: 0.6611, Test Loss: 4.9410
+
+Epoch: 60 
+Acc: 0.6853, Loss: 4.9282
+Test Acc: 0.6581, Test Loss: 4.9448
+
+Epoch: 61 
+Acc: 0.7121, Loss: 4.8952
+Test Acc: 0.6823, Test Loss: 4.9151
+
+Epoch: 62 
+Acc: 0.7211, Loss: 4.8826
+Test Acc: 0.6883, Test Loss: 4.9118
+
+Epoch: 63 
+Acc: 0.7235, Loss: 4.8795
+Test Acc: 0.6853, Test Loss: 4.9131
+
+Epoch: 64 
+Acc: 0.7251, Loss: 4.8774
+Test Acc: 0.6853, Test Loss: 4.9134
+
+Epoch: 65 
+Acc: 0.7268, Loss: 4.8757
+Test Acc: 0.6875, Test Loss: 4.9140
+
+Epoch: 66 
+Acc: 0.7276, Loss: 4.8743
+Test Acc: 0.6845, Test Loss: 4.9130
+
+Epoch: 67 
+Acc: 0.7287, Loss: 4.8730
+Test Acc: 0.6830, Test Loss: 4.9136
+
+Epoch: 68 
+Acc: 0.7300, Loss: 4.8717
+Test Acc: 0.6800, Test Loss: 4.9142
+
+Epoch: 69 
+Acc: 0.7307, Loss: 4.8708
+Test Acc: 0.6800, Test Loss: 4.9142
+
+Epoch: 70 
+Acc: 0.7313, Loss: 4.8699
+Test Acc: 0.6823, Test Loss: 4.9146
+
+Epoch: 71 
+Acc: 0.7321, Loss: 4.8693
+Test Acc: 0.6823, Test Loss: 4.9148
+
+Epoch: 72 
+Acc: 0.7328, Loss: 4.8684
+Test Acc: 0.6815, Test Loss: 4.9132
+
+Epoch: 73 
+Acc: 0.7334, Loss: 4.8678
+Test Acc: 0.6838, Test Loss: 4.9141
+
+Epoch: 74 
+Acc: 0.7339, Loss: 4.8669
+Test Acc: 0.6823, Test Loss: 4.9146
+
+Epoch: 75 
+Acc: 0.7342, Loss: 4.8662
+Test Acc: 0.6777, Test Loss: 4.9166
+
+Epoch: 76 
+Acc: 0.7349, Loss: 4.8653
+Test Acc: 0.6770, Test Loss: 4.9176
+
+Epoch: 77 
+Acc: 0.7354, Loss: 4.8648
+Test Acc: 0.6823, Test Loss: 4.9167
+
+Epoch: 78 
+Acc: 0.7357, Loss: 4.8644
+Test Acc: 0.6777, Test Loss: 4.9182
+
+Epoch: 79 
+Acc: 0.7363, Loss: 4.8637
+Test Acc: 0.6815, Test Loss: 4.9171
+
+Epoch: 80 
+Acc: 0.7365, Loss: 4.8633
+Test Acc: 0.6792, Test Loss: 4.9175
+
+Epoch: 81 
+Acc: 0.7370, Loss: 4.8628
+Test Acc: 0.6777, Test Loss: 4.9178
+
+Epoch: 82 
+Acc: 0.7374, Loss: 4.8624
+Test Acc: 0.6762, Test Loss: 4.9203
+
+Epoch: 83 
+Acc: 0.7381, Loss: 4.8618
+Test Acc: 0.6792, Test Loss: 4.9185
+
+Epoch: 84 
+Acc: 0.7390, Loss: 4.8614
+Test Acc: 0.6808, Test Loss: 4.9173
+
+Epoch: 85 
+Acc: 0.7397, Loss: 4.8604
+Test Acc: 0.6785, Test Loss: 4.9178
+
+Epoch: 86 
+Acc: 0.7403, Loss: 4.8595
+Test Acc: 0.6762, Test Loss: 4.9187
+
+Epoch: 87 
+Acc: 0.7410, Loss: 4.8591
+Test Acc: 0.6732, Test Loss: 4.9206

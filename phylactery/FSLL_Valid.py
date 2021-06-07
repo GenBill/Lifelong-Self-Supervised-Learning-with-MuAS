@@ -142,8 +142,8 @@ Trainset_path = '/home/zhangxuanming/Kaggle265/train'
 Testset_path = '/home/zhangxuanming/Kaggle265/test'
 Validset_path = '/home/zhangxuanming/Kaggle265/valid'
 
-batch_size = 512
-num_epochs = 1000
+batch_size = 256
+num_epochs = 200
 
 # 载入数据
 
@@ -185,11 +185,11 @@ if this_Epoch != 0 :
 # 就是普通的载入模型
 optimizer = optim.Adam(
     [
-        {'params': (p for name, p in net.named_parameters() if 'weight' in name), 'lr': 1e-4, 'momentum': 0.6, 'weight_decay': 1e-8},
-        {'params': (p for name, p in net.named_parameters() if 'bias' in name), 'lr': 1e-3, 'momentum': 0.9, 'weight_decay': 0.}
-    ]   , lr=1e-4, weight_decay=1e-8
+        {'params': (p for name, p in net.named_parameters() if 'weight' in name), 'lr': 1e-3, 'momentum': 0.6, 'weight_decay': 1e-8},
+        {'params': (p for name, p in net.named_parameters() if 'bias' in name), 'lr': 1e-2, 'momentum': 0.9, 'weight_decay': 0.}
+    ]   , lr=1e-3, weight_decay=1e-8
 )
-scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[300, 600], gamma=0.1, last_epoch=-1)
+scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60, 140], gamma=0.1, last_epoch=-1)
 
 criterion = nn.CrossEntropyLoss(reduction='mean')   # nn.MSELoss(reduction='mean')
 loss_list = []
@@ -268,12 +268,9 @@ logs.close()
 plt.figure()
 plt.plot(loss_list)
 plt.plot(testloss_list)
-plt.show()
 plt.savefig(plot_path+'/loss_'+Frost_str+'.png')
 
 plt.figure()
 plt.plot(accrate_list)
 plt.plot(testaccrate_list)
-
-plt.show()
 plt.savefig(plot_path+'/acc_'+Frost_str+'.png')

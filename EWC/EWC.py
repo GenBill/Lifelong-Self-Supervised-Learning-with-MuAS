@@ -72,7 +72,6 @@ class LastLayer(nn.Module):
 
 
 crit = nn.CrossEntropyLoss()
-# ewc = ElasticWeightConsolidation(BaseModel(28 * 28, 100, 10), crit=crit, lr=1e-4)
 
 mynet = BaseModel(28*28, 100).to(device)
 last1 = LastLayer(100, 10).to(device)
@@ -85,6 +84,7 @@ optimizer = optim.Adam(
     ]   , lr=1e-3, weight_decay=1e-8
 )
 ewc = ElasticWeightConsolidation(mynet, crit=crit, optimizer=optimizer, device=device)
+# ewc = ElasticWeightConsolidation(BaseModel(28 * 28, 100, 10), crit=crit, lr=1e-4)
 
 for _ in range(4):
     for input, target in tqdm(train_loader):

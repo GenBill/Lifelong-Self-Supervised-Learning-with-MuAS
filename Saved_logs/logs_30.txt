@@ -24,3 +24,27 @@ Test Acc: 0.5351, Test Loss: 5.0756
 Epoch: 6 
 Acc: 0.6387, Loss: 4.9734
 Test Acc: 0.5691, Test Loss: 5.0409
+
+Epoch: 7 
+Acc: 0.6536, Loss: 4.9583
+Test Acc: 0.5728, Test Loss: 5.0432
+
+Epoch: 8 
+Acc: 0.6665, Loss: 4.9473
+Test Acc: 0.5736, Test Loss: 5.0483
+
+Epoch: 9 
+Acc: 0.6690, Loss: 4.9449
+Test Acc: 0.5034, Test Loss: 5.1148
+
+Epoch: 10 
+Acc: 0.6698, Loss: 4.9456
+Test Acc: 0.4725, Test Loss: 5.1582
+
+Epoch: 11 
+Acc: 0.6678, Loss: 4.9469
+Test Acc: 0.5238, Test Loss: 5.0891
+
+Epoch: 12 
+Acc: 0.6653, Loss: 4.9531
+Test Acc: 0.3638, Test Loss: 5.2616

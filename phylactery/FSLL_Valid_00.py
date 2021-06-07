@@ -226,6 +226,7 @@ for i in range(len(params_shadow)):
 
 # Epoch On !
 for epoch in range(1,num_epochs+1):
+    net.train()
     epoch_loss = 0
     epoch_acc = 0
     for batch_num, (inputs, labels) in enumerate(tqdm(train_loader)):
@@ -241,6 +242,7 @@ for epoch in range(1,num_epochs+1):
     scheduler.step()
 
     ## Test
+    net.eval()
     with torch.no_grad():
         test_loss = 0
         test_acc = 0

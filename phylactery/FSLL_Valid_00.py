@@ -191,7 +191,7 @@ optimizer = optim.Adam(
         {'params': (p for name, p in net.named_parameters() if 'fc.bias' in name), 'lr': 5e-2, 'momentum': 0.9, 'weight_decay': 0.}
     ]   , lr=5e-3, weight_decay=1e-8
 )
-scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[10, 120, 240], gamma=0.1, last_epoch=-1)
+scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[20, 120, 240], gamma=0.2, last_epoch=-1)
 
 criterion = nn.CrossEntropyLoss(reduction='mean')   # nn.MSELoss(reduction='mean')
 loss_list = []

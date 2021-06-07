@@ -7,12 +7,13 @@ import numpy as np
 from torch.utils.data import DataLoader
 
 class ElasticWeightConsolidation:
-    def __init__(self, model, crit, device, lr=0.001, weight=1000000):
+    def __init__(self, model, crit, optimizer, device, weight=1000000):
         self.model = model.to(device)
         self.weight = weight
         self.crit = crit
+        self.optimizer = optimizer
         self.device = device
-        self.optimizer = optim.Adam(self.model.parameters(), lr)
+        # optim.Adam(self.model.parameters(), lr=0.001)
 
     def _update_mean_params(self):
         for param_name, param in self.model.named_parameters():
@@ -51,10 +52,10 @@ class ElasticWeightConsolidation:
         except AttributeError:
             return 0
 
-    def forward_backward_update(self, input, target):
+    def forward_backward_update(self, input, target, linear_layer):
         input = input.to(self.device)
         target = target.to(self.device)
-        output = self.model(input)
+        output = linear_layer(self.model(input))
         loss = self._compute_consolidation_loss(self.weight) + self.crit(output, target)
         self.optimizer.zero_grad()
         loss.backward()

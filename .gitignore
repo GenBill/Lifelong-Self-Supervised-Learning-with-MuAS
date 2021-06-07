@@ -1,4 +1,5 @@
 Saved_models/valid_FSLL_*/*.pth
 .vscode/settings.json
-.vscode/*
 
+*/__pycache__/*
+data/*

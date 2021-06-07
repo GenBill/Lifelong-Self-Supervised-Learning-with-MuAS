@@ -184,9 +184,9 @@ if this_Epoch != 0 :
 # 就是普通的载入模型
 optimizer = optim.Adam(
     [
-        {'params': (p for name, p in net.named_parameters() if 'weight' in name), 'lr': 1e-2, 'momentum': 0.6, 'weight_decay': 1e-8},
-        {'params': (p for name, p in net.named_parameters() if 'bias' in name), 'lr': 1e-1, 'momentum': 0.9, 'weight_decay': 0.}
-    ]   , lr=1e-2, weight_decay=1e-8
+        {'params': (p for name, p in net.named_parameters() if 'weight' in name), 'lr': 5e-3, 'momentum': 0.6, 'weight_decay': 1e-8},
+        {'params': (p for name, p in net.named_parameters() if 'bias' in name), 'lr': 5e-2, 'momentum': 0.9, 'weight_decay': 0.}
+    ]   , lr=5e-3, weight_decay=1e-8
 )
 scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[10, 120, 240], gamma=0.1, last_epoch=-1)
 

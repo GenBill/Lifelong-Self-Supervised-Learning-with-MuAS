@@ -8,7 +8,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torch import autograd
 
-from EWC_class import ElasticWeightConsolidation
+from EWC.EWC_class import ElasticWeightConsolidation
 
 # 固定随机种子
 manualSeed = 2077   # random.randint(1, 10000)
@@ -52,7 +52,6 @@ class Flatten(nn.Module):
     def forward(self, x):
         return x.view(x.shape[0], -1)
 
-
 class BaseModel(nn.Module):
     def __init__(self, num_inputs, num_hidden):
         super(BaseModel, self).__init__()
@@ -72,7 +71,6 @@ class LastLayer(nn.Module):
 
 
 crit = nn.CrossEntropyLoss()
-
 mynet = BaseModel(28*28, 100).to(device)
 last1 = LastLayer(100, 10).to(device)
 last2 = LastLayer(100, 10).to(device)
@@ -84,7 +82,6 @@ optimizer = optim.Adam(
     ]   , lr=1e-3, weight_decay=1e-8
 )
 ewc = ElasticWeightConsolidation(mynet, crit=crit, optimizer=optimizer, device=device)
-# ewc = ElasticWeightConsolidation(BaseModel(28 * 28, 100, 10), crit=crit, lr=1e-4)
 
 for _ in range(4):
     for input, target in tqdm(train_loader):

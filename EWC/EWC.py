@@ -8,6 +8,8 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torch import autograd
 
+# remove EWC !!!
+# from EWC_class import ElasticWeightConsolidation
 from EWC.EWC_class import ElasticWeightConsolidation
 
 # 固定随机种子

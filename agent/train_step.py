@@ -35,7 +35,6 @@ def LaStep(
         ]),
     }
     
-    loader_jigro = jigroloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
     if powerword=='rota':
         loader_rota = rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size)
         optimizer = optim.Adam(

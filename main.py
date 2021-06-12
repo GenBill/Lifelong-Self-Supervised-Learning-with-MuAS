@@ -61,7 +61,6 @@ torch.manual_seed(opt.manualSeed)
 
 cudnn.benchmark = True
 image_size = (224, 224)
-# labelled_data_root = './Kaggle265/split{}'.format(0)
 data_root = '../Kaggle265'     # '../Dataset/Kaggle265'
 batch_size = 512
 num_epochs = 50
@@ -163,9 +162,37 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adagrad(
     [
         {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
-        {'params': fc_rota.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12}
+        {'params': fc_rota.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
+        {'params': fc_patch.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
+        {'params': fc_jigpa.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
+        {'params': fc_jigro.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
     ]
 )
+optimizer_rota = optim.Adagrad(
+    [
+        {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
+        {'params': fc_rota.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
+    ]
+)
+optimizer_patch = optim.Adagrad(
+    [
+        {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
+        {'params': fc_patch.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
+    ]
+)
+optimizer_jigpa = optim.Adagrad(
+    [
+        {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
+        {'params': fc_jigpa.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
+    ]
+)
+optimizer_jigro = optim.Adagrad(
+    [
+        {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
+        {'params': fc_jigro.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
+    ]
+)
+
 scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=[50, 100, 150], gamma=0.2)
 
 ### 警告：施工现场 ###

@@ -2,13 +2,14 @@ from .mydataset import PrimeRotationDataset
 
 import torch
 import torch.nn.parallel
+from tqdm import tqdm
 import time
 import copy
 import warnings
 warnings.filterwarnings('ignore')
 
 # General Code for supervised train
-def rotatrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, device, checkpoint_path, file, saveinterval=1, num_epochs=25):
+def rotatrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, device, checkpoint_path, file, saveinterval=1, num_epochs=20):
     since = time.time()
 
     best_model_wts = copy.deepcopy(model.state_dict())
@@ -38,7 +39,7 @@ def rotatrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, dev
             end = time.time()
 
             # Iterate over data.
-            for _, (inputs, labels) in enumerate(dataloaders[phase]):
+            for _, (inputs, labels) in enumerate(tqdm(dataloaders[phase])):
                 inputs = inputs.to(device)
                 labels = labels.to(device)
                 # zero the parameter gradients

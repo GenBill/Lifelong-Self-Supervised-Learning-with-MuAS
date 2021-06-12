@@ -8,7 +8,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # General Code for supervised train
-def patchtrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, device, checkpoint_path, file, saveinterval=1, num_epochs=25):
+def patchtrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, device, checkpoint_path, file, saveinterval=1, num_epochs=20):
     since = time.time()
 
     best_model_wts = copy.deepcopy(model.state_dict())

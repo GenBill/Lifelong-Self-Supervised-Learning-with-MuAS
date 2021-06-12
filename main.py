@@ -1,12 +1,7 @@
-from agent.train_rota import rotaloader
-from agent.train_patch import patchloader
-from agent.train_jigpa import jigpaloader
-from agent.train_jigro import jigroloader
-from agent.train_step import Step
+from agent.train_step import LaStep
 
 import torch
 import torch.nn as nn
-import torch.optim as optim
 import torch.nn.parallel
 import torch.backends.cudnn as cudnn
 import torch.optim as optim
@@ -27,17 +22,21 @@ plt.ion()  # interactive mode
 warnings.filterwarnings('ignore')
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--lr', type=float, default=0.001, help='learning rate, default=0.001')
-parser.add_argument('--powerword', default='rota', help="path to net (for continue training)")
+parser.add_argument('--powerword', default='rota', help="Power Word, decide what to do")
+
+parser.add_argument('--lr', type=float, default=1e-3, help='learning rate, default=0.001')
+parser.add_argument('--weight', type=float, default=1e-8, help="weight decay")
+
 parser.add_argument('--netCont', default='', help="path to net (for continue training)")
-parser.add_argument('--rotaCont', default='', help="path to fc_layer")
-parser.add_argument('--jigroCont', default='', help="path to fc_layer")
-parser.add_argument('--patchCont', default='', help="path to fc_layer")
-parser.add_argument('--jigpaCont', default='', help="path to fc_layer")
+parser.add_argument('--rotaCont', default='', help="path to fc_layer rota")
+parser.add_argument('--jigroCont', default='', help="path to fc_layer patch")
+parser.add_argument('--patchCont', default='', help="path to fc_layer jigpa")
+parser.add_argument('--jigpaCont', default='', help="path to fc_layer jigro")
+parser.add_argument('--contraCont', default='', help="path to fc_layer jigro")
 # parser.add_argument('--manualSeed', type=int, help='manual seed')
 
-opt = parser.parse_args(args=[])
-opt.lr = 1e-3
+# opt = parser.parse_args(args=[])
+opt = parser.parse_args()
 opt.manualSeed = 2077
 # opt.netCont = './models/net_epoch_56.pth'
 
@@ -64,36 +63,14 @@ cudnn.benchmark = True
 image_size = (224, 224)
 data_root = '../Kaggle265'     # '../Dataset/Kaggle265'
 batch_size = 512
-num_epochs = 50
 
-# Initiate dataset and dataset transform
-data_pre_transforms = {
-    'train': transforms.Compose([
-        transforms.Resize(image_size),
-        transforms.RandomHorizontalFlip(),
-    ]),
-    'test': transforms.Compose([
-        transforms.Resize(image_size),
-    ]),
-}
-data_post_transforms = {
-    'train': transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.6086, 0.4920, 0.4619], std=[0.2577, 0.2381, 0.2408])
-    ]),
-    'test': transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.6086, 0.4920, 0.4619], std=[0.2577, 0.2381, 0.2408])
-    ]),
-}
 patch_dim = 96
+contra_dim = 128
 gap = 6
 jitter = 6
 
-loader_rota = rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size)
-loader_patch = patchloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
-loader_jigpa = jigpaloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
-loader_jigro = jigroloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
+saveinterval = 2
+num_epochs = 50
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -129,6 +106,8 @@ fc_patch = make_MLP(2*num_ftrs, 2*num_ftrs, output_ftrs=8, layers=2)
 fc_jigpa = make_MLP(4*num_ftrs, 4*num_ftrs, output_ftrs=24, layers=4)
 ### 警告：类间距不同，不可粗暴计算损失，需要重写损失函数 ###
 fc_jigro = make_MLP(4*num_ftrs, 4*num_ftrs, output_ftrs=96, layers=8)   # output_ftrs=24
+# 对比学习部分
+fc_contra = make_MLP(2*num_ftrs, 2*num_ftrs, output_ftrs=1, layers=2)
 
 if torch.cuda.device_count() > 1: 
     print("Let's use", torch.cuda.device_count(), "GPUs!")
@@ -157,58 +136,23 @@ def loadstate(model, fc_layer, net_Cont, fc_Cont, device, file):
         file.write('Loaded fc_layer state ...')
 
 loadstate(model_ft, fc_rota, opt.netCont, opt.rotaCont, device, file)
+loadstate(model_ft, fc_patch, opt.netCont, opt.patchCont, device, file)
+loadstate(model_ft, fc_jigpa, opt.netCont, opt.jigpaCont, device, file)
+loadstate(model_ft, fc_jigro, opt.netCont, opt.jigroCont, device, file)
+loadstate(model_ft, fc_contra, opt.netCont, opt.contraCont, device, file)
 
 # Model trainer
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adagrad(
-    [
-        {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
-        {'params': fc_rota.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
-        {'params': fc_patch.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
-        {'params': fc_jigpa.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
-        {'params': fc_jigro.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
-    ]
-)
-optimizer_rota = optim.Adam(
-    [
-        {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
-        {'params': fc_rota.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
-    ]
-)
-optimizer_patch = optim.Adam(
-    [
-        {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
-        {'params': fc_patch.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
-    ]
-)
-optimizer_jigpa = optim.Adam(
-    [
-        {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
-        {'params': fc_jigpa.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
-    ]
-)
-optimizer_jigro = optim.Adam(
-    [
-        {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
-        {'params': fc_jigro.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
-    ]
-)
+milestones = [50, 100, 150]
+milegamma = 0.2
 
-scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=[50, 100, 150], gamma=0.2)
-
-### 警告：施工现场 ###
-
-# model_ft, fc_rota = Step(
-#     model_ft, fc_rota, 'rota',
-#     myloader_rota, criterion, optimizer, scheduler,
-#     device, out_dir, file, 10, num_epochs
-# )
-print('Training ... ', opt.powerword)
+print('Training ... {}\n'.format(opt.powerword))
 
 # 'rota' , 'patch' , 'jigpa' , 'jigro'
-model_ft, fc_rota, fc_patch, fc_jigpa, fc_jigro = Step(
-    model_ft, fc_rota, fc_patch, fc_jigpa, fc_jigro, opt.powerword,
-    loader_jigro, criterion, optimizer, scheduler,
-    device, out_dir, file, saveinterval=2, num_epochs=num_epochs
+model_ft, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
+    image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+    opt.powerword, model_ft, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
+    criterion, opt.lr, opt.weight, milestones, milegamma, 
+    device, out_dir, file, saveinterval, num_epochs
 )
 

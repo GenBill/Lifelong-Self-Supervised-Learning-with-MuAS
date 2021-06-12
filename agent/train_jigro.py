@@ -8,7 +8,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # General Code for supervised train
-def jigrotrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, device, checkpoint_path, file, saveinterval=1, num_epochs=25):
+def jigrotrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, device, checkpoint_path, file, saveinterval=1, num_epochs=20):
     since = time.time()
 
     best_model_wts = copy.deepcopy(model.state_dict())
@@ -43,8 +43,7 @@ def jigrotrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, de
                 input_3 = input_3.to(device)
                 labels = labels.to(device)
                 # zero the parameter gradients
-                # optimizer.zero_grad()
-                optimizer.grad() *= 0.9
+                optimizer.zero_grad()
                 batchSize = labels.size(0)
                 n_samples += batchSize
 

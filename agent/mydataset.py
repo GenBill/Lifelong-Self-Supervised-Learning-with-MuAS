@@ -379,3 +379,84 @@ class JigsawRotationDataset(Dataset):
             patch_d = self.postTransform(patch_d)
 
         return patch_a, patch_b, patch_c, patch_d, combined_label
+
+### 警告：施工现场 ###
+class ContrastiveDataset(Dataset):
+    
+    def __init__(self, split, root_paths, patch_dim, gap, jitter, preTransform=None, postTransform=None):
+        self.root_paths = root_paths
+        self.image_paths = root_paths + '/' + split
+
+        self.patch_dim = patch_dim
+        self.gap = gap
+        self.jitter = jitter
+
+        self.margin = math.ceil(self.patch_dim/2.0) + self.jitter
+        self.min_width = 2*self.patch_dim + 2*self.jitter + 2*self.gap
+
+        self.preTransform = preTransform
+        self.postTransform = postTransform
+        self.dataset = datasets.ImageFolder(self.image_paths, self.preTransform)
+
+    def __len__(self):
+        return len(self.dataset)
+    
+    def prep_patch(self, image):
+
+        # for some patches, randomly downsample to as little as 100 total pixels
+        # 说是要下采样，结果放大后又缩小？迷惑行为
+        # 可能可以添加抖动
+        if(random.random() < .33):
+            pil_patch = Image.fromarray(image)
+            original_size = pil_patch.size
+            randpix = int(math.sqrt(random.random() * (95 * 95 - 10 * 10) + 10 * 10))
+            pil_patch = pil_patch.resize((randpix, randpix)) 
+            pil_patch = pil_patch.resize(original_size) 
+            np.copyto(image, np.array(pil_patch))
+
+    def __getitem__(self, index):
+        # [y, x, chan], dtype=uint8, top_left is (0,0)
+        patch_loc_arr = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
+        # image_index = int(math.floor((len(self.dataset) * random.random())))
+        # pil_image = Image.open(self.image_paths[image_index]).convert('RGB')
+        # pil_image = datasets.ImageFolder(self.image_paths, self.preTransform)
+        img_PIL, _ = self.dataset[index]
+        image = np.array(img_PIL)
+        # If image is too small, try another image
+        if image.shape[1] <= self.min_width or image.shape[0] <= self.min_width:
+            return self.__getitem__(index)
+        
+        patch_direction_label = int(math.floor((8 * random.random())))
+        patch_jitter_y = int(math.floor((self.jitter * 2 * random.random()))) - self.jitter
+        patch_jitter_x = int(math.floor((self.jitter * 2 * random.random()))) - self.jitter
+                
+        while True:
+                
+            uniform_patch_x_coord = int(math.floor((image.shape[0] - self.margin*2) * random.random())) + self.margin - int(round(self.patch_dim/2.0))
+            uniform_patch_y_coord = int(math.floor((image.shape[1] - self.margin*2) * random.random())) + self.margin - int(round(self.patch_dim/2.0))
+            random_patch_y_coord = uniform_patch_x_coord + patch_loc_arr[patch_direction_label][0] * (self.patch_dim + self.gap) + patch_jitter_y
+            random_patch_x_coord = uniform_patch_y_coord + patch_loc_arr[patch_direction_label][1] * (self.patch_dim + self.gap) + patch_jitter_x
+
+            if random_patch_y_coord>=0 and random_patch_x_coord>=0 and random_patch_y_coord+self.patch_dim<image.shape[0] and random_patch_x_coord+self.patch_dim<image.shape[1]:
+                break
+        
+        uniform_patch = image[
+            uniform_patch_x_coord : uniform_patch_x_coord + self.patch_dim, 
+            uniform_patch_y_coord : uniform_patch_y_coord + self.patch_dim
+        ]                
+        random_patch = image[
+            random_patch_y_coord : random_patch_y_coord + self.patch_dim, 
+            random_patch_x_coord : random_patch_x_coord + self.patch_dim
+        ]
+        # 非必要模块：随机图片抖动
+        # self.prep_patch(uniform_patch)
+        # self.prep_patch(random_patch)
+        if self.preTransform:
+            uniform_patch = self.postTransform(uniform_patch)
+            random_patch = self.postTransform(random_patch)
+        else:
+            uniform_patch = transforms.ToTensor(uniform_patch)
+            random_patch = transforms.ToTensor(random_patch)
+
+        patch_direction_label = np.array(patch_direction_label).astype(np.int64)
+        return uniform_patch, random_patch, patch_direction_label

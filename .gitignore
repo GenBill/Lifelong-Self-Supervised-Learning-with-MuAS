@@ -1,4 +1,4 @@
-Saved_models/valid_FSLL_*/*.pth
+*/*/*.pth
 .vscode/settings.json
 
 */__pycache__/*

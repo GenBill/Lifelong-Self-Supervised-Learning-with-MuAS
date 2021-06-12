@@ -43,7 +43,8 @@ def jigrotrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, de
                 input_3 = input_3.to(device)
                 labels = labels.to(device)
                 # zero the parameter gradients
-                optimizer.zero_grad()
+                # optimizer.zero_grad()
+                optimizer.grad() *= 0.9
                 batchSize = labels.size(0)
                 n_samples += batchSize
 

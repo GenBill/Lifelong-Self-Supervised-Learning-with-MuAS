@@ -28,6 +28,7 @@ warnings.filterwarnings('ignore')
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--lr', type=float, default=0.001, help='learning rate, default=0.001')
+parser.add_argument('--powerword', default='rota', help="path to net (for continue training)")
 parser.add_argument('--netCont', default='', help="path to net (for continue training)")
 parser.add_argument('--rotaCont', default='', help="path to fc_layer")
 parser.add_argument('--jigroCont', default='', help="path to fc_layer")
@@ -168,25 +169,25 @@ optimizer = optim.Adagrad(
         {'params': fc_jigro.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
     ]
 )
-optimizer_rota = optim.Adagrad(
+optimizer_rota = optim.Adam(
     [
         {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
         {'params': fc_rota.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
     ]
 )
-optimizer_patch = optim.Adagrad(
+optimizer_patch = optim.Adam(
     [
         {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
         {'params': fc_patch.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
     ]
 )
-optimizer_jigpa = optim.Adagrad(
+optimizer_jigpa = optim.Adam(
     [
         {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
         {'params': fc_jigpa.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
     ]
 )
-optimizer_jigro = optim.Adagrad(
+optimizer_jigro = optim.Adam(
     [
         {'params': model_ft.parameters(), 'lr': opt.lr, 'weight_decay': 1e-8},
         {'params': fc_jigro.parameters(), 'lr': opt.lr, 'weight_decay': 1e-12},
@@ -202,11 +203,11 @@ scheduler = lr_scheduler.MultiStepLR(optimizer, milestones=[50, 100, 150], gamma
 #     myloader_rota, criterion, optimizer, scheduler,
 #     device, out_dir, file, 10, num_epochs
 # )
-print('Training ...')
+print('Training ... ', opt.powerword)
 
 # 'rota' , 'patch' , 'jigpa' , 'jigro'
-model_ft, fc_jigro = Step(
-    model_ft, fc_jigro, 'jigro',
+model_ft, fc_rota, fc_patch, fc_jigpa, fc_jigro = Step(
+    model_ft, fc_rota, fc_patch, fc_jigpa, fc_jigro, opt.powerword,
     loader_jigro, criterion, optimizer, scheduler,
     device, out_dir, file, saveinterval=2, num_epochs=num_epochs
 )

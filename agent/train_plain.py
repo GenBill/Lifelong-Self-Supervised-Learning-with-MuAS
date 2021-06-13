@@ -1,16 +1,17 @@
-from .mydataset import ContrastiveDataset
-from tqdm import tqdm
+from .mydataset import PlainDataset
+
 import torch
 import torch.nn.parallel
+from tqdm import tqdm
 import time
 import copy
 import warnings
 warnings.filterwarnings('ignore')
 
 # General Code for supervised train
-def contratrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, 
+def plaintrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, 
     device, checkpoint_path, file, saveinterval=1, last_epochs=0, num_epochs=20):
-
+    
     since = time.time()
 
     best_model_wts = copy.deepcopy(model.state_dict())
@@ -36,10 +37,11 @@ def contratrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
             running_corrects = 0
             n_samples = 0
 
+            end = time.time()
+
             # Iterate over data.
-            for _, (input_0, input_1, labels) in enumerate(tqdm(dataloaders[phase])):
-                input_0 = input_0.to(device)
-                input_1 = input_1.to(device)
+            for _, (inputs, labels) in enumerate(tqdm(dataloaders[phase])):
+                inputs = inputs.to(device)
                 labels = labels.to(device)
                 # zero the parameter gradients
                 optimizer.zero_grad()
@@ -48,12 +50,8 @@ def contratrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
 
                 # forward
                 # track history if only in train
-
                 with torch.set_grad_enabled(phase == 'train'):
-                    fea_output_0 = model(input_0)
-                    fea_output_1 = model(input_1)
-                    outputs = fc_layer(torch.cat((fea_output_0, fea_output_1), dim=1))
-                    
+                    outputs = fc_layer(model(inputs))
                     loss = criterion(outputs, labels)
                     # backward + optimize only if in training phase
                     if phase == 'train':
@@ -95,11 +93,9 @@ def contratrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
     fc_layer.load_state_dict(best_fc_wts)
     return model, fc_layer
 
-def contraloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size):
-
+def plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size):
     image_datasets = {
-        x: ContrastiveDataset(x, data_root, patch_dim, gap, jitter, 
-        preTransform = data_pre_transforms[x], postTransform=data_post_transforms[x])
+        x: PlainDataset(x, data_root, data_pre_transforms[x], data_post_transforms[x])
         for x in ['train', 'test']
     }
     assert image_datasets

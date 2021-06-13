@@ -1,3 +1,4 @@
+from .train_plain import *
 from .train_rota import *
 from .train_patch import *
 from .train_jigpa import *
@@ -10,9 +11,9 @@ import torchvision.transforms as transforms
 
 def LaStep(
     image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
-    powerword, model_ft, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
-    criterion, lr, weight_decay, milestones, milegamma, 
-    device, out_dir, file, saveinterval, num_epochs, 
+    powerword, model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
+    criterion, lr_0, weight_0, lr_1, weight_1, milestones, milegamma, 
+    device, out_dir, file, saveinterval, last_epochs, num_epochs, 
 ):
     # Initiate dataset and dataset transform
     data_pre_transforms = {
@@ -34,83 +35,98 @@ def LaStep(
             transforms.Normalize(mean=[0.6086, 0.4920, 0.4619], std=[0.2577, 0.2381, 0.2408])
         ]),
     }
-    
-    if powerword=='rota':
+
+    if powerword=='plain':
+        loader_plain = plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size)
+        optimizer = optim.Adam(
+            [
+                {'params': model_ft.parameters(), 'lr': lr_0, 'weight_decay': weight_0},
+                {'params': fc_plain.parameters(), 'lr': lr_1, 'weight_decay': weight_1},
+            ]
+        )
+        scheduler = lr_scheduler.MultiStepLR(optimizer, milestones, milegamma)
+        model_ft, fc_plain = plaintrain(
+            model_ft, fc_plain, 
+            loader_plain, criterion, optimizer, scheduler, 
+            device, out_dir, file, saveinterval, last_epochs, num_epochs
+        )
+
+    elif powerword=='rota':
         loader_rota = rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size)
         optimizer = optim.Adam(
             [
-                {'params': model_ft.parameters(), 'lr': lr, 'weight_decay': weight_decay},
-                {'params': fc_rota.parameters(), 'lr': lr, 'weight_decay': weight_decay},
+                {'params': model_ft.parameters(), 'lr': lr_0, 'weight_decay': weight_0},
+                {'params': fc_rota.parameters(), 'lr': lr_1, 'weight_decay': weight_1},
             ]
         )
         scheduler = lr_scheduler.MultiStepLR(optimizer, milestones, milegamma)
         model_ft, fc_rota = rotatrain(
             model_ft, fc_rota, 
             loader_rota, criterion, optimizer, scheduler, 
-            device, out_dir, file, saveinterval, num_epochs
+            device, out_dir, file, saveinterval, last_epochs, num_epochs
         )
 
     elif powerword=='patch':
         loader_patch = patchloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
         optimizer = optim.Adam(
             [
-                {'params': model_ft.parameters(), 'lr': lr, 'weight_decay': weight_decay},
-                {'params': fc_patch.parameters(), 'lr': lr, 'weight_decay': weight_decay},
+                {'params': model_ft.parameters(), 'lr': lr_0, 'weight_decay': weight_0},
+                {'params': fc_patch.parameters(), 'lr': lr_1, 'weight_decay': weight_1},
             ]
         )
         scheduler = lr_scheduler.MultiStepLR(optimizer, milestones, milegamma)
         model_ft, fc_patch = patchtrain(
             model_ft, fc_patch, 
             loader_patch, criterion, optimizer, scheduler, 
-            device, out_dir, file, saveinterval, num_epochs
+            device, out_dir, file, saveinterval, last_epochs, num_epochs
         )
 
     elif powerword=='jigpa':
         loader_jigpa = jigpaloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
         optimizer = optim.Adam(
             [
-                {'params': model_ft.parameters(), 'lr': lr, 'weight_decay': weight_decay},
-                {'params': fc_jigpa.parameters(), 'lr': lr, 'weight_decay': weight_decay},
+                {'params': model_ft.parameters(), 'lr': lr_0, 'weight_decay': weight_0},
+                {'params': fc_jigpa.parameters(), 'lr': lr_1, 'weight_decay': weight_1},
             ]
         )
         scheduler = lr_scheduler.MultiStepLR(optimizer, milestones, milegamma)
         model_ft, fc_jigpa = jigpatrain(
             model_ft, fc_jigpa, 
             loader_jigpa, criterion, optimizer, scheduler, 
-            device, out_dir, file, saveinterval, num_epochs
+            device, out_dir, file, saveinterval, last_epochs, num_epochs
         )
 
     elif powerword=='jigro':
         loader_jigro = jigroloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
         optimizer = optim.Adam(
             [
-                {'params': model_ft.parameters(), 'lr': lr, 'weight_decay': weight_decay},
-                {'params': fc_jigro.parameters(), 'lr': lr, 'weight_decay': weight_decay},
+                {'params': model_ft.parameters(), 'lr': lr_0, 'weight_decay': weight_0},
+                {'params': fc_jigro.parameters(), 'lr': lr_1, 'weight_decay': weight_1},
             ]
         )
         scheduler = lr_scheduler.MultiStepLR(optimizer, milestones, milegamma)
         model_ft, fc_jigro = jigrotrain(
             model_ft, fc_jigro, 
             loader_jigro, criterion, optimizer, scheduler, 
-            device, out_dir, file, saveinterval, num_epochs
+            device, out_dir, file, saveinterval, last_epochs, num_epochs
         )
 
     elif powerword=='contra':
         loader_contra = contraloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
         optimizer = optim.Adam(
             [
-                {'params': model_ft.parameters(), 'lr': lr, 'weight_decay': weight_decay},
-                {'params': fc_contra.parameters(), 'lr': lr, 'weight_decay': weight_decay},
+                {'params': model_ft.parameters(), 'lr': lr_0, 'weight_decay': weight_0},
+                {'params': fc_contra.parameters(), 'lr': lr_1, 'weight_decay': weight_1},
             ]
         )
         scheduler = lr_scheduler.MultiStepLR(optimizer, milestones, milegamma)
         model_ft, fc_contra = contratrain(
             model_ft, fc_contra, 
             loader_contra, criterion, optimizer, scheduler, 
-            device, out_dir, file, saveinterval, num_epochs
+            device, out_dir, file, saveinterval, last_epochs, num_epochs
         )
     
-    return model_ft, fc_rota, fc_patch, fc_jigpa, fc_jigro
+    return model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro
 
     # default num_step == 0,1,2,3
     # else return 0

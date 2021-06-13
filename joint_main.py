@@ -47,9 +47,20 @@ opt = parser.parse_args()
 opt.manualSeed = 2077
 # opt.netCont = './models/net_epoch_56.pth'
 
-
-out_dir = './StepRot/models'
-log_out_dir = './StepRot/logs'
+if opt.joint==1:
+    if opt.pretrain==1:
+        out_dir = './Joint/Jopre/models'
+        log_out_dir = './Joint/Jopre/logs'
+    else :
+        out_dir = './Joint/Jono/models'
+        log_out_dir = './Joint/Jono/logs'
+else:
+    if opt.pretrain==1:
+        out_dir = './Joint/Wopre/models'
+        log_out_dir = './Joint/Wopre/logs'
+    else :
+        out_dir = './Joint/Wono/models'
+        log_out_dir = './Joint/Wono/logs'
 
 try:
     os.makedirs(out_dir)
@@ -77,18 +88,17 @@ gap = 6
 jitter = 6
 
 saveinterval = 2
-num_epochs = 50
+num_epochs = 100
+fine_epochs = 20
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '1'
-# device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-# use_cuda = not args.no_cuda and torch.cuda.is_available()
+os.environ['CUDA_VISIBLE_DEVICES'] = opt.cuda
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 file.write("using " + str(device) + "\n")
 file.flush()
 
 # Model Initialization
 # 仅支持 Res-Net !!!
-model_all = models.resnet18(pretrained=True)
+model_all = models.resnet18(pretrained=opt.pretrain)
 num_ftrs = model_all.fc.in_features
 
 def make_MLP(input_ftrs, hidden_ftrs, output_ftrs, layers=1):
@@ -109,6 +119,7 @@ def make_MLP(input_ftrs, hidden_ftrs, output_ftrs, layers=1):
 
 model_ft = nn.Sequential(*(list(model_all.children())[:-1]))
 fc_plain = make_MLP(num_ftrs, num_ftrs, output_ftrs=265, layers=1)
+
 fc_rota = make_MLP(num_ftrs, num_ftrs, output_ftrs=4, layers=1)
 fc_patch = make_MLP(2*num_ftrs, 2*num_ftrs, output_ftrs=8, layers=2)
 fc_jigpa = make_MLP(4*num_ftrs, 4*num_ftrs, output_ftrs=24, layers=4)
@@ -145,6 +156,7 @@ def loadstate(model, fc_layer, net_Cont, fc_Cont, device, file):
         print('Loaded fc_layer state ...')
         file.write('Loaded fc_layer state ...')
 
+loadstate(model_ft, fc_plain, opt.netCont, opt.plainCont, device, file)
 loadstate(model_ft, fc_rota, opt.netCont, opt.rotaCont, device, file)
 loadstate(model_ft, fc_patch, opt.netCont, opt.patchCont, device, file)
 loadstate(model_ft, fc_jigpa, opt.netCont, opt.jigpaCont, device, file)
@@ -156,13 +168,30 @@ criterion = nn.CrossEntropyLoss()
 milestones = [50, 100, 150]
 milegamma = 0.2
 
-print('Training ... {}\n'.format(opt.powerword))
-
+# print('Training ... {}\n'.format(opt.powerword))
 # 'rota' , 'patch' , 'jigpa' , 'jigro'
-model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
-    image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
-    opt.powerword, model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
-    criterion, opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
-    device, out_dir, file, saveinterval, 0, num_epochs
-)
+
+if opt.joint==1:
+    powerword = ['rota', 'patch', 'jigpa', 'jigro']
+    for i in range(num_epochs):
+        model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
+            image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+            powerword[i%4], model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
+            criterion, opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+            device, out_dir, file, saveinterval, i, 1
+        )
+    model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
+            image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+            'plain', model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
+            criterion, opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+            # criterion, 0, 0, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+            device, out_dir, file, saveinterval, num_epochs, fine_epochs
+        )
+else :
+    model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
+            image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+            'plain', model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
+            criterion, opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+            device, out_dir, file, saveinterval, 0, num_epochs+fine_epochs
+        )
 

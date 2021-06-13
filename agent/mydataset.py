@@ -49,6 +49,28 @@ patch_order_arr = [
     (3, 2, 1, 0)
 ]
 
+class PlainDataset(Dataset):
+
+    def __init__(self, split, labelled_root_dir, preTransform=None, postTransform=None):
+        self.labelled_root_dir = labelled_root_dir
+        # Output of pretransform should be PIL images
+        self.preTransform = preTransform
+        self.postTransform = postTransform
+        self.split = split
+        self.labelled_data_dir = labelled_root_dir + '/' + split
+        self.dataset = datasets.ImageFolder(self.labelled_data_dir, self.preTransform) 
+        
+    def __len__(self):
+        return len(self.dataset)
+
+    def __getitem__(self, idx):
+        plain_img, plain_class = self.dataset[idx]
+        if self.postTransform:
+            sample = self.postTransform(plain_img)
+        else:
+            sample = transforms.ToTensor(plain_img)
+        return sample, plain_class
+
 class PrimeRotationDataset(Dataset):
 
     def __init__(self, split, labelled_root_dir, preTransform=None, postTransform=None):

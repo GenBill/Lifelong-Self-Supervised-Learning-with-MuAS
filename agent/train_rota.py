@@ -9,16 +9,17 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # General Code for supervised train
-def rotatrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, device, checkpoint_path, file, saveinterval=1, num_epochs=20):
+def rotatrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, 
+    device, checkpoint_path, file, saveinterval=1, last_epochs=0, num_epochs=20):
+
     since = time.time()
 
     best_model_wts = copy.deepcopy(model.state_dict())
     best_acc = 0.0
 
-    for epoch in range(num_epochs):
-        print('Epoch {}/{} \n'.format(epoch, num_epochs - 1))
-        
-        file.write('Epoch {}/{} \n'.format(epoch, num_epochs - 1))
+    for epoch in range(last_epochs, last_epochs+num_epochs):
+        print('Epoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
+        file.write('Epoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
         file.write('-' * 10)
         file.write('\n')
         file.flush()

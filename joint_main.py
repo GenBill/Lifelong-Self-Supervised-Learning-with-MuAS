@@ -55,6 +55,15 @@ if opt.joint==1:
     else :
         out_dir = './Joint/Jono/models'
         log_out_dir = './Joint/Jono/Jono'
+
+elif opt.joint==2:
+    if opt.pretrain==1:
+        out_dir = './Joint/JoJopre/models'
+        log_out_dir = './Joint/JoJopre/JoJopre'
+    else :
+        out_dir = './Joint/JoJono/models'
+        log_out_dir = './Joint/JoJono/JoJono'
+        
 else:
     if opt.pretrain==1:
         out_dir = './Joint/Wopre/models'
@@ -250,6 +259,16 @@ if opt.joint==1:
             optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, optimizer_contra, 
             scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
             criterion, device, out_dir, file, saveinterval, num_epochs, fine_epochs
+        )
+elif opt.joint==2:
+    powerword = ['rota', 'patch', 'jigpa', 'jigro', 'plain']
+    for i in range(num_epochs+fine_epochs):
+        model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
+            loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
+            powerword[i%5], model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
+            optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, optimizer_contra, 
+            scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
+            criterion, device, out_dir, file, saveinterval, i, 1
         )
 else :
     model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(

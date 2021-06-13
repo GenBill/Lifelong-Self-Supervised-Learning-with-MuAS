@@ -77,9 +77,9 @@ def plaintrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
                 best_acc = top_1_acc
                 best_model_wts = copy.deepcopy(model.state_dict())
                 best_fc_wts = copy.deepcopy(fc_layer.state_dict())
-    if (epoch+1) % saveinterval == 0:
-        torch.save(model.state_dict(), '%s/model_epoch_%d.pth' % (checkpoint_path, epoch))
-        torch.save(fc_layer.state_dict(), '%s/fc_epoch_%d.pth' % (checkpoint_path, epoch))
+        if (epoch+1) % saveinterval == 0:
+            torch.save(model.state_dict(), '%s/model_epoch_%d.pth' % (checkpoint_path, epoch))
+            torch.save(fc_layer.state_dict(), '%s/fc_epoch_%d.pth' % (checkpoint_path, epoch))
 
     time_elapsed = time.time() - since
     print('Training complete in {:.0f}m {:.0f}s \n'.format(time_elapsed // 60, time_elapsed % 60))

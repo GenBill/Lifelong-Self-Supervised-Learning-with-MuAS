@@ -49,7 +49,15 @@ opt = parser.parse_args()
 opt.manualSeed = 2077
 # opt.netCont = './models/net_epoch_56.pth'
 
-if opt.joint==1:
+if opt.joint==0:
+    if opt.pretrain==1:
+        out_dir = './Joint/Wopre/models'
+        log_out_dir = './Joint/Wopre/Wopre'
+    else :
+        out_dir = './Joint/Wono/models'
+        log_out_dir = './Joint/Wono/Wono'
+
+elif opt.joint==1:
     if opt.pretrain==1:
         out_dir = './Joint/Jopre/models'
         log_out_dir = './Joint/Jopre/Jopre'
@@ -67,11 +75,12 @@ elif opt.joint==2:
         
 else:
     if opt.pretrain==1:
-        out_dir = './Joint/Wopre/models'
-        log_out_dir = './Joint/Wopre/Wopre'
+        out_dir = './Joint/Onepre/models'
+        log_out_dir = './Joint/Onepre/Onepre'
     else :
-        out_dir = './Joint/Wono/models'
-        log_out_dir = './Joint/Wono/Wono'
+        out_dir = './Joint/Oneno/models'
+        log_out_dir = './Joint/Oneno/Oneno'
+        
 
 try:
     os.makedirs(out_dir)

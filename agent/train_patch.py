@@ -17,8 +17,8 @@ def patchtrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
     best_acc = 0.0
 
     for epoch in range(last_epochs, last_epochs+num_epochs):
-        print('Epoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
-        file.write('Epoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
+        print('\nEpoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
+        file.write('\nEpoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
         file.write('-' * 10)
         file.write('\n')
         file.flush()

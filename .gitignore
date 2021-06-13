@@ -1,4 +1,5 @@
 */*/*.pth
+*/*/*/*.pth
 .vscode/settings.json
 
 */__pycache__/*

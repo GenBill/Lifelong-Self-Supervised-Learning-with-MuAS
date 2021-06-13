@@ -17,8 +17,8 @@ def contratrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
     best_acc = 0.0
 
     for epoch in range(last_epochs, last_epochs+num_epochs):
-        print('Epoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
-        file.write('Epoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
+        print('\nEpoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
+        file.write('\nEpoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
         file.write('-' * 10)
         file.write('\n')
         file.flush()
@@ -95,10 +95,10 @@ def contratrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
     fc_layer.load_state_dict(best_fc_wts)
     return model, fc_layer
 
-def contraloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size):
+def contraloader(patch_dim, data_root, data_pre_transforms, data_post_transforms, batch_size):
 
     image_datasets = {
-        x: ContrastiveDataset(x, data_root, patch_dim, gap, jitter, 
+        x: ContrastiveDataset(x, data_root, patch_dim, 
         preTransform = data_pre_transforms[x], postTransform=data_post_transforms[x])
         for x in ['train', 'test']
     }

@@ -1,4 +1,5 @@
 from agent.train_step import LaStep
+from agent import *
 
 import torch
 import torch.nn as nn
@@ -50,26 +51,25 @@ opt.manualSeed = 2077
 if opt.joint==1:
     if opt.pretrain==1:
         out_dir = './Joint/Jopre/models'
-        log_out_dir = './Joint/Jopre/logs'
+        log_out_dir = './Joint/Jopre/Jopre'
     else :
         out_dir = './Joint/Jono/models'
-        log_out_dir = './Joint/Jono/logs'
+        log_out_dir = './Joint/Jono/Jono'
 else:
     if opt.pretrain==1:
         out_dir = './Joint/Wopre/models'
-        log_out_dir = './Joint/Wopre/logs'
+        log_out_dir = './Joint/Wopre/Wopre'
     else :
         out_dir = './Joint/Wono/models'
-        log_out_dir = './Joint/Wono/logs'
+        log_out_dir = './Joint/Wono/Wono'
 
 try:
     os.makedirs(out_dir)
-    os.makedirs(log_out_dir)
 except OSError:
     pass
 
 
-file = open("{}/training_logs.txt".format(log_out_dir), "w+")
+file = open("{}_logs.txt".format(log_out_dir), "w+")
 if opt.manualSeed is None:
     opt.manualSeed = random.randint(1, 10000) 
 file.write("Random Seed: {} \n".format(opt.manualSeed))
@@ -87,7 +87,7 @@ contra_dim = 128
 gap = 6
 jitter = 6
 
-saveinterval = 2
+saveinterval = 1
 num_epochs = 100
 fine_epochs = 20
 
@@ -95,6 +95,33 @@ os.environ['CUDA_VISIBLE_DEVICES'] = opt.cuda
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 file.write("using " + str(device) + "\n")
 file.flush()
+
+# Initiate dataset and dataset transform
+data_pre_transforms = {
+    'train': transforms.Compose([
+        transforms.Resize(image_size),
+        transforms.RandomHorizontalFlip(),
+    ]),
+    'test': transforms.Compose([
+        transforms.Resize(image_size),
+    ]),
+}
+data_post_transforms = {
+    'train': transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.6086, 0.4920, 0.4619], std=[0.2577, 0.2381, 0.2408])
+    ]),
+    'test': transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.6086, 0.4920, 0.4619], std=[0.2577, 0.2381, 0.2408])
+    ]),
+}
+loader_plain = plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size)
+loader_rota = rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size)
+loader_patch = patchloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
+loader_jigpa = jigpaloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
+loader_jigro = jigroloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
+loader_contra = contraloader(patch_dim, data_root, data_pre_transforms, data_post_transforms, batch_size)
 
 # Model Initialization
 # 仅支持 Res-Net !!!
@@ -168,6 +195,42 @@ criterion = nn.CrossEntropyLoss()
 milestones = [50, 100, 150]
 milegamma = 0.2
 
+optimizer_plain = optim.Adam([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
+    {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+])
+scheduler_plain = lr_scheduler.MultiStepLR(optimizer_plain, milestones, milegamma)
+
+optimizer_rota = optim.Adam([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
+    {'params': fc_rota.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+])
+scheduler_rota = lr_scheduler.MultiStepLR(optimizer_rota, milestones, milegamma)
+
+optimizer_patch = optim.Adam([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
+    {'params': fc_patch.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+])
+scheduler_patch = lr_scheduler.MultiStepLR(optimizer_patch, milestones, milegamma)
+
+optimizer_jigpa = optim.Adam([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
+    {'params': fc_jigpa.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+])
+scheduler_jigpa = lr_scheduler.MultiStepLR(optimizer_jigpa, milestones, milegamma)
+
+optimizer_jigro = optim.Adam([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
+    {'params': fc_jigro.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+])
+scheduler_jigro = lr_scheduler.MultiStepLR(optimizer_jigro, milestones, milegamma)
+
+optimizer_contra = optim.Adam([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
+    {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+])
+scheduler_contra = lr_scheduler.MultiStepLR(optimizer_contra, milestones, milegamma)
+
 # print('Training ... {}\n'.format(opt.powerword))
 # 'rota' , 'patch' , 'jigpa' , 'jigro'
 
@@ -175,23 +238,25 @@ if opt.joint==1:
     powerword = ['rota', 'patch', 'jigpa', 'jigro']
     for i in range(num_epochs):
         model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
-            image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+            loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
             powerword[i%4], model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
-            criterion, opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
-            device, out_dir, file, saveinterval, i, 1
+            optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, optimizer_contra, 
+            scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
+            criterion, device, out_dir, file, saveinterval, i, 1
         )
     model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
-            image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+            loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
             'plain', model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
-            criterion, opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
-            # criterion, 0, 0, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
-            device, out_dir, file, saveinterval, num_epochs, fine_epochs
+            optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, optimizer_contra, 
+            scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
+            criterion, device, out_dir, file, saveinterval, num_epochs, fine_epochs
         )
 else :
     model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
-            image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+            loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
             'plain', model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
-            criterion, opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
-            device, out_dir, file, saveinterval, 0, num_epochs+fine_epochs
+            optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, optimizer_contra, 
+            scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
+            criterion, device, out_dir, file, saveinterval, 0, num_epochs+fine_epochs
         )
 

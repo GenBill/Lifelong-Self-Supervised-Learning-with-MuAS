@@ -253,8 +253,16 @@ scheduler_contra = lr_scheduler.MultiStepLR(optimizer_contra, milestones, milega
 
 # print('Training ... {}\n'.format(opt.powerword))
 # 'rota' , 'patch' , 'jigpa' , 'jigro'
+if opt.joint==0:
+    model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
+            loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
+            'plain', model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
+            optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, optimizer_contra, 
+            scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
+            criterion, device, out_dir, file, saveinterval, 0, num_epochs+fine_epochs
+        )
 
-if opt.joint==1:
+elif opt.joint==1:
     powerword = ['rota', 'patch', 'jigpa', 'jigro']
     for i in range(num_epochs):
         model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
@@ -271,6 +279,7 @@ if opt.joint==1:
             scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
             criterion, device, out_dir, file, saveinterval, num_epochs, fine_epochs
         )
+
 elif opt.joint==2:
     powerword = ['rota', 'patch', 'jigpa', 'jigro', 'plain']
     for i in range(num_epochs+fine_epochs):
@@ -281,18 +290,11 @@ elif opt.joint==2:
             scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
             criterion, device, out_dir, file, saveinterval, i, 1
         )
+
 elif opt.joint==3:
     model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = JointStep(
         loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
         model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
         optimizer_all, scheduler_all, criterion, device, out_dir, file, saveinterval, 0, num_epochs+fine_epochs
     )
-else :
-    model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
-            loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
-            'plain', model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
-            optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, optimizer_contra, 
-            scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
-            criterion, device, out_dir, file, saveinterval, 0, num_epochs+fine_epochs
-        )
 

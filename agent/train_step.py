@@ -5,6 +5,8 @@ from .train_jigpa import *
 from .train_jigro import *
 from .train_contra import *
 
+from .train_joint import *
+
 import torch.optim as optim
 from torch.optim import lr_scheduler
 import torchvision.transforms as transforms
@@ -65,6 +67,18 @@ def LaStep(
     # else return 0
 
 
+def JointStep(
+    loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
+    model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
+    optimizer, scheduler, criterion, device, out_dir, file, saveinterval, last_epochs, num_epochs, 
+):
+    model_ft, fc_contra = jointtrain(
+            loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, 
+            model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, 
+            criterion, optimizer, scheduler, 
+            device, out_dir, file, saveinterval, last_epochs, num_epochs
+        )
+    return model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro
 ### 警告：废弃管道 ###
 
 '''

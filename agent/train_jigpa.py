@@ -12,8 +12,6 @@ def jigpatrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
     device, checkpoint_path, file, saveinterval=1, last_epochs=0, num_epochs=20):
     
     since = time.time()
-
-    best_model_wts = copy.deepcopy(model.state_dict())
     best_acc = 0.0
 
     for epoch in range(last_epochs, last_epochs+num_epochs):

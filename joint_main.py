@@ -1,4 +1,5 @@
 from agent.train_step import LaStep
+from agent.train_step import JointStep
 from agent import *
 
 import torch
@@ -204,6 +205,16 @@ criterion = nn.CrossEntropyLoss()
 milestones = [50, 100, 150]
 milegamma = 0.2
 
+optimizer_all = optim.Adam([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
+    {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+    {'params': fc_rota.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+    {'params': fc_patch.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+    {'params': fc_jigpa.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+    {'params': fc_jigro.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+])
+scheduler_all = lr_scheduler.MultiStepLR(optimizer_all, milestones, milegamma)
+
 optimizer_plain = optim.Adam([
     {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
     {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
@@ -270,6 +281,12 @@ elif opt.joint==2:
             scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
             criterion, device, out_dir, file, saveinterval, i, 1
         )
+elif opt.joint==3:
+    model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = JointStep(
+        loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
+        model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
+        optimizer_all, scheduler_all, criterion, device, out_dir, file, saveinterval, 0, num_epochs+fine_epochs
+    )
 else :
     model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
             loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 

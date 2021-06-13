@@ -108,7 +108,7 @@ def jigroloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_tra
     dataloaders = {
         x: torch.utils.data.DataLoader(
             image_datasets[x], batch_size=batch_size,
-            pin_memory=True, shuffle=True, num_workers=8
+            pin_memory=True, shuffle=True, num_workers=4
         ) for x in ['train', 'test']}
     # dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'test']}
     return dataloaders

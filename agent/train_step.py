@@ -68,14 +68,12 @@ def LaStep(
 
 
 def JointStep(
-    loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
     model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
-    optimizer, scheduler, criterion, device, out_dir, file, saveinterval, last_epochs, num_epochs, 
+    loader_joint, optimizer, scheduler, criterion, device, out_dir, file, saveinterval, last_epochs, num_epochs, 
 ):
-    model_ft, fc_contra = jointtrain(
-            loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, 
+    model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = jointtrain(
             model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, 
-            criterion, optimizer, scheduler, 
+            loader_joint, optimizer, scheduler, criterion, 
             device, out_dir, file, saveinterval, last_epochs, num_epochs
         )
     return model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro

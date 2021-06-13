@@ -4,3 +4,4 @@ from .train_patch import *
 from .train_jigpa import *
 from .train_jigro import *
 from .train_contra import *
+from .train_joint import *

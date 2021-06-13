@@ -135,12 +135,14 @@ data_post_transforms = {
         transforms.Normalize(mean=[0.6086, 0.4920, 0.4619], std=[0.2577, 0.2381, 0.2408])
     ]),
 }
+
 loader_plain = plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size)
 loader_rota = rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size)
 loader_patch = patchloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
 loader_jigpa = jigpaloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
 loader_jigro = jigroloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
 loader_contra = contraloader(patch_dim, data_root, data_pre_transforms, data_post_transforms, batch_size)
+loader_joint = jointloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
 
 # Model Initialization
 # 仅支持 Res-Net !!!
@@ -302,8 +304,7 @@ elif opt.joint==2:
 
 elif opt.joint==3:
     model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = JointStep(
-        loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
-        model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
+        model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, loader_joint, 
         optimizer_all, scheduler_all, criterion, device, out_dir, file, saveinterval, 0, num_epochs+fine_epochs
     )
 

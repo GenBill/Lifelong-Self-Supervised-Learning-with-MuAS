@@ -27,6 +27,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--cuda', default='', help="cuda : ?")
 parser.add_argument('--powerword', default='rota', help="Power Word, decide what to do")
 
+parser.add_argument('--batchsize', type=int, default=512, help="set batch size")
+parser.add_argument('--numworkers', type=int, default=4, help="set num workers")
 parser.add_argument('--lr_net', type=float, default=1e-3, help='learning rate, default=0.001')
 parser.add_argument('--weight_net', type=float, default=1e-8, help="weight decay")
 parser.add_argument('--lr_fc', type=float, default=1e-3, help='learning rate, default=0.001')
@@ -59,34 +61,41 @@ if opt.joint==0:
 
 elif opt.joint==1:
     if opt.pretrain==1:
-        out_dir = './Joint/Jopre/models'
-        log_out_dir = './Joint/Jopre/Jopre'
+        out_dir = './Joint_{}/Jopre/models'.format(opt.batchsize)
+        log_out_dir = './Joint_{}/Jopre/Jopre'.format(opt.batchsize)
     else :
-        out_dir = './Joint/Jono/models'
-        log_out_dir = './Joint/Jono/Jono'
+        out_dir = './Joint_{}/Jono/models'.format(opt.batchsize)
+        log_out_dir = './Joint_{}/Jono/Jono'.format(opt.batchsize)
 
 elif opt.joint==2:
     if opt.pretrain==1:
-        out_dir = './Joint/JoJopre/models'
-        log_out_dir = './Joint/JoJopre/JoJopre'
+        out_dir = './Joint_{}/JoJopre/models'.format(opt.batchsize)
+        log_out_dir = './Joint_{}/JoJopre/JoJopre'.format(opt.batchsize)
     else :
-        out_dir = './Joint/JoJono/models'
-        log_out_dir = './Joint/JoJono/JoJono'
-        
+        out_dir = './Joint_{}/JoJono/models'.format(opt.batchsize)
+        log_out_dir = './Joint_{}/JoJono/JoJono'.format(opt.batchsize)
+
+elif opt.joint==3:
+    if opt.pretrain==1:
+        out_dir = './Joint_{}/JoJonepre/models'.format(opt.batchsize)
+        log_out_dir = './Joint_{}/JoJonepre/JoJonepre'.format(opt.batchsize)
+    else :
+        out_dir = './Joint_{}/JoJoneno/models'.format(opt.batchsize)
+        log_out_dir = './Joint_{}/JoJoneno/JoJoneno'.format(opt.batchsize)
+
 else:
     if opt.pretrain==1:
-        out_dir = './Joint/Onepre/models'
-        log_out_dir = './Joint/Onepre/Onepre'
+        out_dir = './Joint_{}/Onepre/models'.format(opt.batchsize)
+        log_out_dir = './Joint_{}/Onepre/Onepre'.format(opt.batchsize)
     else :
-        out_dir = './Joint/Oneno/models'
-        log_out_dir = './Joint/Oneno/Oneno'
+        out_dir = './Joint_{}/Oneno/models'.format(opt.batchsize)
+        log_out_dir = './Joint_{}/Oneno/Oneno'.format(opt.batchsize)
         
 
 try:
     os.makedirs(out_dir)
 except OSError:
     pass
-
 
 file = open("{}_logs.txt".format(log_out_dir), "w+")
 if opt.manualSeed is None:
@@ -98,8 +107,9 @@ torch.manual_seed(opt.manualSeed)
 
 cudnn.benchmark = True
 image_size = (224, 224)
-data_root = '../Kaggle265'     # '../Dataset/Kaggle265'
-batch_size = 512
+data_root = '../Kaggle265'      # '../Dataset/Kaggle265'
+batch_size = opt.batchsize      # 512, 256
+num_workers = opt.numworkers    # 4
 
 patch_dim = 96
 contra_dim = 128
@@ -136,13 +146,13 @@ data_post_transforms = {
     ]),
 }
 
-loader_plain = plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size)
-loader_rota = rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size)
-loader_patch = patchloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
-loader_jigpa = jigpaloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
-loader_jigro = jigroloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
-loader_contra = contraloader(patch_dim, data_root, data_pre_transforms, data_post_transforms, batch_size)
-loader_joint = jointloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size)
+loader_plain = plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+loader_rota = rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+loader_patch = patchloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+loader_jigpa = jigpaloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+loader_jigro = jigroloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+loader_contra = contraloader(patch_dim, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+loader_joint = jointloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
 
 # Model Initialization
 # 仅支持 Res-Net !!!
@@ -304,8 +314,32 @@ elif opt.joint==2:
         )
 
 elif opt.joint==3:
+    powerword = ['rota', 'patch', 'jigpa', 'jigro', 'plain']
+    for i in range(num_epochs):
+        model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
+            loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
+            powerword[i%5], model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
+            optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, optimizer_contra, 
+            scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
+            criterion, device, out_dir, file, saveinterval, i, 1
+        )
+    model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
+            loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
+            'plain', model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
+            optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, optimizer_contra, 
+            scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
+            criterion, device, out_dir, file, saveinterval, num_epochs, fine_epochs
+        )
+
+elif opt.joint==4:
     model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = JointStep(
         model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, loader_joint, 
-        optimizer_all, scheduler_all, criterion, device, out_dir, file, saveinterval, 0, num_epochs+fine_epochs
+        optimizer_all, scheduler_all, criterion, device, out_dir, file, saveinterval, 0, num_epochs//4
     )
-
+    model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
+        loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
+        'plain', model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
+        optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, optimizer_contra, 
+        scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
+        criterion, device, out_dir, file, saveinterval, num_epochs//4, fine_epochs
+    )

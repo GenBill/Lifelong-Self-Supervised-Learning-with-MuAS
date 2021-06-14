@@ -97,7 +97,7 @@ def jigpatrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
     fc_layer.load_state_dict(best_fc_wts)
     return model, fc_layer
 
-def jigpaloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size):
+def jigpaloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers):
 
     image_datasets = {
         x: JigsawPatchDataset(x, data_root, patch_dim, gap, jitter, 
@@ -108,7 +108,7 @@ def jigpaloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_pos
     dataloaders = {
         x: torch.utils.data.DataLoader(
             image_datasets[x], batch_size=batch_size,
-            pin_memory=True, shuffle=True, num_workers=4
+            pin_memory=True, shuffle=True, num_workers= num_workers
         ) for x in ['train', 'test']}
     # dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'test']}
     return dataloaders

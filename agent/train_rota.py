@@ -91,7 +91,7 @@ def rotatrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
     fc_layer.load_state_dict(best_fc_wts)
     return model, fc_layer
 
-def rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size):
+def rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers):
     image_datasets = {
         x: PrimeRotationDataset(x, data_root, data_pre_transforms[x], data_post_transforms[x])
         for x in ['train', 'test']
@@ -100,7 +100,7 @@ def rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size)
     dataloaders = {
         x: torch.utils.data.DataLoader(
             image_datasets[x], batch_size=batch_size,
-            pin_memory=True, shuffle=True, num_workers=4
+            pin_memory=True, shuffle=True, num_workers= num_workers
         ) for x in ['train', 'test']}
     # dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'test']}
     return dataloaders

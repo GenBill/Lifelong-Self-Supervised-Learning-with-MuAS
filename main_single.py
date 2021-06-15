@@ -1,4 +1,4 @@
-from agent.train_step import LaStep
+from agent.train_step import SingleStep
 
 import torch
 import torch.nn as nn
@@ -25,6 +25,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--cuda', default='', help="cuda : ?")
 parser.add_argument('--powerword', default='rota', help="Power Word, decide what to do")
 
+parser.add_argument('--batchsize', type=int, default=512, help="set batch size")
+parser.add_argument('--numworkers', type=int, default=4, help="set num workers")
 parser.add_argument('--lr_net', type=float, default=1e-3, help='learning rate, default=0.001')
 parser.add_argument('--weight_net', type=float, default=1e-8, help="weight decay")
 parser.add_argument('--lr_fc', type=float, default=1e-3, help='learning rate, default=0.001')
@@ -39,7 +41,6 @@ parser.add_argument('--jigpaCont', default='', help="path to fc_layer jigro")
 parser.add_argument('--contraCont', default='', help="path to fc_layer jigro")
 # parser.add_argument('--manualSeed', type=int, help='manual seed')
 
-parser.add_argument('--joint', type=int, default=1, help="joint on")
 parser.add_argument('--pretrain', type=int, default=1, help="pretrain on")
 
 # opt = parser.parse_args(args=[])
@@ -47,18 +48,16 @@ opt = parser.parse_args()
 opt.manualSeed = 2077
 # opt.netCont = './models/net_epoch_56.pth'
 
-
-out_dir = './StepRot/models'
-log_out_dir = './StepRot/logs'
+out_dir = '../Single_{}/{}/models'.format(opt.batchsize, opt.powerword)
+log_out_dir = '../Single_{}/{}/{}'.format(opt.batchsize, opt.powerword, opt.powerword)
 
 try:
     os.makedirs(out_dir)
-    os.makedirs(log_out_dir)
 except OSError:
     pass
 
 
-file = open("{}/training_logs.txt".format(log_out_dir), "w+")
+file = open("{}_logs.txt".format(log_out_dir), "w+")
 if opt.manualSeed is None:
     opt.manualSeed = random.randint(1, 10000) 
 file.write("Random Seed: {} \n".format(opt.manualSeed))
@@ -68,16 +67,18 @@ torch.manual_seed(opt.manualSeed)
 
 cudnn.benchmark = True
 image_size = (224, 224)
-data_root = '../Kaggle265'     # '../Dataset/Kaggle265'
-batch_size = 512
+data_root = '../../Kaggle265'     # '../Dataset/Kaggle265'
+batch_size = opt.batchsize      # 512, 256
+num_workers = opt.numworkers    # 4
 
 patch_dim = 96
 contra_dim = 128
 gap = 6
 jitter = 6
 
-saveinterval = 2
-num_epochs = 50
+saveinterval = 1
+num_epochs = 200
+fine_epochs = 40
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -153,16 +154,65 @@ loadstate(model_ft, fc_contra, opt.netCont, opt.contraCont, device, file)
 
 # Model trainer
 criterion = nn.CrossEntropyLoss()
-milestones = [50, 100, 150]
-milegamma = 0.2
+milestones = [50, 100, 150, 200]
+milegamma = 0.6
 
 print('Training ... {}\n'.format(opt.powerword))
 
 # 'rota' , 'patch' , 'jigpa' , 'jigro'
-model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
-    image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
-    opt.powerword, model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
-    criterion, opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
-    device, out_dir, file, saveinterval, 0, num_epochs
-)
+if opt.powerword == 'rota':
+    model_ft, fc_rota = SingleStep(
+        image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+        opt.powerword, model_ft, fc_rota, criterion, 
+        opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+        device, out_dir, file, saveinterval, 0, num_epochs, num_workers
+    )
+    model_ft, fc_plain = SingleStep(
+        image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+        opt.powerword, model_ft, fc_plain, criterion, 
+        opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+        device, out_dir, file, saveinterval, num_epochs, fine_epochs, num_workers
+    )
+
+elif opt.powerword == 'patch':
+    model_ft, fc_patch = SingleStep(
+        image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+        opt.powerword, model_ft, fc_patch, criterion, 
+        opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+        device, out_dir, file, saveinterval, 0, num_epochs, num_workers
+    )
+    model_ft, fc_plain = SingleStep(
+        image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+        opt.powerword, model_ft, fc_plain, criterion, 
+        opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+        device, out_dir, file, saveinterval, num_epochs, fine_epochs, num_workers
+    )
+
+elif opt.powerword == 'jigpa':
+    model_ft, fc_jigpa = SingleStep(
+        image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+        opt.powerword, model_ft, fc_jigpa, criterion, 
+        opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+        device, out_dir, file, saveinterval, 0, num_epochs, num_workers
+    )
+    model_ft, fc_plain = SingleStep(
+        image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+        opt.powerword, model_ft, fc_plain, criterion, 
+        opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+        device, out_dir, file, saveinterval, num_epochs, fine_epochs, num_workers
+    )
+
+elif opt.powerword == 'jigro':
+    model_ft, fc_jigro = SingleStep(
+        image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+        opt.powerword, model_ft, fc_jigro, criterion, 
+        opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+        device, out_dir, file, saveinterval, 0, num_epochs, num_workers
+    )
+    model_ft, fc_plain = SingleStep(
+        image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+        opt.powerword, model_ft, fc_plain, criterion, 
+        opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+        device, out_dir, file, saveinterval, num_epochs, fine_epochs, num_workers
+    )
 

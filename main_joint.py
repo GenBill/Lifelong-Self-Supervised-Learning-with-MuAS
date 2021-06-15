@@ -53,43 +53,43 @@ opt.manualSeed = 2077
 
 if opt.joint==0:
     if opt.pretrain==1:
-        out_dir = './Joint_{}/Wopre/models'.format(opt.batchsize)
-        log_out_dir = './Joint_{}/Wopre/Wopre'.format(opt.batchsize)
+        out_dir = '../Joint_{}/Wopre/models'.format(opt.batchsize)
+        log_out_dir = '../Joint_{}/Wopre/Wopre'.format(opt.batchsize)
     else :
-        out_dir = './Joint_{}/Wono/models'.format(opt.batchsize)
-        log_out_dir = './Joint_{}/Wono/Wono'.format(opt.batchsize)
+        out_dir = '../Joint_{}/Wono/models'.format(opt.batchsize)
+        log_out_dir = '../Joint_{}/Wono/Wono'.format(opt.batchsize)
 
 elif opt.joint==1:
     if opt.pretrain==1:
-        out_dir = './Joint_{}/Jopre/models'.format(opt.batchsize)
-        log_out_dir = './Joint_{}/Jopre/Jopre'.format(opt.batchsize)
+        out_dir = '../Joint_{}/Jopre/models'.format(opt.batchsize)
+        log_out_dir = '../Joint_{}/Jopre/Jopre'.format(opt.batchsize)
     else :
-        out_dir = './Joint_{}/Jono/models'.format(opt.batchsize)
-        log_out_dir = './Joint_{}/Jono/Jono'.format(opt.batchsize)
+        out_dir = '../Joint_{}/Jono/models'.format(opt.batchsize)
+        log_out_dir = '../Joint_{}/Jono/Jono'.format(opt.batchsize)
 
 elif opt.joint==2:
     if opt.pretrain==1:
-        out_dir = './Joint_{}/JoJopre/models'.format(opt.batchsize)
-        log_out_dir = './Joint_{}/JoJopre/JoJopre'.format(opt.batchsize)
+        out_dir = '../Joint_{}/JoJopre/models'.format(opt.batchsize)
+        log_out_dir = '../Joint_{}/JoJopre/JoJopre'.format(opt.batchsize)
     else :
-        out_dir = './Joint_{}/JoJono/models'.format(opt.batchsize)
-        log_out_dir = './Joint_{}/JoJono/JoJono'.format(opt.batchsize)
+        out_dir = '../Joint_{}/JoJono/models'.format(opt.batchsize)
+        log_out_dir = '../Joint_{}/JoJono/JoJono'.format(opt.batchsize)
 
 elif opt.joint==3:
     if opt.pretrain==1:
-        out_dir = './Joint_{}/JoJonepre/models'.format(opt.batchsize)
-        log_out_dir = './Joint_{}/JoJonepre/JoJonepre'.format(opt.batchsize)
+        out_dir = '../Joint_{}/JoJonepre/models'.format(opt.batchsize)
+        log_out_dir = '../Joint_{}/JoJonepre/JoJonepre'.format(opt.batchsize)
     else :
-        out_dir = './Joint_{}/JoJoneno/models'.format(opt.batchsize)
-        log_out_dir = './Joint_{}/JoJoneno/JoJoneno'.format(opt.batchsize)
+        out_dir = '../Joint_{}/JoJoneno/models'.format(opt.batchsize)
+        log_out_dir = '../Joint_{}/JoJoneno/JoJoneno'.format(opt.batchsize)
 
 else:
     if opt.pretrain==1:
-        out_dir = './Joint_{}/Onepre/models'.format(opt.batchsize)
-        log_out_dir = './Joint_{}/Onepre/Onepre'.format(opt.batchsize)
+        out_dir = '../Joint_{}/Onepre/models'.format(opt.batchsize)
+        log_out_dir = '../Joint_{}/Onepre/Onepre'.format(opt.batchsize)
     else :
-        out_dir = './Joint_{}/Oneno/models'.format(opt.batchsize)
-        log_out_dir = './Joint_{}/Oneno/Oneno'.format(opt.batchsize)
+        out_dir = '../Joint_{}/Oneno/models'.format(opt.batchsize)
+        log_out_dir = '../Joint_{}/Oneno/Oneno'.format(opt.batchsize)
         
 
 try:

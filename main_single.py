@@ -48,8 +48,14 @@ opt = parser.parse_args()
 opt.manualSeed = 2077
 # opt.netCont = './models/net_epoch_56.pth'
 
-out_dir = '../Single_{}/{}/models'.format(opt.batchsize, opt.powerword)
-log_out_dir = '../Single_{}/{}/{}'.format(opt.batchsize, opt.powerword, opt.powerword)
+dirname = opt.powerword.capitalize()
+if opt.pretrain == 1:
+    dirname = dirname + 'pre'
+else :
+    dirname = dirname + 'no'
+    
+out_dir = '../Single_{}/{}/models'.format(opt.batchsize, dirname)
+log_out_dir = '../Single_{}/{}/{}'.format(opt.batchsize, dirname, dirname)
 
 try:
     os.makedirs(out_dir)
@@ -80,7 +86,7 @@ saveinterval = 1
 num_epochs = 200
 fine_epochs = 40
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+os.environ['CUDA_VISIBLE_DEVICES'] = opt.cuda
 # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 # use_cuda = not args.no_cuda and torch.cuda.is_available()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

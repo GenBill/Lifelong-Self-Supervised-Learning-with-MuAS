@@ -53,11 +53,11 @@ opt.manualSeed = 2077
 
 if opt.joint==0:
     if opt.pretrain==1:
-        out_dir = './Joint/Wopre/models'
-        log_out_dir = './Joint/Wopre/Wopre'
+        out_dir = './Joint_{}/Wopre/models'.format(opt.batchsize)
+        log_out_dir = './Joint_{}/Wopre/Wopre'.format(opt.batchsize)
     else :
-        out_dir = './Joint/Wono/models'
-        log_out_dir = './Joint/Wono/Wono'
+        out_dir = './Joint_{}/Wono/models'.format(opt.batchsize)
+        log_out_dir = './Joint_{}/Wono/Wono'.format(opt.batchsize)
 
 elif opt.joint==1:
     if opt.pretrain==1:

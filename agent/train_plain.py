@@ -100,7 +100,7 @@ def plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size
     dataloaders = {
         x: torch.utils.data.DataLoader(
             image_datasets[x], batch_size=batch_size,
-            pin_memory=True, shuffle=True, num_workers= num_workers
+            pin_memory=True, shuffle=True, num_workers=num_workers
         ) for x in ['train', 'test']}
     # dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'test']}
     return dataloaders

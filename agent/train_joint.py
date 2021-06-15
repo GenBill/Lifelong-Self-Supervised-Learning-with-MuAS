@@ -144,7 +144,7 @@ def jointtrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
     fc_jigro.load_state_dict(best_jigro_wts)
     return model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro
 
-def jointloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size):
+def jointloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers):
 
     image_datasets = {
         x: JointDataset(x, data_root, patch_dim, gap, jitter, 
@@ -155,7 +155,7 @@ def jointloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_pos
     dataloaders = {
         x: torch.utils.data.DataLoader(
             image_datasets[x], batch_size=batch_size,
-            pin_memory=True, shuffle=True, num_workers=2
+            pin_memory=True, shuffle=True, num_workers=num_workers
         ) for x in ['train', 'test']}
     # dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'test']}
     return dataloaders

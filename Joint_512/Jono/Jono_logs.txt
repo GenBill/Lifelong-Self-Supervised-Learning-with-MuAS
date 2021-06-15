@@ -1,0 +1,1604 @@
+Random Seed: 2077 
+using cuda
+
+Epoch 0/0 
+----------
+train Loss: 1.0546 Top 1 Acc: 0.5697 
+test Loss: 0.6211 Top 1 Acc: 0.7668 
+Training complete in 0m 48s 
+Best test Acc: 0.766792 
+
+Epoch 1/1 
+----------
+train Loss: 1.3569 Top 1 Acc: 0.5028 
+test Loss: 0.9799 Top 1 Acc: 0.6498 
+Training complete in 0m 26s 
+Best test Acc: 0.649811 
+
+Epoch 2/2 
+----------
+train Loss: 1.3835 Top 1 Acc: 0.6055 
+test Loss: 0.8706 Top 1 Acc: 0.7532 
+Training complete in 0m 49s 
+Best test Acc: 0.753208 
+
+Epoch 3/3 
+----------
+train Loss: 3.5236 Top 1 Acc: 0.0406 
+test Loss: 3.1857 Top 1 Acc: 0.0400 
+Training complete in 0m 46s 
+Best test Acc: 0.040000 
+
+Epoch 4/4 
+----------
+train Loss: 1.2931 Top 1 Acc: 0.4355 
+test Loss: 0.9342 Top 1 Acc: 0.6558 
+Training complete in 0m 45s 
+Best test Acc: 0.655849 
+
+Epoch 5/5 
+----------
+train Loss: 1.3830 Top 1 Acc: 0.4864 
+test Loss: 1.0446 Top 1 Acc: 0.6211 
+Training complete in 0m 29s 
+Best test Acc: 0.621132 
+
+Epoch 6/6 
+----------
+train Loss: 1.0855 Top 1 Acc: 0.6835 
+test Loss: 0.7324 Top 1 Acc: 0.7638 
+Training complete in 0m 46s 
+Best test Acc: 0.763774 
+
+Epoch 7/7 
+----------
+train Loss: 3.0308 Top 1 Acc: 0.0713 
+test Loss: 2.6229 Top 1 Acc: 0.1396 
+Training complete in 0m 49s 
+Best test Acc: 0.139623 
+
+Epoch 8/8 
+----------
+train Loss: 0.7264 Top 1 Acc: 0.7243 
+test Loss: 0.5182 Top 1 Acc: 0.8068 
+Training complete in 0m 46s 
+Best test Acc: 0.806792 
+
+Epoch 9/9 
+----------
+train Loss: 1.0000 Top 1 Acc: 0.6346 
+test Loss: 0.7446 Top 1 Acc: 0.7328 
+Training complete in 0m 30s 
+Best test Acc: 0.732830 
+
+Epoch 10/10 
+----------
+train Loss: 0.8297 Top 1 Acc: 0.7562 
+test Loss: 0.5704 Top 1 Acc: 0.8294 
+Training complete in 0m 48s 
+Best test Acc: 0.829434 
+
+Epoch 11/11 
+----------
+train Loss: 2.4185 Top 1 Acc: 0.2116 
+test Loss: 1.9023 Top 1 Acc: 0.3668 
+Training complete in 0m 50s 
+Best test Acc: 0.366792 
+
+Epoch 12/12 
+----------
+train Loss: 0.5912 Top 1 Acc: 0.7789 
+test Loss: 0.3673 Top 1 Acc: 0.8702 
+Training complete in 0m 50s 
+Best test Acc: 0.870189 
+
+Epoch 13/13 
+----------
+train Loss: 0.8646 Top 1 Acc: 0.6861 
+test Loss: 0.6458 Top 1 Acc: 0.7668 
+Training complete in 0m 29s 
+Best test Acc: 0.766792 
+
+Epoch 14/14 
+----------
+train Loss: 0.6775 Top 1 Acc: 0.7956 
+test Loss: 0.4623 Top 1 Acc: 0.8566 
+Training complete in 0m 43s 
+Best test Acc: 0.856604 
+
+Epoch 15/15 
+----------
+train Loss: 1.5770 Top 1 Acc: 0.5251 
+test Loss: 1.0813 Top 1 Acc: 0.7125 
+Training complete in 0m 49s 
+Best test Acc: 0.712453 
+
+Epoch 16/16 
+----------
+train Loss: 0.5314 Top 1 Acc: 0.8031 
+test Loss: 0.2992 Top 1 Acc: 0.9042 
+Training complete in 0m 46s 
+Best test Acc: 0.904151 
+
+Epoch 17/17 
+----------
+train Loss: 0.7828 Top 1 Acc: 0.7157 
+test Loss: 0.5640 Top 1 Acc: 0.8015 
+Training complete in 0m 28s 
+Best test Acc: 0.801509 
+
+Epoch 18/18 
+----------
+train Loss: 0.5781 Top 1 Acc: 0.8227 
+test Loss: 0.4138 Top 1 Acc: 0.8672 
+Training complete in 0m 45s 
+Best test Acc: 0.867170 
+
+Epoch 19/19 
+----------
+train Loss: 1.1097 Top 1 Acc: 0.6944 
+test Loss: 0.8310 Top 1 Acc: 0.7789 
+Training complete in 0m 48s 
+Best test Acc: 0.778868 
+
+Epoch 20/20 
+----------
+train Loss: 0.4683 Top 1 Acc: 0.8267 
+test Loss: 0.2779 Top 1 Acc: 0.8996 
+Training complete in 0m 47s 
+Best test Acc: 0.899623 
+
+Epoch 21/21 
+----------
+train Loss: 0.7198 Top 1 Acc: 0.7351 
+test Loss: 0.5520 Top 1 Acc: 0.7917 
+Training complete in 0m 27s 
+Best test Acc: 0.791698 
+
+Epoch 22/22 
+----------
+train Loss: 0.5099 Top 1 Acc: 0.8426 
+test Loss: 0.3505 Top 1 Acc: 0.8906 
+Training complete in 0m 44s 
+Best test Acc: 0.890566 
+
+Epoch 23/23 
+----------
+train Loss: 0.9206 Top 1 Acc: 0.7432 
+test Loss: 0.7626 Top 1 Acc: 0.7887 
+Training complete in 0m 50s 
+Best test Acc: 0.788679 
+
+Epoch 24/24 
+----------
+train Loss: 0.4190 Top 1 Acc: 0.8487 
+test Loss: 0.2190 Top 1 Acc: 0.9253 
+Training complete in 0m 45s 
+Best test Acc: 0.925283 
+
+Epoch 25/25 
+----------
+train Loss: 0.6591 Top 1 Acc: 0.7595 
+test Loss: 0.4815 Top 1 Acc: 0.8264 
+Training complete in 0m 27s 
+Best test Acc: 0.826415 
+
+Epoch 26/26 
+----------
+train Loss: 0.4616 Top 1 Acc: 0.8573 
+test Loss: 0.3567 Top 1 Acc: 0.8853 
+Training complete in 0m 41s 
+Best test Acc: 0.885283 
+
+Epoch 27/27 
+----------
+train Loss: 0.8146 Top 1 Acc: 0.7675 
+test Loss: 0.5971 Top 1 Acc: 0.8196 
+Training complete in 0m 44s 
+Best test Acc: 0.819623 
+
+Epoch 28/28 
+----------
+train Loss: 0.3797 Top 1 Acc: 0.8620 
+test Loss: 0.1958 Top 1 Acc: 0.9374 
+Training complete in 0m 44s 
+Best test Acc: 0.937358 
+
+Epoch 29/29 
+----------
+train Loss: 0.6292 Top 1 Acc: 0.7708 
+test Loss: 0.4484 Top 1 Acc: 0.8317 
+Training complete in 0m 26s 
+Best test Acc: 0.831698 
+
+Epoch 30/30 
+----------
+train Loss: 0.4253 Top 1 Acc: 0.8666 
+test Loss: 0.2877 Top 1 Acc: 0.9011 
+Training complete in 0m 42s 
+Best test Acc: 0.901132 
+
+Epoch 31/31 
+----------
+train Loss: 0.7341 Top 1 Acc: 0.7852 
+test Loss: 0.5352 Top 1 Acc: 0.8445 
+Training complete in 0m 42s 
+Best test Acc: 0.844528 
+
+Epoch 32/32 
+----------
+train Loss: 0.3402 Top 1 Acc: 0.8752 
+test Loss: 0.1828 Top 1 Acc: 0.9434 
+Training complete in 0m 44s 
+Best test Acc: 0.943396 
+
+Epoch 33/33 
+----------
+train Loss: 0.5843 Top 1 Acc: 0.7858 
+test Loss: 0.4167 Top 1 Acc: 0.8475 
+Training complete in 0m 30s 
+Best test Acc: 0.847547 
+
+Epoch 34/34 
+----------
+train Loss: 0.3737 Top 1 Acc: 0.8807 
+test Loss: 0.2512 Top 1 Acc: 0.9215 
+Training complete in 0m 44s 
+Best test Acc: 0.921509 
+
+Epoch 35/35 
+----------
+train Loss: 0.6660 Top 1 Acc: 0.7997 
+test Loss: 0.5123 Top 1 Acc: 0.8415 
+Training complete in 0m 48s 
+Best test Acc: 0.841509 
+
+Epoch 36/36 
+----------
+train Loss: 0.3111 Top 1 Acc: 0.8871 
+test Loss: 0.2368 Top 1 Acc: 0.9147 
+Training complete in 0m 45s 
+Best test Acc: 0.914717 
+
+Epoch 37/37 
+----------
+train Loss: 0.5546 Top 1 Acc: 0.7977 
+test Loss: 0.4263 Top 1 Acc: 0.8400 
+Training complete in 0m 31s 
+Best test Acc: 0.840000 
+
+Epoch 38/38 
+----------
+train Loss: 0.3455 Top 1 Acc: 0.8875 
+test Loss: 0.2398 Top 1 Acc: 0.9215 
+Training complete in 0m 43s 
+Best test Acc: 0.921509 
+
+Epoch 39/39 
+----------
+train Loss: 0.6186 Top 1 Acc: 0.8121 
+test Loss: 0.4661 Top 1 Acc: 0.8566 
+Training complete in 0m 47s 
+Best test Acc: 0.856604 
+
+Epoch 40/40 
+----------
+train Loss: 0.2800 Top 1 Acc: 0.8991 
+test Loss: 0.1743 Top 1 Acc: 0.9419 
+Training complete in 0m 43s 
+Best test Acc: 0.941887 
+
+Epoch 41/41 
+----------
+train Loss: 0.5219 Top 1 Acc: 0.8094 
+test Loss: 0.3763 Top 1 Acc: 0.8762 
+Training complete in 0m 26s 
+Best test Acc: 0.876226 
+
+Epoch 42/42 
+----------
+train Loss: 0.3252 Top 1 Acc: 0.8965 
+test Loss: 0.2228 Top 1 Acc: 0.9366 
+Training complete in 0m 40s 
+Best test Acc: 0.936604 
+
+Epoch 43/43 
+----------
+train Loss: 0.5888 Top 1 Acc: 0.8193 
+test Loss: 0.4556 Top 1 Acc: 0.8574 
+Training complete in 0m 47s 
+Best test Acc: 0.857358 
+
+Epoch 44/44 
+----------
+train Loss: 0.2616 Top 1 Acc: 0.9055 
+test Loss: 0.1920 Top 1 Acc: 0.9374 
+Training complete in 0m 46s 
+Best test Acc: 0.937358 
+
+Epoch 45/45 
+----------
+train Loss: 0.4984 Top 1 Acc: 0.8173 
+test Loss: 0.4028 Top 1 Acc: 0.8506 
+Training complete in 0m 29s 
+Best test Acc: 0.850566 
+
+Epoch 46/46 
+----------
+train Loss: 0.3009 Top 1 Acc: 0.9049 
+test Loss: 0.1724 Top 1 Acc: 0.9374 
+Training complete in 0m 40s 
+Best test Acc: 0.937358 
+
+Epoch 47/47 
+----------
+train Loss: 0.5476 Top 1 Acc: 0.8313 
+test Loss: 0.3973 Top 1 Acc: 0.8634 
+Training complete in 0m 43s 
+Best test Acc: 0.863396 
+
+Epoch 48/48 
+----------
+train Loss: 0.2397 Top 1 Acc: 0.9139 
+test Loss: 0.1319 Top 1 Acc: 0.9525 
+Training complete in 0m 43s 
+Best test Acc: 0.952453 
+
+Epoch 49/49 
+----------
+train Loss: 0.4819 Top 1 Acc: 0.8253 
+test Loss: 0.3643 Top 1 Acc: 0.8657 
+Training complete in 0m 28s 
+Best test Acc: 0.865660 
+
+Epoch 50/50 
+----------
+train Loss: 0.2799 Top 1 Acc: 0.9111 
+test Loss: 0.1921 Top 1 Acc: 0.9464 
+Training complete in 0m 45s 
+Best test Acc: 0.946415 
+
+Epoch 51/51 
+----------
+train Loss: 0.5281 Top 1 Acc: 0.8345 
+test Loss: 0.4313 Top 1 Acc: 0.8619 
+Training complete in 0m 52s 
+Best test Acc: 0.861887 
+
+Epoch 52/52 
+----------
+train Loss: 0.2262 Top 1 Acc: 0.9200 
+test Loss: 0.1199 Top 1 Acc: 0.9562 
+Training complete in 0m 42s 
+Best test Acc: 0.956226 
+
+Epoch 53/53 
+----------
+train Loss: 0.4662 Top 1 Acc: 0.8301 
+test Loss: 0.3336 Top 1 Acc: 0.8792 
+Training complete in 0m 35s 
+Best test Acc: 0.879245 
+
+Epoch 54/54 
+----------
+train Loss: 0.2552 Top 1 Acc: 0.9181 
+test Loss: 0.1986 Top 1 Acc: 0.9411 
+Training complete in 0m 45s 
+Best test Acc: 0.941132 
+
+Epoch 55/55 
+----------
+train Loss: 0.5029 Top 1 Acc: 0.8420 
+test Loss: 0.3226 Top 1 Acc: 0.8913 
+Training complete in 0m 54s 
+Best test Acc: 0.891321 
+
+Epoch 56/56 
+----------
+train Loss: 0.2114 Top 1 Acc: 0.9242 
+test Loss: 0.1275 Top 1 Acc: 0.9577 
+Training complete in 0m 46s 
+Best test Acc: 0.957736 
+
+Epoch 57/57 
+----------
+train Loss: 0.4395 Top 1 Acc: 0.8398 
+test Loss: 0.2989 Top 1 Acc: 0.9004 
+Training complete in 0m 33s 
+Best test Acc: 0.900377 
+
+Epoch 58/58 
+----------
+train Loss: 0.2341 Top 1 Acc: 0.9246 
+test Loss: 0.1641 Top 1 Acc: 0.9487 
+Training complete in 0m 40s 
+Best test Acc: 0.948679 
+
+Epoch 59/59 
+----------
+train Loss: 0.4883 Top 1 Acc: 0.8469 
+test Loss: 0.3111 Top 1 Acc: 0.8966 
+Training complete in 0m 47s 
+Best test Acc: 0.896604 
+
+Epoch 60/60 
+----------
+train Loss: 0.2004 Top 1 Acc: 0.9280 
+test Loss: 0.1113 Top 1 Acc: 0.9600 
+Training complete in 0m 43s 
+Best test Acc: 0.960000 
+
+Epoch 61/61 
+----------
+train Loss: 0.4292 Top 1 Acc: 0.8439 
+test Loss: 0.3268 Top 1 Acc: 0.8974 
+Training complete in 0m 29s 
+Best test Acc: 0.897358 
+
+Epoch 62/62 
+----------
+train Loss: 0.2160 Top 1 Acc: 0.9289 
+test Loss: 0.1668 Top 1 Acc: 0.9464 
+Training complete in 0m 40s 
+Best test Acc: 0.946415 
+
+Epoch 63/63 
+----------
+train Loss: 0.4574 Top 1 Acc: 0.8567 
+test Loss: 0.3542 Top 1 Acc: 0.8838 
+Training complete in 0m 51s 
+Best test Acc: 0.883774 
+
+Epoch 64/64 
+----------
+train Loss: 0.1888 Top 1 Acc: 0.9323 
+test Loss: 0.1432 Top 1 Acc: 0.9555 
+Training complete in 0m 45s 
+Best test Acc: 0.955472 
+
+Epoch 65/65 
+----------
+train Loss: 0.4120 Top 1 Acc: 0.8505 
+test Loss: 0.3217 Top 1 Acc: 0.8936 
+Training complete in 0m 30s 
+Best test Acc: 0.893585 
+
+Epoch 66/66 
+----------
+train Loss: 0.2122 Top 1 Acc: 0.9304 
+test Loss: 0.1446 Top 1 Acc: 0.9509 
+Training complete in 0m 46s 
+Best test Acc: 0.950943 
+
+Epoch 67/67 
+----------
+train Loss: 0.4420 Top 1 Acc: 0.8616 
+test Loss: 0.2765 Top 1 Acc: 0.9079 
+Training complete in 0m 50s 
+Best test Acc: 0.907925 
+
+Epoch 68/68 
+----------
+train Loss: 0.1824 Top 1 Acc: 0.9347 
+test Loss: 0.1032 Top 1 Acc: 0.9653 
+Training complete in 0m 46s 
+Best test Acc: 0.965283 
+
+Epoch 69/69 
+----------
+train Loss: 0.3993 Top 1 Acc: 0.8562 
+test Loss: 0.3285 Top 1 Acc: 0.8747 
+Training complete in 0m 27s 
+Best test Acc: 0.874717 
+
+Epoch 70/70 
+----------
+train Loss: 0.1897 Top 1 Acc: 0.9390 
+test Loss: 0.1442 Top 1 Acc: 0.9540 
+Training complete in 0m 45s 
+Best test Acc: 0.953962 
+
+Epoch 71/71 
+----------
+train Loss: 0.4133 Top 1 Acc: 0.8690 
+test Loss: 0.2778 Top 1 Acc: 0.8981 
+Training complete in 0m 53s 
+Best test Acc: 0.898113 
+
+Epoch 72/72 
+----------
+train Loss: 0.1697 Top 1 Acc: 0.9400 
+test Loss: 0.1201 Top 1 Acc: 0.9615 
+Training complete in 0m 45s 
+Best test Acc: 0.961509 
+
+Epoch 73/73 
+----------
+train Loss: 0.3895 Top 1 Acc: 0.8581 
+test Loss: 0.3066 Top 1 Acc: 0.8981 
+Training complete in 0m 36s 
+Best test Acc: 0.898113 
+
+Epoch 74/74 
+----------
+train Loss: 0.1776 Top 1 Acc: 0.9428 
+test Loss: 0.1306 Top 1 Acc: 0.9592 
+Training complete in 0m 40s 
+Best test Acc: 0.959245 
+
+Epoch 75/75 
+----------
+train Loss: 0.4162 Top 1 Acc: 0.8688 
+test Loss: 0.2737 Top 1 Acc: 0.9117 
+Training complete in 0m 41s 
+Best test Acc: 0.911698 
+
+Epoch 76/76 
+----------
+train Loss: 0.1633 Top 1 Acc: 0.9422 
+test Loss: 0.1170 Top 1 Acc: 0.9645 
+Training complete in 0m 42s 
+Best test Acc: 0.964528 
+
+Epoch 77/77 
+----------
+train Loss: 0.3826 Top 1 Acc: 0.8597 
+test Loss: 0.3011 Top 1 Acc: 0.8898 
+Training complete in 0m 28s 
+Best test Acc: 0.889811 
+
+Epoch 78/78 
+----------
+train Loss: 0.1664 Top 1 Acc: 0.9467 
+test Loss: 0.1079 Top 1 Acc: 0.9683 
+Training complete in 0m 40s 
+Best test Acc: 0.968302 
+
+Epoch 79/79 
+----------
+train Loss: 0.3831 Top 1 Acc: 0.8788 
+test Loss: 0.2810 Top 1 Acc: 0.9087 
+Training complete in 0m 47s 
+Best test Acc: 0.908679 
+
+Epoch 80/80 
+----------
+train Loss: 0.1551 Top 1 Acc: 0.9454 
+test Loss: 0.1176 Top 1 Acc: 0.9638 
+Training complete in 0m 44s 
+Best test Acc: 0.963774 
+
+Epoch 81/81 
+----------
+train Loss: 0.3639 Top 1 Acc: 0.8690 
+test Loss: 0.2776 Top 1 Acc: 0.8981 
+Training complete in 0m 26s 
+Best test Acc: 0.898113 
+
+Epoch 82/82 
+----------
+train Loss: 0.1581 Top 1 Acc: 0.9499 
+test Loss: 0.1264 Top 1 Acc: 0.9615 
+Training complete in 0m 48s 
+Best test Acc: 0.961509 
+
+Epoch 83/83 
+----------
+train Loss: 0.3698 Top 1 Acc: 0.8822 
+test Loss: 0.2540 Top 1 Acc: 0.9245 
+Training complete in 0m 41s 
+Best test Acc: 0.924528 
+
+Epoch 84/84 
+----------
+train Loss: 0.1522 Top 1 Acc: 0.9464 
+test Loss: 0.0933 Top 1 Acc: 0.9721 
+Training complete in 0m 41s 
+Best test Acc: 0.972075 
+
+Epoch 85/85 
+----------
+train Loss: 0.3567 Top 1 Acc: 0.8703 
+test Loss: 0.3006 Top 1 Acc: 0.8875 
+Training complete in 0m 26s 
+Best test Acc: 0.887547 
+
+Epoch 86/86 
+----------
+train Loss: 0.1528 Top 1 Acc: 0.9506 
+test Loss: 0.1214 Top 1 Acc: 0.9660 
+Training complete in 0m 40s 
+Best test Acc: 0.966038 
+
+Epoch 87/87 
+----------
+train Loss: 0.3613 Top 1 Acc: 0.8843 
+test Loss: 0.2623 Top 1 Acc: 0.9064 
+Training complete in 0m 46s 
+Best test Acc: 0.906415 
+
+Epoch 88/88 
+----------
+train Loss: 0.1461 Top 1 Acc: 0.9489 
+test Loss: 0.0789 Top 1 Acc: 0.9675 
+Training complete in 0m 45s 
+Best test Acc: 0.967547 
+
+Epoch 89/89 
+----------
+train Loss: 0.3442 Top 1 Acc: 0.8757 
+test Loss: 0.2500 Top 1 Acc: 0.9072 
+Training complete in 0m 29s 
+Best test Acc: 0.907170 
+
+Epoch 90/90 
+----------
+train Loss: 0.1449 Top 1 Acc: 0.9530 
+test Loss: 0.0962 Top 1 Acc: 0.9668 
+Training complete in 0m 46s 
+Best test Acc: 0.966792 
+
+Epoch 91/91 
+----------
+train Loss: 0.3467 Top 1 Acc: 0.8900 
+test Loss: 0.2382 Top 1 Acc: 0.9260 
+Training complete in 0m 55s 
+Best test Acc: 0.926038 
+
+Epoch 92/92 
+----------
+train Loss: 0.1386 Top 1 Acc: 0.9516 
+test Loss: 0.0890 Top 1 Acc: 0.9721 
+Training complete in 0m 44s 
+Best test Acc: 0.972075 
+
+Epoch 93/93 
+----------
+train Loss: 0.3351 Top 1 Acc: 0.8800 
+test Loss: 0.2691 Top 1 Acc: 0.9034 
+Training complete in 0m 27s 
+Best test Acc: 0.903396 
+
+Epoch 94/94 
+----------
+train Loss: 0.1337 Top 1 Acc: 0.9564 
+test Loss: 0.0788 Top 1 Acc: 0.9743 
+Training complete in 0m 45s 
+Best test Acc: 0.974340 
+
+Epoch 95/95 
+----------
+train Loss: 0.3346 Top 1 Acc: 0.8938 
+test Loss: 0.2427 Top 1 Acc: 0.9253 
+Training complete in 0m 49s 
+Best test Acc: 0.925283 
+
+Epoch 96/96 
+----------
+train Loss: 0.1319 Top 1 Acc: 0.9534 
+test Loss: 0.0789 Top 1 Acc: 0.9736 
+Training complete in 0m 41s 
+Best test Acc: 0.973585 
+
+Epoch 97/97 
+----------
+train Loss: 0.3287 Top 1 Acc: 0.8789 
+test Loss: 0.2286 Top 1 Acc: 0.9192 
+Training complete in 0m 28s 
+Best test Acc: 0.919245 
+
+Epoch 98/98 
+----------
+train Loss: 0.1273 Top 1 Acc: 0.9587 
+test Loss: 0.1103 Top 1 Acc: 0.9668 
+Training complete in 0m 39s 
+Best test Acc: 0.966792 
+
+Epoch 99/99 
+----------
+train Loss: 0.3244 Top 1 Acc: 0.8982 
+test Loss: 0.2346 Top 1 Acc: 0.9336 
+Training complete in 0m 46s 
+Best test Acc: 0.933585 
+
+Epoch 100/100 
+----------
+train Loss: 0.1264 Top 1 Acc: 0.9561 
+test Loss: 0.1165 Top 1 Acc: 0.9570 
+Training complete in 0m 40s 
+Best test Acc: 0.956981 
+
+Epoch 101/101 
+----------
+train Loss: 0.3200 Top 1 Acc: 0.8836 
+test Loss: 0.2653 Top 1 Acc: 0.8981 
+Training complete in 0m 27s 
+Best test Acc: 0.898113 
+
+Epoch 102/102 
+----------
+train Loss: 0.1214 Top 1 Acc: 0.9599 
+test Loss: 0.0844 Top 1 Acc: 0.9766 
+Training complete in 0m 41s 
+Best test Acc: 0.976604 
+
+Epoch 103/103 
+----------
+train Loss: 0.3167 Top 1 Acc: 0.8997 
+test Loss: 0.1949 Top 1 Acc: 0.9306 
+Training complete in 0m 47s 
+Best test Acc: 0.930566 
+
+Epoch 104/104 
+----------
+train Loss: 0.1222 Top 1 Acc: 0.9566 
+test Loss: 0.0760 Top 1 Acc: 0.9751 
+Training complete in 0m 41s 
+Best test Acc: 0.975094 
+
+Epoch 105/105 
+----------
+train Loss: 0.3163 Top 1 Acc: 0.8849 
+test Loss: 0.2426 Top 1 Acc: 0.9223 
+Training complete in 0m 32s 
+Best test Acc: 0.922264 
+
+Epoch 106/106 
+----------
+train Loss: 0.1152 Top 1 Acc: 0.9625 
+test Loss: 0.0826 Top 1 Acc: 0.9713 
+Training complete in 0m 45s 
+Best test Acc: 0.971321 
+
+Epoch 107/107 
+----------
+train Loss: 0.3123 Top 1 Acc: 0.9001 
+test Loss: 0.2115 Top 1 Acc: 0.9260 
+Training complete in 0m 47s 
+Best test Acc: 0.926038 
+
+Epoch 108/108 
+----------
+train Loss: 0.1171 Top 1 Acc: 0.9590 
+test Loss: 0.0839 Top 1 Acc: 0.9713 
+Training complete in 0m 45s 
+Best test Acc: 0.971321 
+
+Epoch 109/109 
+----------
+train Loss: 0.3071 Top 1 Acc: 0.8892 
+test Loss: 0.2548 Top 1 Acc: 0.9072 
+Training complete in 0m 29s 
+Best test Acc: 0.907170 
+
+Epoch 110/110 
+----------
+train Loss: 0.1109 Top 1 Acc: 0.9645 
+test Loss: 0.0895 Top 1 Acc: 0.9736 
+Training complete in 0m 42s 
+Best test Acc: 0.973585 
+
+Epoch 111/111 
+----------
+train Loss: 0.2999 Top 1 Acc: 0.9059 
+test Loss: 0.2055 Top 1 Acc: 0.9343 
+Training complete in 0m 47s 
+Best test Acc: 0.934340 
+
+Epoch 112/112 
+----------
+train Loss: 0.1178 Top 1 Acc: 0.9589 
+test Loss: 0.0778 Top 1 Acc: 0.9713 
+Training complete in 0m 41s 
+Best test Acc: 0.971321 
+
+Epoch 113/113 
+----------
+train Loss: 0.3025 Top 1 Acc: 0.8897 
+test Loss: 0.2231 Top 1 Acc: 0.9208 
+Training complete in 0m 32s 
+Best test Acc: 0.920755 
+
+Epoch 114/114 
+----------
+train Loss: 0.1011 Top 1 Acc: 0.9665 
+test Loss: 0.0738 Top 1 Acc: 0.9781 
+Training complete in 0m 43s 
+Best test Acc: 0.978113 
+
+Epoch 115/115 
+----------
+train Loss: 0.2899 Top 1 Acc: 0.9073 
+test Loss: 0.2298 Top 1 Acc: 0.9313 
+Training complete in 0m 50s 
+Best test Acc: 0.931321 
+
+Epoch 116/116 
+----------
+train Loss: 0.1116 Top 1 Acc: 0.9602 
+test Loss: 0.0774 Top 1 Acc: 0.9675 
+Training complete in 0m 40s 
+Best test Acc: 0.967547 
+
+Epoch 117/117 
+----------
+train Loss: 0.2987 Top 1 Acc: 0.8933 
+test Loss: 0.2415 Top 1 Acc: 0.9185 
+Training complete in 0m 27s 
+Best test Acc: 0.918491 
+
+Epoch 118/118 
+----------
+train Loss: 0.0993 Top 1 Acc: 0.9678 
+test Loss: 0.0831 Top 1 Acc: 0.9706 
+Training complete in 0m 47s 
+Best test Acc: 0.970566 
+
+Epoch 119/119 
+----------
+train Loss: 0.2782 Top 1 Acc: 0.9116 
+test Loss: 0.1880 Top 1 Acc: 0.9374 
+Training complete in 0m 53s 
+Best test Acc: 0.937358 
+
+Epoch 120/120 
+----------
+train Loss: 0.1054 Top 1 Acc: 0.9632 
+test Loss: 0.0934 Top 1 Acc: 0.9623 
+Training complete in 0m 40s 
+Best test Acc: 0.962264 
+
+Epoch 121/121 
+----------
+train Loss: 0.2831 Top 1 Acc: 0.8967 
+test Loss: 0.2296 Top 1 Acc: 0.9223 
+Training complete in 0m 31s 
+Best test Acc: 0.922264 
+
+Epoch 122/122 
+----------
+train Loss: 0.0988 Top 1 Acc: 0.9684 
+test Loss: 0.0734 Top 1 Acc: 0.9774 
+Training complete in 0m 46s 
+Best test Acc: 0.977358 
+
+Epoch 123/123 
+----------
+train Loss: 0.2653 Top 1 Acc: 0.9159 
+test Loss: 0.1749 Top 1 Acc: 0.9411 
+Training complete in 0m 51s 
+Best test Acc: 0.941132 
+
+Epoch 124/124 
+----------
+train Loss: 0.1007 Top 1 Acc: 0.9643 
+test Loss: 0.0718 Top 1 Acc: 0.9736 
+Training complete in 0m 40s 
+Best test Acc: 0.973585 
+
+Epoch 125/125 
+----------
+train Loss: 0.2817 Top 1 Acc: 0.8981 
+test Loss: 0.2035 Top 1 Acc: 0.9321 
+Training complete in 0m 27s 
+Best test Acc: 0.932075 
+
+Epoch 126/126 
+----------
+train Loss: 0.0961 Top 1 Acc: 0.9682 
+test Loss: 0.0626 Top 1 Acc: 0.9811 
+Training complete in 0m 43s 
+Best test Acc: 0.981132 
+
+Epoch 127/127 
+----------
+train Loss: 0.2634 Top 1 Acc: 0.9164 
+test Loss: 0.1599 Top 1 Acc: 0.9502 
+Training complete in 0m 43s 
+Best test Acc: 0.950189 
+
+Epoch 128/128 
+----------
+train Loss: 0.1011 Top 1 Acc: 0.9636 
+test Loss: 0.0771 Top 1 Acc: 0.9751 
+Training complete in 0m 39s 
+Best test Acc: 0.975094 
+
+Epoch 129/129 
+----------
+train Loss: 0.2719 Top 1 Acc: 0.9003 
+test Loss: 0.2331 Top 1 Acc: 0.9125 
+Training complete in 0m 29s 
+Best test Acc: 0.912453 
+
+Epoch 130/130 
+----------
+train Loss: 0.0868 Top 1 Acc: 0.9713 
+test Loss: 0.0500 Top 1 Acc: 0.9804 
+Training complete in 0m 48s 
+Best test Acc: 0.980377 
+
+Epoch 131/131 
+----------
+train Loss: 0.2582 Top 1 Acc: 0.9179 
+test Loss: 0.1502 Top 1 Acc: 0.9502 
+Training complete in 0m 42s 
+Best test Acc: 0.950189 
+
+Epoch 132/132 
+----------
+train Loss: 0.1003 Top 1 Acc: 0.9655 
+test Loss: 0.0788 Top 1 Acc: 0.9774 
+Training complete in 0m 40s 
+Best test Acc: 0.977358 
+
+Epoch 133/133 
+----------
+train Loss: 0.2731 Top 1 Acc: 0.8992 
+test Loss: 0.2336 Top 1 Acc: 0.9185 
+Training complete in 0m 28s 
+Best test Acc: 0.918491 
+
+Epoch 134/134 
+----------
+train Loss: 0.0833 Top 1 Acc: 0.9715 
+test Loss: 0.1067 Top 1 Acc: 0.9675 
+Training complete in 0m 43s 
+Best test Acc: 0.967547 
+
+Epoch 135/135 
+----------
+train Loss: 0.2486 Top 1 Acc: 0.9215 
+test Loss: 0.1902 Top 1 Acc: 0.9396 
+Training complete in 0m 43s 
+Best test Acc: 0.939623 
+
+Epoch 136/136 
+----------
+train Loss: 0.0969 Top 1 Acc: 0.9651 
+test Loss: 0.0639 Top 1 Acc: 0.9758 
+Training complete in 0m 40s 
+Best test Acc: 0.975849 
+
+Epoch 137/137 
+----------
+train Loss: 0.2730 Top 1 Acc: 0.9011 
+test Loss: 0.2166 Top 1 Acc: 0.9200 
+Training complete in 0m 30s 
+Best test Acc: 0.920000 
+
+Epoch 138/138 
+----------
+train Loss: 0.0801 Top 1 Acc: 0.9730 
+test Loss: 0.0897 Top 1 Acc: 0.9743 
+Training complete in 0m 41s 
+Best test Acc: 0.974340 
+
+Epoch 139/139 
+----------
+train Loss: 0.2406 Top 1 Acc: 0.9228 
+test Loss: 0.1308 Top 1 Acc: 0.9585 
+Training complete in 0m 43s 
+Best test Acc: 0.958491 
+
+Epoch 140/140 
+----------
+train Loss: 0.0915 Top 1 Acc: 0.9686 
+test Loss: 0.0584 Top 1 Acc: 0.9804 
+Training complete in 0m 40s 
+Best test Acc: 0.980377 
+
+Epoch 141/141 
+----------
+train Loss: 0.2622 Top 1 Acc: 0.9051 
+test Loss: 0.2512 Top 1 Acc: 0.9125 
+Training complete in 0m 28s 
+Best test Acc: 0.912453 
+
+Epoch 142/142 
+----------
+train Loss: 0.0828 Top 1 Acc: 0.9728 
+test Loss: 0.0953 Top 1 Acc: 0.9668 
+Training complete in 0m 49s 
+Best test Acc: 0.966792 
+
+Epoch 143/143 
+----------
+train Loss: 0.2406 Top 1 Acc: 0.9235 
+test Loss: 0.1783 Top 1 Acc: 0.9449 
+Training complete in 0m 49s 
+Best test Acc: 0.944906 
+
+Epoch 144/144 
+----------
+train Loss: 0.0888 Top 1 Acc: 0.9698 
+test Loss: 0.0772 Top 1 Acc: 0.9736 
+Training complete in 0m 42s 
+Best test Acc: 0.973585 
+
+Epoch 145/145 
+----------
+train Loss: 0.2598 Top 1 Acc: 0.9059 
+test Loss: 0.2298 Top 1 Acc: 0.9200 
+Training complete in 0m 30s 
+Best test Acc: 0.920000 
+
+Epoch 146/146 
+----------
+train Loss: 0.0775 Top 1 Acc: 0.9740 
+test Loss: 0.0634 Top 1 Acc: 0.9796 
+Training complete in 0m 43s 
+Best test Acc: 0.979623 
+
+Epoch 147/147 
+----------
+train Loss: 0.2275 Top 1 Acc: 0.9283 
+test Loss: 0.1611 Top 1 Acc: 0.9525 
+Training complete in 0m 49s 
+Best test Acc: 0.952453 
+
+Epoch 148/148 
+----------
+train Loss: 0.0837 Top 1 Acc: 0.9706 
+test Loss: 0.0631 Top 1 Acc: 0.9758 
+Training complete in 0m 42s 
+Best test Acc: 0.975849 
+
+Epoch 149/149 
+----------
+train Loss: 0.2517 Top 1 Acc: 0.9083 
+test Loss: 0.2197 Top 1 Acc: 0.9170 
+Training complete in 0m 26s 
+Best test Acc: 0.916981 
+
+Epoch 150/150 
+----------
+train Loss: 0.0778 Top 1 Acc: 0.9743 
+test Loss: 0.0612 Top 1 Acc: 0.9811 
+Training complete in 0m 48s 
+Best test Acc: 0.981132 
+
+Epoch 151/151 
+----------
+train Loss: 0.2257 Top 1 Acc: 0.9288 
+test Loss: 0.1703 Top 1 Acc: 0.9449 
+Training complete in 0m 41s 
+Best test Acc: 0.944906 
+
+Epoch 152/152 
+----------
+train Loss: 0.0815 Top 1 Acc: 0.9706 
+test Loss: 0.0941 Top 1 Acc: 0.9713 
+Training complete in 0m 46s 
+Best test Acc: 0.971321 
+
+Epoch 153/153 
+----------
+train Loss: 0.2445 Top 1 Acc: 0.9108 
+test Loss: 0.1982 Top 1 Acc: 0.9268 
+Training complete in 0m 30s 
+Best test Acc: 0.926792 
+
+Epoch 154/154 
+----------
+train Loss: 0.0718 Top 1 Acc: 0.9762 
+test Loss: 0.0558 Top 1 Acc: 0.9811 
+Training complete in 0m 42s 
+Best test Acc: 0.981132 
+
+Epoch 155/155 
+----------
+train Loss: 0.2213 Top 1 Acc: 0.9288 
+test Loss: 0.1548 Top 1 Acc: 0.9472 
+Training complete in 0m 42s 
+Best test Acc: 0.947170 
+
+Epoch 156/156 
+----------
+train Loss: 0.0818 Top 1 Acc: 0.9711 
+test Loss: 0.0851 Top 1 Acc: 0.9683 
+Training complete in 0m 45s 
+Best test Acc: 0.968302 
+
+Epoch 157/157 
+----------
+train Loss: 0.2480 Top 1 Acc: 0.9086 
+test Loss: 0.2003 Top 1 Acc: 0.9291 
+Training complete in 0m 26s 
+Best test Acc: 0.929057 
+
+Epoch 158/158 
+----------
+train Loss: 0.0735 Top 1 Acc: 0.9750 
+test Loss: 0.0554 Top 1 Acc: 0.9811 
+Training complete in 0m 39s 
+Best test Acc: 0.981132 
+
+Epoch 159/159 
+----------
+train Loss: 0.2220 Top 1 Acc: 0.9300 
+test Loss: 0.1240 Top 1 Acc: 0.9577 
+Training complete in 0m 53s 
+Best test Acc: 0.957736 
+
+Epoch 160/160 
+----------
+train Loss: 0.0785 Top 1 Acc: 0.9727 
+test Loss: 0.0703 Top 1 Acc: 0.9774 
+Training complete in 0m 42s 
+Best test Acc: 0.977358 
+
+Epoch 161/161 
+----------
+train Loss: 0.2437 Top 1 Acc: 0.9116 
+test Loss: 0.2184 Top 1 Acc: 0.9177 
+Training complete in 0m 27s 
+Best test Acc: 0.917736 
+
+Epoch 162/162 
+----------
+train Loss: 0.0655 Top 1 Acc: 0.9785 
+test Loss: 0.0579 Top 1 Acc: 0.9796 
+Training complete in 0m 41s 
+Best test Acc: 0.979623 
+
+Epoch 163/163 
+----------
+train Loss: 0.2111 Top 1 Acc: 0.9335 
+test Loss: 0.1381 Top 1 Acc: 0.9547 
+Training complete in 0m 49s 
+Best test Acc: 0.954717 
+
+Epoch 164/164 
+----------
+train Loss: 0.0757 Top 1 Acc: 0.9742 
+test Loss: 0.0658 Top 1 Acc: 0.9804 
+Training complete in 0m 45s 
+Best test Acc: 0.980377 
+
+Epoch 165/165 
+----------
+train Loss: 0.2360 Top 1 Acc: 0.9129 
+test Loss: 0.1714 Top 1 Acc: 0.9366 
+Training complete in 0m 33s 
+Best test Acc: 0.936604 
+
+Epoch 166/166 
+----------
+train Loss: 0.0618 Top 1 Acc: 0.9794 
+test Loss: 0.0707 Top 1 Acc: 0.9774 
+Training complete in 0m 46s 
+Best test Acc: 0.977358 
+
+Epoch 167/167 
+----------
+train Loss: 0.2131 Top 1 Acc: 0.9324 
+test Loss: 0.1387 Top 1 Acc: 0.9577 
+Training complete in 0m 48s 
+Best test Acc: 0.957736 
+
+Epoch 168/168 
+----------
+train Loss: 0.0714 Top 1 Acc: 0.9756 
+test Loss: 0.0931 Top 1 Acc: 0.9721 
+Training complete in 0m 45s 
+Best test Acc: 0.972075 
+
+Epoch 169/169 
+----------
+train Loss: 0.2383 Top 1 Acc: 0.9141 
+test Loss: 0.1775 Top 1 Acc: 0.9343 
+Training complete in 0m 31s 
+Best test Acc: 0.934340 
+
+Epoch 170/170 
+----------
+train Loss: 0.0599 Top 1 Acc: 0.9801 
+test Loss: 0.0553 Top 1 Acc: 0.9819 
+Training complete in 0m 47s 
+Best test Acc: 0.981887 
+
+Epoch 171/171 
+----------
+train Loss: 0.2041 Top 1 Acc: 0.9350 
+test Loss: 0.1399 Top 1 Acc: 0.9547 
+Training complete in 0m 53s 
+Best test Acc: 0.954717 
+
+Epoch 172/172 
+----------
+train Loss: 0.0725 Top 1 Acc: 0.9747 
+test Loss: 0.0573 Top 1 Acc: 0.9774 
+Training complete in 0m 46s 
+Best test Acc: 0.977358 
+
+Epoch 173/173 
+----------
+train Loss: 0.2350 Top 1 Acc: 0.9153 
+test Loss: 0.2189 Top 1 Acc: 0.9215 
+Training complete in 0m 28s 
+Best test Acc: 0.921509 
+
+Epoch 174/174 
+----------
+train Loss: 0.0579 Top 1 Acc: 0.9818 
+test Loss: 0.0439 Top 1 Acc: 0.9842 
+Training complete in 0m 46s 
+Best test Acc: 0.984151 
+
+Epoch 175/175 
+----------
+train Loss: 0.2028 Top 1 Acc: 0.9370 
+test Loss: 0.1546 Top 1 Acc: 0.9479 
+Training complete in 0m 53s 
+Best test Acc: 0.947925 
+
+Epoch 176/176 
+----------
+train Loss: 0.0700 Top 1 Acc: 0.9754 
+test Loss: 0.0609 Top 1 Acc: 0.9811 
+Training complete in 0m 46s 
+Best test Acc: 0.981132 
+
+Epoch 177/177 
+----------
+train Loss: 0.2305 Top 1 Acc: 0.9151 
+test Loss: 0.1952 Top 1 Acc: 0.9358 
+Training complete in 0m 28s 
+Best test Acc: 0.935849 
+
+Epoch 178/178 
+----------
+train Loss: 0.0610 Top 1 Acc: 0.9792 
+test Loss: 0.0667 Top 1 Acc: 0.9789 
+Training complete in 0m 46s 
+Best test Acc: 0.978868 
+
+Epoch 179/179 
+----------
+train Loss: 0.1998 Top 1 Acc: 0.9368 
+test Loss: 0.1302 Top 1 Acc: 0.9570 
+Training complete in 0m 54s 
+Best test Acc: 0.956981 
+
+Epoch 180/180 
+----------
+train Loss: 0.0675 Top 1 Acc: 0.9764 
+test Loss: 0.0489 Top 1 Acc: 0.9804 
+Training complete in 0m 47s 
+Best test Acc: 0.980377 
+
+Epoch 181/181 
+----------
+train Loss: 0.2308 Top 1 Acc: 0.9160 
+test Loss: 0.2015 Top 1 Acc: 0.9291 
+Training complete in 0m 30s 
+Best test Acc: 0.929057 
+
+Epoch 182/182 
+----------
+train Loss: 0.0568 Top 1 Acc: 0.9813 
+test Loss: 0.0531 Top 1 Acc: 0.9826 
+Training complete in 0m 48s 
+Best test Acc: 0.982642 
+
+Epoch 183/183 
+----------
+train Loss: 0.1925 Top 1 Acc: 0.9395 
+test Loss: 0.1069 Top 1 Acc: 0.9623 
+Training complete in 0m 42s 
+Best test Acc: 0.962264 
+
+Epoch 184/184 
+----------
+train Loss: 0.0664 Top 1 Acc: 0.9772 
+test Loss: 0.0518 Top 1 Acc: 0.9834 
+Training complete in 0m 45s 
+Best test Acc: 0.983396 
+
+Epoch 185/185 
+----------
+train Loss: 0.2259 Top 1 Acc: 0.9190 
+test Loss: 0.1838 Top 1 Acc: 0.9306 
+Training complete in 0m 28s 
+Best test Acc: 0.930566 
+
+Epoch 186/186 
+----------
+train Loss: 0.0586 Top 1 Acc: 0.9807 
+test Loss: 0.0572 Top 1 Acc: 0.9826 
+Training complete in 0m 45s 
+Best test Acc: 0.982642 
+
+Epoch 187/187 
+----------
+train Loss: 0.1922 Top 1 Acc: 0.9393 
+test Loss: 0.1334 Top 1 Acc: 0.9547 
+Training complete in 0m 46s 
+Best test Acc: 0.954717 
+
+Epoch 188/188 
+----------
+train Loss: 0.0640 Top 1 Acc: 0.9777 
+test Loss: 0.0673 Top 1 Acc: 0.9743 
+Training complete in 0m 45s 
+Best test Acc: 0.974340 
+
+Epoch 189/189 
+----------
+train Loss: 0.2222 Top 1 Acc: 0.9202 
+test Loss: 0.1780 Top 1 Acc: 0.9396 
+Training complete in 0m 27s 
+Best test Acc: 0.939623 
+
+Epoch 190/190 
+----------
+train Loss: 0.0528 Top 1 Acc: 0.9820 
+test Loss: 0.0545 Top 1 Acc: 0.9834 
+Training complete in 0m 44s 
+Best test Acc: 0.983396 
+
+Epoch 191/191 
+----------
+train Loss: 0.1910 Top 1 Acc: 0.9388 
+test Loss: 0.1335 Top 1 Acc: 0.9585 
+Training complete in 0m 46s 
+Best test Acc: 0.958491 
+
+Epoch 192/192 
+----------
+train Loss: 0.0644 Top 1 Acc: 0.9775 
+test Loss: 0.0990 Top 1 Acc: 0.9638 
+Training complete in 0m 42s 
+Best test Acc: 0.963774 
+
+Epoch 193/193 
+----------
+train Loss: 0.2154 Top 1 Acc: 0.9211 
+test Loss: 0.1879 Top 1 Acc: 0.9321 
+Training complete in 0m 29s 
+Best test Acc: 0.932075 
+
+Epoch 194/194 
+----------
+train Loss: 0.0513 Top 1 Acc: 0.9824 
+test Loss: 0.0653 Top 1 Acc: 0.9842 
+Training complete in 0m 45s 
+Best test Acc: 0.984151 
+
+Epoch 195/195 
+----------
+train Loss: 0.1844 Top 1 Acc: 0.9407 
+test Loss: 0.1172 Top 1 Acc: 0.9585 
+Training complete in 0m 48s 
+Best test Acc: 0.958491 
+
+Epoch 196/196 
+----------
+train Loss: 0.0622 Top 1 Acc: 0.9785 
+test Loss: 0.0969 Top 1 Acc: 0.9675 
+Training complete in 0m 42s 
+Best test Acc: 0.967547 
+
+Epoch 197/197 
+----------
+train Loss: 0.2131 Top 1 Acc: 0.9221 
+test Loss: 0.1917 Top 1 Acc: 0.9291 
+Training complete in 0m 34s 
+Best test Acc: 0.929057 
+
+Epoch 198/198 
+----------
+train Loss: 0.0493 Top 1 Acc: 0.9840 
+test Loss: 0.0763 Top 1 Acc: 0.9774 
+Training complete in 0m 49s 
+Best test Acc: 0.977358 
+
+Epoch 199/199 
+----------
+train Loss: 0.1837 Top 1 Acc: 0.9411 
+test Loss: 0.1232 Top 1 Acc: 0.9630 
+Training complete in 0m 52s 
+Best test Acc: 0.963019 
+
+Epoch 200/239 
+----------
+train Loss: 4.3837 Top 1 Acc: 0.1349 
+test Loss: 3.6379 Top 1 Acc: 0.2483 
+
+Epoch 201/239 
+----------
+train Loss: 3.2619 Top 1 Acc: 0.3180 
+test Loss: 2.8614 Top 1 Acc: 0.3947 
+
+Epoch 202/239 
+----------
+train Loss: 2.6130 Top 1 Acc: 0.4466 
+test Loss: 2.1915 Top 1 Acc: 0.5215 
+
+Epoch 203/239 
+----------
+train Loss: 2.1314 Top 1 Acc: 0.5448 
+test Loss: 1.7527 Top 1 Acc: 0.6415 
+
+Epoch 204/239 
+----------
+train Loss: 1.7706 Top 1 Acc: 0.6204 
+test Loss: 1.5784 Top 1 Acc: 0.6423 
+
+Epoch 205/239 
+----------
+train Loss: 1.4847 Top 1 Acc: 0.6825 
+test Loss: 1.1674 Top 1 Acc: 0.7675 
+
+Epoch 206/239 
+----------
+train Loss: 1.2682 Top 1 Acc: 0.7262 
+test Loss: 0.9969 Top 1 Acc: 0.7804 
+
+Epoch 207/239 
+----------
+train Loss: 1.0878 Top 1 Acc: 0.7623 
+test Loss: 0.8835 Top 1 Acc: 0.8091 
+
+Epoch 208/239 
+----------
+train Loss: 0.9501 Top 1 Acc: 0.7946 
+test Loss: 0.7388 Top 1 Acc: 0.8264 
+
+Epoch 209/239 
+----------
+train Loss: 0.8344 Top 1 Acc: 0.8194 
+test Loss: 0.7084 Top 1 Acc: 0.8347 
+
+Epoch 210/239 
+----------
+train Loss: 0.7315 Top 1 Acc: 0.8420 
+test Loss: 0.5863 Top 1 Acc: 0.8800 
+
+Epoch 211/239 
+----------
+train Loss: 0.6508 Top 1 Acc: 0.8604 
+test Loss: 0.5774 Top 1 Acc: 0.8679 
+
+Epoch 212/239 
+----------
+train Loss: 0.5771 Top 1 Acc: 0.8764 
+test Loss: 0.4765 Top 1 Acc: 0.8913 
+
+Epoch 213/239 
+----------
+train Loss: 0.5115 Top 1 Acc: 0.8914 
+test Loss: 0.4734 Top 1 Acc: 0.8823 
+
+Epoch 214/239 
+----------
+train Loss: 0.4497 Top 1 Acc: 0.9091 
+test Loss: 0.4436 Top 1 Acc: 0.9034 
+
+Epoch 215/239 
+----------
+train Loss: 0.3946 Top 1 Acc: 0.9222 
+test Loss: 0.4158 Top 1 Acc: 0.8989 
+
+Epoch 216/239 
+----------
+train Loss: 0.3499 Top 1 Acc: 0.9322 
+test Loss: 0.3933 Top 1 Acc: 0.9094 
+
+Epoch 217/239 
+----------
+train Loss: 0.3006 Top 1 Acc: 0.9453 
+test Loss: 0.4132 Top 1 Acc: 0.9011 
+
+Epoch 218/239 
+----------
+train Loss: 0.2722 Top 1 Acc: 0.9519 
+test Loss: 0.3612 Top 1 Acc: 0.9125 
+
+Epoch 219/239 
+----------
+train Loss: 0.2339 Top 1 Acc: 0.9614 
+test Loss: 0.3442 Top 1 Acc: 0.9155 
+
+Epoch 220/239 
+----------
+train Loss: 0.2032 Top 1 Acc: 0.9697 
+test Loss: 0.2997 Top 1 Acc: 0.9283 
+
+Epoch 221/239 
+----------
+train Loss: 0.1723 Top 1 Acc: 0.9752 
+test Loss: 0.3103 Top 1 Acc: 0.9283 
+
+Epoch 222/239 
+----------
+train Loss: 0.1524 Top 1 Acc: 0.9807 
+test Loss: 0.3188 Top 1 Acc: 0.9208 
+
+Epoch 223/239 
+----------
+train Loss: 0.1254 Top 1 Acc: 0.9871 
+test Loss: 0.2546 Top 1 Acc: 0.9351 
+
+Epoch 224/239 
+----------
+train Loss: 0.1076 Top 1 Acc: 0.9902 
+test Loss: 0.2946 Top 1 Acc: 0.9223 
+
+Epoch 225/239 
+----------
+train Loss: 0.0935 Top 1 Acc: 0.9920 
+test Loss: 0.2662 Top 1 Acc: 0.9268 
+
+Epoch 226/239 
+----------
+train Loss: 0.0807 Top 1 Acc: 0.9942 
+test Loss: 0.2428 Top 1 Acc: 0.9381 
+
+Epoch 227/239 
+----------
+train Loss: 0.0681 Top 1 Acc: 0.9957 
+test Loss: 0.2501 Top 1 Acc: 0.9328 
+
+Epoch 228/239 
+----------
+train Loss: 0.0577 Top 1 Acc: 0.9970 
+test Loss: 0.2267 Top 1 Acc: 0.9374 
+
+Epoch 229/239 
+----------
+train Loss: 0.0496 Top 1 Acc: 0.9978 
+test Loss: 0.2273 Top 1 Acc: 0.9374 
+
+Epoch 230/239 
+----------
+train Loss: 0.0438 Top 1 Acc: 0.9983 
+test Loss: 0.2237 Top 1 Acc: 0.9404 
+
+Epoch 231/239 
+----------
+train Loss: 0.0363 Top 1 Acc: 0.9991 
+test Loss: 0.2170 Top 1 Acc: 0.9396 
+
+Epoch 232/239 
+----------
+train Loss: 0.0324 Top 1 Acc: 0.9990 
+test Loss: 0.1985 Top 1 Acc: 0.9472 
+
+Epoch 233/239 
+----------
+train Loss: 0.0284 Top 1 Acc: 0.9995 
+test Loss: 0.2062 Top 1 Acc: 0.9457 
+
+Epoch 234/239 
+----------
+train Loss: 0.0244 Top 1 Acc: 0.9994 
+test Loss: 0.1890 Top 1 Acc: 0.9494 
+
+Epoch 235/239 
+----------
+train Loss: 0.0230 Top 1 Acc: 0.9995 
+test Loss: 0.1972 Top 1 Acc: 0.9426 
+
+Epoch 236/239 
+----------
+train Loss: 0.0199 Top 1 Acc: 0.9996 
+test Loss: 0.1802 Top 1 Acc: 0.9517 
+
+Epoch 237/239 
+----------
+train Loss: 0.0176 Top 1 Acc: 0.9997 
+test Loss: 0.1875 Top 1 Acc: 0.9487 
+
+Epoch 238/239 
+----------
+train Loss: 0.0175 Top 1 Acc: 0.9994 
+test Loss: 0.2016 Top 1 Acc: 0.9487 
+
+Epoch 239/239 
+----------
+train Loss: 0.0154 Top 1 Acc: 0.9996 
+test Loss: 0.1815 Top 1 Acc: 0.9540 
+Training complete in 29m 4s 
+Best test Acc: 0.953962 

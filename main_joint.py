@@ -87,8 +87,8 @@ gap = 6
 jitter = 6
 
 saveinterval = 1
-num_epochs = 200
-fine_epochs = 40
+num_epochs = 1000
+fine_epochs = 200
 
 os.environ['CUDA_VISIBLE_DEVICES'] = opt.cuda
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -193,8 +193,8 @@ loadstate(model_ft, fc_contra, opt.netCont, opt.contraCont, device, file)
 
 # Model trainer
 criterion = nn.CrossEntropyLoss()
-milestones = [50, 100, 150, 200]
-milegamma = 0.6
+milestones = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+milegamma = 0.4
 optimizer_all = optim.Adam([
     {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
     {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},

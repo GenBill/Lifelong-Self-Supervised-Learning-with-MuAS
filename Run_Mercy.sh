@@ -8,8 +8,8 @@ python main_single.py --cuda '7' --batchsize 256 --numworkers 2 --pretrain 1 --p
 python main_single.py --cuda '0' --batchsize 256 --numworkers 2 --pretrain 0 --powerword 'jigpa' &
 python main_single.py --cuda '1' --batchsize 256 --numworkers 2 --pretrain 1 --powerword 'jigpa'
 
-python main_single.py --cuda '0' --batchsize 256 --numworkers 2 --pretrain 1 --powerword 'jigro' &
-python main_single.py --cuda '1' --batchsize 256 --numworkers 2 --pretrain 0 --powerword 'jigro'
+python main_single.py --cuda '0' --batchsize 256 --numworkers 2 --pretrain 0 --powerword 'jigro' &
+python main_single.py --cuda '1' --batchsize 256 --numworkers 2 --pretrain 1 --powerword 'jigro'
 
 
 # From bash Run_Joint.sh

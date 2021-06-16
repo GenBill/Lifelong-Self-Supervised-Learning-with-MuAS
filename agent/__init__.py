@@ -5,3 +5,5 @@ from .train_jigpa import *
 from .train_jigro import *
 from .train_contra import *
 from .train_joint import *
+
+from .train_step import *

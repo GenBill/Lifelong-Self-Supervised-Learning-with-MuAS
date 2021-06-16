@@ -1,4 +1,4 @@
-from agent.train_step import SingleStep
+from agent import SingleStep
 
 import torch
 import torch.nn as nn
@@ -83,8 +83,8 @@ gap = 6
 jitter = 6
 
 saveinterval = 1
-num_epochs = 200
-fine_epochs = 40
+num_epochs = 2#200
+fine_epochs = 2#40
 
 os.environ['CUDA_VISIBLE_DEVICES'] = opt.cuda
 # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -175,7 +175,7 @@ if opt.powerword == 'rota':
     )
     model_ft, fc_plain = SingleStep(
         image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
-        opt.powerword, model_ft, fc_plain, criterion, 
+        'plain', model_ft, fc_plain, criterion, 
         opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
         device, out_dir, file, saveinterval, num_epochs, fine_epochs, num_workers
     )
@@ -189,7 +189,7 @@ elif opt.powerword == 'patch':
     )
     model_ft, fc_plain = SingleStep(
         image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
-        opt.powerword, model_ft, fc_plain, criterion, 
+        'plain', model_ft, fc_plain, criterion, 
         opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
         device, out_dir, file, saveinterval, num_epochs, fine_epochs, num_workers
     )
@@ -203,7 +203,7 @@ elif opt.powerword == 'jigpa':
     )
     model_ft, fc_plain = SingleStep(
         image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
-        opt.powerword, model_ft, fc_plain, criterion, 
+        'plain', model_ft, fc_plain, criterion, 
         opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
         device, out_dir, file, saveinterval, num_epochs, fine_epochs, num_workers
     )
@@ -217,7 +217,7 @@ elif opt.powerword == 'jigro':
     )
     model_ft, fc_plain = SingleStep(
         image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
-        opt.powerword, model_ft, fc_plain, criterion, 
+        'plain', model_ft, fc_plain, criterion, 
         opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
         device, out_dir, file, saveinterval, num_epochs, fine_epochs, num_workers
     )

@@ -1,5 +1,5 @@
-from agent.train_step import LaStep
-from agent.train_step import JointStep
+from agent import LaStep
+from agent import JointStep
 from agent import *
 
 import torch

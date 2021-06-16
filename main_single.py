@@ -83,8 +83,8 @@ gap = 6
 jitter = 6
 
 saveinterval = 1
-num_epochs = 2#200
-fine_epochs = 2#40
+num_epochs = 200
+fine_epochs = 40
 
 os.environ['CUDA_VISIBLE_DEVICES'] = opt.cuda
 # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")

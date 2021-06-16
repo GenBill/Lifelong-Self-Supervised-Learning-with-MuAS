@@ -1,11 +1,4 @@
-from .train_plain import *
-from .train_rota import *
-from .train_patch import *
-from .train_jigpa import *
-from .train_jigro import *
-from .train_contra import *
-
-from .train_joint import *
+from .mission import *
 
 import torch.optim as optim
 from torch.optim import lr_scheduler

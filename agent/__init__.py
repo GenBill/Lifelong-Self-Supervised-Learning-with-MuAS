@@ -1,9 +1,10 @@
-from .train_plain import *
-from .train_rota import *
-from .train_patch import *
-from .train_jigpa import *
-from .train_jigro import *
-from .train_contra import *
-from .train_joint import *
+from mission.m_plain import *
+from mission.m_rota import *
+from mission.m_patch import *
+from mission.m_jigpa import *
+from mission.m_jigro import *
+from mission.m_contra import *
+
+from mission.train_joint import *
 
 from .train_step import *

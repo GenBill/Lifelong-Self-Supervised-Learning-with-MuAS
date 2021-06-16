@@ -1,4 +1,4 @@
-from .mydataset import PrimePatchDataset
+from .dataset import JigsawRotationDataset
 from tqdm import tqdm
 import torch
 import torch.nn.parallel
@@ -8,9 +8,9 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # General Code for supervised train
-def patchtrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, 
+def jigrotrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, 
     device, checkpoint_path, file, saveinterval=1, last_epochs=0, num_epochs=20):
-
+    
     since = time.time()
     best_acc = 0.0
 
@@ -35,9 +35,11 @@ def patchtrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
             n_samples = 0
 
             # Iterate over data.
-            for _, (input_0, input_1, labels) in enumerate(tqdm(dataloaders[phase])):
+            for _, (input_0, input_1, input_2, input_3, labels) in enumerate(tqdm(dataloaders[phase])):
                 input_0 = input_0.to(device)
                 input_1 = input_1.to(device)
+                input_2 = input_2.to(device)
+                input_3 = input_3.to(device)
                 labels = labels.to(device)
                 # zero the parameter gradients
                 optimizer.zero_grad()
@@ -50,8 +52,10 @@ def patchtrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
                 with torch.set_grad_enabled(phase == 'train'):
                     fea_output_0 = model(input_0)
                     fea_output_1 = model(input_1)
-                    outputs = fc_layer(torch.cat((fea_output_0, fea_output_1), dim=1))
-                    
+                    fea_output_2 = model(input_2)
+                    fea_output_3 = model(input_3)
+                    outputs = fc_layer(torch.cat((fea_output_0, fea_output_1, fea_output_2, fea_output_3), dim = 1))
+
                     loss = criterion(outputs, labels)
                     # backward + optimize only if in training phase
                     if phase == 'train':
@@ -93,10 +97,10 @@ def patchtrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
     fc_layer.load_state_dict(best_fc_wts)
     return model, fc_layer
 
-def patchloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers):
+def jigroloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers):
 
     image_datasets = {
-        x: PrimePatchDataset(x, data_root, patch_dim, gap, jitter, 
+        x: JigsawRotationDataset(x, data_root, patch_dim, jitter, 
         preTransform = data_pre_transforms[x], postTransform=data_post_transforms[x])
         for x in ['train', 'test']
     }

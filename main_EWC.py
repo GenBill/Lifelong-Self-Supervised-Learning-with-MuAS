@@ -1,5 +1,5 @@
-from agent.train_rota import *
-from agent.train_patch import *
+from agent.mission.train_rota import *
+from agent.mission.train_patch import *
 
 # Elastic Weight Consolidation
 import os

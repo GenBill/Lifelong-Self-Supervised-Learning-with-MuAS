@@ -1,4 +1,4 @@
-from .mydataset import JointDataset
+from .dataset import JointDataset
 from tqdm import tqdm
 import torch
 import torch.nn.parallel

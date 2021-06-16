@@ -1,4 +1,4 @@
-from .mydataset import PlainDataset
+from .dataset import PrimeRotationDataset
 
 import torch
 import torch.nn.parallel
@@ -9,9 +9,9 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # General Code for supervised train
-def plaintrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, 
+def rotatrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler, 
     device, checkpoint_path, file, saveinterval=1, last_epochs=0, num_epochs=20):
-    
+
     since = time.time()
     best_acc = 0.0
 
@@ -91,9 +91,9 @@ def plaintrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
     fc_layer.load_state_dict(best_fc_wts)
     return model, fc_layer
 
-def plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers):
+def rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers):
     image_datasets = {
-        x: PlainDataset(x, data_root, data_pre_transforms[x], data_post_transforms[x])
+        x: PrimeRotationDataset(x, data_root, data_pre_transforms[x], data_post_transforms[x])
         for x in ['train', 'test']
     }
     assert image_datasets

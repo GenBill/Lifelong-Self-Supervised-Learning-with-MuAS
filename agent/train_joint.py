@@ -105,9 +105,9 @@ def jointtrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
             # Metrics
             top_1_acc = running_corrects / n_samples
             epoch_loss = running_loss / n_samples
-            print('{} Loss: {:.4f} Top 1 Acc: {:.4f} \n'.format(phase, epoch_loss, top_1_acc))
+            print('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))
 
-            file.write('{} Loss: {:.4f} Top 1 Acc: {:.4f} \n'.format(phase, epoch_loss, top_1_acc))
+            file.write('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))
             file.flush()
 
             # deep copy the model

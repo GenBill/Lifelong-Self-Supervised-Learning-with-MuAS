@@ -814,6 +814,7 @@ class DJDataset(Dataset):
         return sample, plain_class
 
     def get_valid(self, index):
+        index = index % len(self.validataset)
         plain_img, plain_class = self.validataset[index]
         if self.postTransform:
             sample = self.postTransform(plain_img)

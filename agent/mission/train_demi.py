@@ -52,7 +52,6 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
             # Iterate over data.
             if phase=='train':
                 # Train Part
-                backup = copy.deepcopy(model_ft.state_dict())
                 for _, (iter_plain, iter_valid, iter_rota, iter_patch, iter_jigpa, iter_jigro) in enumerate(tqdm(loader_joint)):
                     inputs, labels = iter_plain
                     inputs, labels = inputs.to(device), labels.to(device)
@@ -72,13 +71,9 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     jigro_in_0, jigro_in_1, jigro_in_2, jigro_in_3, jigro_la = iter_jigro
                     jigro_in_0, jigro_in_1, jigro_in_2, jigro_in_3, jigro_la = jigro_in_0.to(device), jigro_in_1.to(device), jigro_in_2.to(device), jigro_in_3.to(device), jigro_la.to(device)
 
-                    # zero the parameter gradients
-                    optimizer_all.zero_grad()
-                    optimizer_0.zero_grad()
-                    optimizer_1.zero_grad()
-                    optimizer_2.zero_grad()
-                    optimizer_3.zero_grad()
-                    optimizer_4.zero_grad()
+                    # backup = copy.deepcopy(model_ft)
+                    backup = copy.deepcopy(model_ft.state_dict())
+
                     batchSize = labels.size(0)
                     n_samples += batchSize
 
@@ -93,6 +88,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     fc_rota.train()
                     outputs = fc_rota(model_ft(rota_in))
                     loss_1 = criterion(outputs, rota_la)
+                    optimizer_1.zero_grad()
                     loss_1.backward()
                     optimizer_1.step()
 
@@ -103,7 +99,8 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     
                     # rota return
                     weight[0] = loss_origin - loss_valid_1
-                    matcopy(model_ft, backup)
+                    # matcopy(model_ft, backup)
+                    model_ft.load_state_dict(backup)
 
                     # patch main
                     model_ft.train()
@@ -112,6 +109,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                         (model_ft(patch_in_0), model_ft(patch_in_1)), dim = 1
                     ))
                     loss_2 = criterion(outputs, patch_la)
+                    optimizer_2.zero_grad()
                     loss_2.backward()
                     optimizer_2.step()
 
@@ -122,7 +120,8 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     
                     # patch return
                     weight[1] = loss_origin - loss_valid_2
-                    matcopy(model_ft, backup)
+                    # matcopy(model_ft, backup)
+                    model_ft.load_state_dict(backup)
 
                     # jigpa main
                     model_ft.train()
@@ -131,6 +130,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                         (model_ft(jigpa_in_0), model_ft(jigpa_in_1), model_ft(jigpa_in_2), model_ft(jigpa_in_3)), dim = 1
                     ))
                     loss_3 = criterion(outputs, jigpa_la)
+                    optimizer_3.zero_grad()
                     loss_3.backward()
                     optimizer_3.step()
 
@@ -141,7 +141,8 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     
                     # jigpa return
                     weight[2] = loss_origin - loss_valid_3
-                    matcopy(model_ft, backup)
+                    # matcopy(model_ft, backup)
+                    model_ft.load_state_dict(backup)
 
                     # jigro main
                     model_ft.train()
@@ -150,6 +151,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                         (model_ft(jigro_in_0), model_ft(jigro_in_1), model_ft(jigro_in_2), model_ft(jigro_in_3)), dim = 1
                     ))
                     loss_4 = criterion(outputs, jigro_la)
+                    optimizer_4.zero_grad()
                     loss_4.backward()
                     optimizer_4.step()
 
@@ -160,7 +162,8 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     
                     # jigro return
                     weight[3] = loss_origin - loss_valid_4
-                    matcopy(model_ft, backup)
+                    # matcopy(model_ft, backup)
+                    model_ft.load_state_dict(backup)
 
                     # fine train
                     weight = torch.softmax(weight, 0)
@@ -183,6 +186,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     loss_4 = criterion(outputs, jigro_la)
 
                     loss_all = weight[0]*loss_1 + weight[1]*loss_2 + weight[2]*loss_3 + weight[3]*loss_4
+                    optimizer_all.zero_grad()
                     loss_all.backward()
                     optimizer_all.step()
 
@@ -191,6 +195,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     model_ft.eval()
                     outputs = fc_plain(model_ft(inputs))
                     loss_0 = criterion(outputs, labels)
+                    optimizer_0.zero_grad()
                     loss_0.backward()
                     optimizer_0.step()
 

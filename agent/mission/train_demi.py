@@ -22,7 +22,7 @@ def matcopy(this, source):
 
 # General Code for supervised train
 def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, 
-    loader_joint, loader_valid, 
+    loader_joint, loader_test, 
     # 警告：optimizer_all 不含 fc_plain
     # 警告：optimizer_0 仅优化 fc_plain
     optimizer_all, optimizer_0, optimizer_1, optimizer_2, optimizer_3, optimizer_4, 
@@ -31,6 +31,9 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
     
     since = time.time()
     best_acc = 0.0
+
+    # initial weight
+    weight = torch.zeros(4)
 
     for epoch in range(last_epochs, last_epochs+num_epochs):
         print('\nEpoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
@@ -50,9 +53,12 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
             if phase=='train':
                 # Train Part
                 backup = copy.deepcopy(model_ft.state_dict())
-                for _, (iter_plain, iter_rota, iter_patch, iter_jigpa, iter_jigro) in enumerate(tqdm(loader_joint['train'])):
+                for _, (iter_plain, iter_valid, iter_rota, iter_patch, iter_jigpa, iter_jigro) in enumerate(tqdm(loader_joint)):
                     inputs, labels = iter_plain
                     inputs, labels = inputs.to(device), labels.to(device)
+
+                    valid_inputs, valid_labels = iter_valid
+                    valid_inputs, valid_labels = valid_inputs.to(device), valid_labels.to(device)
 
                     rota_in, rota_la = iter_rota
                     rota_in, rota_la = rota_in.to(device), rota_la.to(device)
@@ -76,17 +82,11 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     batchSize = labels.size(0)
                     n_samples += batchSize
 
-                    # initial weight
-                    weight = torch.zeros(4)
-
                     # Calculate origin loss
                     model_ft.eval()
                     fc_plain.eval()
-                    for _, (valid_inputs, valid_labels) in enumerate(tqdm(loader_valid)):
-                        valid_inputs, valid_labels = valid_inputs.to(device), valid_labels.to(device)
-                        with torch.no_grad() :
-                            loss_origin = criterion(fc_plain(model_ft(valid_inputs)), valid_labels).item()
-                        break
+                    with torch.no_grad() :
+                        loss_origin = criterion(fc_plain(model_ft(valid_inputs)), valid_labels).item()
 
                     # rota main
                     model_ft.train()
@@ -212,8 +212,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                 # Test Part
                 model_ft.eval()  # Set model to evaluate mode
                 fc_plain.eval()
-                for _, (inputs, labels) in enumerate(tqdm(loader_joint['test'])):
-                    'test'
+                for _, (inputs, labels) in enumerate(tqdm(loader_test)):
                     inputs, labels = inputs.to(device), labels.to(device)
                     batchSize = labels.size(0)
                     n_samples += batchSize
@@ -241,6 +240,13 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     best_patch_wts = copy.deepcopy(fc_patch.state_dict())
                     best_jigpa_wts = copy.deepcopy(fc_jigpa.state_dict())
                     best_jigro_wts = copy.deepcopy(fc_jigro.state_dict())
+        
+        scheduler_all.step()
+        scheduler_0.step()
+        scheduler_1.step()
+        scheduler_2.step()
+        scheduler_3.step()
+        scheduler_4.step()
 
         if (epoch+1) % saveinterval == 0:
             torch.save(model_ft.state_dict(), '%s/model_epoch_%d.pth' % (checkpoint_path, epoch))

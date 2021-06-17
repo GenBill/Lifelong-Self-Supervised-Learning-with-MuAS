@@ -106,15 +106,21 @@ def plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size
     return dataloaders
 
 def validloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers):
-    image_datasets = {
-        x: PlainDataset(x, data_root, data_pre_transforms[x], data_post_transforms[x])
-        for x in ['valid']
-    }
+    image_datasets = PlainDataset('valid', data_root, data_pre_transforms['train'], data_post_transforms['train'])
     assert image_datasets
-    dataloaders = {
-        x: torch.utils.data.DataLoader(
-            image_datasets[x], batch_size=batch_size,
-            pin_memory=True, shuffle=True, num_workers=num_workers
-        ) for x in ['valid']}
-    # dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'test']}
+
+    dataloaders = torch.utils.data.DataLoader(
+        image_datasets, batch_size=batch_size,
+        pin_memory=True, shuffle=True, num_workers=num_workers
+    )
+    return dataloaders
+
+def testloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers):
+    image_datasets = PlainDataset('test', data_root, data_pre_transforms['test'], data_post_transforms['test'])
+    assert image_datasets
+
+    dataloaders = torch.utils.data.DataLoader(
+        image_datasets, batch_size=batch_size,
+        pin_memory=True, shuffle=True, num_workers=num_workers
+    )
     return dataloaders

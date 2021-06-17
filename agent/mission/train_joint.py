@@ -1,4 +1,6 @@
 from .dataset import JointDataset
+from .dataset import DJDataset
+
 from tqdm import tqdm
 import torch
 import torch.nn.parallel
@@ -160,3 +162,15 @@ def jointloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_pos
     # dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'test']}
     return dataloaders
 
+def DJloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers):
+    # Only Train !!!
+    image_datasets = DJDataset('train', data_root, patch_dim, gap, jitter, 
+        preTransform = data_pre_transforms['train'], postTransform=data_post_transforms['train'])
+
+    assert image_datasets
+    dataloaders = torch.utils.data.DataLoader(
+        image_datasets, batch_size=batch_size,
+        pin_memory=True, shuffle=True, num_workers=num_workers
+    )
+    # dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'test']}
+    return dataloaders

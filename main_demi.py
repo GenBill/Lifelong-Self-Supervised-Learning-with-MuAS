@@ -27,10 +27,13 @@ warnings.filterwarnings('ignore')
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--cuda', default='', help="cuda : ?")
-parser.add_argument('--powerword', default='rota', help="Power Word, decide what to do")
+# parser.add_argument('--powerword', default='rota', help="Power Word, decide what to do")
 
 parser.add_argument('--batchsize', type=int, default=512, help="set batch size")
 parser.add_argument('--numworkers', type=int, default=4, help="set num workers")
+parser.add_argument('--epochs_0', type=int, default=200, help="set num epochs")
+parser.add_argument('--epochs_1', type=int, default=40, help="set num epochs")
+
 parser.add_argument('--lr_net', type=float, default=1e-3, help='learning rate, default=0.001')
 parser.add_argument('--weight_net', type=float, default=1e-8, help="weight decay")
 parser.add_argument('--lr_fc', type=float, default=1e-3, help='learning rate, default=0.001')
@@ -45,7 +48,7 @@ parser.add_argument('--jigpaCont', default='', help="path to fc_layer jigro")
 parser.add_argument('--contraCont', default='', help="path to fc_layer jigro")
 # parser.add_argument('--manualSeed', type=int, help='manual seed')
 
-parser.add_argument('--joint', type=int, default=1, help="joint on")
+# parser.add_argument('--joint', type=int, default=1, help="joint on")
 parser.add_argument('--pretrain', type=int, default=1, help="pretrain on")
 
 # opt = parser.parse_args(args=[])
@@ -82,8 +85,8 @@ gap = 6
 jitter = 6
 
 saveinterval = 1
-num_epochs = 2
-fine_epochs = 2
+num_epochs = opt.epochs_0
+fine_epochs = opt.epochs_1
 
 os.environ['CUDA_VISIBLE_DEVICES'] = opt.cuda
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -111,15 +114,10 @@ data_post_transforms = {
     ]),
 }
 
-loader_plain = plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
-loader_valid = validloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+loader_joint = DJloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+loader_test = testloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
 
-loader_rota = rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
-loader_patch = patchloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
-loader_jigpa = jigpaloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
-loader_jigro = jigroloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
-loader_contra = contraloader(patch_dim, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
-loader_joint = jointloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+loader_plain = plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
 
 # Model Initialization
 # 仅支持 Res-Net !!!
@@ -245,7 +243,7 @@ scheduler_contra = lr_scheduler.MultiStepLR(optimizer_contra, milestones, milega
 
 model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = demitrain(
     model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, 
-    loader_joint, loader_valid, 
+    loader_joint, loader_test, 
     # 警告：optimizer_all 不含 fc_plain
     # 警告：optimizer_0 仅优化 fc_plain
     optimizer_all, optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, 

@@ -73,7 +73,6 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
 
                     # backup = copy.deepcopy(model_ft)
                     backup = copy.deepcopy(model_ft.state_dict())
-
                     batchSize = labels.size(0)
                     n_samples += batchSize
 
@@ -85,7 +84,6 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
 
                     # rota main
                     model_ft.train()
-                    fc_rota.train()
                     outputs = fc_rota(model_ft(rota_in))
                     loss_1 = criterion(outputs, rota_la)
                     optimizer_1.zero_grad()
@@ -104,7 +102,6 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
 
                     # patch main
                     model_ft.train()
-                    fc_patch.train()
                     outputs = fc_patch(torch.cat(
                         (model_ft(patch_in_0), model_ft(patch_in_1)), dim = 1
                     ))
@@ -125,7 +122,6 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
 
                     # jigpa main
                     model_ft.train()
-                    fc_jigpa.train()
                     outputs = fc_jigpa(torch.cat(
                         (model_ft(jigpa_in_0), model_ft(jigpa_in_1), model_ft(jigpa_in_2), model_ft(jigpa_in_3)), dim = 1
                     ))
@@ -146,7 +142,6 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
 
                     # jigro main
                     model_ft.train()
-                    fc_jigro.train()
                     outputs = fc_jigro(torch.cat(
                         (model_ft(jigro_in_0), model_ft(jigro_in_1), model_ft(jigro_in_2), model_ft(jigro_in_3)), dim = 1
                     ))
@@ -166,6 +161,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     model_ft.load_state_dict(backup)
 
                     # fine train
+                    model_ft.train()
                     weight = torch.softmax(weight, 0)
                     outputs = fc_rota(model_ft(rota_in))
                     loss_1 = criterion(outputs, rota_la)

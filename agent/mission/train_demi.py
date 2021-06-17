@@ -163,23 +163,19 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     # fine train
                     model_ft.train()
                     weight = torch.softmax(weight, 0)
-                    outputs = fc_rota(model_ft(rota_in))
-                    loss_1 = criterion(outputs, rota_la)
 
-                    outputs = fc_patch(torch.cat(
+                    loss_1 = criterion(fc_rota(model_ft(rota_in)), rota_la)
+                    loss_2 = criterion(fc_patch(torch.cat(
                         (model_ft(patch_in_0), model_ft(patch_in_1)), dim = 1
-                    ))
-                    loss_2 = criterion(outputs, patch_la)
+                    )), patch_la)
 
-                    outputs = fc_jigpa(torch.cat(
+                    loss_3 = criterion(fc_jigpa(torch.cat(
                         (model_ft(jigpa_in_0), model_ft(jigpa_in_1), model_ft(jigpa_in_2), model_ft(jigpa_in_3)), dim = 1
-                    ))
-                    loss_3 = criterion(outputs, jigpa_la)
+                    )), jigpa_la)
 
-                    outputs = fc_jigro(torch.cat(
+                    loss_4 = criterion(fc_jigro(torch.cat(
                         (model_ft(jigro_in_0), model_ft(jigro_in_1), model_ft(jigro_in_2), model_ft(jigro_in_3)), dim = 1
-                    ))
-                    loss_4 = criterion(outputs, jigro_la)
+                    )), jigro_la)
 
                     loss_all = weight[0]*loss_1 + weight[1]*loss_2 + weight[2]*loss_3 + weight[3]*loss_4
                     optimizer_all.zero_grad()

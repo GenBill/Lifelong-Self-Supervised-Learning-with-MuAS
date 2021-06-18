@@ -35,14 +35,18 @@ def contratrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
             n_samples = 0
 
             # Iterate over data.
-            for _, (input_0, input_1, labels) in enumerate(tqdm(dataloaders[phase])):
+            for _, (input_0, input_1, input_2) in enumerate(tqdm(dataloaders[phase])):
+                # 0 源，1 同类，2 负样本
                 input_0 = input_0.to(device)
                 input_1 = input_1.to(device)
-                labels = labels.to(device)
+                input_2 = input_2.to(device)
                 # zero the parameter gradients
                 optimizer.zero_grad()
-                batchSize = labels.size(0)
+                batchSize = input_0.size(0)
                 n_samples += batchSize
+
+                label_0 = torch.zeros(batchSize)
+                label_1 = torch.ones(batchSize)
 
                 # forward
                 # track history if only in train
@@ -50,9 +54,12 @@ def contratrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
                 with torch.set_grad_enabled(phase == 'train'):
                     fea_output_0 = model(input_0)
                     fea_output_1 = model(input_1)
-                    outputs = fc_layer(torch.cat((fea_output_0, fea_output_1), dim=1))
-                    
-                    loss = criterion(outputs, labels)
+                    fea_output_2 = model(input_2)
+
+                    outputs_0 = fc_layer(torch.cat((fea_output_0, fea_output_1), dim=1))
+                    outputs_1 = fc_layer(torch.cat((fea_output_0, fea_output_2), dim=1))
+                    loss = criterion(outputs_0, label_0) + criterion(outputs_1, label_1)
+
                     # backward + optimize only if in training phase
                     if phase == 'train':
                         loss.backward()
@@ -60,15 +67,14 @@ def contratrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
                         scheduler.step()
 
                 # statistics
-                running_loss += loss.item() * labels.size(0)
-                pred_top_1 = torch.topk(outputs, k=1, dim=1)[1]
-                running_corrects += pred_top_1.eq(labels.view_as(pred_top_1)).int().sum().item()
+                running_loss += loss.item() * input_0.size(0)
+                running_corrects += (outputs_0[:,0]>0.5).int().sum().item()
+                running_corrects += (outputs_1[:,1]>0.5).int().sum().item()
 
             # Metrics
             top_1_acc = running_corrects / n_samples
             epoch_loss = running_loss / n_samples
             print('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))
-
             file.write('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))
             file.flush()
 

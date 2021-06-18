@@ -140,7 +140,6 @@ class PrimePatchDataset(Dataset):
 
     def __getitem__(self, index):
         # [y, x, chan], dtype=uint8, top_left is (0,0)
-        patch_loc_arr = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
         # image_index = int(math.floor((len(self.dataset) * random.random())))
         # pil_image = Image.open(self.image_paths[image_index]).convert('RGB')
         # pil_image = datasets.ImageFolder(self.image_paths, self.preTransform)
@@ -150,16 +149,19 @@ class PrimePatchDataset(Dataset):
         if image.shape[1] <= self.min_width or image.shape[0] <= self.min_width:
             return self.__getitem__(index)
         
-        patch_direction_label = int(math.floor((8 * random.random())))
-        patch_jitter_y = int(math.floor((self.jitter * 2 * random.random()))) - self.jitter
-        patch_jitter_x = int(math.floor((self.jitter * 2 * random.random()))) - self.jitter
-                
+        patch_direction_label = random.randint(0, 7)
+        # int(math.floor((8 * random.random())))
+        patch_jitter_y = random.randint(0, self.jitter*2-1) - self.jitter
+        patch_jitter_x = random.randint(0, self.jitter*2-1) - self.jitter
+        # int(math.floor((self.jitter * 2 * random.random())))
+        
+        patch_loc_arr = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
         while True:
-                
-            uniform_patch_x_coord = int(math.floor((image.shape[0] - self.margin*2) * random.random())) + self.margin - int(round(self.patch_dim/2.0))
-            uniform_patch_y_coord = int(math.floor((image.shape[1] - self.margin*2) * random.random())) + self.margin - int(round(self.patch_dim/2.0))
-            random_patch_y_coord = uniform_patch_x_coord + patch_loc_arr[patch_direction_label][0] * (self.patch_dim + self.gap) + patch_jitter_y
-            random_patch_x_coord = uniform_patch_y_coord + patch_loc_arr[patch_direction_label][1] * (self.patch_dim + self.gap) + patch_jitter_x
+            # int(math.floor((image.shape[1] - self.margin*2) * random.random()))
+            uniform_patch_x_coord = random.randint(0, image.shape[0] - self.margin*2 - 1) + self.margin - int(round(self.patch_dim/2.0))
+            uniform_patch_y_coord = random.randint(0, image.shape[1] - self.margin*2 - 1) + self.margin - int(round(self.patch_dim/2.0))
+            random_patch_x_coord = uniform_patch_x_coord + patch_loc_arr[patch_direction_label][0] * (self.patch_dim + self.gap) + patch_jitter_x
+            random_patch_y_coord = uniform_patch_y_coord + patch_loc_arr[patch_direction_label][1] * (self.patch_dim + self.gap) + patch_jitter_y
 
             if random_patch_y_coord>=0 and random_patch_x_coord>=0 and random_patch_y_coord+self.patch_dim<image.shape[0] and random_patch_x_coord+self.patch_dim<image.shape[1]:
                 break
@@ -169,8 +171,8 @@ class PrimePatchDataset(Dataset):
             uniform_patch_y_coord : uniform_patch_y_coord + self.patch_dim
         ]                
         random_patch = image[
-            random_patch_y_coord : random_patch_y_coord + self.patch_dim, 
-            random_patch_x_coord : random_patch_x_coord + self.patch_dim
+            random_patch_x_coord : random_patch_x_coord + self.patch_dim, 
+            random_patch_y_coord : random_patch_y_coord + self.patch_dim
         ]
         # 非必要模块：随机图片抖动
         # self.prep_patch(uniform_patch)
@@ -211,7 +213,7 @@ class JigsawPatchDataset(Dataset):
         return math.ceil(self.gap/2)
 
     def random_jitter(self):
-        return int(math.floor((self.jitter * 2 * random.random()))) - self.jitter
+        return random.randint(0, self.jitter*2-1) - self.jitter
 
     def random_shift(self):
         return random.randrange(self.color_shift * 2 + 1)
@@ -247,8 +249,8 @@ class JigsawPatchDataset(Dataset):
         if image.shape[0] <= self.min_width or image.shape[1] <= self.min_width:
                 return self.__getitem__(index)
         
-        center_y_coord = int(math.floor((image.shape[0] - self.margin*2) * random.random())) + self.margin
-        center_x_coord = int(math.floor((image.shape[1] - self.margin*2) * random.random())) + self.margin
+        center_y_coord = random.randint(0, image.shape[0] - self.margin*2 - 1) + self.margin
+        center_x_coord = random.randint(0, image.shape[1] - self.margin*2 - 1) + self.margin
         patch_coords = [
             (
                 center_y_coord - (self.patch_dim + self.half_gap() + self.random_jitter() + self.color_shift),
@@ -268,7 +270,7 @@ class JigsawPatchDataset(Dataset):
             )
         ]
         
-        patch_shuffle_order_label = int(math.floor((24 * random.random())))
+        patch_shuffle_order_label = random.randint(0, 23)
         patch_coords = [pc for _,pc in sorted(zip(patch_order_arr[patch_shuffle_order_label],patch_coords))]
 
         patch_a = image[patch_coords[0][0]:patch_coords[0][0]+self.patch_dim+2*self.color_shift, patch_coords[0][1]:patch_coords[0][1]+self.patch_dim+2*self.color_shift]
@@ -318,7 +320,7 @@ class JigsawRotationDataset(Dataset):
         return len(self.dataset)
 
     def random_jitter(self):
-        return int(math.floor((self.jitter * 2 * random.random())))
+        return random.randint(0, self.jitter*2-1)
 
     def random_shift(self):
         return random.randrange(self.color_shift * 2 + 1)
@@ -362,12 +364,12 @@ class JigsawRotationDataset(Dataset):
         img_PIL, _ = self.dataset[index]
         image = np.array(img_PIL)
 
-        window_y_coord = int(math.floor((image.shape[0] - self.window_width) * random.random()))
-        window_x_coord = int(math.floor((image.shape[1] - self.window_width) * random.random()))
+        window_y_coord = random.randint(0, image.shape[0] - self.window_width - 1)
+        window_x_coord = random.randint(0, image.shape[1] - self.window_width - 1)
         window = image[window_y_coord:window_y_coord+self.window_width, window_x_coord:window_x_coord+self.window_width]
         
-        rotation_label = int(math.floor((4 * random.random())))
-        order_label = int(math.floor((24 * random.random()))) 
+        rotation_label = random.randint(0, 3)
+        order_label = random.randint(0, 23)
         
         if rotation_label>0:
             window = np.rot90(window, rotation_label).copy()
@@ -421,33 +423,93 @@ class ContrastiveDataset(Dataset):
     def __len__(self):
         return len(self.dataset)
     
-    def prep_patch(self, image):
+    def patch_enhance(self, image):
+        case = random.random()
+        cropped = np.empty((self.patch_dim, self.patch_dim, 3), dtype=np.uint8)
 
-        # for some patches, randomly downsample to as little as 100 total pixels
-        # 说是要下采样，结果放大后又缩小？迷惑行为
-        # 可能可以添加抖动
-        if(random.random() < .33):
+        if case < 0.25 :
             pil_patch = Image.fromarray(image)
-            original_size = pil_patch.size
-            randpix = int(math.sqrt(random.random() * (95 * 95 - 10 * 10) + 10 * 10))
-            pil_patch = pil_patch.resize((randpix, randpix)) 
-            pil_patch = pil_patch.resize(original_size) 
-            np.copyto(image, np.array(pil_patch))
+            pil_patch = pil_patch.convert('L')
+            pil_patch = pil_patch.convert('RGB')
+            np.copyto(cropped, np.array(pil_patch)[
+                self.color_shift:self.color_shift+self.patch_dim, 
+                self.color_shift:self.color_shift+self.patch_dim, 
+                :])
+        elif case < 0.50 :
+            shift = [random.randint(-4, 4) for _ in range(6)]
+            cropped[:,:,0] = image[shift[0]:shift[0]+self.patch_dim, shift[1]:shift[1]+self.patch_dim, 0]
+            cropped[:,:,1] = image[shift[2]:shift[2]+self.patch_dim, shift[3]:shift[3]+self.patch_dim, 1]
+            cropped[:,:,2] = image[shift[4]:shift[4]+self.patch_dim, shift[5]:shift[5]+self.patch_dim, 2]
+        elif case < 0.75 :
+            # pil_patch = Image.fromarray(image)
+            cropped = transforms.RandomRotation(12)(image)
+        else :
+            return image
+        
+        return cropped
 
     def __getitem__(self, index):
+        endex = random.randint(len(self.dataset))
+        while endex==index:
+            endex = random.randint(len(self.dataset))
+        
         img_PIL, _ = self.dataset[index]
         image = np.array(img_PIL)
+        
         # If image is too small, try another image
         if image.shape[1] <= self.min_width or image.shape[0] <= self.min_width:
             return self.__getitem__(index)
+        
+        img_PIL, _ = self.dataset[endex]
+        emage = np.array(img_PIL)
+        # If image is too small, try another image
+        while emage.shape[1] <= self.min_width or emage.shape[0] <= self.min_width:
+            endex = random.randint(len(self.dataset))
+            while endex==index:
+                endex = random.randint(len(self.dataset))
+            img_PIL, _ = self.dataset[endex]
+            emage = np.array(img_PIL)
+        
+        # 在2张图片里取出3个patch
+        patch_jitter_y = random.randint(-self.jitter, self.jitter-1)
+        patch_jitter_x = random.randint(-self.jitter, self.jitter-1)
+        
+        patch_loc_arr = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
+        patch_direction_label = random.randint(0, 7)
+        while True:
+            uniform_patch_x_coord = random.randint(self.margin, image.shape[0] - self.margin - 1) - int(round(self.patch_dim/2.0))
+            uniform_patch_y_coord = random.randint(self.margin, image.shape[1] - self.margin - 1) - int(round(self.patch_dim/2.0))
+            random_patch_x_coord = uniform_patch_x_coord + patch_loc_arr[patch_direction_label][0] * self.patch_dim + patch_jitter_x
+            random_patch_y_coord = uniform_patch_y_coord + patch_loc_arr[patch_direction_label][1] * self.patch_dim + patch_jitter_y
 
-        patch_direction_label = np.random.randint(2)
-                
+            if random_patch_y_coord>=0 and random_patch_x_coord>=0 and random_patch_y_coord+self.patch_dim<image.shape[0] and random_patch_x_coord+self.patch_dim<image.shape[1]:
+                break
+        
+        patch_0 = self.patch_enhance(image)[
+            uniform_patch_x_coord : uniform_patch_x_coord + self.patch_dim, 
+            uniform_patch_y_coord : uniform_patch_y_coord + self.patch_dim
+        ]
+
+        patch_1 = self.patch_enhance(image)[
+            random_patch_x_coord : random_patch_x_coord + self.patch_dim, 
+            random_patch_y_coord : random_patch_y_coord + self.patch_dim
+        ]
+        patch_2 = self.patch_enhance(emage)[
+            random_patch_x_coord : random_patch_x_coord + self.patch_dim, 
+            random_patch_y_coord : random_patch_y_coord + self.patch_dim
+        ]
+
+        # Patch Enhance
+        patch_0 = self.patch_enhance(patch_0)
+        patch_1 = self.patch_enhance(patch_1)
+        patch_2 = self.patch_enhance(patch_2)
+
         if self.postTransform:
-            uniform_patch = self.postTransform(image)
-            random_patch = self.postTransform(image)
+            patch_0 = self.postTransform(patch_0)
+            patch_1 = self.postTransform(patch_1)
+            patch_2 = self.postTransform(patch_2)
 
-        return uniform_patch, random_patch, patch_direction_label
+        return patch_0, patch_1, patch_2
 
 ### 警告：施工现场 ###
 class JointDataset(Dataset):
@@ -467,8 +529,6 @@ class JointDataset(Dataset):
         self.margin = math.ceil(self.patch_dim/2.0) + self.jitter
         self.min_width = 2*self.patch_dim + 2*self.jitter + 2*self.gap
 
-        self.gray_portion = 0.3
-        self.color_shift = 2
         self.jigmargin = math.ceil((2*patch_dim + 2*jitter + 2*self.color_shift + gap)/2)
         self.jigmin_width = 2 * self.margin + 1
 
@@ -487,10 +547,10 @@ class JointDataset(Dataset):
         return math.ceil(self.gap/2)
 
     def jigro_random_jitter(self):
-        return int(math.floor((self.jitter * 2 * random.random())))
+        return random.randint(0, self.jitter*2-1)
 
     def jigpa_random_jitter(self):
-        return int(math.floor((self.jitter * 2 * random.random()))) - self.jitter
+        return random.randint(0, self.jitter*2-1) - self.jitter
 
     def random_shift(self):
         return random.randrange(self.color_shift * 2 + 1)
@@ -573,14 +633,14 @@ class JointDataset(Dataset):
         if image.shape[1] <= self.min_width or image.shape[0] <= self.min_width:
             return self.__getitem__(index)
         
-        patch_direction_label = int(math.floor((8 * random.random())))
-        patch_jitter_y = int(math.floor((self.jitter * 2 * random.random()))) - self.jitter
-        patch_jitter_x = int(math.floor((self.jitter * 2 * random.random()))) - self.jitter
+        patch_direction_label = random.randint(0, 7)
+        patch_jitter_y = random.randint(0, self.jitter*2-1) - self.jitter
+        patch_jitter_x = random.randint(0, self.jitter*2-1) - self.jitter
                 
         while True:
                 
-            uniform_patch_x_coord = int(math.floor((image.shape[0] - self.margin*2) * random.random())) + self.margin - int(round(self.patch_dim/2.0))
-            uniform_patch_y_coord = int(math.floor((image.shape[1] - self.margin*2) * random.random())) + self.margin - int(round(self.patch_dim/2.0))
+            uniform_patch_x_coord = random.randint(0, image.shape[0] - self.margin*2 - 1) + self.margin - int(round(self.patch_dim/2.0))
+            uniform_patch_y_coord = random.randint(0, image.shape[1] - self.margin*2 - 1) + self.margin - int(round(self.patch_dim/2.0))
             random_patch_y_coord = uniform_patch_x_coord + patch_loc_arr[patch_direction_label][0] * (self.patch_dim + self.gap) + patch_jitter_y
             random_patch_x_coord = uniform_patch_y_coord + patch_loc_arr[patch_direction_label][1] * (self.patch_dim + self.gap) + patch_jitter_x
 
@@ -615,8 +675,8 @@ class JointDataset(Dataset):
         if image.shape[0] <= self.jigmin_width or image.shape[1] <= self.jigmin_width:
                 return self.__getitem__(index)
         
-        center_y_coord = int(math.floor((image.shape[0] - self.jigmargin*2) * random.random())) + self.jigmargin
-        center_x_coord = int(math.floor((image.shape[1] - self.jigmargin*2) * random.random())) + self.jigmargin
+        center_y_coord = random.randint(self.jigmargin, image.shape[0] - self.jigmargin - 1)
+        center_x_coord = random.randint(self.jigmargin, image.shape[1] - self.jigmargin - 1)
         patch_coords = [
             (
                 center_y_coord - (self.patch_dim + self.half_gap() + self.jigpa_random_jitter() + self.color_shift),
@@ -636,7 +696,7 @@ class JointDataset(Dataset):
             )
         ]
         
-        patch_shuffle_order_label = int(math.floor((24 * random.random())))
+        patch_shuffle_order_label = random.randint(0, 23)
         patch_coords = [pc for _,pc in sorted(zip(patch_order_arr[patch_shuffle_order_label],patch_coords))]
 
         patch_a = image[patch_coords[0][0]:patch_coords[0][0]+self.patch_dim+2*self.color_shift, patch_coords[0][1]:patch_coords[0][1]+self.patch_dim+2*self.color_shift]
@@ -664,12 +724,12 @@ class JointDataset(Dataset):
         img_PIL, _ = self.dataset[index]
         image = np.array(img_PIL)
 
-        window_y_coord = int(math.floor((image.shape[0] - self.window_width) * random.random()))
-        window_x_coord = int(math.floor((image.shape[1] - self.window_width) * random.random()))
+        window_y_coord = random.randint(0, image.shape[0] - self.window_width - 1)
+        window_x_coord = random.randint(0, image.shape[1] - self.window_width - 1)
         window = image[window_y_coord:window_y_coord+self.window_width, window_x_coord:window_x_coord+self.window_width]
         
-        rotation_label = int(math.floor((4 * random.random())))
-        order_label = int(math.floor((24 * random.random()))) 
+        rotation_label = random.randint(0, 3)
+        order_label = random.randint(0, 23)
         
         if rotation_label>0:
             window = np.rot90(window, rotation_label).copy()
@@ -747,10 +807,10 @@ class DJDataset(Dataset):
         return math.ceil(self.gap/2)
 
     def jigro_random_jitter(self):
-        return int(math.floor((self.jitter * 2 * random.random())))
+        return random.randint(0, self.jitter*2-1)
 
     def jigpa_random_jitter(self):
-        return int(math.floor((self.jitter * 2 * random.random()))) - self.jitter
+        return random.randint(0, self.jitter*2-1) - self.jitter
 
     def random_shift(self):
         return random.randrange(self.color_shift * 2 + 1)
@@ -842,14 +902,14 @@ class DJDataset(Dataset):
         if image.shape[1] <= self.min_width or image.shape[0] <= self.min_width:
             return self.__getitem__(index)
         
-        patch_direction_label = int(math.floor((8 * random.random())))
-        patch_jitter_y = int(math.floor((self.jitter * 2 * random.random()))) - self.jitter
-        patch_jitter_x = int(math.floor((self.jitter * 2 * random.random()))) - self.jitter
+        patch_direction_label = random.randint(0, 7)
+        patch_jitter_y = random.randint(0, self.jitter*2-1) - self.jitter
+        patch_jitter_x = random.randint(0, self.jitter*2-1) - self.jitter
                 
         while True:
                 
-            uniform_patch_x_coord = int(math.floor((image.shape[0] - self.margin*2) * random.random())) + self.margin - int(round(self.patch_dim/2.0))
-            uniform_patch_y_coord = int(math.floor((image.shape[1] - self.margin*2) * random.random())) + self.margin - int(round(self.patch_dim/2.0))
+            uniform_patch_x_coord = random.randint(0, image.shape[0] - self.margin*2 - 1) + self.margin - int(round(self.patch_dim/2.0))
+            uniform_patch_y_coord = random.randint(0, image.shape[1] - self.margin*2 - 1) + self.margin - int(round(self.patch_dim/2.0))
             random_patch_y_coord = uniform_patch_x_coord + patch_loc_arr[patch_direction_label][0] * (self.patch_dim + self.gap) + patch_jitter_y
             random_patch_x_coord = uniform_patch_y_coord + patch_loc_arr[patch_direction_label][1] * (self.patch_dim + self.gap) + patch_jitter_x
 
@@ -884,8 +944,8 @@ class DJDataset(Dataset):
         if image.shape[0] <= self.jigmin_width or image.shape[1] <= self.jigmin_width:
                 return self.__getitem__(index)
         
-        center_y_coord = int(math.floor((image.shape[0] - self.jigmargin*2) * random.random())) + self.jigmargin
-        center_x_coord = int(math.floor((image.shape[1] - self.jigmargin*2) * random.random())) + self.jigmargin
+        center_y_coord = random.randint(self.jigmargin, image.shape[0] - self.jigmargin - 1)
+        center_x_coord = random.randint(self.jigmargin, image.shape[1] - self.jigmargin - 1)
         patch_coords = [
             (
                 center_y_coord - (self.patch_dim + self.half_gap() + self.jigpa_random_jitter() + self.color_shift),
@@ -905,7 +965,7 @@ class DJDataset(Dataset):
             )
         ]
         
-        patch_shuffle_order_label = int(math.floor((24 * random.random())))
+        patch_shuffle_order_label = random.randint(0, 23)
         patch_coords = [pc for _,pc in sorted(zip(patch_order_arr[patch_shuffle_order_label],patch_coords))]
 
         patch_a = image[patch_coords[0][0]:patch_coords[0][0]+self.patch_dim+2*self.color_shift, patch_coords[0][1]:patch_coords[0][1]+self.patch_dim+2*self.color_shift]
@@ -933,12 +993,12 @@ class DJDataset(Dataset):
         img_PIL, _ = self.dataset[index]
         image = np.array(img_PIL)
 
-        window_y_coord = int(math.floor((image.shape[0] - self.window_width) * random.random()))
-        window_x_coord = int(math.floor((image.shape[1] - self.window_width) * random.random()))
+        window_y_coord = random.randint(0, image.shape[0] - self.window_width - 1)
+        window_x_coord = random.randint(0, image.shape[1] - self.window_width - 1)
         window = image[window_y_coord:window_y_coord+self.window_width, window_x_coord:window_x_coord+self.window_width]
         
-        rotation_label = int(math.floor((4 * random.random())))
-        order_label = int(math.floor((24 * random.random()))) 
+        rotation_label = random.randint(0, 3)
+        order_label = random.randint(0, 23)
         
         if rotation_label>0:
             window = np.rot90(window, rotation_label).copy()

@@ -51,6 +51,14 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
 
             # Iterate over data.
             if phase=='train':
+                # Set model to training mode
+                model_ft.train()
+                fc_plain.train()
+                fc_rota.train()
+                fc_patch.train()
+                fc_jigpa.train()
+                fc_jigro.train()
+                
                 # Train Part
                 for _, (iter_plain, iter_valid, iter_rota, iter_patch, iter_jigpa, iter_jigro) in enumerate(tqdm(loader_joint)):
                     inputs, labels = iter_plain

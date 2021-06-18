@@ -203,6 +203,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     optimizer_0.step()
 
                     # statistics
+                    # loss_ft.item() is float
                     joint_loss += loss_ft.item() * labels.size(0)
                     running_loss += loss_0.item() * labels.size(0)
                     pred_top_1 = torch.topk(outputs, k=1, dim=1)[1]

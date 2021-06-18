@@ -45,8 +45,8 @@ def contratrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
                 batchSize = input_0.size(0)
                 n_samples += batchSize
 
-                label_0 = torch.zeros(batchSize)
-                label_1 = torch.ones(batchSize)
+                label_0 = torch.zeros(batchSize, dtype=int, device=device)
+                label_1 = torch.ones(batchSize, dtype=int, device=device)
 
                 # forward
                 # track history if only in train
@@ -68,11 +68,13 @@ def contratrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
 
                 # statistics
                 running_loss += loss.item() * input_0.size(0)
-                running_corrects += (outputs_0[:,0]>0.5).int().sum().item()
-                running_corrects += (outputs_1[:,1]>0.5).int().sum().item()
+                pred_top = torch.topk(outputs_0, k=1, dim=1)[1]
+                running_corrects += pred_top.eq(label_0.view_as(pred_top)).int().sum().item()
+                pred_top = torch.topk(outputs_1, k=1, dim=1)[1]
+                running_corrects += pred_top.eq(label_1.view_as(pred_top)).int().sum().item()
 
             # Metrics
-            top_1_acc = running_corrects / n_samples
+            top_1_acc = running_corrects / n_samples / 2
             epoch_loss = running_loss / n_samples
             print('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))
             file.write('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))
@@ -99,10 +101,10 @@ def contratrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
     fc_layer.load_state_dict(best_fc_wts)
     return model, fc_layer
 
-def contraloader(patch_dim, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers):
+def contraloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers):
 
     image_datasets = {
-        x: ContrastiveDataset(x, data_root, patch_dim, 
+        x: ContrastiveDataset(x, data_root, patch_dim, jitter, 
         preTransform = data_pre_transforms[x], postTransform=data_post_transforms[x])
         for x in ['train', 'test']
     }

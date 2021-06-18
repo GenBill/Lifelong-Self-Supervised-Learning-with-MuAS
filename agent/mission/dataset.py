@@ -407,12 +407,13 @@ class JigsawRotationDataset(Dataset):
 ### 警告：施工现场 ###
 class ContrastiveDataset(Dataset):
     
-    def __init__(self, split, root_paths, patch_dim, preTransform=None, postTransform=None):
+    def __init__(self, split, root_paths, patch_dim, jitter, preTransform=None, postTransform=None):
         self.root_paths = root_paths
         self.image_paths = root_paths + '/' + split
 
         self.patch_dim = patch_dim
-
+        self.jitter = jitter
+        self.color_shift = 2
         self.margin = math.ceil(self.patch_dim/2.0)
         self.min_width = 2*self.patch_dim
 
@@ -424,6 +425,7 @@ class ContrastiveDataset(Dataset):
         return len(self.dataset)
     
     def patch_enhance(self, image):
+        return image
         case = random.random()
         cropped = np.empty((self.patch_dim, self.patch_dim, 3), dtype=np.uint8)
 
@@ -435,23 +437,27 @@ class ContrastiveDataset(Dataset):
                 self.color_shift:self.color_shift+self.patch_dim, 
                 self.color_shift:self.color_shift+self.patch_dim, 
                 :])
-        elif case < 0.50 :
-            shift = [random.randint(-4, 4) for _ in range(6)]
-            cropped[:,:,0] = image[shift[0]:shift[0]+self.patch_dim, shift[1]:shift[1]+self.patch_dim, 0]
-            cropped[:,:,1] = image[shift[2]:shift[2]+self.patch_dim, shift[3]:shift[3]+self.patch_dim, 1]
-            cropped[:,:,2] = image[shift[4]:shift[4]+self.patch_dim, shift[5]:shift[5]+self.patch_dim, 2]
-        elif case < 0.75 :
-            # pil_patch = Image.fromarray(image)
-            cropped = transforms.RandomRotation(12)(image)
-        else :
+        # elif case < 0.50 :
+        #     shift = [random.randint(-4, 4) for _ in range(6)]
+        #     cropped[:,:,0] = image[shift[0]:shift[0]+self.patch_dim, shift[1]:shift[1]+self.patch_dim, 0]
+        #     cropped[:,:,1] = image[shift[2]:shift[2]+self.patch_dim, shift[3]:shift[3]+self.patch_dim, 1]
+        #     cropped[:,:,2] = image[shift[4]:shift[4]+self.patch_dim, shift[5]:shift[5]+self.patch_dim, 2]
+        # elif case < 0.75 :
+        #     pil_patch = Image.fromarray(image)
+        #     pil_patch = transforms.RandomRotation(12)(pil_patch)
+        #     np.copyto(cropped, np.array(pil_patch)[
+        #         self.color_shift:self.color_shift+self.patch_dim, 
+        #         self.color_shift:self.color_shift+self.patch_dim, 
+        #         :])
+        # else :
             return image
         
         return cropped
 
     def __getitem__(self, index):
-        endex = random.randint(len(self.dataset))
+        endex = random.randint(0, len(self.dataset)-1)
         while endex==index:
-            endex = random.randint(len(self.dataset))
+            endex = random.randint(0, len(self.dataset)-1)
         
         img_PIL, _ = self.dataset[index]
         image = np.array(img_PIL)
@@ -464,9 +470,9 @@ class ContrastiveDataset(Dataset):
         emage = np.array(img_PIL)
         # If image is too small, try another image
         while emage.shape[1] <= self.min_width or emage.shape[0] <= self.min_width:
-            endex = random.randint(len(self.dataset))
+            endex = random.randint(0, len(self.dataset)-1)
             while endex==index:
-                endex = random.randint(len(self.dataset))
+                endex = random.randint(0, len(self.dataset)-1)
             img_PIL, _ = self.dataset[endex]
             emage = np.array(img_PIL)
         

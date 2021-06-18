@@ -78,7 +78,7 @@ batch_size = opt.batchsize      # 512, 256
 num_workers = opt.numworkers    # 4
 
 patch_dim = 96
-contra_dim = 128
+contra_dim = 96
 gap = 6
 jitter = 6
 
@@ -122,7 +122,7 @@ fc_jigpa = make_MLP(4*num_ftrs, 4*num_ftrs, output_ftrs=24, layers=4)
 ### 警告：类间距不同，不可粗暴计算损失，需要重写损失函数 ###
 fc_jigro = make_MLP(4*num_ftrs, 4*num_ftrs, output_ftrs=96, layers=8)   # output_ftrs=24
 # 对比学习部分
-fc_contra = make_MLP(2*num_ftrs, 2*num_ftrs, output_ftrs=1, layers=2)
+fc_contra = make_MLP(2*num_ftrs, 2*num_ftrs, output_ftrs=2, layers=2)
 
 if torch.cuda.device_count() > 1: 
     print("Let's use", torch.cuda.device_count(), "GPUs!")
@@ -132,6 +132,7 @@ if torch.cuda.device_count() > 1:
     fc_patch = nn.DataParallel(fc_patch)
     fc_jigpa = nn.DataParallel(fc_jigpa)
     fc_jigro = nn.DataParallel(fc_jigro)
+    fc_contra = nn.DataParallel(fc_contra)
 
 model_ft = model_ft.to(device)
 fc_plain = fc_plain.to(device)
@@ -139,6 +140,7 @@ fc_rota = fc_rota.to(device)
 fc_patch = fc_patch.to(device)
 fc_jigpa = fc_jigpa.to(device)
 fc_jigro = fc_jigro.to(device)
+fc_contra = fc_contra.to(device)
 
 # Load state : model & fc_layer
 def loadstate(model, fc_layer, net_Cont, fc_Cont, device, file):
@@ -222,3 +224,16 @@ elif opt.powerword == 'jigro':
         device, out_dir, file, saveinterval, num_epochs, fine_epochs, num_workers
     )
 
+elif opt.powerword == 'contra':
+    model_ft, fc_contra = SingleStep(
+        image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+        opt.powerword, model_ft, fc_contra, criterion, 
+        opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+        device, out_dir, file, saveinterval, 0, num_epochs, num_workers
+    )
+    model_ft, fc_plain = SingleStep(
+        image_size, data_root, batch_size, patch_dim, contra_dim, gap, jitter, 
+        'plain', model_ft, fc_plain, criterion, 
+        opt.lr_net, opt.weight_net, opt.lr_fc, opt.weight_fc, milestones, milegamma, 
+        device, out_dir, file, saveinterval, num_epochs, fine_epochs, num_workers
+    )

@@ -9,3 +9,6 @@ python ../main_single.py --cuda '1' --batchsize 256 --numworkers 2 --pretrain 1 
 
 python ../main_single.py --cuda '0' --batchsize 256 --numworkers 2 --pretrain 1 --powerword 'jigro' &
 python ../main_single.py --cuda '1' --batchsize 256 --numworkers 2 --pretrain 0 --powerword 'jigro'
+
+python ../main_single.py --cuda '0' --batchsize 256 --numworkers 2 --pretrain 1 --powerword 'contra' &
+python ../main_single.py --cuda '1' --batchsize 256 --numworkers 2 --pretrain 0 --powerword 'contra'

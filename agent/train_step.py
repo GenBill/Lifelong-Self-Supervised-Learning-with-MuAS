@@ -147,7 +147,7 @@ def SingleStep(
         )
 
     elif powerword=='contra':
-        loader_contra = contraloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+        loader_contra = contraloader(contra_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
         model_ft, fc_layer = contratrain(
             model_ft, fc_layer, 
             loader_contra, criterion, optimizer, scheduler, 

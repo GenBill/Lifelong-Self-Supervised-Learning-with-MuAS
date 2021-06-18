@@ -250,8 +250,14 @@ model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = demitrain(
     scheduler_all, scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, 
     criterion, device, out_dir, file, saveinterval, 0, num_epochs)
 
+optimizer_finetune = optim.Adam([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
+    {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+])
+scheduler_finetune = lr_scheduler.MultiStepLR(optimizer_finetune, milestones, milegamma)
+
 model_ft, fc_plain = plaintrain(
     model_ft, fc_plain, 
-    loader_plain, criterion, optimizer_plain, scheduler_plain, 
+    loader_plain, criterion, optimizer_finetune, scheduler_finetune, 
     device, out_dir, file, saveinterval, 0, fine_epochs
 )

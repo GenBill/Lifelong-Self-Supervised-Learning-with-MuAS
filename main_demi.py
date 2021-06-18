@@ -191,7 +191,7 @@ criterion = nn.CrossEntropyLoss()
 milestones = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 milegamma = 0.6
 optimizer_all = optim.Adam([
-    # {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
     # {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
     {'params': fc_rota.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
     {'params': fc_patch.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
@@ -202,12 +202,6 @@ scheduler_all = lr_scheduler.MultiStepLR(optimizer_all, milestones, milegamma)
 
 # milestones = [10, 20, 30, 40]
 # milegamma = 0.6
-optimizer_ft = optim.Adam([
-    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
-    # {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
-])
-scheduler_ft = lr_scheduler.MultiStepLR(optimizer_ft, milestones, milegamma)
-
 optimizer_plain = optim.Adam([
     # {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
     {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
@@ -250,11 +244,10 @@ scheduler_contra = lr_scheduler.MultiStepLR(optimizer_contra, milestones, milega
 model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = demitrain(
     model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, 
     loader_joint, loader_test, 
-    # 警告：optimizer_all 不含 model_ft, fc_plain
-    # 警告：optimizer_ft 仅优化 model_ft
+    # 警告：optimizer_all 不含 fc_plain
     # 警告：optimizer_0 仅优化 fc_plain
-    optimizer_all, optimizer_ft, optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, 
-    scheduler_all, scheduler_ft, scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, 
+    optimizer_all, optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, 
+    scheduler_all, scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, 
     criterion, device, out_dir, file, saveinterval, 0, num_epochs)
 
 optimizer_finetune = optim.Adam([

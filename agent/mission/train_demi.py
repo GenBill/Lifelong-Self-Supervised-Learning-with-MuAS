@@ -25,8 +25,8 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
     loader_joint, loader_test, 
     # 警告：optimizer_all 不含 fc_plain
     # 警告：optimizer_0 仅优化 fc_plain
-    optimizer_all, optimizer_ft, optimizer_0, optimizer_1, optimizer_2, optimizer_3, optimizer_4, 
-    scheduler_all, scheduler_ft, scheduler_0, scheduler_1, scheduler_2, scheduler_3, scheduler_4, 
+    optimizer_all, optimizer_0, optimizer_1, optimizer_2, optimizer_3, optimizer_4, 
+    scheduler_all, scheduler_0, scheduler_1, scheduler_2, scheduler_3, scheduler_4, 
     criterion, device, checkpoint_path, file, saveinterval=1, last_epochs=0, num_epochs=20):
     
     since = time.time()
@@ -186,12 +186,10 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro,
                     )), jigro_la)
 
                     loss_ft = weight[0]*loss_1 + weight[1]*loss_2 + weight[2]*loss_3 + weight[3]*loss_4
-                    optimizer_ft.zero_grad()
-                    loss_ft.backward()
-                    optimizer_ft.step()
-
-                    loss_all = weight[0]*loss_1 + weight[1]*loss_2 + weight[2]*loss_3 + weight[3]*loss_4
+                    loss_all = (1-weight[0])*loss_1 + (1-weight[1])*loss_2 + (1-weight[2])*loss_3 + (1-weight[3])*loss_4
+                    
                     optimizer_all.zero_grad()
+                    loss_ft.backward(retain_graph=True)
                     loss_all.backward()
                     optimizer_all.step()
 

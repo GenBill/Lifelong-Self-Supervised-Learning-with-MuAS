@@ -1,9 +1,9 @@
 # On Tesla_V100
-python ../main_demi.py --cuda '4,5,6,7' --batchsize 256 --numworkers 2 --pretrain 0 --epochs_0 2 --epochs_1 2
-python ../main_demi.py --cuda '4,5,6,7' --batchsize 256 --numworkers 2 --pretrain 1 --epochs_0 2 --epochs_1 2
+# python ../main_demi.py
+python main_demi.py --cuda '0,1,2,3' --batchsize 256 --numworkers 4 --pretrain 0 --lr_net 0.005 --lr_fc 0.01 --epochs_0 400 --epochs_1 80
 
 # On RTX3090
-python main_demi.py --cuda '4,5' --batchsize 256 --numworkers 2 --pretrain 0 --epochs_0 2 --epochs_1 2
+python main_demi.py --cuda '0,1' --batchsize 256 --numworkers 4 --pretrain 1 --lr_net 0.005 --lr_fc 0.01 --epochs_0 400 --epochs_1 80
 
 # CPU 代码测试
 # python main_demi.py --cuda '' --batchsize 16 --numworkers 2 --pretrain 0 --epochs_0 2 --epochs_1 2

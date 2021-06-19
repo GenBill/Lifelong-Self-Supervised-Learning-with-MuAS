@@ -56,7 +56,10 @@ opt = parser.parse_args()
 opt.manualSeed = 2077
 # opt.netCont = './models/net_epoch_56.pth'
 
-dirname = 'Demi'
+if opt.pretrain==1:
+    dirname = 'Demipre'
+else:
+    dirname = 'Demino'
 out_dir = '../Joint_{}/{}/models'.format(opt.batchsize, dirname)
 log_out_dir = '../Joint_{}/{}/{}'.format(opt.batchsize, dirname, dirname)
 

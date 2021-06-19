@@ -35,8 +35,9 @@ parser.add_argument('--epochs_0', type=int, default=200, help="set num epochs")
 parser.add_argument('--epochs_1', type=int, default=40, help="set num epochs")
 
 parser.add_argument('--lr_net', type=float, default=1e-3, help='learning rate, default=0.001')
-parser.add_argument('--weight_net', type=float, default=1e-8, help="weight decay")
 parser.add_argument('--lr_fc', type=float, default=1e-3, help='learning rate, default=0.001')
+parser.add_argument('--momentum', type=float, default=0.9, help='momentum, default=0.9')
+parser.add_argument('--weight_net', type=float, default=1e-8, help="weight decay")
 parser.add_argument('--weight_fc', type=float, default=1e-8, help="weight decay")
 
 parser.add_argument('--netCont', default='', help="path to net (for continue training)")
@@ -194,51 +195,51 @@ loadstate(model_ft, fc_contra, opt.netCont, opt.contraCont, device, file)
 criterion = nn.CrossEntropyLoss()
 milestones = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 milegamma = 0.6
-optimizer_all = optim.Adam([
-    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
-    # {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
-    {'params': fc_rota.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
-    {'params': fc_patch.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
-    {'params': fc_jigpa.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
-    {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+optimizer_all = optim.SGD([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
+    # {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
+    {'params': fc_rota.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
+    {'params': fc_patch.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
+    {'params': fc_jigpa.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
+    {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
 ])
 scheduler_all = lr_scheduler.MultiStepLR(optimizer_all, milestones, milegamma)
 
 # milestones = [10, 20, 30, 40]
 # milegamma = 0.6
-optimizer_plain = optim.Adam([
-    # {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
-    {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+optimizer_plain = optim.SGD([
+    # {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
+    {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
 ])
 scheduler_plain = lr_scheduler.MultiStepLR(optimizer_plain, milestones, milegamma)
 
-optimizer_rota = optim.Adam([
-    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
-    {'params': fc_rota.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+optimizer_rota = optim.SGD([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
+    {'params': fc_rota.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
 ])
 scheduler_rota = lr_scheduler.MultiStepLR(optimizer_rota, milestones, milegamma)
 
-optimizer_patch = optim.Adam([
-    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
-    {'params': fc_patch.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+optimizer_patch = optim.SGD([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
+    {'params': fc_patch.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
 ])
 scheduler_patch = lr_scheduler.MultiStepLR(optimizer_patch, milestones, milegamma)
 
-optimizer_jigpa = optim.Adam([
-    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
-    {'params': fc_jigpa.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+optimizer_jigpa = optim.SGD([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
+    {'params': fc_jigpa.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
 ])
 scheduler_jigpa = lr_scheduler.MultiStepLR(optimizer_jigpa, milestones, milegamma)
 
-optimizer_contra = optim.Adam([
-    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
-    {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+optimizer_contra = optim.SGD([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
+    {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
 ])
 scheduler_contra = lr_scheduler.MultiStepLR(optimizer_contra, milestones, milegamma)
 
-optimizer_contra = optim.Adam([
-    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
-    {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+optimizer_contra = optim.SGD([
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
+    {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
 ])
 scheduler_contra = lr_scheduler.MultiStepLR(optimizer_contra, milestones, milegamma)
 
@@ -254,9 +255,9 @@ model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra = demitrain(
     scheduler_all, scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_contra, 
     criterion, device, out_dir, file, saveinterval, 0, num_epochs)
 
-optimizer_finetune = optim.Adam([
-    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
-    {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+optimizer_finetune = optim.SGD([
+    {'params': model_ft.parameters(), 'lr': 1e-3, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
+    {'params': fc_plain.parameters(), 'lr': 1e-3, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
 ])
 scheduler_finetune = lr_scheduler.MultiStepLR(optimizer_finetune, milestones, milegamma)
 

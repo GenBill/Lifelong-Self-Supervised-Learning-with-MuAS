@@ -11,6 +11,15 @@ import copy
 import warnings
 warnings.filterwarnings('ignore')
 
+def ReluSoftmax(weight):
+    # leng = weight.size(0)
+    weight[weight<0] = 0
+    sumw = torch.sum(weight).item()
+    if sumw==0:
+        return weight + 0.25    # 1/leng
+    else:
+        return weight / sumw
+
 # similar to deepcopy
 def matcopy(this, source):
     # this = source
@@ -89,9 +98,13 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
 
                     # Calculate origin loss
                     model_ft.eval()
-                    fc_plain.eval()
-                    with torch.no_grad() :
-                        loss_origin = criterion(fc_plain(model_ft(valid_inputs)), valid_labels).item()
+                    fc_plain.train()
+                    # with torch.no_grad() :
+                    loss_0 = criterion(fc_plain(model_ft(valid_inputs)), valid_labels)
+                    loss_origin = loss_0.item()
+                    optimizer_0.zero_grad()
+                    loss_0.backward()
+                    optimizer_0.step()
 
                     # rota main
                     model_ft.train()
@@ -176,7 +189,10 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
 
                     # fine train
                     model_ft.train()
-                    weight = torch.softmax(weight, 0)
+                    weight = ReluSoftmax(weight)
+                    # weight = torch.softmax(weight, 0)
+                    # if iter_index%5==0 :
+                    #     print('Weight : ', weight)
 
                     loss_1 = criterion(fc_rota(model_ft(rota_in)), rota_la)
                     loss_2 = criterion(fc_patch(torch.cat(
@@ -198,6 +214,8 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
 
                     loss_ft = weight[0]*loss_1 + weight[1]*loss_2 + weight[2]*loss_3 + weight[3]*loss_4
                     loss_all = (1-weight[0])*loss_1 + (1-weight[1])*loss_2 + (1-weight[2])*loss_3 + (1-weight[3])*loss_4
+                    # if iter_index%5==0 :
+                    #     print('Joint Loss : {:4f}, {:4f}, {:4f}, {:4f}'.format(loss_1.item(), loss_2.item(), loss_3.item(), loss_4.item()))
                     
                     optimizer_all.zero_grad()
                     loss_ft.backward(retain_graph=True)
@@ -209,6 +227,8 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                     model_ft.eval()
                     outputs = fc_plain(model_ft(inputs))
                     loss_0 = criterion(outputs, labels)
+                    # if iter_index%5==0 :
+                    #     print('Main Loss : {:4f}'.format(loss_0.item()))
                     optimizer_0.zero_grad()
                     loss_0.backward()
                     optimizer_0.step()

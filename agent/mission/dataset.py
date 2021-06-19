@@ -812,15 +812,15 @@ class DJDataset(Dataset):
     def half_gap(self):
         return math.ceil(self.gap/2)
 
-    def jigro_random_jitter(self):
-        return int(math.floor((self.jitter * 2 * random.random())))
-
     def jigpa_random_jitter(self):
         return int(math.floor((self.jitter * 2 * random.random()))) - self.jitter
 
     def random_shift(self):
         return random.randrange(self.color_shift * 2 + 1)
-    
+
+    def patch_enhance(self, image):
+        return image
+        
     def prep_patch(self, image):
         # for some patches, randomly downsample to as little as 100 total pixels
         # 说是要下采样，结果放大后又缩小？迷惑行为
@@ -849,26 +849,6 @@ class DJDataset(Dataset):
             cropped[:,:,1] = image[shift[2]:shift[2]+self.patch_dim, shift[3]:shift[3]+self.patch_dim, 1]
             cropped[:,:,2] = image[shift[4]:shift[4]+self.patch_dim, shift[5]:shift[5]+self.patch_dim, 2]
         
-        return cropped
-    
-    def prep_jigro(self, image):
- 
-        cropped = np.empty((self.patch_dim, self.patch_dim, 3), dtype=np.uint8)
-
-        if(random.random() < self.gray_portion):
-            pil_patch = Image.fromarray(image)
-            pil_patch = pil_patch.convert('L')
-            pil_patch = pil_patch.convert('RGB')
-            np.copyto(cropped, np.array(pil_patch)[
-                self.color_shift:self.color_shift+self.patch_dim, 
-                self.color_shift:self.color_shift+self.patch_dim, 
-                :])
-        else:
-            shift = [self.random_shift() for _ in range(6)]
-            cropped[:,:,0] = image[shift[0]:shift[0]+self.patch_dim, shift[1]:shift[1]+self.patch_dim, 0]
-            cropped[:,:,1] = image[shift[2]:shift[2]+self.patch_dim, shift[3]:shift[3]+self.patch_dim, 1]
-            cropped[:,:,2] = image[shift[4]:shift[4]+self.patch_dim, shift[5]:shift[5]+self.patch_dim, 2]
-
         return cropped
 
     def get_plain(self, index):
@@ -995,49 +975,68 @@ class DJDataset(Dataset):
 
         return patch_a, patch_b, patch_c, patch_d, patch_shuffle_order_label
     
-    def get_jigro(self, index):
+    def get_contra(self, index):
+        endex = random.randint(0, len(self.dataset)-1)
+        while endex==index:
+            endex = random.randint(0, len(self.dataset)-1)
+        
         img_PIL, _ = self.dataset[index]
         image = np.array(img_PIL)
-
-        window_y_coord = int(math.floor((image.shape[0] - self.window_width) * random.random()))
-        window_x_coord = int(math.floor((image.shape[1] - self.window_width) * random.random()))
-        window = image[window_y_coord:window_y_coord+self.window_width, window_x_coord:window_x_coord+self.window_width]
         
-        rotation_label = int(math.floor((4 * random.random())))
-        order_label = int(math.floor((24 * random.random()))) 
+        # If image is too small, try another image
+        if image.shape[1] <= self.min_width or image.shape[0] <= self.min_width:
+            return self.__getitem__(index)
         
-        if rotation_label>0:
-            window = np.rot90(window, rotation_label).copy()
+        img_PIL, _ = self.dataset[endex]
+        emage = np.array(img_PIL)
+        # If image is too small, try another image
+        while emage.shape[1] <= self.min_width or emage.shape[0] <= self.min_width:
+            endex = random.randint(0, len(self.dataset)-1)
+            while endex==index:
+                endex = random.randint(0, len(self.dataset)-1)
+            img_PIL, _ = self.dataset[endex]
+            emage = np.array(img_PIL)
+        
+        # 在2张图片里取出3个patch
+        patch_jitter_y = random.randint(-self.jitter, self.jitter-1)
+        patch_jitter_x = random.randint(-self.jitter, self.jitter-1)
+        
+        patch_loc_arr = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
+        patch_direction_label = random.randint(0, 7)
+        while True:
+            uniform_patch_x_coord = random.randint(self.margin, image.shape[0] - self.margin - 1) - int(round(self.patch_dim/2.0))
+            uniform_patch_y_coord = random.randint(self.margin, image.shape[1] - self.margin - 1) - int(round(self.patch_dim/2.0))
+            random_patch_x_coord = uniform_patch_x_coord + patch_loc_arr[patch_direction_label][0] * self.patch_dim + patch_jitter_x
+            random_patch_y_coord = uniform_patch_y_coord + patch_loc_arr[patch_direction_label][1] * self.patch_dim + patch_jitter_y
 
-        patch_coords = [
-            (self.jigro_random_jitter(), self.jigro_random_jitter()),
-            (self.jigro_random_jitter(), self.sub_window_width + self.jigro_random_jitter()),
-            (self.sub_window_width + self.jigro_random_jitter(), self.jigro_random_jitter()),
-            (self.sub_window_width + self.jigro_random_jitter(), self.sub_window_width + self.jigro_random_jitter()),
+            if random_patch_y_coord>=0 and random_patch_x_coord>=0 and random_patch_y_coord+self.patch_dim<image.shape[0] and random_patch_x_coord+self.patch_dim<image.shape[1]:
+                break
+        
+        patch_0 = self.patch_enhance(image)[
+            uniform_patch_x_coord : uniform_patch_x_coord + self.patch_dim, 
+            uniform_patch_y_coord : uniform_patch_y_coord + self.patch_dim
         ]
 
-        patch_coords = [pc for _,pc in sorted(zip(patch_order_arr[order_label],patch_coords))]
+        patch_1 = self.patch_enhance(image)[
+            random_patch_x_coord : random_patch_x_coord + self.patch_dim, 
+            random_patch_y_coord : random_patch_y_coord + self.patch_dim
+        ]
+        patch_2 = self.patch_enhance(emage)[
+            random_patch_x_coord : random_patch_x_coord + self.patch_dim, 
+            random_patch_y_coord : random_patch_y_coord + self.patch_dim
+        ]
 
-        patch_a = window[patch_coords[0][0]:patch_coords[0][0]+self.patch_dim+2*self.color_shift, patch_coords[0][1]:patch_coords[0][1]+self.patch_dim+2*self.color_shift]
-        patch_b = window[patch_coords[1][0]:patch_coords[1][0]+self.patch_dim+2*self.color_shift, patch_coords[1][1]:patch_coords[1][1]+self.patch_dim+2*self.color_shift]
-        patch_c = window[patch_coords[2][0]:patch_coords[2][0]+self.patch_dim+2*self.color_shift, patch_coords[2][1]:patch_coords[2][1]+self.patch_dim+2*self.color_shift]
-        patch_d = window[patch_coords[3][0]:patch_coords[3][0]+self.patch_dim+2*self.color_shift, patch_coords[3][1]:patch_coords[3][1]+self.patch_dim+2*self.color_shift]
+        # Patch Enhance
+        patch_0 = self.patch_enhance(patch_0)
+        patch_1 = self.patch_enhance(patch_1)
+        patch_2 = self.patch_enhance(patch_2)
 
-        patch_a = self.prep_jigro(patch_a)
-        patch_b = self.prep_jigro(patch_b)
-        patch_c = self.prep_jigro(patch_c)
-        patch_d = self.prep_jigro(patch_d)
-
-        # combined_label = np.array(rotation_label * 24 + order_label).astype(np.int64)
-        combined_label = np.array(order_label).astype(np.int64)
-                
         if self.postTransform:
-            patch_a = self.postTransform(patch_a)
-            patch_b = self.postTransform(patch_b)
-            patch_c = self.postTransform(patch_c)
-            patch_d = self.postTransform(patch_d)
+            patch_0 = self.postTransform(patch_0)
+            patch_1 = self.postTransform(patch_1)
+            patch_2 = self.postTransform(patch_2)
 
-        return patch_a, patch_b, patch_c, patch_d, combined_label
+        return patch_0, patch_1, patch_2
 
     def __getitem__(self, index):
-        return self.get_plain(index), self.get_valid(index), self.get_rota(index), self.get_patch(index), self.get_jigpa(index), self.get_jigro(index)
+        return self.get_plain(index), self.get_valid(index), self.get_rota(index), self.get_patch(index), self.get_jigpa(index), self.get_contra(index)

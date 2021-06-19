@@ -147,9 +147,10 @@ fc_rota = make_MLP(num_ftrs, num_ftrs, output_ftrs=4, layers=2)         # layers
 fc_patch = make_MLP(2*num_ftrs, 2*num_ftrs, output_ftrs=8, layers=2)
 fc_jigpa = make_MLP(4*num_ftrs, 4*num_ftrs, output_ftrs=24, layers=4)
 ### 警告：类间距不同，不可粗暴计算损失，需要重写损失函数 ###
-fc_jigro = make_MLP(4*num_ftrs, 4*num_ftrs, output_ftrs=96, layers=8)   # output_ftrs=24
+# Bye Jigro
+# fc_jigro = make_MLP(4*num_ftrs, 4*num_ftrs, output_ftrs=96, layers=8)   # output_ftrs=24
 # 对比学习部分
-fc_contra = make_MLP(2*num_ftrs, 2*num_ftrs, output_ftrs=1, layers=2)
+fc_contra = make_MLP(2*num_ftrs, 2*num_ftrs, output_ftrs=2, layers=2)
 
 if torch.cuda.device_count() > 1: 
     print("Let's use", torch.cuda.device_count(), "GPUs!")
@@ -158,14 +159,14 @@ if torch.cuda.device_count() > 1:
     fc_rota = nn.DataParallel(fc_rota)
     fc_patch = nn.DataParallel(fc_patch)
     fc_jigpa = nn.DataParallel(fc_jigpa)
-    fc_jigro = nn.DataParallel(fc_jigro)
+    fc_contra = nn.DataParallel(fc_contra)
 
 model_ft = model_ft.to(device)
 fc_plain = fc_plain.to(device)
 fc_rota = fc_rota.to(device)
 fc_patch = fc_patch.to(device)
 fc_jigpa = fc_jigpa.to(device)
-fc_jigro = fc_jigro.to(device)
+fc_contra = fc_contra.to(device)
 
 # Load state : model & fc_layer
 def loadstate(model, fc_layer, net_Cont, fc_Cont, device, file):
@@ -183,7 +184,7 @@ loadstate(model_ft, fc_plain, opt.netCont, opt.plainCont, device, file)
 loadstate(model_ft, fc_rota, opt.netCont, opt.rotaCont, device, file)
 loadstate(model_ft, fc_patch, opt.netCont, opt.patchCont, device, file)
 loadstate(model_ft, fc_jigpa, opt.netCont, opt.jigpaCont, device, file)
-loadstate(model_ft, fc_jigro, opt.netCont, opt.jigroCont, device, file)
+# loadstate(model_ft, fc_jigro, opt.netCont, opt.jigroCont, device, file)
 loadstate(model_ft, fc_contra, opt.netCont, opt.contraCont, device, file)
 
 # Model trainer
@@ -196,7 +197,7 @@ optimizer_all = optim.Adam([
     {'params': fc_rota.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
     {'params': fc_patch.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
     {'params': fc_jigpa.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
-    {'params': fc_jigro.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+    {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
 ])
 scheduler_all = lr_scheduler.MultiStepLR(optimizer_all, milestones, milegamma)
 
@@ -226,11 +227,11 @@ optimizer_jigpa = optim.Adam([
 ])
 scheduler_jigpa = lr_scheduler.MultiStepLR(optimizer_jigpa, milestones, milegamma)
 
-optimizer_jigro = optim.Adam([
+optimizer_contra = optim.Adam([
     {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
-    {'params': fc_jigro.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
+    {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'weight_decay': opt.weight_fc},
 ])
-scheduler_jigro = lr_scheduler.MultiStepLR(optimizer_jigro, milestones, milegamma)
+scheduler_contra = lr_scheduler.MultiStepLR(optimizer_contra, milestones, milegamma)
 
 optimizer_contra = optim.Adam([
     {'params': model_ft.parameters(), 'lr': opt.lr_net, 'weight_decay': opt.weight_net},
@@ -239,15 +240,15 @@ optimizer_contra = optim.Adam([
 scheduler_contra = lr_scheduler.MultiStepLR(optimizer_contra, milestones, milegamma)
 
 # print('Training ... {}\n'.format(opt.powerword))
-# 'rota' , 'patch' , 'jigpa' , 'jigro'
+# 'rota' , 'patch' , 'jigpa' , 'contra'
 
-model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = demitrain(
-    model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, 
+model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra = demitrain(
+    model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra, 
     loader_joint, loader_test, 
     # 警告：optimizer_all 不含 fc_plain
     # 警告：optimizer_0 仅优化 fc_plain
-    optimizer_all, optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, 
-    scheduler_all, scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, 
+    optimizer_all, optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_contra, 
+    scheduler_all, scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_contra, 
     criterion, device, out_dir, file, saveinterval, 0, num_epochs)
 
 optimizer_finetune = optim.Adam([

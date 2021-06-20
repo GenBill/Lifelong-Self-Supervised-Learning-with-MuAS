@@ -9,5 +9,5 @@ python main_demi.py --cuda '2' --batchsize 256 --numworkers 2 --pretrain 0 --lr_
 
 
 # On RTX3090
-python main_demi.py --cuda '1' --batchsize 256 --numworkers 4 --pretrain 1 --lr_net 0.005 --lr_fc 0.01 --epochs_0 400 --epochs_1 80
+python main_demi.py --cuda '1' --batchsize 256 --numworkers 4 --pretrain 0 --lr_net 0.00005 --lr_fc 0.00005 --epochs_0 400 --epochs_1 80
 

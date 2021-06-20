@@ -255,6 +255,8 @@ model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra = demitrain(
     scheduler_all, scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_contra, 
     criterion, device, out_dir, file, saveinterval, 0, num_epochs)
 
+milestones = [20, 40, 60, 80, 100]
+milegamma = 0.6
 optimizer_finetune = optim.SGD([
     {'params': model_ft.parameters(), 'lr': 1e-3, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
     {'params': fc_plain.parameters(), 'lr': 1e-3, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},

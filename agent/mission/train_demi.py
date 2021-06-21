@@ -73,7 +73,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                 fc_contra.train()
                 
                 # Train Part
-                for _, (iter_plain, iter_valid, iter_rota, iter_patch, iter_jigpa, iter_contra) in enumerate(tqdm(loader_joint)):
+                for n_iter, (iter_plain, iter_valid, iter_rota, iter_patch, iter_jigpa, iter_contra) in enumerate(tqdm(loader_joint)):
                     inputs, labels = iter_plain
                     inputs, labels = inputs.to(device), labels.to(device)
 
@@ -248,6 +248,13 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                 top_1_acc = running_corrects / n_samples
                 epoch_loss = running_loss / n_samples
                 joint_loss = joint_loss / n_samples
+
+                data_writer.add_scalar('data/TrainLoss_Group', {
+                    'Acc': top_1_acc,
+                    'EpochLoss': epoch_loss,
+                    'JointLoss': joint_loss
+                }, n_iter)
+
                 print('{} Loss: {:.6f} , Joint Loss: {:.6f} , Top 1 Acc: {:.6f} \n'.format('Train', epoch_loss, joint_loss, top_1_acc))
                 file.write('{} Loss: {:.6f} , Joint Loss: {:.6f} , Top 1 Acc: {:.6f} \n'.format('Train', epoch_loss, joint_loss, top_1_acc))
                 file.flush()
@@ -271,6 +278,12 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                 # Metrics
                 top_1_acc = running_corrects / n_samples
                 epoch_loss = running_loss / n_samples
+
+                data_writer.add_scalar('data/TestLoss_Group', {
+                    'Acc': top_1_acc,
+                    'EpochLoss': epoch_loss
+                }, n_iter)
+
                 print('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))
                 file.write('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))
                 file.flush()

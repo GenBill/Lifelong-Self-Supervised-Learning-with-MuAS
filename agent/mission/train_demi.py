@@ -6,6 +6,8 @@ from .train_joint import jointloader
 from tqdm import tqdm
 import torch
 import torch.nn.parallel
+from tensorboardX import SummaryWriter
+
 import time
 import copy
 import warnings
@@ -40,9 +42,11 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
     
     since = time.time()
     best_acc = 0.0
-
-    # initial weight
+    
+    # initial weight & SummaryWriter
     weight = torch.zeros(4)
+    data_path = checkpoint_path+'/../Data'
+    data_writer = SummaryWriter()
 
     for epoch in range(last_epochs, last_epochs+num_epochs):
         print('\nEpoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))

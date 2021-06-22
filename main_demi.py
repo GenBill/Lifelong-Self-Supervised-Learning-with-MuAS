@@ -194,7 +194,7 @@ loadstate(model_ft, fc_contra, opt.netCont, opt.contraCont, device, file)
 # Model trainer
 criterion = nn.CrossEntropyLoss()
 milestones = [5, 10, 20, 40, 100, 200, 400, 800, 1600]
-milegamma = 0.7
+milegamma = 0.6
 optimizer_all = optim.SGD([
     {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
     # {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},

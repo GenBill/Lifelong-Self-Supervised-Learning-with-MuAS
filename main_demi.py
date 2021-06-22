@@ -193,8 +193,8 @@ loadstate(model_ft, fc_contra, opt.netCont, opt.contraCont, device, file)
 
 # Model trainer
 criterion = nn.CrossEntropyLoss()
-milestones = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
-milegamma = 0.6
+milestones = [5, 10, 20, 40, 100, 200, 400, 800, 1600]
+milegamma = 0.8
 optimizer_all = optim.SGD([
     {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
     # {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
@@ -256,10 +256,10 @@ model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra = demitrain(
     criterion, device, out_dir, file, saveinterval, 0, num_epochs)
 
 milestones = [20, 40, 60, 80, 100]
-milegamma = 0.6
+milegamma = 0.8
 optimizer_finetune = optim.SGD([
-    {'params': model_ft.parameters(), 'lr': 1e-3, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
-    {'params': fc_plain.parameters(), 'lr': 1e-3, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
+    {'params': model_ft.parameters(), 'lr': 1e-3, 'momentum': 0.9, 'weight_decay': opt.weight_net},
+    {'params': fc_plain.parameters(), 'lr': 1e-3, 'momentum': 0.9, 'weight_decay': opt.weight_fc},
 ])
 scheduler_finetune = lr_scheduler.MultiStepLR(optimizer_finetune, milestones, milegamma)
 

@@ -6,7 +6,7 @@ from .train_joint import jointloader
 from tqdm import tqdm
 import torch
 import torch.nn.parallel
-# from tensorboardX import SummaryWriter
+from tensorboardX import SummaryWriter
 
 import time
 import copy
@@ -45,8 +45,8 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
     
     # initial weight & SummaryWriter
     weight = torch.zeros(4)
-    data_path = checkpoint_path+'/../Data'
-    # data_writer = SummaryWriter()
+    data_path = checkpoint_path+'/../Tensorboard'
+    data_writer = SummaryWriter(logdir=data_path)
 
     for epoch in range(last_epochs, last_epochs+num_epochs):
         print('\nEpoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
@@ -243,17 +243,17 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                     running_loss += loss_0.item() * labels.size(0)
                     pred_top_1 = torch.topk(outputs, k=1, dim=1)[1]
                     running_corrects += pred_top_1.eq(labels.view_as(pred_top_1)).int().sum().item()
-                
+
                 # Metrics
                 top_1_acc = running_corrects / n_samples
                 epoch_loss = running_loss / n_samples
                 joint_loss = joint_loss / n_samples
 
-                '''data_writer.add_scalar('data/TrainLoss_Group', {
+                data_writer.add_scalars('data/TrainLoss_Group', {
                     'Acc': top_1_acc,
                     'EpochLoss': epoch_loss,
                     'JointLoss': joint_loss
-                }, n_iter)'''
+                }, n_iter)
 
                 print('{} Loss: {:.6f} , Joint Loss: {:.6f} , Top 1 Acc: {:.6f} \n'.format('Train', epoch_loss, joint_loss, top_1_acc))
                 file.write('{} Loss: {:.6f} , Joint Loss: {:.6f} , Top 1 Acc: {:.6f} \n'.format('Train', epoch_loss, joint_loss, top_1_acc))
@@ -279,10 +279,10 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                 top_1_acc = running_corrects / n_samples
                 epoch_loss = running_loss / n_samples
 
-                '''data_writer.add_scalar('data/TestLoss_Group', {
+                data_writer.add_scalars('data/TestLoss_Group', {
                     'Acc': top_1_acc,
                     'EpochLoss': epoch_loss
-                }, n_iter)'''
+                }, n_iter)
 
                 print('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))
                 file.write('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))
@@ -327,6 +327,8 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
     fc_patch.load_state_dict(best_patch_wts)
     fc_jigpa.load_state_dict(best_jigpa_wts)
     fc_contra.load_state_dict(best_contra_wts)
+    
+    data_writer.close()
     
     return model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra
 

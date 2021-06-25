@@ -226,7 +226,10 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                         'PatchLoss': loss_2.item(),
                         'JigpaLoss': loss_3.item(),
                         'ContraLoss': loss_4.item(),
-                        'LossWeight': weight
+                        'LossWeight_0': weight[0],
+                        'LossWeight_1': weight[1],
+                        'LossWeight_2': weight[2],
+                        'LossWeight_3': weight[3],
                     }, n_iter)
 
                     optimizer_all.zero_grad()

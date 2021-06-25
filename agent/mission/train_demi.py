@@ -220,7 +220,15 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                     loss_all = (1-weight[0])*loss_1 + (1-weight[1])*loss_2 + (1-weight[2])*loss_3 + (1-weight[3])*loss_4
                     # if iter_index%5==0 :
                     #     print('Joint Loss : {:4f}, {:4f}, {:4f}, {:4f}'.format(loss_1.item(), loss_2.item(), loss_3.item(), loss_4.item()))
-                    
+                    data_writer.add_scalars('data/StepLoss_Group', {
+                        'OriginLoss': loss_origin,
+                        'RotaLoss': loss_1.item(),
+                        'PatchLoss': loss_2.item(),
+                        'JigpaLoss': loss_3.item(),
+                        'ContraLoss': loss_4.item(),
+                        'LossWeight': weight
+                    }, n_iter)
+
                     optimizer_all.zero_grad()
                     loss_ft.backward(retain_graph=True)
                     loss_all.backward()

@@ -72,8 +72,9 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                 fc_jigpa.train()
                 fc_contra.train()
                 
+                n_iter = 0
                 # Train Part
-                for n_iter, (iter_plain, iter_valid, iter_rota, iter_patch, iter_jigpa, iter_contra) in enumerate(tqdm(loader_joint)):
+                for _, (iter_plain, iter_valid, iter_rota, iter_patch, iter_jigpa, iter_contra) in enumerate(tqdm(loader_joint)):
                     inputs, labels = iter_plain
                     inputs, labels = inputs.to(device), labels.to(device)
 
@@ -231,6 +232,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                         'LossWeight_2': weight[2],
                         'LossWeight_3': weight[3],
                     }, n_iter)
+                    n_iter += 1
 
                     optimizer_all.zero_grad()
                     loss_ft.backward(retain_graph=True)
@@ -264,7 +266,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                     'Acc': top_1_acc,
                     'EpochLoss': epoch_loss,
                     'JointLoss': joint_loss
-                }, n_iter)
+                }, epoch)
 
                 print('{} Loss: {:.6f} , Joint Loss: {:.6f} , Top 1 Acc: {:.6f} \n'.format('Train', epoch_loss, joint_loss, top_1_acc))
                 file.write('{} Loss: {:.6f} , Joint Loss: {:.6f} , Top 1 Acc: {:.6f} \n'.format('Train', epoch_loss, joint_loss, top_1_acc))
@@ -293,7 +295,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                 data_writer.add_scalars('data/TestLoss_Group', {
                     'Acc': top_1_acc,
                     'EpochLoss': epoch_loss
-                }, n_iter)
+                }, epoch)
 
                 print('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))
                 file.write('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))

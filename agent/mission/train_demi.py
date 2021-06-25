@@ -227,10 +227,12 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                         'PatchLoss': loss_2.item(),
                         'JigpaLoss': loss_3.item(),
                         'ContraLoss': loss_4.item(),
-                        'LossWeight_0': weight[0],
-                        'LossWeight_1': weight[1],
-                        'LossWeight_2': weight[2],
-                        'LossWeight_3': weight[3],
+                    }, n_iter)
+                    data_writer.add_scalars('data/LossWeight_Group', {
+                        'LossWeight_1': weight[0],
+                        'LossWeight_2': weight[1],
+                        'LossWeight_3': weight[2],
+                        'LossWeight_4': weight[3],
                     }, n_iter)
                     n_iter += 1
 

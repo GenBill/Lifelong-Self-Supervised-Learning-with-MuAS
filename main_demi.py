@@ -255,11 +255,11 @@ model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra = demitrain(
     scheduler_all, scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_contra, 
     criterion, device, out_dir, file, saveinterval, 0, num_epochs)
 
-milestones = [20, 40, 60, 80, 100]
+milestones = [5, 10, 20, 40, 80, 100]
 milegamma = 0.8
 optimizer_finetune = optim.SGD([
-    {'params': model_ft.parameters(), 'lr': 1e-3, 'momentum': 0.9, 'weight_decay': opt.weight_net},
-    {'params': fc_plain.parameters(), 'lr': 1e-3, 'momentum': 0.9, 'weight_decay': opt.weight_fc},
+    {'params': model_ft.parameters(), 'lr': 5e-3, 'momentum': 0.9, 'weight_decay': opt.weight_net},
+    {'params': fc_plain.parameters(), 'lr': 5e-3, 'momentum': 0.9, 'weight_decay': opt.weight_fc},
 ])
 scheduler_finetune = lr_scheduler.MultiStepLR(optimizer_finetune, milestones, milegamma)
 

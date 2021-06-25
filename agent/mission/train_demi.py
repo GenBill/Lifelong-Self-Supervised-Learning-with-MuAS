@@ -47,7 +47,8 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
     weight = torch.zeros(4)
     data_path = checkpoint_path+'/../Tensorboard'
     data_writer = SummaryWriter(logdir=data_path)
-
+    
+    n_iter = 0
     for epoch in range(last_epochs, last_epochs+num_epochs):
         print('\nEpoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
         file.write('\nEpoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
@@ -72,7 +73,6 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                 fc_jigpa.train()
                 fc_contra.train()
                 
-                n_iter = 0
                 # Train Part
                 for _, (iter_plain, iter_valid, iter_rota, iter_patch, iter_jigpa, iter_contra) in enumerate(tqdm(loader_joint)):
                     inputs, labels = iter_plain

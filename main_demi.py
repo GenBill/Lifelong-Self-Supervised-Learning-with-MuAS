@@ -173,23 +173,19 @@ fc_jigpa = fc_jigpa.to(device)
 fc_contra = fc_contra.to(device)
 
 # Load state : model & fc_layer
-def loadstate(model, fc_layer, net_Cont, fc_Cont, device, file):
+def loadstate(model, net_Cont, device, file):
     if net_Cont != '':
         model.load_state_dict(torch.load(net_Cont, map_location=device))
-        print('Loaded model state ...')
-        file.write('Loaded model state ...')
+        print('Loaded model/fc state ...')
+        file.write('Loaded model/fc state ...')
 
-    if fc_Cont != '':
-        fc_layer.load_state_dict(torch.load(fc_Cont, map_location=device))
-        print('Loaded fc_layer state ...')
-        file.write('Loaded fc_layer state ...')
-
-loadstate(model_ft, fc_plain, opt.netCont, opt.plainCont, device, file)
-loadstate(model_ft, fc_rota, opt.netCont, opt.rotaCont, device, file)
-loadstate(model_ft, fc_patch, opt.netCont, opt.patchCont, device, file)
-loadstate(model_ft, fc_jigpa, opt.netCont, opt.jigpaCont, device, file)
-# loadstate(model_ft, fc_jigro, opt.netCont, opt.jigroCont, device, file)
-loadstate(model_ft, fc_contra, opt.netCont, opt.contraCont, device, file)
+loadstate(model_ft, opt.netCont, device, file)
+loadstate(fc_plain, opt.plainCont, device, file)
+loadstate(fc_rota, opt.rotaCont, device, file)
+loadstate(fc_patch, opt.patchCont, device, file)
+loadstate(fc_jigpa, opt.jigpaCont, device, file)
+# loadstate(fc_jigro, opt.jigroCont, device, file)
+loadstate(fc_contra, opt.contraCont, device, file)
 
 # Model trainer
 criterion = nn.CrossEntropyLoss()
@@ -253,7 +249,7 @@ model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra = demitrain(
     # 警告：optimizer_0 仅优化 fc_plain
     optimizer_all, optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_contra, 
     scheduler_all, scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_contra, 
-    criterion, device, out_dir, file, saveinterval, 0, num_epochs)
+    criterion, device, out_dir, file, saveinterval, 500, num_epochs)
 
 milestones = [5, 10, 20, 40, 80, 100]
 milegamma = 0.8
@@ -266,5 +262,5 @@ scheduler_finetune = lr_scheduler.MultiStepLR(optimizer_finetune, milestones, mi
 model_ft, fc_plain = plaintrain(
     model_ft, fc_plain, 
     loader_plain, criterion, optimizer_finetune, scheduler_finetune, 
-    device, out_dir, file, saveinterval, 0, fine_epochs
+    device, out_dir, file, saveinterval, 500, fine_epochs
 )

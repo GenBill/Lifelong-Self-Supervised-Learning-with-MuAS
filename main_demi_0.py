@@ -58,9 +58,9 @@ opt.manualSeed = 2077
 # opt.netCont = './models/net_epoch_56.pth'
 
 if opt.pretrain==1:
-    dirname = 'Demipre'
+    dirname = 'Demipre50'
 else:
-    dirname = 'Demino'
+    dirname = 'Demino50'
 out_dir = '../Joint_{}/{}/models'.format(opt.batchsize, dirname)
 log_out_dir = '../Joint_{}/{}/{}'.format(opt.batchsize, dirname, dirname)
 
@@ -125,7 +125,7 @@ loader_plain = plainloader(data_root, data_pre_transforms, data_post_transforms,
 
 # Model Initialization
 # 仅支持 Res-Net !!!
-model_all = models.resnet18(pretrained=opt.pretrain)
+model_all = models.resnet50(pretrained=opt.pretrain)
 num_ftrs = model_all.fc.in_features
 
 def make_MLP(input_ftrs, hidden_ftrs, output_ftrs, layers=1):
@@ -173,24 +173,28 @@ fc_jigpa = fc_jigpa.to(device)
 fc_contra = fc_contra.to(device)
 
 # Load state : model & fc_layer
-def loadstate(model, net_Cont, device, file):
+def loadstate(model, fc_layer, net_Cont, fc_Cont, device, file):
     if net_Cont != '':
         model.load_state_dict(torch.load(net_Cont, map_location=device))
-        print('Loaded model/fc state ...')
-        file.write('Loaded model/fc state ...')
+        print('Loaded model state ...')
+        file.write('Loaded model state ...')
 
-loadstate(model_ft, opt.netCont, device, file)
-loadstate(fc_plain, opt.plainCont, device, file)
-loadstate(fc_rota, opt.rotaCont, device, file)
-loadstate(fc_patch, opt.patchCont, device, file)
-loadstate(fc_jigpa, opt.jigpaCont, device, file)
-# loadstate(fc_jigro, opt.jigroCont, device, file)
-loadstate(fc_contra, opt.contraCont, device, file)
+    if fc_Cont != '':
+        fc_layer.load_state_dict(torch.load(fc_Cont, map_location=device))
+        print('Loaded fc_layer state ...')
+        file.write('Loaded fc_layer state ...')
+
+loadstate(model_ft, fc_plain, opt.netCont, opt.plainCont, device, file)
+loadstate(model_ft, fc_rota, opt.netCont, opt.rotaCont, device, file)
+loadstate(model_ft, fc_patch, opt.netCont, opt.patchCont, device, file)
+loadstate(model_ft, fc_jigpa, opt.netCont, opt.jigpaCont, device, file)
+# loadstate(model_ft, fc_jigro, opt.netCont, opt.jigroCont, device, file)
+loadstate(model_ft, fc_contra, opt.netCont, opt.contraCont, device, file)
 
 # Model trainer
 criterion = nn.CrossEntropyLoss()
-milestones = [5, 20, 40, 80, 120, 200, 300, 400, 800, 1600]
-milegamma = 0.6
+milestones = [10, 20, 40, 80, 120, 200, 300, 400, 800, 1600]
+milegamma = 0.8
 optimizer_all = optim.SGD([
     {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
     # {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
@@ -249,7 +253,7 @@ model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra = demitrain(
     # 警告：optimizer_0 仅优化 fc_plain
     optimizer_all, optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_contra, 
     scheduler_all, scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_contra, 
-    criterion, device, out_dir, file, saveinterval, 500, num_epochs)
+    criterion, device, out_dir, file, saveinterval, 0, num_epochs)
 
 milestones = [5, 10, 20, 40, 80, 100]
 milegamma = 0.8
@@ -262,5 +266,5 @@ scheduler_finetune = lr_scheduler.MultiStepLR(optimizer_finetune, milestones, mi
 model_ft, fc_plain = plaintrain(
     model_ft, fc_plain, 
     loader_plain, criterion, optimizer_finetune, scheduler_finetune, 
-    device, out_dir, file, saveinterval, 500, fine_epochs
+    device, out_dir, file, saveinterval, 0, fine_epochs
 )

@@ -45,6 +45,7 @@ parser.add_argument('--contraCont', default='', help="path to fc_layer jigro")
 
 parser.add_argument('--joint', type=int, default=1, help="joint on")
 parser.add_argument('--pretrain', type=int, default=1, help="pretrain on")
+parser.add_argument('--StepLeng', type=int, default=1, help="StepLeng")
 
 # opt = parser.parse_args(args=[])
 opt = parser.parse_args()
@@ -58,7 +59,7 @@ dirname_list = [
     ['JoJoneno','JoJonepre'],
     ['Oneno','Onepre'],
 ]
-dirname = dirname_list[opt.joint][opt.pretrain]
+dirname = dirname_list[opt.joint][opt.pretrain] + opt.StepLeng
 out_dir = '../Joint_{}/{}/models'.format(opt.batchsize, dirname)
 log_out_dir = '../Joint_{}/{}/{}'.format(opt.batchsize, dirname, dirname)
 
@@ -77,7 +78,7 @@ torch.manual_seed(opt.manualSeed)
 
 cudnn.benchmark = True
 image_size = (224, 224)
-data_root = '../../Kaggle265'   # '../Dataset/Kaggle265'
+data_root = '~/Datasets/Kaggle265'
 batch_size = opt.batchsize      # 512, 256
 num_workers = opt.numworkers    # 4
 
@@ -256,13 +257,14 @@ if opt.joint==0:
 
 elif opt.joint==1:
     powerword = ['rota', 'patch', 'jigpa', 'jigro']
-    for i in range(num_epochs):
+    opt.StepLeng = 10
+    for i in range(num_epochs//opt.StepLeng):
         model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
             loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 
             powerword[i%4], model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro, fc_contra, 
             optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_jigro, optimizer_contra, 
             scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_jigro, scheduler_contra, 
-            criterion, device, out_dir, file, saveinterval, i, 1
+            criterion, device, out_dir, file, saveinterval, i * opt.StepLeng, opt.StepLeng
         )
     model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
             loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 

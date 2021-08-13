@@ -38,7 +38,7 @@ parser.add_argument('--num_freeze_layers', default=2, type=int, help = 'Number o
 parser.add_argument('--num_epochs', default=10, type=int, help='Number of epochs you want to train the model on')
 parser.add_argument('--init_lr', default=0.001, type=float, help='Initial learning rate for training the model')
 parser.add_argument('--reg_lambda', default=0.01, type=float, help='Regularization parameter')
-parser.add_argument('--miu', default=0.99, type=float, help='Initial MiuAS')
+parser.add_argument('--miu', default=1.0, type=float, help='Initial MiuAS')
 
 args = parser.parse_args()
 cuda_index = args.cuda
@@ -57,8 +57,7 @@ dsets_test = []
 
 num_classes = []
 
-data_path = "~/Datasets/Kaggle265"
-# data_path = os.path.join(os.getcwd(), "~/Datasets/Kaggle265")
+data_path = os.path.join(os.getcwd(), "MuAS/Data")
 
 data_transforms = {
     'train': transforms.Compose([
@@ -78,15 +77,14 @@ data_transforms = {
 
 os.environ['CUDA_VISIBLE_DEVICES'] = cuda_index
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-data_dir = "/home/zhangxuanming/Datasets/Kaggle265"
-# data_dir = os.path.join(os.getcwd(), "../Necro/MuAS/Data")
+data_dir = os.path.join(os.getcwd(), "MuAS/Data")
 
 #create the dataloaders for all the tasks
-for tdir in sorted(os.listdir(data_dir+'/train/')):
+for tdir in sorted(os.listdir(data_dir)):
 
     #create the image folders objects
-    tr_image_folder = datasets.ImageFolder(os.path.join(data_dir, "train", tdir), transform = data_transforms['train'])
-    te_image_folder = datasets.ImageFolder(os.path.join(data_dir, "test", tdir), transform = data_transforms['test'])
+    tr_image_folder = datasets.ImageFolder(os.path.join(data_dir, tdir, "train"), transform = data_transforms['train'])
+    te_image_folder = datasets.ImageFolder(os.path.join(data_dir, tdir, "test"), transform = data_transforms['test'])
 
     #get the dataloaders
     tr_dset_loaders = torch.utils.data.DataLoader(tr_image_folder, batch_size=batch_size, shuffle=True, num_workers=4)
@@ -103,7 +101,6 @@ for tdir in sorted(os.listdir(data_dir+'/train/')):
 
     #get the classes (THIS MIGHT NEED TO BE CORRECTED)
     num_classes.append(len(tr_image_folder.classes))
-
 
     #get the sizes array
     dsets_train.append(temp1)

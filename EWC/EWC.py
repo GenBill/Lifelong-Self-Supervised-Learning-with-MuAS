@@ -8,9 +8,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torch import autograd
 
-# remove EWC !!!
-# from EWC_class import ElasticWeightConsolidation
-from EWC.EWC_class import ElasticWeightConsolidation
+from EWC_class import ElasticWeightConsolidation
 
 # 固定随机种子
 manualSeed = 2077   # random.randint(1, 10000)
@@ -83,7 +81,7 @@ optimizer = optim.Adam(
         {'params': last2.parameters(), 'lr': 1e-3, 'momentum': 0.9, 'weight_decay': 1e-8},
     ]   , lr=1e-3, weight_decay=1e-8
 )
-ewc = ElasticWeightConsolidation(mynet, crit=crit, optimizer=optimizer, device=device)
+ewc = ElasticWeightConsolidation(mynet, crit=crit, optimizer=optimizer, device=device, emiu=0.8, weight=1000000)
 
 for _ in range(4):
     for input, target in tqdm(train_loader):

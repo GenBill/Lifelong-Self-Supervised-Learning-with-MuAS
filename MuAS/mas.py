@@ -85,8 +85,8 @@ def compute_forgetting(task_no, dataloader, dset_size, device):
     """
     
     #get the results file
-    store_path = os.path.join(os.getcwd(), "../Necro/MuAS/models", "Task_" + str(task_no))
-    model_path = os.path.join(os.getcwd(), "../Necro/MuAS/models")
+    store_path = os.path.join(os.getcwd(), "MuAS/models", "Task_" + str(task_no))
+    model_path = os.path.join(os.getcwd(), "MuAS/models")
     # device = torch.device("cuda:0" if use_gpu else "cpu")
 
     #get the old performance

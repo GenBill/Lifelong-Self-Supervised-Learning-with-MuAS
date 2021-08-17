@@ -59,9 +59,9 @@ dirname_list = [
     ['JoJoneno','JoJonepre'],
     ['Oneno','Onepre'],
 ]
-dirname = dirname_list[opt.joint][opt.pretrain] + opt.StepLeng
-out_dir = '../Joint_{}/{}/models'.format(opt.batchsize, dirname)
-log_out_dir = '../Joint_{}/{}/{}'.format(opt.batchsize, dirname, dirname)
+dirname = dirname_list[opt.joint][opt.pretrain]
+out_dir = '../Joint_{}_{}/{}/models'.format(opt.batchsize, opt.StepLeng, dirname)
+log_out_dir = '../Joint_{}_{}/{}/{}'.format(opt.batchsize, opt.StepLeng, dirname, dirname)
 
 try:
     os.makedirs(out_dir)
@@ -122,7 +122,7 @@ loader_rota = rotaloader(data_root, data_pre_transforms, data_post_transforms, b
 loader_patch = patchloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
 loader_jigpa = jigpaloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
 loader_jigro = jigroloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
-loader_contra = contraloader(patch_dim, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+loader_contra = contraloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
 loader_joint = jointloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
 
 # Model Initialization
@@ -257,7 +257,7 @@ if opt.joint==0:
 
 elif opt.joint==1:
     powerword = ['rota', 'patch', 'jigpa', 'jigro']
-    opt.StepLeng = 10
+    # opt.StepLeng = 10
     for i in range(num_epochs//opt.StepLeng):
         model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_jigro = LaStep(
             loader_plain, loader_rota, loader_patch, loader_jigpa, loader_jigro, loader_contra, 

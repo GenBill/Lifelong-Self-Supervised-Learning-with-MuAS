@@ -57,7 +57,8 @@ dsets_test = []
 
 num_classes = []
 
-data_path = "~/Datasets/Kaggle265"
+# data_path = "~/Datasets/Kaggle265"
+data_path = "~/Storage/Kaggle265"
 # data_path = os.path.join(os.getcwd(), "~/Datasets/Kaggle265")
 
 data_transforms = {
@@ -78,19 +79,26 @@ data_transforms = {
 
 os.environ['CUDA_VISIBLE_DEVICES'] = cuda_index
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-data_dir = "/home/zhangxuanming/Datasets/Kaggle265"
+# data_dir = "/home/zhangxuanming/Datasets/Kaggle265"
+# data_dir = os.path.join(os.getcwd(), "../Datasets/Kaggle265")
+data_dir = os.path.join(os.getcwd(), "../Storage/Kaggle265")
 # data_dir = os.path.join(os.getcwd(), "../Necro/MuAS/Data")
 
 #create the dataloaders for all the tasks
-for tdir in sorted(os.listdir(data_dir+'/train/')):
+# for tdir in sorted(os.listdir(data_dir+'/train/')):
+powerlist = ['rota', 'patch', 'jigpa', 'jigro', 'plain']
+for powerword in powerlist:
+    
+    dset_loaders = cometopower(powerword)
+    tr_dset_loaders = dset_loaders['train']
+    te_dset_loaders = dset_loaders['test']
+    # #create the image folders objects
+    # tr_image_folder = datasets.ImageFolder(os.path.join(data_dir, "train", tdir), transform = data_transforms['train'])
+    # te_image_folder = datasets.ImageFolder(os.path.join(data_dir, "test", tdir), transform = data_transforms['test'])
 
-    #create the image folders objects
-    tr_image_folder = datasets.ImageFolder(os.path.join(data_dir, "train", tdir), transform = data_transforms['train'])
-    te_image_folder = datasets.ImageFolder(os.path.join(data_dir, "test", tdir), transform = data_transforms['test'])
-
-    #get the dataloaders
-    tr_dset_loaders = torch.utils.data.DataLoader(tr_image_folder, batch_size=batch_size, shuffle=True, num_workers=4)
-    te_dset_loaders = torch.utils.data.DataLoader(te_image_folder, batch_size=batch_size, shuffle=True, num_workers=4)
+    # #get the dataloaders
+    # tr_dset_loaders = torch.utils.data.DataLoader(tr_image_folder, batch_size=batch_size, shuffle=True, num_workers=4)
+    # te_dset_loaders = torch.utils.data.DataLoader(te_image_folder, batch_size=batch_size, shuffle=True, num_workers=4)
 
     #get the sizes
     temp1 = len(tr_image_folder) 

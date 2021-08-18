@@ -21,19 +21,20 @@ import copy
 
 # import sys 
 # sys.path.append('./utils')
-from utils.model_utils import *
-from utils.mas_utils import *
+from MuAS.utils.model_utils import *
+from MuAS.utils.mas_utils import *
 
+from MuAS.model_class import *
+from MuAS.optimizer_lib import *
+from MuAS.model_train import *
+from MuAS.mas import *
 
-from model_class import *
-from optimizer_lib import *
-from model_train import *
-from mas import *
-
+from cometopower import cometopower
 
 parser = argparse.ArgumentParser(description='Test file')
 parser.add_argument('--cuda', default='', type=str, help = 'Set the GPU index')
 parser.add_argument('--batch_size', default=32, type=int, help = 'The batch size you want to use')
+parser.add_argument('--num_workers', default=8, type=int, help = 'The num workers you want to use')
 parser.add_argument('--num_freeze_layers', default=2, type=int, help = 'Number of layers you want to frozen in the feature extractor of the model')
 parser.add_argument('--num_epochs', default=10, type=int, help='Number of epochs you want to train the model on')
 parser.add_argument('--init_lr', default=0.001, type=float, help='Initial learning rate for training the model')
@@ -43,6 +44,8 @@ parser.add_argument('--miu', default=0.99, type=float, help='Initial MiuAS')
 args = parser.parse_args()
 cuda_index = args.cuda
 batch_size = args.batch_size
+num_workers = args.num_workers
+
 no_of_layers = args.num_freeze_layers
 num_epochs = args.num_epochs
 lr = args.init_lr
@@ -77,6 +80,27 @@ data_transforms = {
     ])
 }
 
+image_size = (224, 224)
+data_pre_transforms = {
+    'train': transforms.Compose([
+        transforms.Resize(image_size),
+        transforms.RandomHorizontalFlip(),
+    ]),
+    'test': transforms.Compose([
+        transforms.Resize(image_size),
+    ]),
+}
+data_post_transforms = {
+    'train': transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.6086, 0.4920, 0.4619], std=[0.2577, 0.2381, 0.2408])
+    ]),
+    'test': transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize(mean=[0.6086, 0.4920, 0.4619], std=[0.2577, 0.2381, 0.2408])
+    ]),
+}
+
 os.environ['CUDA_VISIBLE_DEVICES'] = cuda_index
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # data_dir = "/home/zhangxuanming/Datasets/Kaggle265"
@@ -86,10 +110,12 @@ data_dir = os.path.join(os.getcwd(), "../Storage/Kaggle265")
 
 #create the dataloaders for all the tasks
 # for tdir in sorted(os.listdir(data_dir+'/train/')):
+
+dset_size_train, dset_size_test = cometopower('none', data_dir, data_pre_transforms, data_post_transforms, batch_size, num_workers)
 powerlist = ['rota', 'patch', 'jigpa', 'jigro', 'plain']
 for powerword in powerlist:
     
-    dset_loaders = cometopower(powerword)
+    dset_loaders, this_num_classes = cometopower(powerword, data_dir, data_pre_transforms, data_post_transforms, batch_size, num_workers)
     tr_dset_loaders = dset_loaders['train']
     te_dset_loaders = dset_loaders['test']
     # #create the image folders objects
@@ -110,6 +136,7 @@ for powerword in powerlist:
 
     # #get the classes (THIS MIGHT NEED TO BE CORRECTED)
     # num_classes.append(len(tr_image_folder.classes))
+    num_classes.append(this_num_classes)
 
     # #get the sizes array
     # dsets_train.append(temp1)
@@ -126,9 +153,8 @@ for task in range(1, no_of_tasks+1):
 
     dataloader_train = dloaders_train[task-1]
     dataloader_test = dloaders_test[task-1]
-    dset_size_train = dsets_train[task-1]
-    dset_size_test = dsets_test[task-1]
-
+    # dset_size_train = dsets_train[task-1]
+    # dset_size_test = dsets_test[task-1]
     no_of_classes = num_classes[task-1]
 
     model = model_init(no_of_classes, device)

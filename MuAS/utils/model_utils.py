@@ -20,7 +20,7 @@ import pickle
 import sys
 sys.path.append('../')
 
-from model_class import *
+from MuAS.model_class import *
 
 
 def exp_lr_scheduler(optimizer, epoch, init_lr=0.0008, lr_decay_epoch=20):

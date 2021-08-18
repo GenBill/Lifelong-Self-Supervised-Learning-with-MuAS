@@ -10,3 +10,6 @@ StepRot/*/*
 EWC/data/*
 .git_prime/*
 models/*
+MuAS/model_train.py
+
+__pycache__/*

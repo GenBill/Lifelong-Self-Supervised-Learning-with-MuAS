@@ -402,7 +402,7 @@ def elich_train_model(model, task_no, num_classes, optimizer, optimizer_mlp, mod
                 loss.backward()
                 #print (model.reg_params)
 
-                optimizer.step(model.reg_params, retain_graph=True)
+                optimizer.step(model.reg_params)
                 optimizer_mlp.step(model.reg_params)
                 
                 running_loss += loss.item()

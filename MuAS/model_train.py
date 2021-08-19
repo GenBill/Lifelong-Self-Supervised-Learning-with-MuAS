@@ -208,7 +208,7 @@ def train_model(model, task_no, num_classes, optimizer, model_criterion,
 
 
 # a copy for elich
-def elich_train_model(model, task_no, num_classes, optimizer, model_criterion, 
+def elich_train_model(model, task_no, num_classes, optimizer, optimizer_mlp, model_criterion, 
     dataloader_train, dataloader_test, loader_plain, dset_size_train, dset_size_test, 
     num_epochs, device, lr = 0.001, reg_lambda = 0.01, miu = 0.99):
     """
@@ -291,8 +291,8 @@ def elich_train_model(model, task_no, num_classes, optimizer, model_criterion,
             running_loss = 0
             running_corrects = 0
 
+            # eval 阶段
             model.tmodel.eval()
-
             for data in dataloader_test:
 
                 if len(data)==2:
@@ -352,6 +352,7 @@ def elich_train_model(model, task_no, num_classes, optimizer, model_criterion,
 
             #scales the optimizer every 20 epochs 
             optimizer = exp_lr_scheduler(optimizer, epoch, lr)
+            optimizer_mlp = exp_lr_scheduler(optimizer_mlp, epoch, lr)
 
             model.tmodel.train(True)
 
@@ -384,6 +385,7 @@ def elich_train_model(model, task_no, num_classes, optimizer, model_criterion,
                 
                 model.tmodel.to(device)
                 optimizer.zero_grad()
+                optimizer_mlp.zero_grad()
                 
                 moutputs = model.tmodel(input_data[0])
                 for i in range(1, len(input_data)):
@@ -401,6 +403,7 @@ def elich_train_model(model, task_no, num_classes, optimizer, model_criterion,
                 #print (model.reg_params)
 
                 optimizer.step(model.reg_params)
+                optimizer_mlp.step(model.reg_params)
                 
                 running_loss += loss.item()
                 del loss

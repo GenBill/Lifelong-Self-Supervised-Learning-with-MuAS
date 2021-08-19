@@ -119,3 +119,7 @@ optimizer.step()
 params = list(net.named_parameters())   # get the index by debuging
 for params in net.parameters():
     print(params.data)
+
+print('--------2021 08 19--------')
+for params in net.parameters():
+    print(params.name)

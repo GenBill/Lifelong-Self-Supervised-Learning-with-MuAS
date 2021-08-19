@@ -46,7 +46,7 @@ class local_sgd(optim.SGD):
                 d_p = p.grad.data
 
                 if p in reg_params:
-
+                    # print(p, reg_params)
                     param_dict = reg_params[p]
 
                     omega = param_dict['omega']

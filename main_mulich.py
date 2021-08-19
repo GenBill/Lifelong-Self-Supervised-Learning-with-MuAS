@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from agent.mission.m_plain import plainloader
 import torch
 torch.backends.cudnn.benchmark=True
 
@@ -55,8 +56,8 @@ miu = args.miu
 dloaders_train = []
 dloaders_test = []
 
-dsets_train = []
-dsets_test = []
+# dsets_train = []
+# dsets_test = []
 
 num_classes = []
 
@@ -112,10 +113,15 @@ data_dir = os.path.join(os.getcwd(), "../Storage/Kaggle265")
 # for tdir in sorted(os.listdir(data_dir+'/train/')):
 
 dset_size_train, dset_size_test = cometopower('none', data_dir, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+loader_plain = plainloader(data_dir, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+
 powerlist = ['rota', 'patch', 'jigpa', 'jigro', 'plain']
+num_in_times = [1, 2, 4, 4, 1]
+num_classes = [4, 8, 24, 96, 265]
+
 for powerword in powerlist:
     
-    dset_loaders, this_num_classes = cometopower(powerword, data_dir, data_pre_transforms, data_post_transforms, batch_size, num_workers)
+    dset_loaders = cometopower(powerword, data_dir, data_pre_transforms, data_post_transforms, batch_size, num_workers)
     tr_dset_loaders = dset_loaders['train']
     te_dset_loaders = dset_loaders['test']
     # #create the image folders objects
@@ -136,7 +142,7 @@ for powerword in powerlist:
 
     # #get the classes (THIS MIGHT NEED TO BE CORRECTED)
     # num_classes.append(len(tr_image_folder.classes))
-    num_classes.append(this_num_classes)
+    # num_classes.append(this_num_classes)
 
     # #get the sizes array
     # dsets_train.append(temp1)
@@ -155,12 +161,17 @@ for task in range(1, no_of_tasks+1):
     dataloader_test = dloaders_test[task-1]
     # dset_size_train = dsets_train[task-1]
     # dset_size_test = dsets_test[task-1]
+    no_of_in_times = num_in_times[task-1]
     no_of_classes = num_classes[task-1]
 
-    model = model_init(no_of_classes, device)
+    model = model_init(no_of_in_times, no_of_classes, device)
 
-    mas_train(model, task, num_epochs, no_of_layers, no_of_classes, 
-        dataloader_train, dataloader_test, dset_size_train, dset_size_test, 
+    # mas_train(model, task, num_epochs, no_of_layers, no_of_classes, 
+    #     dataloader_train, dataloader_test, dset_size_train, dset_size_test, 
+    #     device, lr, reg_lambda, miu)
+    mulich_train(model, task, num_epochs, no_of_layers, no_of_classes, 
+        dataloader_train, dataloader_test, loader_plain['train'], # include ['train'] and ['test']
+        dset_size_train, dset_size_test, 
         device, lr, reg_lambda, miu)
     
 
@@ -173,12 +184,15 @@ for task in range(1, no_of_tasks+1):
     print ("Testing the model on task {}".format(task))
 
     dataloader = dloaders_test[task-1]
-    dset_size = dsets_test[task-1]
+    dset_size = dset_size_test # dsets_test[task-1]
+    no_of_in_times = num_in_times[task-1]
     no_of_classes = num_classes[task-1]
-
-    forgetting = compute_forgetting(task, dataloader, dset_size, device)
+    
+    # now_performance - old_performance
+    forgetting = compute_forgetting(task, no_of_in_times, dataloader, dset_size, device)
 
     print ("The forgetting undergone on task {} is {:.4f}%".format(task, forgetting*100))
+    
 
 
 

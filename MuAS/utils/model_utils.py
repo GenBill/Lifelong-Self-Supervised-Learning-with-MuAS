@@ -120,7 +120,7 @@ def create_task_dir(task_no, no_of_classes, store_path):
 
 
 
-def model_inference(task_no, device):
+def model_inference(task_no, in_times, device):
     
     """
     Inputs
@@ -140,7 +140,6 @@ def model_inference(task_no, device):
     model = shared_model(pre_model)
 
     path_to_model = os.path.join(os.getcwd(), "models")
-
     path_to_head = os.path.join(os.getcwd(), "models", "Task_" + str(task_no))
     
     #get the number of classes by reading from the text file created during initialization for this task
@@ -150,22 +149,37 @@ def model_inference(task_no, device):
     file_object.close()
     
     num_classes = int(num_classes)
-    #print (num_classes)
-    in_features = model.tmodel.classifier[-1].in_features
     
+
+    mid_features = model.tmodel.classifier[-1].in_features
+    in_features = mid_features * in_times
     del model.tmodel.classifier[-1]
+    
     #load the classifier head for the given task identified by the task number
-    classifier = classification_head(in_features, num_classes)
+    # print(in_features, mid_features, num_classes)
+    classifier = classification_head(in_features, mid_features, num_classes)
     classifier.load_state_dict(torch.load(os.path.join(path_to_head, "head.pth")))
 
     #load the trained shared model
     model.load_state_dict(torch.load(os.path.join(path_to_model, "shared_model.pth")))
 
-    model.tmodel.classifier.add_module('6', nn.Linear(in_features, num_classes))
+    # model.tmodel.classifier.add_module('6', nn.Linear(in_features, num_classes))
+    model.add_module('mlptail', 
+        nn.Sequential(
+            nn.Linear(in_features, mid_features), 
+            nn.LeakyReLU(),
+            nn.Linear(mid_features, mid_features), 
+            nn.LeakyReLU(),
+            nn.Linear(mid_features, num_classes)
+        )
+    )
 
     #change the weights layers to the classifier head weights
-    model.tmodel.classifier[-1].weight.data = classifier.fc.weight.data
-    model.tmodel.classifier[-1].bias.data = classifier.fc.bias.data
+    for i in range(3):
+        model.mlptail[2*i].weight.data = classifier.fc[i].weight.data
+        model.mlptail[2*i].bias.data = classifier.fc[i].bias.data
+    # model.tmodel.classifier[-1].weight.data = classifier.fc.weight.data
+    # model.tmodel.classifier[-1].bias.data = classifier.fc.bias.data
 
     #device = torch.device("cuda:0" if use_gpu else "cpu")
     model.eval()
@@ -175,7 +189,7 @@ def model_inference(task_no, device):
 
 
 
-def model_init(no_classes, device):
+def model_init(in_times, no_classes, device):
     """
     Inputs
     1) no_classes: The number of classes that the model is exposed to in the new task
@@ -196,16 +210,31 @@ def model_init(no_classes, device):
     model = shared_model(pre_model)
 
     #initialize a new classification head
+    # print(len(model.tmodel.classifier))
     in_features = model.tmodel.classifier[-1].in_features
-
     del model.tmodel.classifier[-1]
+    # if len(model.tmodel.classifier)==7:
+    #     in_features = model.tmodel.classifier[-1].in_features
+    #     del model.tmodel.classifier[-1]
+    # else:
+    #     in_features = model.mlptail[0].in_features
+    #     del model.mlptail
 
     #load the model
     if os.path.isfile(path):
         model.load_state_dict(torch.load(path))
 
     #add the last classfication head to the shared model
-    model.tmodel.classifier.add_module('6', nn.Linear(in_features, no_classes))
+    model.add_module('mlptail', 
+        nn.Sequential(
+            nn.Linear(in_features*in_times, in_features), 
+            nn.LeakyReLU(),
+            nn.Linear(in_features, in_features), 
+            nn.LeakyReLU(),
+            nn.Linear(in_features, no_classes)
+        )
+    )
+    # model.tmodel.classifier.add_module('6', nn.Linear(in_features, no_classes))
 
     #load the reg_params stored
     if os.path.isfile(path_to_reg):
@@ -239,13 +268,15 @@ def save_model(model, task_no, epoch_accuracy):
     path_to_head = os.path.join(path_to_model, "Task_" + str(task_no))
 
     #get the features of the classification head
-    in_features = model.tmodel.classifier[-1].in_features 
-    out_features = model.tmodel.classifier[-1].out_features
+    in_features = model.mlptail[0].in_features
+    mid_features = model.mlptail[0].out_features
+    out_features = model.mlptail[-1].out_features
 
     #seperate out the classification head from the model
-    ref = classification_head(in_features, out_features)
-    ref.fc.weight.data = model.tmodel.classifier[-1].weight.data
-    ref.fc.bias.data = model.tmodel.classifier[-1].bias.data
+    ref = classification_head(in_features, mid_features, out_features)
+    for i in range(3):
+        ref.fc[i].weight.data = model.mlptail[2*i].weight.data
+        ref.fc[i].bias.data = model.mlptail[2*i].bias.data
 
     #save the reg_params
     reg_params = model.reg_params
@@ -255,7 +286,7 @@ def save_model(model, task_no, epoch_accuracy):
     f.close()
 
     #save tge model
-    del model.tmodel.classifier[-1]
+    del model.mlptail
 
     #save the model at the specified location
     torch.save(model.state_dict(), os.path.join(path_to_model, "shared_model.pth"))

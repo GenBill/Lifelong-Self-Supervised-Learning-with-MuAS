@@ -24,9 +24,13 @@ class classification_head(nn.Module):
 
     """
     
-    def __init__(self, in_features, out_features):
+    def __init__(self, in_features, mid_features, out_features):
         super(classification_head, self).__init__()
-        self.fc = nn.Linear(in_features, out_features)
+        self.fc = nn.Sequential(
+            nn.Linear(in_features, mid_features), 
+            nn.Linear(mid_features, mid_features), 
+            nn.Linear(mid_features, out_features)
+        )
 
     def forward(self, x):
         return x

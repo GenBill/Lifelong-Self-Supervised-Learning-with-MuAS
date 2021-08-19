@@ -13,21 +13,21 @@ def cometopower(powerword, data_root, data_pre_transforms, data_post_transforms,
         return len(image_datasets['train']), len(image_datasets['test'])
 
     if powerword=='rota':
-        return rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers), 4
+        return rotaloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
     
     if powerword=='patch':
-        return patchloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers), 8
+        return patchloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
     
     if powerword=='jigpa':
-        return jigpaloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers), 24
+        return jigpaloader(patch_dim, gap, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
         
     if powerword=='jigro':
-        return jigroloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers), 96
+        return jigroloader(patch_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
         
     if powerword=='contra':
-        return contraloader(contra_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers), 2
+        return contraloader(contra_dim, jitter, data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
     
     if powerword=='plain':
-        return plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers), 265
+        return plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
     
     return None

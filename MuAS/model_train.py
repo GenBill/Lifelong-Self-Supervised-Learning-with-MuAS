@@ -328,6 +328,9 @@ def elich_train_model(model, task_no, num_classes, optimizer, optimizer_mlp, mod
                 del input_data
 
                 _, preds = torch.max(output, 1)
+                loss = model_criterion(output, labels)
+                running_loss += loss.item()
+                
                 del moutputs
                 del output
     
@@ -335,7 +338,11 @@ def elich_train_model(model, task_no, num_classes, optimizer, optimizer_mlp, mod
                 del preds
                 del labels
 
+            epoch_loss = running_loss/dset_size_test
             epoch_accuracy = running_corrects.double()/dset_size_test
+
+            print('Test Loss: {:.4f} Test Acc: {:.4f}'.format(epoch_loss, epoch_accuracy))
+            print()
 
         
         else:
@@ -416,7 +423,7 @@ def elich_train_model(model, task_no, num_classes, optimizer, optimizer_mlp, mod
             epoch_accuracy = running_corrects.double()/dset_size_train
 
 
-            print('Loss: {:.4f} Acc: {:.4f}'.format(epoch_loss, epoch_accuracy))
+            print('Train Loss: {:.4f} Train Acc: {:.4f}'.format(epoch_loss, epoch_accuracy))
             print()
             
             #avoid saving a file twice

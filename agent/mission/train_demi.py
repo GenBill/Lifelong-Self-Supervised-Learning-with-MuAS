@@ -32,12 +32,12 @@ def matcopy(this, source):
     return this
 
 # General Code for supervised train
-def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra, 
+def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, # fc_contra, 
     loader_joint, loader_test, 
     # 警告：optimizer_all 不含 fc_plain
     # 警告：optimizer_0 仅优化 fc_plain
-    optimizer_all, optimizer_0, optimizer_1, optimizer_2, optimizer_3, optimizer_4, 
-    scheduler_all, scheduler_0, scheduler_1, scheduler_2, scheduler_3, scheduler_4, 
+    optimizer_all, optimizer_0, optimizer_1, optimizer_2, optimizer_3, # optimizer_4, 
+    scheduler_all, scheduler_0, scheduler_1, scheduler_2, scheduler_3, # scheduler_4, 
     criterion, device, checkpoint_path, file, saveinterval=1, last_epochs=0, num_epochs=20):
     
     since = time.time()
@@ -71,7 +71,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                 fc_rota.train()
                 fc_patch.train()
                 fc_jigpa.train()
-                fc_contra.train()
+                # fc_contra.train()
                 
                 # Train Part
                 for _, (iter_plain, iter_valid, iter_rota, iter_patch, iter_jigpa, iter_contra) in enumerate(tqdm(loader_joint)):
@@ -169,28 +169,28 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                     # matcopy(model_ft, backup)
                     model_ft.load_state_dict(backup)
 
-                    # contra main
-                    model_ft.train()
-                    outputs_0 = fc_contra(torch.cat(
-                        (model_ft(contra_in_0), model_ft(contra_in_1)), dim = 1
-                    ))
-                    outputs_1 = fc_contra(torch.cat(
-                        (model_ft(contra_in_0), model_ft(contra_in_2)), dim = 1
-                    ))
-                    loss_4 = criterion(outputs_0, contra_la_0) + criterion(outputs_1, contra_la_1)
-                    optimizer_4.zero_grad()
-                    loss_4.backward()
-                    optimizer_4.step()
+                    # # contra main
+                    # model_ft.train()
+                    # outputs_0 = fc_contra(torch.cat(
+                    #     (model_ft(contra_in_0), model_ft(contra_in_1)), dim = 1
+                    # ))
+                    # outputs_1 = fc_contra(torch.cat(
+                    #     (model_ft(contra_in_0), model_ft(contra_in_2)), dim = 1
+                    # ))
+                    # loss_4 = criterion(outputs_0, contra_la_0) + criterion(outputs_1, contra_la_1)
+                    # optimizer_4.zero_grad()
+                    # loss_4.backward()
+                    # optimizer_4.step()
 
-                    # contra valid
-                    model_ft.eval()
-                    with torch.no_grad() :
-                        loss_valid_4 = criterion(fc_plain(model_ft(valid_inputs)), valid_labels).item()
+                    # # contra valid
+                    # model_ft.eval()
+                    # with torch.no_grad() :
+                    #     loss_valid_4 = criterion(fc_plain(model_ft(valid_inputs)), valid_labels).item()
                     
-                    # contra return
-                    weight[3] = loss_origin - loss_valid_4
-                    # matcopy(model_ft, backup)
-                    model_ft.load_state_dict(backup)
+                    # # contra return
+                    # weight[3] = loss_origin - loss_valid_4
+                    # # matcopy(model_ft, backup)
+                    # model_ft.load_state_dict(backup)
 
                     # fine train
                     model_ft.train()
@@ -208,17 +208,17 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                         (model_ft(jigpa_in_0), model_ft(jigpa_in_1), model_ft(jigpa_in_2), model_ft(jigpa_in_3)), dim = 1
                     )), jigpa_la)
 
-                    # Contra
-                    outputs_0 = fc_contra(torch.cat(
-                        (model_ft(contra_in_0), model_ft(contra_in_1)), dim = 1
-                    ))
-                    outputs_1 = fc_contra(torch.cat(
-                        (model_ft(contra_in_0), model_ft(contra_in_2)), dim = 1
-                    ))
-                    loss_4 = criterion(outputs_0, contra_la_0) + criterion(outputs_1, contra_la_1)
+                    # # Contra
+                    # outputs_0 = fc_contra(torch.cat(
+                    #     (model_ft(contra_in_0), model_ft(contra_in_1)), dim = 1
+                    # ))
+                    # outputs_1 = fc_contra(torch.cat(
+                    #     (model_ft(contra_in_0), model_ft(contra_in_2)), dim = 1
+                    # ))
+                    # loss_4 = criterion(outputs_0, contra_la_0) + criterion(outputs_1, contra_la_1)
 
-                    loss_ft = weight[0]*loss_1 + weight[1]*loss_2 + weight[2]*loss_3 + weight[3]*loss_4
-                    loss_all = (1-weight[0])*loss_1 + (1-weight[1])*loss_2 + (1-weight[2])*loss_3 + (1-weight[3])*loss_4
+                    loss_ft = weight[0]*loss_1 + weight[1]*loss_2 + weight[2]*loss_3# + weight[3]*loss_4
+                    loss_all = (1-weight[0])*loss_1 + (1-weight[1])*loss_2 + (1-weight[2])*loss_3# + (1-weight[3])*loss_4
                     # if iter_index%5==0 :
                     #     print('Joint Loss : {:4f}, {:4f}, {:4f}, {:4f}'.format(loss_1.item(), loss_2.item(), loss_3.item(), loss_4.item()))
                     data_writer.add_scalars('data/StepLoss_Group', {
@@ -226,13 +226,13 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                         'RotaLoss': loss_1.item(),
                         'PatchLoss': loss_2.item(),
                         'JigpaLoss': loss_3.item(),
-                        'ContraLoss': loss_4.item(),
+                        # 'ContraLoss': loss_4.item(),
                     }, n_iter)
                     data_writer.add_scalars('data/LossWeight_Group', {
                         'LossWeight_1': weight[0],
                         'LossWeight_2': weight[1],
                         'LossWeight_3': weight[2],
-                        'LossWeight_4': weight[3],
+                        # 'LossWeight_4': weight[3],
                     }, n_iter)
                     n_iter += 1
 
@@ -311,14 +311,14 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
                     best_rota_wts = copy.deepcopy(fc_rota.state_dict())
                     best_patch_wts = copy.deepcopy(fc_patch.state_dict())
                     best_jigpa_wts = copy.deepcopy(fc_jigpa.state_dict())
-                    best_contra_wts = copy.deepcopy(fc_contra.state_dict())
+                    # best_contra_wts = copy.deepcopy(fc_contra.state_dict())
         
         scheduler_all.step()
         scheduler_0.step()
         scheduler_1.step()
         scheduler_2.step()
         scheduler_3.step()
-        scheduler_4.step()
+        # scheduler_4.step()
 
         if (epoch+1) % saveinterval == 0:
             torch.save(model_ft.state_dict(), '%s/model_epoch_%d.pth' % (checkpoint_path, epoch))
@@ -326,7 +326,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
             torch.save(fc_rota.state_dict(), '%s/fc_rota_epoch_%d.pth' % (checkpoint_path, epoch))
             torch.save(fc_patch.state_dict(), '%s/fc_patch_epoch_%d.pth' % (checkpoint_path, epoch))
             torch.save(fc_jigpa.state_dict(), '%s/fc_jigpa_epoch_%d.pth' % (checkpoint_path, epoch))
-            torch.save(fc_contra.state_dict(), '%s/fc_contra_epoch_%d.pth' % (checkpoint_path, epoch))
+            # torch.save(fc_contra.state_dict(), '%s/fc_contra_epoch_%d.pth' % (checkpoint_path, epoch))
 
     time_elapsed = time.time() - since
     print('Training complete in {:.0f}m {:.0f}s \n'.format(time_elapsed // 60, time_elapsed % 60))
@@ -341,9 +341,9 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra,
     fc_rota.load_state_dict(best_rota_wts)
     fc_patch.load_state_dict(best_patch_wts)
     fc_jigpa.load_state_dict(best_jigpa_wts)
-    fc_contra.load_state_dict(best_contra_wts)
+    # fc_contra.load_state_dict(best_contra_wts)
     
     data_writer.close()
     
-    return model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra
+    return model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa#, fc_contra
 

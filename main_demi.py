@@ -79,7 +79,7 @@ torch.manual_seed(opt.manualSeed)
 
 cudnn.benchmark = True
 image_size = (224, 224)
-data_root = '../../Kaggle265'   # '../Dataset/Kaggle265'
+data_root = '../Storage/Kaggle265'   # '../Dataset/Kaggle265'
 batch_size = opt.batchsize      # 512, 256
 num_workers = opt.numworkers    # 4
 
@@ -154,7 +154,9 @@ fc_jigpa = make_MLP(4*num_ftrs, 4*num_ftrs, output_ftrs=24, layers=4)
 # Bye Jigro
 # fc_jigro = make_MLP(4*num_ftrs, 4*num_ftrs, output_ftrs=96, layers=8)   # output_ftrs=24
 # 对比学习部分
-fc_contra = make_MLP(2*num_ftrs, 2*num_ftrs, output_ftrs=2, layers=2)
+
+# 暂时移除
+# fc_contra = make_MLP(2*num_ftrs, 2*num_ftrs, output_ftrs=2, layers=2)
 
 if torch.cuda.device_count() > 1: 
     print("Let's use", torch.cuda.device_count(), "GPUs!")
@@ -163,14 +165,14 @@ if torch.cuda.device_count() > 1:
     fc_rota = nn.DataParallel(fc_rota)
     fc_patch = nn.DataParallel(fc_patch)
     fc_jigpa = nn.DataParallel(fc_jigpa)
-    fc_contra = nn.DataParallel(fc_contra)
+    # fc_contra = nn.DataParallel(fc_contra)
 
 model_ft = model_ft.to(device)
 fc_plain = fc_plain.to(device)
 fc_rota = fc_rota.to(device)
 fc_patch = fc_patch.to(device)
 fc_jigpa = fc_jigpa.to(device)
-fc_contra = fc_contra.to(device)
+# fc_contra = fc_contra.to(device)
 
 # Load state : model & fc_layer
 def loadstate(model, net_Cont, device, file):
@@ -185,7 +187,7 @@ loadstate(fc_rota, opt.rotaCont, device, file)
 loadstate(fc_patch, opt.patchCont, device, file)
 loadstate(fc_jigpa, opt.jigpaCont, device, file)
 # loadstate(fc_jigro, opt.jigroCont, device, file)
-loadstate(fc_contra, opt.contraCont, device, file)
+# loadstate(fc_contra, opt.contraCont, device, file)
 
 # Model trainer
 criterion = nn.CrossEntropyLoss()
@@ -197,7 +199,7 @@ optimizer_all = optim.SGD([
     {'params': fc_rota.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
     {'params': fc_patch.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
     {'params': fc_jigpa.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
-    {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
+    # {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
 ])
 scheduler_all = lr_scheduler.MultiStepLR(optimizer_all, milestones, milegamma)
 
@@ -227,28 +229,22 @@ optimizer_jigpa = optim.SGD([
 ])
 scheduler_jigpa = lr_scheduler.MultiStepLR(optimizer_jigpa, milestones, milegamma)
 
-optimizer_contra = optim.SGD([
-    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
-    {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
-])
-scheduler_contra = lr_scheduler.MultiStepLR(optimizer_contra, milestones, milegamma)
-
-optimizer_contra = optim.SGD([
-    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
-    {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
-])
-scheduler_contra = lr_scheduler.MultiStepLR(optimizer_contra, milestones, milegamma)
+# optimizer_contra = optim.SGD([
+#     {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
+#     {'params': fc_contra.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
+# ])
+# scheduler_contra = lr_scheduler.MultiStepLR(optimizer_contra, milestones, milegamma)
 
 # print('Training ... {}\n'.format(opt.powerword))
 # 'rota' , 'patch' , 'jigpa' , 'contra'
 
 model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra = demitrain(
-    model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra, 
+    model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, # fc_contra, 
     loader_joint, loader_test, 
     # 警告：optimizer_all 不含 fc_plain
     # 警告：optimizer_0 仅优化 fc_plain
-    optimizer_all, optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, optimizer_contra, 
-    scheduler_all, scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, scheduler_contra, 
+    optimizer_all, optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, # optimizer_contra, 
+    scheduler_all, scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, # scheduler_contra, 
     criterion, device, out_dir, file, saveinterval, 500, num_epochs)
 
 milestones = [5, 10, 20, 40, 80, 100]

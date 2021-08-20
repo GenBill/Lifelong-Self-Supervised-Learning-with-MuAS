@@ -2,6 +2,8 @@ from .dataset import PlainDataset
 
 import torch
 import torch.nn.parallel
+from tensorboardX import SummaryWriter
+
 from tqdm import tqdm
 import time
 import copy
@@ -15,6 +17,9 @@ def plaintrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
     since = time.time()
     best_acc = 0.0
 
+    data_path = checkpoint_path+'/../Tensorboard'
+    data_writer = SummaryWriter(logdir=data_path)
+
     for epoch in range(last_epochs, last_epochs+num_epochs):
         print('\nEpoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
         file.write('\nEpoch {}/{} \n'.format(epoch, last_epochs+num_epochs - 1))
@@ -27,9 +32,11 @@ def plaintrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
             if phase == 'train':
                 model.train()  # Set model to training mode
                 fc_layer.train()
+                dirname = 'data/TrainLoss_Plain'
             else:
                 model.eval()  # Set model to evaluate mode
                 fc_layer.eval()
+                dirname = 'data/TestLoss_Plain'
 
             running_loss = 0.0
             running_corrects = 0
@@ -65,6 +72,12 @@ def plaintrain(model, fc_layer, dataloaders, criterion, optimizer, scheduler,
             # Metrics
             top_1_acc = running_corrects / n_samples
             epoch_loss = running_loss / n_samples
+
+            data_writer.add_scalars(dirname, {
+                    'Acc': top_1_acc,
+                    'EpochLoss': epoch_loss,
+                }, epoch)
+
             print('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))
 
             file.write('{} Loss: {:.6f} Top 1 Acc: {:.6f} \n'.format(phase, epoch_loss, top_1_acc))

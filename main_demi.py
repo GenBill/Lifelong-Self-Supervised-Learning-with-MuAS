@@ -238,7 +238,7 @@ scheduler_jigpa = lr_scheduler.MultiStepLR(optimizer_jigpa, milestones, milegamm
 # print('Training ... {}\n'.format(opt.powerword))
 # 'rota' , 'patch' , 'jigpa' , 'contra'
 
-model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, fc_contra = demitrain(
+model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa = demitrain(#, fc_contra = demitrain(
     model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, # fc_contra, 
     loader_joint, loader_test, 
     # 警告：optimizer_all 不含 fc_plain

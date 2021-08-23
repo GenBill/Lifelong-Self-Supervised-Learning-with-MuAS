@@ -79,7 +79,8 @@ torch.manual_seed(opt.manualSeed)
 
 cudnn.benchmark = True
 image_size = (224, 224)
-data_root = '../Storage/Kaggle265'   # '../Dataset/Kaggle265'
+data_root = '~/Datasets/miniImageNet'
+# data_root = '../Storage/Kaggle265'   # '../Dataset/Kaggle265'
 batch_size = opt.batchsize      # 512, 256
 num_workers = opt.numworkers    # 4
 
@@ -88,7 +89,7 @@ contra_dim = 128
 gap = 6
 jitter = 6
 
-saveinterval = 1
+saveinterval = 10
 num_epochs = opt.epochs_0
 fine_epochs = opt.epochs_1
 
@@ -206,7 +207,7 @@ scheduler_all = lr_scheduler.MultiStepLR(optimizer_all, milestones, milegamma)
 # milestones = [10, 20, 30, 40]
 # milegamma = 0.6
 optimizer_plain = optim.SGD([
-    # {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
+    {'params': model_ft.parameters(), 'lr': opt.lr_net, 'momentum': opt.momentum, 'weight_decay': opt.weight_net},
     {'params': fc_plain.parameters(), 'lr': opt.lr_fc, 'momentum': opt.momentum, 'weight_decay': opt.weight_fc},
 ])
 scheduler_plain = lr_scheduler.MultiStepLR(optimizer_plain, milestones, milegamma)
@@ -245,7 +246,7 @@ model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa = demitrain(#, fc_contra = demit
     # 警告：optimizer_0 仅优化 fc_plain
     optimizer_all, optimizer_plain, optimizer_rota, optimizer_patch, optimizer_jigpa, # optimizer_contra, 
     scheduler_all, scheduler_plain, scheduler_rota, scheduler_patch, scheduler_jigpa, # scheduler_contra, 
-    criterion, device, out_dir, file, saveinterval, 500, num_epochs)
+    criterion, device, out_dir, file, saveinterval, 0, num_epochs)
 
 milestones = [5, 10, 20, 40, 80, 100]
 milegamma = 0.8
@@ -258,5 +259,5 @@ scheduler_finetune = lr_scheduler.MultiStepLR(optimizer_finetune, milestones, mi
 model_ft, fc_plain = plaintrain(
     model_ft, fc_plain, 
     loader_plain, criterion, optimizer_finetune, scheduler_finetune, 
-    device, out_dir, file, saveinterval, 500, fine_epochs
+    device, out_dir, file, saveinterval, num_epochs, fine_epochs
 )

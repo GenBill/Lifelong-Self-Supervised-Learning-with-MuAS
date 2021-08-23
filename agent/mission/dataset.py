@@ -779,7 +779,7 @@ class DJDataset(Dataset):
     def __init__(self, split, root_paths, patch_dim, gap, jitter, preTransform=None, postTransform=None):
         self.root_paths = root_paths
         self.image_paths = root_paths + '/' + split
-        self.valid_paths = root_paths + '/valid'
+        self.valid_paths = root_paths + '/val'# + 'id'
 
         self.patch_dim = patch_dim
         self.gap = gap
@@ -1039,4 +1039,4 @@ class DJDataset(Dataset):
         return patch_0, patch_1, patch_2
 
     def __getitem__(self, index):
-        return self.get_plain(index), self.get_valid(index), self.get_rota(index), self.get_patch(index), self.get_jigpa(index), self.get_contra(index)
+        return self.get_plain(index), self.get_valid(index), self.get_rota(index), self.get_patch(index), self.get_jigpa(index)#, self.get_contra(index)

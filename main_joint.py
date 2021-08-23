@@ -78,7 +78,7 @@ torch.manual_seed(opt.manualSeed)
 
 cudnn.benchmark = True
 image_size = (224, 224)
-data_root = '~/Datasets/Kaggle265'
+data_root = '~/Datasets/miniImageNet' # '~/Storage/Kaggle265'  #'~/Datasets/Kaggle265'
 batch_size = opt.batchsize      # 512, 256
 num_workers = opt.numworkers    # 4
 
@@ -87,7 +87,7 @@ contra_dim = 128
 gap = 6
 jitter = 6
 
-saveinterval = 1
+saveinterval = 10
 num_epochs = 1000
 fine_epochs = 200
 

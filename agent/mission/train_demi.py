@@ -38,7 +38,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, # fc_contra,
     # 警告：optimizer_0 仅优化 fc_plain
     optimizer_all, optimizer_0, optimizer_1, optimizer_2, optimizer_3, # optimizer_4, 
     scheduler_all, scheduler_0, scheduler_1, scheduler_2, scheduler_3, # scheduler_4, 
-    criterion, device, checkpoint_path, file, saveinterval=1, last_epochs=0, num_epochs=20):
+    criterion, device, checkpoint_path, file, saveinterval=10, last_epochs=0, num_epochs=20):
     
     since = time.time()
     best_acc = 0.0
@@ -74,7 +74,8 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, # fc_contra,
                 # fc_contra.train()
                 
                 # Train Part
-                for _, (iter_plain, iter_valid, iter_rota, iter_patch, iter_jigpa, iter_contra) in enumerate(tqdm(loader_joint)):
+                for _, (iter_plain, iter_valid, iter_rota, iter_patch, iter_jigpa) in enumerate(tqdm(loader_joint)):
+                # for _, (iter_plain, iter_valid, iter_rota, iter_patch, iter_jigpa, iter_contra) in enumerate(tqdm(loader_joint)):
                     inputs, labels = iter_plain
                     inputs, labels = inputs.to(device), labels.to(device)
 
@@ -90,16 +91,16 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, # fc_contra,
                     jigpa_in_0, jigpa_in_1, jigpa_in_2, jigpa_in_3, jigpa_la = iter_jigpa
                     jigpa_in_0, jigpa_in_1, jigpa_in_2, jigpa_in_3, jigpa_la = jigpa_in_0.to(device), jigpa_in_1.to(device), jigpa_in_2.to(device), jigpa_in_3.to(device), jigpa_la.to(device)
                     
-                    contra_in_0, contra_in_1, contra_in_2 = iter_contra
-                    contra_in_0, contra_in_1, contra_in_2 = contra_in_0.to(device), contra_in_1.to(device), contra_in_2.to(device)
+                    # contra_in_0, contra_in_1, contra_in_2 = iter_contra
+                    # contra_in_0, contra_in_1, contra_in_2 = contra_in_0.to(device), contra_in_1.to(device), contra_in_2.to(device)
                     
                     # backup = copy.deepcopy(model_ft)
                     backup = copy.deepcopy(model_ft.state_dict())
                     batchSize = labels.size(0)
                     n_samples += batchSize
 
-                    contra_la_0 = torch.zeros(batchSize, dtype=int, device=device)
-                    contra_la_1 = torch.ones(batchSize, dtype=int, device=device)
+                    # contra_la_0 = torch.zeros(batchSize, dtype=int, device=device)
+                    # contra_la_1 = torch.ones(batchSize, dtype=int, device=device)
 
                     # Calculate origin loss
                     model_ft.eval()
@@ -242,6 +243,7 @@ def demitrain(model_ft, fc_plain, fc_rota, fc_patch, fc_jigpa, # fc_contra,
                     optimizer_all.step()
 
                     # plain 仅仅训练全连接层
+                    # 抢救一下，全训练试试看吧
                     fc_plain.train()
                     model_ft.eval()
                     outputs = fc_plain(model_ft(inputs))

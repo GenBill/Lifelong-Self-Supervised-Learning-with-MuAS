@@ -1,0 +1,1 @@
+python main_mulich.py --cuda '1' --batch_size 256 --num_workers 4 --num_epochs 100 --miu 0.9

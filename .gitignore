@@ -12,3 +12,4 @@ EWC/data/*
 models/
 
 __pycache__/*
+models*

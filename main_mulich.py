@@ -61,8 +61,9 @@ dloaders_test = []
 
 num_classes = []
 
+data_root = '~/Datasets/miniImageNet'
 # data_path = "~/Datasets/Kaggle265"
-data_path = "~/Storage/Kaggle265"
+# data_path = "~/Storage/Kaggle265"
 # data_path = os.path.join(os.getcwd(), "~/Datasets/Kaggle265")
 
 data_transforms = {

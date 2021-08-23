@@ -61,7 +61,7 @@ dloaders_test = []
 
 num_classes = []
 
-data_root = '~/Datasets/miniImageNet'
+data_dir = '~/Datasets/miniImageNet'
 # data_path = "~/Datasets/Kaggle265"
 # data_path = "~/Storage/Kaggle265"
 # data_path = os.path.join(os.getcwd(), "~/Datasets/Kaggle265")
@@ -105,9 +105,10 @@ data_post_transforms = {
 
 os.environ['CUDA_VISIBLE_DEVICES'] = cuda_index
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 # data_dir = "/home/zhangxuanming/Datasets/Kaggle265"
 # data_dir = os.path.join(os.getcwd(), "../Datasets/Kaggle265")
-data_dir = os.path.join(os.getcwd(), "../Storage/Kaggle265")
+# data_dir = os.path.join(os.getcwd(), "../Storage/Kaggle265")
 # data_dir = os.path.join(os.getcwd(), "../Necro/MuAS/Data")
 
 #create the dataloaders for all the tasks

@@ -39,13 +39,14 @@ parser.add_argument('--jigroCont', default='', help="path to fc_layer patch")
 parser.add_argument('--patchCont', default='', help="path to fc_layer jigpa")
 parser.add_argument('--jigpaCont', default='', help="path to fc_layer jigro")
 parser.add_argument('--contraCont', default='', help="path to fc_layer jigro")
-# parser.add_argument('--manualSeed', type=int, help='manual seed')
+parser.add_argument('--manualSeed', type=int, default=2077, help='manual seed')
 
 parser.add_argument('--pretrain', type=int, default=1, help="pretrain on")
+parser.add_argument('--classnum', type=int, default=265, help="set class num")
 
 # opt = parser.parse_args(args=[])
 opt = parser.parse_args()
-opt.manualSeed = 2077
+opt.classnum = 100
 # opt.netCont = './models/net_epoch_56.pth'
 
 dirname = opt.powerword.capitalize()

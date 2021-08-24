@@ -119,7 +119,7 @@ loader_plain = plainloader(data_dir, data_pre_transforms, data_post_transforms, 
 
 powerlist = ['rota', 'patch', 'jigpa', 'jigro', 'plain']
 num_in_times = [1, 2, 4, 4, 1]
-num_classes = [4, 8, 24, 96, 265]
+num_classes = [4, 8, 24, 96, 100]
 
 for powerword in powerlist:
     

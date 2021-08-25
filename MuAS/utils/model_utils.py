@@ -136,8 +136,7 @@ def model_inference(task_no, in_times, device):
     """
 
     #all models are derived from the Alexnet architecture
-    pre_model = models.alexnet(pretrained = True)
-    model = shared_model(pre_model)
+    model = shared_model()
 
     path_to_model = os.path.join(os.getcwd(), "models")
     path_to_head = os.path.join(os.getcwd(), "models", "Task_" + str(task_no))
@@ -164,20 +163,12 @@ def model_inference(task_no, in_times, device):
     model.load_state_dict(torch.load(os.path.join(path_to_model, "shared_model.pth")))
 
     # model.tmodel.classifier.add_module('6', nn.Linear(in_features, num_classes))
-    model.add_module('mlptail', 
-        nn.Sequential(
-            nn.Linear(in_features, mid_features), 
-            nn.LeakyReLU(),
-            nn.Linear(mid_features, mid_features), 
-            nn.LeakyReLU(),
-            nn.Linear(mid_features, num_classes)
-        )
-    )
+    model.mlptail = mlptail(in_features, mid_features, num_classes)
 
     #change the weights layers to the classifier head weights
     for i in range(3):
-        model.mlptail[2*i].weight.data = classifier.fc[i].weight.data
-        model.mlptail[2*i].bias.data = classifier.fc[i].bias.data
+        model.mlptail.fc[2*i].weight.data = classifier.fc[i].weight.data
+        model.mlptail.fc[2*i].bias.data = classifier.fc[i].bias.data
     # model.tmodel.classifier[-1].weight.data = classifier.fc.weight.data
     # model.tmodel.classifier[-1].bias.data = classifier.fc.bias.data
 
@@ -206,8 +197,7 @@ def model_init(in_times, no_classes, device):
     path = os.path.join(os.getcwd(), "models", "shared_model.pth")
     path_to_reg = os.path.join(os.getcwd(), "models", "reg_params.pickle")
 
-    pre_model = models.alexnet(pretrained = True)
-    model = shared_model(pre_model)
+    model = shared_model()
 
     #initialize a new classification head
     # print(len(model.tmodel.classifier))
@@ -225,15 +215,8 @@ def model_init(in_times, no_classes, device):
         model.load_state_dict(torch.load(path))
 
     #add the last classfication head to the shared model
-    model.add_module('mlptail', 
-        nn.Sequential(
-            nn.Linear(in_features*in_times, in_features), 
-            nn.LeakyReLU(),
-            nn.Linear(in_features, in_features), 
-            nn.LeakyReLU(),
-            nn.Linear(in_features, no_classes)
-        )
-    )
+    model.mlptail = mlptail(in_features*in_times, in_features, no_classes)
+
     # model.tmodel.classifier.add_module('6', nn.Linear(in_features, no_classes))
 
     #load the reg_params stored
@@ -268,15 +251,15 @@ def save_model(model, task_no, epoch_accuracy):
     path_to_head = os.path.join(path_to_model, "Task_" + str(task_no))
 
     #get the features of the classification head
-    in_features = model.mlptail[0].in_features
-    mid_features = model.mlptail[0].out_features
-    out_features = model.mlptail[-1].out_features
+    in_features = model.mlptail.in_features
+    mid_features = model.mlptail.mid_features
+    out_features = model.mlptail.out_features
 
     #seperate out the classification head from the model
     ref = classification_head(in_features, mid_features, out_features)
     for i in range(3):
-        ref.fc[i].weight.data = model.mlptail[2*i].weight.data
-        ref.fc[i].bias.data = model.mlptail[2*i].bias.data
+        ref.fc[i].weight.data = model.mlptail.fc[2*i].weight.data
+        ref.fc[i].bias.data = model.mlptail.fc[2*i].bias.data
 
     #save the reg_params
     reg_params = model.reg_params

@@ -30,9 +30,9 @@ parser.add_argument('--powerword', default='rota', help="Power Word, decide what
 parser.add_argument('--batchsize', type=int, default=512, help="set batch size")
 parser.add_argument('--numworkers', type=int, default=4, help="set num workers")
 parser.add_argument('--lr_net', type=float, default=1e-3, help='learning rate, default=0.001')
-parser.add_argument('--weight_net', type=float, default=1e-8, help="weight decay")
+parser.add_argument('--weight_net', type=float, default=1e-4, help="weight decay")
 parser.add_argument('--lr_fc', type=float, default=1e-3, help='learning rate, default=0.001')
-parser.add_argument('--weight_fc', type=float, default=1e-8, help="weight decay")
+parser.add_argument('--weight_fc', type=float, default=1e-4, help="weight decay")
 
 parser.add_argument('--netCont', default='', help="path to net (for continue training)")
 parser.add_argument('--plainCont', default='', help="path to plain fc_layer (for continue training)")

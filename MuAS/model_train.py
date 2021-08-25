@@ -388,8 +388,7 @@ def elich_train_model(model, task_no, num_classes, optimizer, optimizer_mlp, mod
                 # input_data, labels = data
                 del data
 
-                labels = labels.to(device) 
-                
+                labels = labels.to(device)
                 model.tmodel.to(device)
                 optimizer.zero_grad()
                 optimizer_mlp.zero_grad()
@@ -397,6 +396,8 @@ def elich_train_model(model, task_no, num_classes, optimizer, optimizer_mlp, mod
                 moutputs = model.tmodel(input_data[0])
                 for i in range(1, len(input_data)):
                     moutputs = torch.cat((moutputs, model.tmodel(input_data[i])), dim=1)
+                # print(moutputs.shape)
+                # print(model.mlptail)
                 output = model.mlptail(moutputs)
                 # output = model.tmodel(input_data)
                 del input_data

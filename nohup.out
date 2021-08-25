@@ -3089,3 +3089,1266 @@ Testing the model on task 4
 The forgetting undergone on task 4 is -15.1698%
 Testing the model on task 5
 The forgetting undergone on task 5 is 0.0000%
+
+
+Matplotlib created a temporary config/cache directory at /tmp/matplotlib-59x7ri82 because the default path (/home/20/xuanming/.cache/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Training the model on task 1
+Initializing omega values for layer features.8.weight
+Initializing omega values for layer features.8.bias
+Initializing omega values for layer features.10.weight
+Initializing omega values for layer features.10.bias
+Initializing omega values for layer classifier.1.weight
+Initializing omega values for layer classifier.1.bias
+Initializing omega values for layer classifier.4.weight
+Initializing omega values for layer classifier.4.bias
+Epoch 1/40
+--------------------
+lr is 0.01
+LR is set to 0.01
+lr is 0.01
+LR is set to 0.01
+Train Loss: 0.0023 Train Acc: 0.4408
+
+Epoch 2/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0020 Train Acc: 0.5236
+
+Epoch 3/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0019 Train Acc: 0.5624
+
+Epoch 4/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0018 Train Acc: 0.5935
+
+Epoch 5/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0017 Train Acc: 0.6117
+
+Epoch 6/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0017 Train Acc: 0.6273
+
+Epoch 7/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0016 Train Acc: 0.6425
+
+Epoch 8/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0016 Train Acc: 0.6510
+
+Epoch 9/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0016 Train Acc: 0.6588
+
+Epoch 10/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0016 Train Acc: 0.6678
+
+Epoch 11/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0015 Train Acc: 0.6732
+
+Epoch 12/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0015 Train Acc: 0.6791
+
+Epoch 13/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0015 Train Acc: 0.6847
+
+Epoch 14/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0015 Train Acc: 0.6888
+
+Epoch 15/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0015 Train Acc: 0.6943
+
+Epoch 16/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0014 Train Acc: 0.6968
+
+Epoch 17/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0014 Train Acc: 0.7014
+
+Epoch 18/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0014 Train Acc: 0.7019
+
+Epoch 19/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0014 Train Acc: 0.7067
+
+Epoch 20/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0014 Train Acc: 0.7078
+
+Epoch 21/40
+--------------------
+lr is 0.001
+LR is set to 0.001
+lr is 0.001
+LR is set to 0.001
+Train Loss: 0.0014 Train Acc: 0.7174
+
+Epoch 22/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0014 Train Acc: 0.7186
+
+Epoch 23/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0014 Train Acc: 0.7187
+
+Epoch 24/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0014 Train Acc: 0.7189
+
+Epoch 25/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0014 Train Acc: 0.7179
+
+Epoch 26/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0014 Train Acc: 0.7196
+
+Epoch 27/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7198
+
+Epoch 28/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7218
+
+Epoch 29/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7209
+
+Epoch 30/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7228
+
+Epoch 31/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7222
+
+Epoch 32/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7196
+
+Epoch 33/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7207
+
+Epoch 34/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7224
+
+Epoch 35/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7212
+
+Epoch 36/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7242
+
+Epoch 37/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7259
+
+Epoch 38/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7216
+
+Epoch 39/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7250
+
+Epoch 40/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7242
+
+Updating the omega values for this task
+Test Loss: 0.0013 Test Acc: 0.7409
+
+Training the model on task 2
+Epoch 1/40
+--------------------
+lr is 0.01
+LR is set to 0.01
+lr is 0.01
+LR is set to 0.01
+Train Loss: 0.0032 Train Acc: 0.3509
+
+Epoch 2/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0027 Train Acc: 0.4646
+
+Epoch 3/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0025 Train Acc: 0.4991
+
+Epoch 4/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0025 Train Acc: 0.5186
+
+Epoch 5/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0024 Train Acc: 0.5339
+
+Epoch 6/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0023 Train Acc: 0.5413
+
+Epoch 7/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0023 Train Acc: 0.5539
+
+Epoch 8/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0022 Train Acc: 0.5578
+
+Epoch 9/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0022 Train Acc: 0.5670
+
+Epoch 10/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0022 Train Acc: 0.5732
+
+Epoch 11/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0022 Train Acc: 0.5781
+
+Epoch 12/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0021 Train Acc: 0.5848
+
+Epoch 13/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0021 Train Acc: 0.5907
+
+Epoch 14/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0021 Train Acc: 0.5918
+
+Epoch 15/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0021 Train Acc: 0.6003
+
+Epoch 16/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0020 Train Acc: 0.6057
+
+Epoch 17/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0020 Train Acc: 0.6063
+
+Epoch 18/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0020 Train Acc: 0.6138
+
+Epoch 19/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0020 Train Acc: 0.6177
+
+Epoch 20/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0020 Train Acc: 0.6205
+
+Epoch 21/40
+--------------------
+lr is 0.001
+LR is set to 0.001
+lr is 0.001
+LR is set to 0.001
+Train Loss: 0.0019 Train Acc: 0.6254
+
+Epoch 22/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6286
+
+Epoch 23/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6310
+
+Epoch 24/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6280
+
+Epoch 25/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6327
+
+Epoch 26/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6325
+
+Epoch 27/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6322
+
+Epoch 28/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6337
+
+Epoch 29/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6336
+
+Epoch 30/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6333
+
+Epoch 31/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6339
+
+Epoch 32/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6357
+
+Epoch 33/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6352
+
+Epoch 34/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6355
+
+Epoch 35/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6372
+
+Epoch 36/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6380
+
+Epoch 37/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6399
+
+Epoch 38/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6400
+
+Epoch 39/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6387
+
+Epoch 40/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0019 Train Acc: 0.6410
+
+Updating the omega values for this task
+Test Loss: 0.0019 Test Acc: 0.6443
+
+Training the model on task 3
+Epoch 1/40
+--------------------
+lr is 0.01
+LR is set to 0.01
+lr is 0.01
+LR is set to 0.01
+Train Loss: 0.0031 Train Acc: 0.5177
+
+Epoch 2/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0026 Train Acc: 0.5879
+
+Epoch 3/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0025 Train Acc: 0.6042
+
+Epoch 4/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0024 Train Acc: 0.6123
+
+Epoch 5/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0024 Train Acc: 0.6226
+
+Epoch 6/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0022 Train Acc: 0.6375
+
+Epoch 7/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0021 Train Acc: 0.6587
+
+Epoch 8/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0019 Train Acc: 0.6826
+
+Epoch 9/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0018 Train Acc: 0.7007
+
+Epoch 10/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0017 Train Acc: 0.7127
+
+Epoch 11/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0017 Train Acc: 0.7226
+
+Epoch 12/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0016 Train Acc: 0.7302
+
+Epoch 13/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0016 Train Acc: 0.7365
+
+Epoch 14/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0015 Train Acc: 0.7432
+
+Epoch 15/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0015 Train Acc: 0.7489
+
+Epoch 16/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0015 Train Acc: 0.7519
+
+Epoch 17/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0014 Train Acc: 0.7584
+
+Epoch 18/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0014 Train Acc: 0.7606
+
+Epoch 19/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0014 Train Acc: 0.7655
+
+Epoch 20/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0014 Train Acc: 0.7682
+
+Epoch 21/40
+--------------------
+lr is 0.001
+LR is set to 0.001
+lr is 0.001
+LR is set to 0.001
+Train Loss: 0.0013 Train Acc: 0.7796
+
+Epoch 22/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7820
+
+Epoch 23/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7832
+
+Epoch 24/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7842
+
+Epoch 25/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7857
+
+Epoch 26/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7870
+
+Epoch 27/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7879
+
+Epoch 28/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7877
+
+Epoch 29/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0012 Train Acc: 0.7895
+
+Epoch 30/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0012 Train Acc: 0.7884
+
+Epoch 31/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0013 Train Acc: 0.7874
+
+Epoch 32/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0012 Train Acc: 0.7896
+
+Epoch 33/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0012 Train Acc: 0.7885
+
+Epoch 34/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0012 Train Acc: 0.7896
+
+Epoch 35/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0012 Train Acc: 0.7911
+
+Epoch 36/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0012 Train Acc: 0.7921
+
+Epoch 37/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0012 Train Acc: 0.7916
+
+Epoch 38/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0012 Train Acc: 0.7918
+
+Epoch 39/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0012 Train Acc: 0.7931
+
+Epoch 40/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0012 Train Acc: 0.7930
+
+Updating the omega values for this task
+Test Loss: 0.0012 Test Acc: 0.8029
+
+Training the model on task 4
+Epoch 1/40
+--------------------
+lr is 0.01
+LR is set to 0.01
+lr is 0.01
+LR is set to 0.01
+Train Loss: 0.0031 Train Acc: 0.5268
+
+Epoch 2/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0025 Train Acc: 0.6102
+
+Epoch 3/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0022 Train Acc: 0.6522
+
+Epoch 4/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0020 Train Acc: 0.6743
+
+Epoch 5/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0019 Train Acc: 0.6868
+
+Epoch 6/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0019 Train Acc: 0.6976
+
+Epoch 7/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0018 Train Acc: 0.7009
+
+Epoch 8/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0018 Train Acc: 0.7070
+
+Epoch 9/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0018 Train Acc: 0.7097
+
+Epoch 10/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0017 Train Acc: 0.7157
+
+Epoch 11/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0017 Train Acc: 0.7172
+
+Epoch 12/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0017 Train Acc: 0.7205
+
+Epoch 13/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0017 Train Acc: 0.7230
+
+Epoch 14/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0017 Train Acc: 0.7250
+
+Epoch 15/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0016 Train Acc: 0.7269
+
+Epoch 16/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0016 Train Acc: 0.7305
+
+Epoch 17/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0016 Train Acc: 0.7339
+
+Epoch 18/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0016 Train Acc: 0.7352
+
+Epoch 19/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0016 Train Acc: 0.7378
+
+Epoch 20/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0016 Train Acc: 0.7399
+
+Epoch 21/40
+--------------------
+lr is 0.001
+LR is set to 0.001
+lr is 0.001
+LR is set to 0.001
+Train Loss: 0.0015 Train Acc: 0.7468
+
+Epoch 22/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7524
+
+Epoch 23/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7525
+
+Epoch 24/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7538
+
+Epoch 25/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7551
+
+Epoch 26/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7537
+
+Epoch 27/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7554
+
+Epoch 28/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7541
+
+Epoch 29/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7552
+
+Epoch 30/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7550
+
+Epoch 31/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7567
+
+Epoch 32/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7569
+
+Epoch 33/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7562
+
+Epoch 34/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7574
+
+Epoch 35/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7574
+
+Epoch 36/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7579
+
+Epoch 37/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7585
+
+Epoch 38/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7580
+
+Epoch 39/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0015 Train Acc: 0.7584
+
+Epoch 40/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0014 Train Acc: 0.7588
+
+Updating the omega values for this task
+Test Loss: 0.0014 Test Acc: 0.7701
+
+Training the model on task 5
+Epoch 1/40
+--------------------
+lr is 0.01
+LR is set to 0.01
+lr is 0.01
+LR is set to 0.01
+Train Loss: 0.0058 Train Acc: 0.2822
+
+Epoch 2/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0028 Train Acc: 0.6108
+
+Epoch 3/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0022 Train Acc: 0.6913
+
+Epoch 4/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0019 Train Acc: 0.7287
+
+Epoch 5/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0017 Train Acc: 0.7525
+
+Epoch 6/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0016 Train Acc: 0.7698
+
+Epoch 7/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0014 Train Acc: 0.7850
+
+Epoch 8/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0014 Train Acc: 0.7965
+
+Epoch 9/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0013 Train Acc: 0.8054
+
+Epoch 10/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0012 Train Acc: 0.8146
+
+Epoch 11/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0012 Train Acc: 0.8230
+
+Epoch 12/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0011 Train Acc: 0.8319
+
+Epoch 13/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0010 Train Acc: 0.8392
+
+Epoch 14/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0010 Train Acc: 0.8452
+
+Epoch 15/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0010 Train Acc: 0.8503
+
+Epoch 16/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0009 Train Acc: 0.8572
+
+Epoch 17/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0009 Train Acc: 0.8619
+
+Epoch 18/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0008 Train Acc: 0.8676
+
+Epoch 19/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0008 Train Acc: 0.8723
+
+Epoch 20/40
+--------------------
+lr is 0.01
+lr is 0.01
+Train Loss: 0.0008 Train Acc: 0.8781
+
+Epoch 21/40
+--------------------
+lr is 0.001
+LR is set to 0.001
+lr is 0.001
+LR is set to 0.001
+Train Loss: 0.0006 Train Acc: 0.8988
+
+Epoch 22/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9009
+
+Epoch 23/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9026
+
+Epoch 24/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9039
+
+Epoch 25/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9039
+
+Epoch 26/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9045
+
+Epoch 27/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9059
+
+Epoch 28/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9050
+
+Epoch 29/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9058
+
+Epoch 30/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9071
+
+Epoch 31/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9084
+
+Epoch 32/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9072
+
+Epoch 33/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9080
+
+Epoch 34/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9100
+
+Epoch 35/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9104
+
+Epoch 36/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0006 Train Acc: 0.9105
+
+Epoch 37/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0005 Train Acc: 0.9118
+
+Epoch 38/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0005 Train Acc: 0.9130
+
+Epoch 39/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0005 Train Acc: 0.9127
+
+Epoch 40/40
+--------------------
+lr is 0.001
+lr is 0.001
+Train Loss: 0.0005 Train Acc: 0.9130
+
+Updating the omega values for this task
+Test Loss: 0.0014 Test Acc: 0.8105
+
+The training process on the 5 tasks is completed
+Testing the model now
+Testing the model on task 1
+The forgetting undergone on task 1 is -26.3800%
+Testing the model on task 2
+The forgetting undergone on task 2 is -24.4900%
+Testing the model on task 3
+The forgetting undergone on task 3 is -38.2600%
+Testing the model on task 4
+The forgetting undergone on task 4 is -41.2900%
+Testing the model on task 5
+The forgetting undergone on task 5 is 0.0000%

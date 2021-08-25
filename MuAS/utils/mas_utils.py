@@ -321,20 +321,21 @@ def create_freeze_layers(model, no_of_layers = 2):
 
     #return an empty list if you want to train the entire model
     if (no_of_layers == 0):
-        return []
+        return model, []
 
     temp_list = []
     freeze_layers = []
 
+    # 老式解冻
+    '''
     #get the keys for the conv layers in the model
     for key in model.tmodel.features._modules:
         if (type(model.tmodel.features._modules[key]) == torch.nn.modules.conv.Conv2d):
             temp_list.append(key)
-    
-    num_of_frozen_layers = len(temp_list) - no_of_layers
+    num_of_freeze_layers = len(temp_list) - no_of_layers
 
     #set the requires_grad attribute to True for the layers you want to be trainable
-    for num in range(0, num_of_frozen_layers):
+    for num in range(0, num_of_freeze_layers):
         #pick the layers from the end
         temp_key = temp_list[num]
         
@@ -346,6 +347,23 @@ def create_freeze_layers(model, no_of_layers = 2):
 
         freeze_layers.append(name_1)
         freeze_layers.append(name_2)
+    '''
+    
+    length_of_list = 0
+    for name, _ in model.tmodel.named_parameters():
+        if 'weight' in name:
+            length_of_list += 1
+    
+    num_of_freeze_layers = length_of_list - no_of_layers
+    for name, param in model.tmodel.named_parameters():
+        if 'bias' in name:
+            param.requires_grad = True
+            freeze_layers.append(name)
+        if num_of_freeze_layers == 0:
+            break
+        if 'weight' in name:
+            param.requires_grad = True
+            freeze_layers.append(name)
+            num_of_freeze_layers -= 1
 
-
-    return [model, freeze_layers]
+    return model, freeze_layers

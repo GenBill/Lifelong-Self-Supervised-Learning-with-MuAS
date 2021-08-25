@@ -8,23 +8,39 @@ import torch.optim as optim
 from torchvision import transforms, utils, datasets, models
 from torch.utils.data import Dataset, DataLoader
 
-this_Epoch = 10000
-epoch_num = 10000
-'''
-for epoch in range(epoch_num) :
-    if (epoch+1) % 100 == 0:
-        print('./TimHu/models256/'+'Epoch_'+str(this_Epoch + epoch)+'.pth')
-'''
-for epoch in range(1,epoch_num) :
-    if epoch % 1000 == 0:
-        print('./TimHu/models256/'+'Epoch_'+str(this_Epoch + epoch)+'.pth')
+class shared_model_res18(nn.Module):
 
+    def __init__(self):
+        super().__init__()
+        res_net = models.resnet18(pretrained = False)
+        self.tmodel = nn.Module()
+        self.tmodel.add_module('features', nn.Sequential(*(list(res_net.children())[:-1])) )
+        self.tmodel.add_module('classifier', res_net.fc )
+        self.reg_params = {}
 
-net = models.resnet18(pretrained=True)
-params_net = list(net.named_parameters())
-print(params_net[-1][0])
-print(params_net[-2][0])
+    def forward(self, x):
+        return self.tmodel(x)
 
+class mlptail(nn.Module):
+    def __init__(self, in_features, mid_features, out_features):
+        super(mlptail, self).__init__()
+        self.in_features = in_features
+        self.mid_features = mid_features
+        self.out_features = out_features
+        self.fc = nn.Sequential(
+            nn.Linear(in_features, mid_features), 
+            nn.LeakyReLU(),
+            nn.Linear(mid_features, mid_features), 
+            nn.LeakyReLU(),
+            nn.Linear(mid_features, out_features)
+        )
+        
+    def forward(self, x):
+        # x -> x.view(-1, self.in_features)
+        return self.fc(x.view(-1, self.in_features))
 
-Frost_Percent = 0.1
-print(str(int(Frost_Percent*100)))
+net1 = models.resnet18(pretrained=True)
+net2 = models.alexnet(pretrained=True)
+net3 = mlptail(10,10,2)
+
+print(net1)

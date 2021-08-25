@@ -38,9 +38,13 @@ parser.add_argument('--batch_size', default=32, type=int, help = 'The batch size
 parser.add_argument('--num_workers', default=8, type=int, help = 'The num workers you want to use')
 parser.add_argument('--num_freeze_layers', default=2, type=int, help = 'Number of layers you want to frozen in the feature extractor of the model')
 parser.add_argument('--num_epochs', default=10, type=int, help='Number of epochs you want to train the model on')
+parser.add_argument('--last_epochs', default=10, type=int, help='Number of epochs you want to Finetune')
+
 parser.add_argument('--init_lr', default=0.001, type=float, help='Initial learning rate for training the model')
 parser.add_argument('--reg_lambda', default=0.01, type=float, help='Regularization parameter')
 parser.add_argument('--miu', default=0.99, type=float, help='Initial MiuAS')
+
+parser.add_argument('--circle', default=1, type=int, help='Initial eLich Circle')
 
 args = parser.parse_args()
 cuda_index = args.cuda
@@ -49,6 +53,8 @@ num_workers = args.num_workers
 
 no_of_layers = args.num_freeze_layers
 num_epochs = args.num_epochs
+last_epochs = args.last_epochs
+
 lr = args.init_lr
 reg_lambda = args.reg_lambda
 miu = args.miu
@@ -56,15 +62,10 @@ miu = args.miu
 dloaders_train = []
 dloaders_test = []
 
-# dsets_train = []
-# dsets_test = []
-
 num_classes = []
 
 data_dir = '~/Datasets/miniImageNet'
 # data_path = "~/Datasets/Kaggle265"
-# data_path = "~/Storage/Kaggle265"
-# data_path = os.path.join(os.getcwd(), "~/Datasets/Kaggle265")
 
 data_transforms = {
     'train': transforms.Compose([
@@ -106,72 +107,47 @@ data_post_transforms = {
 os.environ['CUDA_VISIBLE_DEVICES'] = cuda_index
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# data_dir = "/home/zhangxuanming/Datasets/Kaggle265"
-# data_dir = os.path.join(os.getcwd(), "../Datasets/Kaggle265")
-# data_dir = os.path.join(os.getcwd(), "../Storage/Kaggle265")
-# data_dir = os.path.join(os.getcwd(), "../Necro/MuAS/Data")
-
-#create the dataloaders for all the tasks
-# for tdir in sorted(os.listdir(data_dir+'/train/')):
-
 dset_size_train, dset_size_test = cometopower('none', data_dir, data_pre_transforms, data_post_transforms, batch_size, num_workers)
 loader_plain = plainloader(data_dir, data_pre_transforms, data_post_transforms, batch_size, num_workers)
 
-powerlist = ['rota', 'patch', 'jigpa', 'jigro', 'plain']
-num_in_times = [1, 2, 4, 4, 1]
-num_classes = [4, 8, 24, 96, 100]
+powerlist = args.circle * ['rota', 'patch', 'jigpa', 'jigro'] + ['plain']
+num_in_times = args.circle * [1, 2, 4, 4] + [1]
+num_classes = args.circle * [4, 8, 24, 96] + [100]
 
 for powerword in powerlist:
     
     dset_loaders = cometopower(powerword, data_dir, data_pre_transforms, data_post_transforms, batch_size, num_workers)
     tr_dset_loaders = dset_loaders['train']
     te_dset_loaders = dset_loaders['test']
-    # #create the image folders objects
-    # tr_image_folder = datasets.ImageFolder(os.path.join(data_dir, "train", tdir), transform = data_transforms['train'])
-    # te_image_folder = datasets.ImageFolder(os.path.join(data_dir, "test", tdir), transform = data_transforms['test'])
-
-    # #get the dataloaders
-    # tr_dset_loaders = torch.utils.data.DataLoader(tr_image_folder, batch_size=batch_size, shuffle=True, num_workers=4)
-    # te_dset_loaders = torch.utils.data.DataLoader(te_image_folder, batch_size=batch_size, shuffle=True, num_workers=4)
-
-    # ##get the sizes
-    # temp1 = len(tr_image_folder) 
-    # temp2 = len(te_image_folder)
 
     #append the dataloaders of these tasks
     dloaders_train.append(tr_dset_loaders)
     dloaders_test.append(te_dset_loaders)
 
-    # #get the classes (THIS MIGHT NEED TO BE CORRECTED)
-    # num_classes.append(len(tr_image_folder.classes))
-    # num_classes.append(this_num_classes)
-
-    # #get the sizes array
-    # dsets_train.append(temp1)
-    # dsets_test.append(temp2
-
 #get the number of tasks in the sequence
-no_of_tasks = len(dloaders_train)
+no_of_tasks = len(powerlist)
 
-model = shared_model(models.alexnet(pretrained = True))
+# model = shared_model(models.alexnet(pretrained = True))
+model = shared_model()
+
 
 #train the model on the given number of tasks
-for task in range(1, no_of_tasks+1):
-    print ("Training the model on task {}".format(task))
+for task in range(no_of_tasks):
+    print ("Training the model on task {}".format(task+1))
 
-    dataloader_train = dloaders_train[task-1]
-    dataloader_test = dloaders_test[task-1]
-    # dset_size_train = dsets_train[task-1]
-    # dset_size_test = dsets_test[task-1]
-    no_of_in_times = num_in_times[task-1]
-    no_of_classes = num_classes[task-1]
+    dataloader_train = dloaders_train[task]
+    dataloader_test = dloaders_test[task]
+    no_of_in_times = num_in_times[task]
+    no_of_classes = num_classes[task]
 
     model = model_init(no_of_in_times, no_of_classes, device)
-
-    # mas_train(model, task, num_epochs, no_of_layers, no_of_classes, 
-    #     dataloader_train, dataloader_test, dset_size_train, dset_size_test, 
-    #     device, lr, reg_lambda, miu)
-    mulich_train(model, task, num_epochs, no_of_layers, no_of_classes, 
+    if task < no_of_tasks-1 :
+        mulich_train(model, task+1, num_epochs, no_of_layers, no_of_classes, 
+            dataloader_train, dataloader_test, loader_plain['train'], # include ['train'] and ['test']
+            dset_size_train, dset_size_test, 
+            device, lr, reg_lambda, miu)
+    else :
+        mulich_train(model, task+1, last_epochs, no_of_layers, no_of_classes, 
         dataloader_train, dataloader_test, loader_plain['train'], # include ['train'] and ['test']
         dset_size_train, dset_size_test, 
         device, lr, reg_lambda, miu)
@@ -182,18 +158,18 @@ print ("The training process on the {} tasks is completed".format(no_of_tasks))
 print ("Testing the model now")
 
 #test the model out on the test sets of the tasks
-for task in range(1, no_of_tasks+1):
+for task in range(no_of_tasks):
     print ("Testing the model on task {}".format(task))
 
-    dataloader = dloaders_test[task-1]
+    dataloader = dloaders_test[task]
     dset_size = dset_size_test # dsets_test[task-1]
-    no_of_in_times = num_in_times[task-1]
-    no_of_classes = num_classes[task-1]
+    no_of_in_times = num_in_times[task]
+    no_of_classes = num_classes[task]
     
     # now_performance - old_performance
-    forgetting = compute_forgetting(task, no_of_in_times, dataloader, dset_size, device)
+    forgetting = compute_forgetting(task+1, no_of_in_times, dataloader, dset_size, device)
 
-    print ("The forgetting undergone on task {} is {:.4f}%".format(task, forgetting*100))
+    print ("The forgetting undergone on task {} is {:.4f}%".format(task+1, forgetting*100))
     
 
 

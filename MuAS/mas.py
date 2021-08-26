@@ -51,8 +51,11 @@ def mas_train(model, task_no, num_epochs, no_of_layers, no_of_classes,
     #this is the task to which the model is exposed
     if (task_no == 1):
         #initialize the reg_params for this task
-        model, freeze_layers = create_freeze_layers(model, no_of_layers)
-        model = init_reg_params(model, device, freeze_layers)
+        if no_of_layers<0:
+            model = init_reg_params(model, device, [])
+        else:
+            model, freeze_layers = create_freeze_layers(model, no_of_layers)
+            model = init_reg_params(model, device, freeze_layers)
 
     else:
         #inititialize the reg_params for this task
@@ -95,7 +98,6 @@ def mulich_train(model, task_no, num_epochs, no_of_layers, no_of_classes,
     #this is the task to which the model is exposed
     if (task_no == 1):
         #initialize the reg_params for this task
-        freeze_layers = []
         # if no_of_layers<0:
         #     model, freeze_layers = create_freeze_layers(model, no_of_layers)
         model, freeze_layers = create_freeze_layers(model, no_of_layers)

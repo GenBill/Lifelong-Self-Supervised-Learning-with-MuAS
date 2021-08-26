@@ -317,16 +317,16 @@ def create_freeze_layers(model, no_of_layers = 2):
         param.requires_grad = True
 
     for param in model.tmodel.features.parameters():
-        param.requires_grad = False
+        param.requires_grad = True
 
-    #return an empty list if you want to train the entire model
+    # return an empty list if you want to train the entire model
     if (no_of_layers == 0):
         return model, []
 
     temp_list = []
     freeze_layers = []
 
-    # 老式解冻
+    # 老式冻结
     '''
     #get the keys for the conv layers in the model
     for key in model.tmodel.features._modules:
@@ -351,19 +351,24 @@ def create_freeze_layers(model, no_of_layers = 2):
     
     length_of_list = 0
     for name, _ in model.tmodel.named_parameters():
-        if 'weight' in name:
+        if 'conv' in name:
             length_of_list += 1
     
     num_of_freeze_layers = length_of_list - no_of_layers
+    # print(num_of_freeze_layers, length_of_list, no_of_layers)
     for name, param in model.tmodel.named_parameters():
+        if 'conv' not in name:
+            continue
+
         if 'bias' in name:
-            param.requires_grad = True
+            param.requires_grad = False
             freeze_layers.append(name)
         if num_of_freeze_layers == 0:
             break
         if 'weight' in name:
-            param.requires_grad = True
+            param.requires_grad = False
             freeze_layers.append(name)
             num_of_freeze_layers -= 1
 
+    # print(freeze_layers)
     return model, freeze_layers

@@ -41,7 +41,6 @@ class mlptail(nn.Module):
         self.mid_features = mid_features
         self.out_features = out_features
         self.fc = nn.Sequential(
-            nn.Flatten(), 
             nn.Linear(in_features, mid_features), 
             nn.LeakyReLU(),
             nn.Linear(mid_features, mid_features), 
@@ -51,7 +50,7 @@ class mlptail(nn.Module):
         
     def forward(self, x):
         # x -> x.view(-1, self.in_features)
-        return self.fc(x)
+        return self.fc(x.view(-1, self.in_features))
 
 
 class shared_model_alex(nn.Module):

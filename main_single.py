@@ -97,7 +97,7 @@ file.flush()
 
 # Model Initialization
 # 仅支持 Res-Net !!!
-model_all = models.resnet18(pretrained=True)
+model_all = models.resnet18(pretrained=opt.pretrain)
 num_ftrs = model_all.fc.in_features
 
 def make_MLP(input_ftrs, hidden_ftrs, output_ftrs, layers=1):

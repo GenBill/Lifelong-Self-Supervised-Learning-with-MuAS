@@ -166,10 +166,11 @@ model_list = [model_all_0, model_all_1, model_all_2, model_all_3]
 #     print(i.fc)
 # print(student.fc)
 
-criterion = nn.CrossEntropyLoss(reduction='none')
+criterion_0 = nn.CrossEntropyLoss(reduction='none')
+criterion_1 = nn.CrossEntropyLoss()
 # Train Student
-student = evap(opt, loader_plain['train'], criterion, model_list, student, device)
+student = evap(opt, loader_plain['train'], criterion_0, model_list, student, device)
 
 # Test Student
-student = onlytest(loader_plain['test'], criterion, student, device)
+student = onlytest(loader_plain['test'], criterion_1, student, device)
 

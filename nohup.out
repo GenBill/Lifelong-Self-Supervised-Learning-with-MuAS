@@ -4,3 +4,446 @@ Loaded model state ...
 Loaded model state ...
 Loaded model state ...
 Training the Rotavap ...
+Epoch 0, Loss : 0.51390456
+Epoch 1, Loss : 0.38871576
+Epoch 2, Loss : 0.33761467
+Epoch 3, Loss : 0.31132997
+Epoch 4, Loss : 0.29679143
+Epoch 5, Loss : 0.28765019
+Epoch 6, Loss : 0.28132481
+Epoch 7, Loss : 0.27611231
+Epoch 8, Loss : 0.27170532
+Epoch 9, Loss : 0.26796345
+Epoch 10, Loss : 0.26455593
+Epoch 11, Loss : 0.26152508
+Epoch 12, Loss : 0.25863275
+Epoch 13, Loss : 0.25620839
+Epoch 14, Loss : 0.25371186
+Epoch 15, Loss : 0.25171557
+Epoch 16, Loss : 0.24971264
+Epoch 17, Loss : 0.24778638
+Epoch 18, Loss : 0.24606287
+Epoch 19, Loss : 0.24444381
+Distilling by Rotavap ...
+Epoch 0
+Loss : 5.02973754, Plain Loss : 4.60441439
+Acc : 0.01132000
+Epoch 1
+Loss : 4.83585287, Plain Loss : 4.60493048
+Acc : 0.01000000
+Epoch 2
+Loss : 4.80680147, Plain Loss : 4.60472769
+Acc : 0.01000000
+Epoch 3
+Loss : 4.78662930, Plain Loss : 4.60418041
+Acc : 0.01000000
+Epoch 4
+Loss : 4.76676442, Plain Loss : 4.60370929
+Acc : 0.01000000
+Epoch 5
+Loss : 4.74773088, Plain Loss : 4.60381599
+Acc : 0.01000000
+Epoch 6
+Loss : 4.73471409, Plain Loss : 4.60380505
+Acc : 0.01000000
+Epoch 7
+Loss : 4.72534573, Plain Loss : 4.60352414
+Acc : 0.01000000
+Epoch 8
+Loss : 4.71390609, Plain Loss : 4.60318841
+Acc : 0.01000000
+Epoch 9
+Loss : 4.70497390, Plain Loss : 4.60239076
+Acc : 0.01000000
+Epoch 10
+Loss : 4.69957086, Plain Loss : 4.60159697
+Acc : 0.01000000
+Epoch 11
+Loss : 4.69590462, Plain Loss : 4.60095869
+Acc : 0.01000000
+Epoch 12
+Loss : 4.69336501, Plain Loss : 4.60041553
+Acc : 0.01000000
+Epoch 13
+Loss : 4.69104884, Plain Loss : 4.59996960
+Acc : 0.01000000
+Epoch 14
+Loss : 4.68949299, Plain Loss : 4.59966239
+Acc : 0.01000000
+Epoch 15
+Loss : 4.68824694, Plain Loss : 4.59938536
+Acc : 0.01000000
+Epoch 16
+Loss : 4.68686290, Plain Loss : 4.59909691
+Acc : 0.01000000
+Epoch 17
+Loss : 4.68532285, Plain Loss : 4.59891441
+Acc : 0.01001000
+Epoch 18
+Loss : 4.68452440, Plain Loss : 4.59876071
+Acc : 0.01002000
+Epoch 19
+Loss : 4.68355188, Plain Loss : 4.59855956
+Acc : 0.01009000
+Epoch 20
+Loss : 4.68256376, Plain Loss : 4.59841747
+Acc : 0.01016000
+Epoch 21
+Loss : 4.68201407, Plain Loss : 4.59830163
+Acc : 0.01022000
+Epoch 22
+Loss : 4.68059528, Plain Loss : 4.59815286
+Acc : 0.01036000
+Epoch 23
+Loss : 4.67997365, Plain Loss : 4.59798919
+Acc : 0.01061000
+Epoch 24
+Loss : 4.67914675, Plain Loss : 4.59784910
+Acc : 0.01077000
+Epoch 25
+Loss : 4.67832942, Plain Loss : 4.59769919
+Acc : 0.01093000
+Epoch 26
+Loss : 4.67813076, Plain Loss : 4.59740263
+Acc : 0.01142000
+Epoch 27
+Loss : 4.67697421, Plain Loss : 4.59726537
+Acc : 0.01507000
+Epoch 28
+Loss : 4.67654014, Plain Loss : 4.59704873
+Acc : 0.01835000
+Epoch 29
+Loss : 4.67572330, Plain Loss : 4.59693362
+Acc : 0.01907000
+Epoch 30
+Loss : 4.67529961, Plain Loss : 4.59686755
+Acc : 0.01922000
+Epoch 31
+Loss : 4.67493769, Plain Loss : 4.59670673
+Acc : 0.01931000
+Epoch 32
+Loss : 4.67412410, Plain Loss : 4.59662482
+Acc : 0.01939000
+Epoch 33
+Loss : 4.67353470, Plain Loss : 4.59659090
+Acc : 0.01934000
+Epoch 34
+Loss : 4.67435970, Plain Loss : 4.59642466
+Acc : 0.01934000
+Epoch 35
+Loss : 4.67274926, Plain Loss : 4.59633859
+Acc : 0.01932000
+Epoch 36
+Loss : 4.67230454, Plain Loss : 4.59628871
+Acc : 0.01935000
+Epoch 37
+Loss : 4.67157362, Plain Loss : 4.59621612
+Acc : 0.01941000
+Epoch 38
+Loss : 4.67083032, Plain Loss : 4.59612572
+Acc : 0.01942000
+Epoch 39
+Loss : 4.67050527, Plain Loss : 4.59603229
+Acc : 0.01944000
+Epoch 40
+Loss : 4.66998268, Plain Loss : 4.59594701
+Acc : 0.01945000
+Epoch 41
+Loss : 4.66978367, Plain Loss : 4.59576182
+Acc : 0.01949000
+Epoch 42
+Loss : 4.67017102, Plain Loss : 4.59564842
+Acc : 0.01947000
+Epoch 43
+Loss : 4.66914399, Plain Loss : 4.59546976
+Acc : 0.01945000
+Epoch 44
+Loss : 4.66840181, Plain Loss : 4.59540073
+Acc : 0.01949000
+Epoch 45
+Loss : 4.66813364, Plain Loss : 4.59517565
+Acc : 0.01946000
+Epoch 46
+Loss : 4.66753973, Plain Loss : 4.59493001
+Acc : 0.01949000
+Epoch 47
+Loss : 4.66739660, Plain Loss : 4.59454729
+Acc : 0.01953000
+Epoch 48
+Loss : 4.66680885, Plain Loss : 4.59404668
+Acc : 0.01956000
+Epoch 49
+Loss : 4.66544715, Plain Loss : 4.59328006
+Acc : 0.01957000
+Epoch 50
+Loss : 4.66457893, Plain Loss : 4.59248710
+Acc : 0.01959000
+Epoch 51
+Loss : 4.66380837, Plain Loss : 4.59178602
+Acc : 0.01962000
+Epoch 52
+Loss : 4.66274035, Plain Loss : 4.59125724
+Acc : 0.01968000
+Epoch 53
+Loss : 4.66220591, Plain Loss : 4.59084402
+Acc : 0.01967000
+Epoch 54
+Loss : 4.66135695, Plain Loss : 4.59047186
+Acc : 0.01968000
+Epoch 55
+Loss : 4.66098795, Plain Loss : 4.59019963
+Acc : 0.01969000
+Epoch 56
+Loss : 4.66041886, Plain Loss : 4.58993552
+Acc : 0.01968000
+Epoch 57
+Loss : 4.65984257, Plain Loss : 4.58972704
+Acc : 0.01974000
+Epoch 58
+Loss : 4.65946634, Plain Loss : 4.58956068
+Acc : 0.01972000
+Epoch 59
+Loss : 4.65886703, Plain Loss : 4.58932280
+Acc : 0.01975000
+Epoch 60
+Loss : 4.65851655, Plain Loss : 4.58919889
+Acc : 0.01973000
+Epoch 61
+Loss : 4.65795700, Plain Loss : 4.58898655
+Acc : 0.01975000
+Epoch 62
+Loss : 4.65746615, Plain Loss : 4.58884082
+Acc : 0.01982000
+Epoch 63
+Loss : 4.65735504, Plain Loss : 4.58865981
+Acc : 0.02120000
+Epoch 64
+Loss : 4.65693885, Plain Loss : 4.58845554
+Acc : 0.02660000
+Epoch 65
+Loss : 4.65641364, Plain Loss : 4.58815463
+Acc : 0.02891000
+Epoch 66
+Loss : 4.65598188, Plain Loss : 4.58765598
+Acc : 0.02910000
+Epoch 67
+Loss : 4.65512214, Plain Loss : 4.58724631
+Acc : 0.02906000
+Epoch 68
+Loss : 4.65454723, Plain Loss : 4.58689937
+Acc : 0.02905000
+Epoch 69
+Loss : 4.65399542, Plain Loss : 4.58647539
+Acc : 0.02909000
+Epoch 70
+Loss : 4.65365666, Plain Loss : 4.58612097
+Acc : 0.02910000
+Epoch 71
+Loss : 4.65309251, Plain Loss : 4.58569668
+Acc : 0.02917000
+Epoch 72
+Loss : 4.65238912, Plain Loss : 4.58519215
+Acc : 0.02921000
+Epoch 73
+Loss : 4.65169892, Plain Loss : 4.58448627
+Acc : 0.02920000
+Epoch 74
+Loss : 4.65115767, Plain Loss : 4.58384243
+Acc : 0.02929000
+Epoch 75
+Loss : 4.65035512, Plain Loss : 4.58325297
+Acc : 0.02924000
+Epoch 76
+Loss : 4.64981858, Plain Loss : 4.58263783
+Acc : 0.02939000
+Epoch 77
+Loss : 4.64897511, Plain Loss : 4.58215710
+Acc : 0.02941000
+Epoch 78
+Loss : 4.64812399, Plain Loss : 4.58170783
+Acc : 0.02943000
+Epoch 79
+Loss : 4.64747461, Plain Loss : 4.58139202
+Acc : 0.02950000
+Epoch 80
+Loss : 4.64707203, Plain Loss : 4.58103877
+Acc : 0.02948000
+Epoch 81
+Loss : 4.64669444, Plain Loss : 4.58082908
+Acc : 0.02952000
+Epoch 82
+Loss : 4.64621948, Plain Loss : 4.58055633
+Acc : 0.02964000
+Epoch 83
+Loss : 4.64573036, Plain Loss : 4.58035178
+Acc : 0.03007000
+Epoch 84
+Loss : 4.64562276, Plain Loss : 4.58016572
+Acc : 0.03107000
+Epoch 85
+Loss : 4.64508664, Plain Loss : 4.57991870
+Acc : 0.03454000
+Epoch 86
+Loss : 4.64460210, Plain Loss : 4.57969198
+Acc : 0.03773000
+Epoch 87
+Loss : 4.64452481, Plain Loss : 4.57948842
+Acc : 0.03878000
+Epoch 88
+Loss : 4.64389819, Plain Loss : 4.57918816
+Acc : 0.03899000
+Epoch 89
+Loss : 4.64338516, Plain Loss : 4.57889435
+Acc : 0.03897000
+Epoch 90
+Loss : 4.64297424, Plain Loss : 4.57868909
+Acc : 0.03901000
+Epoch 91
+Loss : 4.64246784, Plain Loss : 4.57839170
+Acc : 0.03907000
+Epoch 92
+Loss : 4.64227389, Plain Loss : 4.57818131
+Acc : 0.03907000
+Epoch 93
+Loss : 4.64165983, Plain Loss : 4.57792548
+Acc : 0.03905000
+Epoch 94
+Loss : 4.64149242, Plain Loss : 4.57760900
+Acc : 0.03914000
+Epoch 95
+Loss : 4.64104658, Plain Loss : 4.57741580
+Acc : 0.03914000
+Epoch 96
+Loss : 4.64079022, Plain Loss : 4.57723258
+Acc : 0.03914000
+Epoch 97
+Loss : 4.64043925, Plain Loss : 4.57696538
+Acc : 0.03912000
+Epoch 98
+Loss : 4.64021765, Plain Loss : 4.57668989
+Acc : 0.03914000
+Epoch 99
+Loss : 4.64007461, Plain Loss : 4.57643568
+Acc : 0.03917000
+Test Result ...
+Loss : 0.12456634, Acc : 0.00100000
+
+
+
+
+Matplotlib created a temporary config/cache directory at /tmp/matplotlib-8yn1ofu8 because the default path (/home/20/xuanming/.cache/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Loaded model state ...
+Loaded model state ...
+Loaded model state ...
+Loaded model state ...
+Training the Rotavap ...
+Distilling by Rotavap ...
+Epoch 0
+Loss : -937.65277098, Plain Loss : 4.52333131
+Acc : 0.11405000
+Epoch 1
+Loss : -2966.79636531, Plain Loss : 4.21124026
+Acc : 0.42211000
+
+Matplotlib created a temporary config/cache directory at /tmp/matplotlib-e37jhslb because the default path (/home/20/xuanming/.cache/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Loaded model state ...
+Loaded model state ...
+Loaded model state ...
+Loaded model state ...
+Training the Rotavap ...
+Distilling by Rotavap ...
+Epoch 0
+Loss : 4.60252218, Plain Loss : 4.60252218
+Acc : 0.01307000
+Epoch 1
+Loss : 4.59493705, Plain Loss : 4.59493705
+Acc : 0.02846000
+Epoch 2
+Loss : 4.57588381, Plain Loss : 4.57588381
+Acc : 0.04969000
+Epoch 3
+Loss : 4.55199329, Plain Loss : 4.55199329
+Acc : 0.08571000
+Epoch 4
+Loss : 4.51774059, Plain Loss : 4.51774059
+Acc : 0.12291000
+
+
+
+Matplotlib created a temporary config/cache directory at /tmp/matplotlib-9clhtjen because the default path (/home/20/xuanming/.cache/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Loaded model state ...
+Loaded model state ...
+Loaded model state ...
+Loaded model state ...
+Training the Rotavap ...
+Distilling by Rotavap ...
+Epoch 0
+Loss : -90.20262199, Plain Loss : 4.52450006
+Acc : 0.10385000
+Epoch 1
+Loss : -292.42493817, Plain Loss : 4.31593959
+Acc : 0.30670000
+Epoch 2
+Loss : -530.00019646, Plain Loss : 4.14023079
+Acc : 0.48207000
+Epoch 3
+Loss : -774.29576680, Plain Loss : 4.08029811
+Acc : 0.54197000
+Epoch 4
+Loss : -1020.87560602, Plain Loss : 4.05033289
+Acc : 0.57186000
+
+
+
+Matplotlib created a temporary config/cache directory at /tmp/matplotlib-lvvsgy3b because the default path (/home/20/xuanming/.cache/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Loaded model state ...
+Loaded model state ...
+Loaded model state ...
+Loaded model state ...
+Training the Rotavap ...
+Distilling by Rotavap ...
+Epoch 0
+Loss : -33.24202100, Plain Loss : 4.60521248
+Acc : 0.00964000
+Epoch 1
+Loss : -35.01408266, Plain Loss : 4.60526874
+Acc : 0.00961000
+Epoch 2
+Loss : -35.89870745, Plain Loss : 4.60527114
+Acc : 0.00963000
+Epoch 3
+Loss : -36.48067820, Plain Loss : 4.60528007
+Acc : 0.00956000
+
+
+Matplotlib created a temporary config/cache directory at /tmp/matplotlib-gqkuzi3g because the default path (/home/20/xuanming/.cache/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Loaded model state ...
+Loaded model state ...
+Loaded model state ...
+Loaded model state ...
+Training the Rotavap ...
+Distilling by Rotavap ...
+Epoch 0
+Loss : 29.52541231, Plain Loss : 4.60407144
+Acc : 0.01015000
+Epoch 1
+Loss : 28.42596887, Plain Loss : 4.59783135
+Acc : 0.02143000
+Epoch 2
+Loss : 27.50836031, Plain Loss : 4.56630641
+Acc : 0.07787000
+Epoch 3
+Loss : 26.55282021, Plain Loss : 4.51573694
+Acc : 0.13095000
+Epoch 4
+Loss : 25.74212203, Plain Loss : 4.47301970
+Acc : 0.17269000
+Epoch 5
+Loss : 25.08504232, Plain Loss : 4.42261046
+Acc : 0.23267000
+
+
+
+Matplotlib created a temporary config/cache directory at /tmp/matplotlib-bhx1vl_r because the default path (/home/20/xuanming/.cache/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Loaded model state ...
+Training the Rotavap ...

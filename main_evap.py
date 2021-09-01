@@ -1,6 +1,6 @@
 from agent import SingleStep
 from agent.mission import plainloader
-from evap import evap
+from instrovap import evap
 from onlytest import onlytest
 
 import torch
@@ -45,7 +45,7 @@ parser.add_argument('--classnum', type=int, default=265, help="set class num")
 
 # opt = parser.parse_args(args=[])
 opt = parser.parse_args()
-opt.classnum = 100
+# opt.classnum = 100
 
 dirname = 'Evap'
 if opt.pretrain:
@@ -87,40 +87,30 @@ file.flush()
 
 # Model Initialization
 # 仅支持 Res-Net !!!
-student = models.resnet18(pretrained=opt.pretrain)
+student = models.resnet18(pretrained=opt.pretrain).to(device)
 student.fc = nn.Linear(student.fc.in_features, opt.classnum).to(device)
 
-model_all_0 = models.resnet18(pretrained=opt.pretrain)
-model_all_1 = models.resnet18(pretrained=opt.pretrain)
-model_all_2 = models.resnet18(pretrained=opt.pretrain)
-model_all_3 = models.resnet18(pretrained=opt.pretrain)
-
+model_all_0 = models.resnet18(pretrained=opt.pretrain).to(device)
+model_all_1 = models.resnet18(pretrained=opt.pretrain).to(device)
+model_all_2 = models.resnet18(pretrained=opt.pretrain).to(device)
+model_all_3 = models.resnet18(pretrained=opt.pretrain).to(device)
 
 model_ft_0 = nn.Sequential(*(list(model_all_0.children())[:-1]))
 model_ft_1 = nn.Sequential(*(list(model_all_1.children())[:-1]))
 model_ft_2 = nn.Sequential(*(list(model_all_2.children())[:-1]))
 model_ft_3 = nn.Sequential(*(list(model_all_3.children())[:-1]))
 
-
-if torch.cuda.device_count() > 1: 
-    print("Let's use", torch.cuda.device_count(), "GPUs!")
-    model_ft_0 = nn.DataParallel(model_ft_0)
-    model_ft_1 = nn.DataParallel(model_ft_1)
-    model_ft_2 = nn.DataParallel(model_ft_2)
-    model_ft_3 = nn.DataParallel(model_ft_3)
-    student = nn.DataParallel(student)
-
-model_ft_0 = model_ft_0.to(device)
-model_ft_1 = model_ft_1.to(device)
-model_ft_2 = model_ft_2.to(device)
-model_ft_3 = model_ft_3.to(device)
-student = student.to(device)
-
 # Load state : model & fc_layer
 def loadstate(model, net_Cont, device, file):
     if net_Cont != '':
         model.load_state_dict(torch.load(net_Cont, map_location=device))
-        
+
+def loadstate_fc(net_Cont, device, file, in_features, classnum):
+    if net_Cont != '':
+        temp = nn.Sequential(nn.Flatten(), nn.Linear(in_features, classnum)).to(device)
+        temp.load_state_dict(torch.load(net_Cont, map_location=device))
+        return temp[1]
+
 print('Loaded model state ...')
 file.write('Loaded model state ...')
 
@@ -128,6 +118,20 @@ loadstate(model_ft_0, '../Single_256/Rotano/models/model_epoch_239.pth', device,
 loadstate(model_ft_1, '../Single_256/Patchno/models/model_epoch_239.pth', device, file)
 loadstate(model_ft_2, '../Single_256/Jigpano/models/model_epoch_239.pth', device, file)
 loadstate(model_ft_3, '../Single_256/Jigrono/models/model_epoch_239.pth', device, file)
+
+model_all_0.fc = loadstate_fc('../Single_256/Rotano/models/fc_epoch_239.pth', device, file, student.fc.in_features, opt.classnum)
+model_all_1.fc = loadstate_fc('../Single_256/Patchno/models/fc_epoch_239.pth', device, file, student.fc.in_features, opt.classnum)
+model_all_2.fc = loadstate_fc('../Single_256/Jigpano/models/fc_epoch_239.pth', device, file, student.fc.in_features, opt.classnum)
+model_all_3.fc = loadstate_fc('../Single_256/Jigrono/models/fc_epoch_239.pth', device, file, student.fc.in_features, opt.classnum)
+
+if torch.cuda.device_count() > 1: 
+    print("Let's use", torch.cuda.device_count(), "GPUs!")
+    model_all_0 = nn.DataParallel(model_all_0)
+    model_all_1 = nn.DataParallel(model_all_1)
+    model_all_2 = nn.DataParallel(model_all_2)
+    model_all_3 = nn.DataParallel(model_all_3)
+    student = nn.DataParallel(student)
+
 
 # Model trainer
 criterion = nn.CrossEntropyLoss()
@@ -158,7 +162,11 @@ data_post_transforms = {
 loader_plain = plainloader(data_root, data_pre_transforms, data_post_transforms, batch_size, num_workers)
 model_list = [model_all_0, model_all_1, model_all_2, model_all_3]
 
-criterion = nn.CrossEntropyLoss()
+# for i in model_list:
+#     print(i.fc)
+# print(student.fc)
+
+criterion = nn.CrossEntropyLoss(reduction='none')
 # Train Student
 student = evap(opt, loader_plain['train'], criterion, model_list, student, device)
 

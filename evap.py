@@ -45,7 +45,7 @@ def student_train(args, dataloader, criterion, retcher_list, student, device):
         n_samples = 0
         
         for batch_num, (inputs, labels) in enumerate(dataloader):
-            batchSize = inputs.size(0)
+            batchSize = labels.shape[0]
             n_samples += batchSize
             inputs = inputs.to(device)
             labels = labels.to(device)
@@ -53,7 +53,7 @@ def student_train(args, dataloader, criterion, retcher_list, student, device):
             optimizer_stu.zero_grad()
 
             features_stu = nn.Flatten()(student_ft(inputs))
-            outputs_stu = torch.softmax(student.fc(features_stu), dim=1)
+            outputs_stu = student.fc(features_stu)
             loss = criterion(outputs_stu, labels)
             loss_plain = loss.item()
 
@@ -81,8 +81,8 @@ def student_train(args, dataloader, criterion, retcher_list, student, device):
         epoch_loss_plain = running_loss_plain / n_samples
         epoch_acc = running_acc / n_samples
 
-        print('Epoch {}\nLoss : {:.8f}, Plain Loss : {:.8f}'.format(epoch, epoch_loss, epoch_loss_plain))
-        print('Acc : {:.8f}'.format(epoch_acc))
+        print('Epoch {}\nLoss : {:.6f}, Plain Loss : {:.6f}'.format(epoch, epoch_loss, epoch_loss_plain))
+        print('Acc : {:.6f}'.format(epoch_acc))
 
     return student
 

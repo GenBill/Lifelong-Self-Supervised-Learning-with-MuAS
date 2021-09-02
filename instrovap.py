@@ -50,7 +50,7 @@ def student_train(args, dataloader, criterion, teacher_list, student, device):
         n_samples = 0
 
         for batch_num, (inputs, labels) in enumerate(dataloader):
-            batchSize = inputs.size(0)
+            batchSize = labels.shape[0]
             n_samples += batchSize
             inputs = inputs.to(device)
             labels = labels.to(device)
@@ -70,10 +70,10 @@ def student_train(args, dataloader, criterion, teacher_list, student, device):
                     weight.append(criterion(this_outputs, labels))
                     
                     pred_top_1 = torch.topk(this_outputs, k=1, dim=1)[1]
-                    # print(pred_top_1.eq(labels.view_as(pred_top_1)).int().shape)
-                    # print(weight[i].shape)
                     weight[i] *= pred_top_1.eq(labels.view_as(pred_top_1)).squeeze().int()
-                    this_acc = pred_top_1.eq(labels.view_as(pred_top_1)).int().sum().item()
+            
+            pred_top_1 = torch.topk(outputs_stu, k=1, dim=1)[1]
+            this_acc = pred_top_1.eq(labels.view_as(pred_top_1)).int().sum().item()
 
             loss_1 = []
             for this_fea in outputs_tea:
@@ -88,16 +88,16 @@ def student_train(args, dataloader, criterion, teacher_list, student, device):
             optimizer_stu.step()
             exp_lr_scheduler.step()
 
-            running_loss += loss_main.item()
-            running_loss_plain += loss_plain
+            running_loss += loss_main.item() * batchSize
+            running_loss_plain += loss_plain * batchSize
             running_acc += this_acc
 
         epoch_loss = running_loss / n_samples
         epoch_loss_plain = running_loss_plain / n_samples
         epoch_acc = running_acc / n_samples
 
-        print('Epoch {}\nLoss : {:.8f}, Plain Loss : {:.8f}'.format(epoch, epoch_loss, epoch_loss_plain))
-        print('Acc : {:.8f}'.format(epoch_acc))
+        print('Epoch {}\nLoss : {:.6f}, Plain Loss : {:.6f}'.format(epoch, epoch_loss, epoch_loss_plain))
+        print('Acc : {:.6f}'.format(epoch_acc))
 
     return student
 

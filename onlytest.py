@@ -7,25 +7,24 @@ def onlytest(dataloader, criterion, student, device):
         running_acc = 0
         n_samples = 0
         for batch_num, (inputs, labels) in enumerate(dataloader):
-            batchSize = inputs.size(0)
+            batchSize = labels.shape[0]
             n_samples += batchSize
             inputs = inputs.to(device)
             labels = labels.to(device)
 
-            outputs = torch.softmax(student(inputs), dim=1)
+            outputs = student(inputs)
             loss = criterion(outputs, labels)
 
             pred_top_1 = torch.topk(outputs, k=1, dim=1)[1]
             this_acc = pred_top_1.eq(labels.view_as(pred_top_1)).int().sum().item()
         
-        # scheduler.step()
-        running_loss += loss.item() * batchSize
-        running_acc += this_acc
+            running_loss += loss.item() * batchSize
+            running_acc += this_acc
 
     epoch_loss = running_loss / n_samples
     epoch_acc = running_acc / n_samples
 
     print('Test Result ...')
-    print('Loss : {:.8f}, Acc : {:.8f}'.format(epoch_loss, epoch_acc))
+    print('Loss : {:.6f}, Acc : {:.6f}'.format(epoch_loss, epoch_acc))
 
     return student

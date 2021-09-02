@@ -104,7 +104,7 @@ def rota_train(args, dataloader, model_list, device, quick_flag=False):
             running_loss += loss.item() * batchSize
 
         epoch_loss = running_loss / n_samples
-        print('Epoch {}, Loss : {:.8f}'.format(epoch, epoch_loss))
+        print('Epoch {}, Loss : {:.6f}'.format(epoch, epoch_loss))
 
     return teacher_list, rota_list
 

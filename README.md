@@ -1,8 +1,11 @@
-# eLich - 电子巫妖
-
-Lifelong Self-Supervised Learning (LSSL)
+# Lifelong Self-Supervised Learning (LSSL)
 
 基于多自监督学习框架的持续学习，同时学习关键信息并遗忘不重要的知识，旨在训练泛化性更强的自监督模型
+
+# Relevant Papers
+MSTDKD: a framework of using multiple self-supervised methods for semi-supervised learning
+
+https://doi.org/10.1117/12.2661030
 
 # MuAS：Mu memory Aware Synapses
 

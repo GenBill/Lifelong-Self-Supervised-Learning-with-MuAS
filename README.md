@@ -1,15 +1,7 @@
 # eLich - 电子巫妖
 Lifelong Self-Supervised Learning (LSSL)
-  
-GenBill的私有库（暂定）
+基于多自监督学习框架的持续学习，同时学习关键信息并遗忘不重要的知识，旨在训练泛化性更强的自监督模型
 
-# What We Need ?
-CLR without old dataset !
-- [x] MAS: Memory Aware Synapses: Learning what (not) to forget. [[paper](https://arxiv.org/abs/1711.09601)]
-- [x] EWC: Overcoming catastrophic forgetting in neural networks. [[paper](https://arxiv.org/abs/1612.00796)]
-- [x] PathInt(SI): Continual Learning Through Synaptic Intelligence. [[paper](https://arxiv.org/abs/1703.04200)]
-
-- [x] LwF: Learning without Forgetting. [[paper](https://arxiv.org/abs/1606.09282)]
-- [x] LwM: Learning without Memorizing. [[paper](https://arxiv.org/abs/1811.08051)]
-
-- [x] Origin: Distilling the Knowledge in a Neural Network. [[paper](https://arxiv.org/abs/1503.02531)]
+# MuAS：Mu memory Aware Synapses
+为MAS添加了一点点动量遗忘机制
+但Task Incremental的Lifelong Learning或许已经退出时代舞台了……
